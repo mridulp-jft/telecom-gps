@@ -1,5 +1,0 @@
--c --cpu Cortex-M0+ -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm
--I C:\Keil_v5\ARM\RV31\INC
--I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include
--I Device\Include
--DKEIL -DFREEDOM -DCMSIS -o .\uv4build\io.o --list_dir ".\\UV4Build\\" --list --omf_browse .\uv4build\io.crf --depend .\uv4build\io.d --feedback ".\UV4Build\KEIL_MAG_Flash.fed" "..\..\..\src\common\io.c"

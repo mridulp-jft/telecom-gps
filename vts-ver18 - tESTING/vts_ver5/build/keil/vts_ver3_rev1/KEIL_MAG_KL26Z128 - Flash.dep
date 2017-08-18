@@ -1,350 +1,0 @@
-Dependencies for Project 'KEIL_MAG', Target 'KL26Z128 - Flash': (DO NOT MODIFY !)
-F (..\..\..\src\projects\KEIL_MAG\KEIL_MAG.c)(0x519E69DC)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\KEIL_MAG.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\KEIL_MAG.crf" --depend ".\UV4Build\KEIL_MAG.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\cpu\start.h)(0x51128652)
-F (..\..\..\src\common\uif.c)(0x51264915)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\uif.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\uif.crf" --depend ".\UV4Build\uif.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\common\uif.h)(0x50573D2E)
-F (..\..\..\src\common\alloc.c)(0x50898769)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\alloc.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\alloc.crf" --depend ".\UV4Build\alloc.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-F (..\..\..\src\common\assert.c)(0x50573D2E)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\assert.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\assert.crf" --depend ".\UV4Build\assert.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-F (..\..\..\src\common\io.c)(0x50573D2E)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\io.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\io.crf" --depend ".\UV4Build\io.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\uart\uart.h)(0x50895677)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdio.h)(0x516F38B6)
-F (..\..\..\src\common\memtest.c)(0x50573D2E)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\memtest.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\memtest.crf" --depend ".\UV4Build\memtest.d")
-I (..\..\..\src\common\memtest.h)(0x50573D2E)
-F (..\..\..\src\common\queue.c)(0x50573D2E)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\queue.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\queue.crf" --depend ".\UV4Build\queue.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\common\queue.h)(0x50573D2E)
-F (..\..\..\src\common\stdlib.c)(0x50573D2E)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\stdlib.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\stdlib.crf" --depend ".\UV4Build\stdlib.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-F (..\..\..\src\common\common.h)(0x5165DD6A)()
-F (..\..\..\src\cpu\nmi_isr_handler.c)(0x51128652)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\nmi_isr_handler.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\nmi_isr_handler.crf" --depend ".\UV4Build\nmi_isr_handler.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\cpu\nmi_isr_handler.h)(0x51128652)
-F (..\..\..\src\cpu\start.c)(0x51128652)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\start.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\start.crf" --depend ".\UV4Build\start.d")
-I (..\..\..\src\cpu\start.h)(0x51128652)
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\cpu\sysinit.h)(0x51128652)
-I (..\..\..\src\drivers\rcm\rcm.h)(0x50573D36)
-F (..\..\..\src\cpu\sysinit.c)(0x517972FE)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\sysinit.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\sysinit.crf" --depend ".\UV4Build\sysinit.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\cpu\sysinit.h)(0x51128652)
-I (..\..\..\src\drivers\uart\UART.h)(0x50895677)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdio.h)(0x516F38B6)
-F (..\..\..\src\cpu\CMSIS\Source\system_MKL26Z4.c)(0x5136367E)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\system_mkl26z4.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\system_mkl26z4.crf" --depend ".\UV4Build\system_mkl26z4.d")
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\platforms\tower.h)(0x51643CB2)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-F (..\..\..\src\cpu\CMSIS\Source\arm\startup_MKL26Z4.s)(0x513634F0)(--cpu Cortex-M0+ -g --apcs=interwork --pd "__MICROLIB SETA 1" -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis --list ".\UV4Build\startup_MKL26Z4.lst" --xref -o ".\UV4Build\startup_MKL26Z4.o" --depend ".\UV4Build\startup_MKL26Z4.d")
-F (..\..\..\src\drivers\cmp\cmp.c)(0x50573D36)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\cmp.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\cmp.crf" --depend ".\UV4Build\cmp.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\cmp\cmp.h)(0x50573D36)
-F (..\..\..\src\drivers\llwu\llwu.c)(0x5058F6F8)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\llwu.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\llwu.crf" --depend ".\UV4Build\llwu.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\llwu\llwu.h)(0x50573D36)
-I (..\..\..\src\cpu\vectors.h)(0x51128652)
-F (..\..\..\src\drivers\lptmr\lptmr.c)(0x5064AEE6)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\lptmr.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\lptmr.crf" --depend ".\UV4Build\lptmr.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\lptmr\lptmr.h)(0x50573D36)
-F (..\..\..\src\drivers\mcg\mcg.c)(0x5127F836)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\mcg.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\mcg.crf" --depend ".\UV4Build\mcg.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-F (..\..\..\src\drivers\pmc\pmc.c)(0x50573D36)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\pmc.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\pmc.crf" --depend ".\UV4Build\pmc.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\pmc\pmc.h)(0x50573D36)
-I (..\..\..\src\drivers\uart\uart.h)(0x50895677)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdio.h)(0x516F38B6)
-F (..\..\..\src\drivers\rcm\rcm.c)(0x50573D36)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\rcm.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\rcm.crf" --depend ".\UV4Build\rcm.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\rcm\rcm.h)(0x50573D36)
-F (..\..\..\src\drivers\rtc\rtc.c)(0x516C6AE3)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\rtc.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\rtc.crf" --depend ".\UV4Build\rtc.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\rtc\rtc.h)(0x50573D36)
-F (..\..\..\src\drivers\smc\smc.c)(0x516C6BC7)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\smc.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\smc.crf" --depend ".\UV4Build\smc.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\smc\smc.h)(0x50573D36)
-F (..\..\..\src\drivers\uart\uart.c)(0x51128304)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\uart.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\uart.crf" --depend ".\UV4Build\uart.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\uart\uart.h)(0x50895677)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdio.h)(0x516F38B6)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdarg.h)(0x516F38B4)
-F (..\..\..\src\drivers\uart\Serial.c)(0x512251E4)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\serial.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\serial.crf" --depend ".\UV4Build\serial.d")
-I (..\..\..\src\common\common.h)(0x5165DD6A)
-I (..\..\..\src\platforms\freedom.h)(0x519A3353)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x509A967D)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)
-I (C:\Keil\ARM\CMSIS\Include\core_cm0plus.h)(0x515EDF84)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdint.h)(0x516F38B6)
-I (C:\Keil\ARM\CMSIS\Include\core_cmInstr.h)(0x515EDF84)
-I (C:\Keil\ARM\CMSIS\Include\core_cmFunc.h)(0x515EDF84)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\system_MKL26Z4.h)(0x51128652)
-I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)
-I (..\..\..\src\common\assert.h)(0x50573D2E)
-I (..\..\..\src\common\io.h)(0x50573D2E)
-I (..\..\..\src\common\startup.h)(0x50573D2E)
-I (..\..\..\src\common\stdlib.h)(0x50573F24)
-I (..\..\..\src\drivers\uart\Serial.h)(0x50573D36)
-I (..\..\..\src\drivers\uart\uart.h)(0x50895677)
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdio.h)(0x516F38B6)
-F (..\..\..\src\drivers\uart\Retarget.c)(0x50573D36)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I..\..\..\src\projects\KEIL_MAG -I..\..\..\src\common -I..\..\..\src\cpu -I..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I..\..\..\src\drivers\llwu -I..\..\..\src\drivers\lptmr -I..\..\..\src\drivers\mcg -I..\..\..\src\drivers\pmc -I..\..\..\src\drivers\rcm -I..\..\..\src\drivers\rtc -I..\..\..\src\drivers\smc -I..\..\..\src\drivers\uart -I..\..\..\src\drivers\cmp -I..\..\..\src\platforms -I..\.. -I..\..\..\src\cpu\CMSIS\Source -I..\..\..\src\cpu\CMSIS\Source\arm -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\Freescale\Kinetis -DKEIL -DFREEDOM -DCMSIS -o ".\UV4Build\retarget.o" --list_dir ".\\UV4Build\\" --list --omf_browse ".\UV4Build\retarget.crf" --depend ".\UV4Build\retarget.d")
-I (C:\Keil\ARM\ARMCC\bin\..\include\stdio.h)(0x516F38B6)
-I (C:\Keil\ARM\ARMCC\bin\..\include\rt_misc.h)(0x4EB18950)
-I (..\..\..\src\drivers\uart\serial.h)(0x50573D36)
-F (..\..\..\src\platforms\tower.h)(0x51643CB2)()
-F (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x519E2869)()
-F (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x511BE9BA)()
-F (..\..\..\src\platforms\freedom.h)(0x519A3353)()
