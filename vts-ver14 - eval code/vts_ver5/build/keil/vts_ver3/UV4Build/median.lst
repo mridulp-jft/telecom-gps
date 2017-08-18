@@ -1,0 +1,90 @@
+L 1 "..\..\..\src\common\median.c"
+N/**
+N  Copyright (c) 2006 Freescale Semiconductor
+N  Freescale Confidential Proprietary
+N  \file     	median.c
+N  \brief    	Calculates the median of 8 integer samples 
+N  \author   	Freescale Semiconductor
+N  \author       Luis Puebla
+N  \author   	Guadalajara Applications Laboratory RTAC Americas
+N  \version    
+N  \date     	
+N  \warning    (If needed)
+N
+N  * History:
+N  
+N*/
+N
+N
+N
+N
+N#include "median.h"
+L 1 "..\..\..\src\common\median.h" 1
+N
+N/*
+NArchivo: mediana.c
+NCalcula la mediana de un buffer de 8 muestras
+NFecha: 29/07/04
+N*/
+N
+N#define NUM_MUESTRAS_MEDIANA 8
+N
+Nstruct tipo_mediana
+N  {
+N unsigned char   ap_muestras;
+N int buffer_muestras[NUM_MUESTRAS_MEDIANA];
+X int buffer_muestras[8];
+N  };
+N
+Nint median(int nuevo_valor, struct tipo_mediana *medicion);
+N
+Nextern struct tipo_mediana arr_medianas[];
+N
+N
+N
+L 21 "..\..\..\src\common\median.c" 2
+N
+N
+N/**
+N * \brief   Calculates the median of 8 integer samples
+N * \author  Luis Puebla
+N * \param   new_value, struct tipo_mediana *medicion
+N * \return   a median value of the last 8 samples
+N * \todo
+N * \warning
+N */ 
+Nint median(int new_value, struct tipo_mediana *medicion)
+N{
+N	int buffer_ord[NUM_MUESTRAS_MEDIANA];
+X	int buffer_ord[8];
+N  	int i;
+N  	int temp1;
+N  	int bandera;
+N  
+N  	medicion->ap_muestras++;
+N  	medicion->ap_muestras &= 0x7;  //de 0 a 7  
+N  	medicion->buffer_muestras[medicion->ap_muestras]=new_value;
+N	//copia el buffer en temporal  
+N  	for(i=0;i<8;i++) buffer_ord[i]=medicion->buffer_muestras[i];  	
+N  	//ordena el buffer temporal  
+N  	do
+N  	{
+N   		bandera=0; 
+N   		for (i=0;i<7;i++)  
+N   		{
+N    		if (buffer_ord[i] > buffer_ord[i+1])
+N     		{
+N      			temp1 = buffer_ord[i];
+N      			buffer_ord[i] = buffer_ord[i+1];
+N      			buffer_ord[i+1] = temp1;
+N      			bandera=1;  	
+N     		}	
+N    	}
+N  	}
+N  	
+N  	while (bandera);   
+N  	//temp1= (buffer_ord[3] + buffer_ord[4])/2;
+N       	temp1= buffer_ord[3];
+N  	return temp1;
+W "..\..\..\src\common\median.c" 63 3 last line of file ends without a newline
+N }
