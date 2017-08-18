@@ -1,0 +1,24 @@
+L 1 "..\..\..\src\common\sqrt16.c"
+N/**
+N * \brief  Calculates the square root of the value
+N * \author  Luis Puebla
+N * \param   value
+N * \return  (unsigend long)square root
+N * \todo    
+N * \warning
+N */   
+Nunsigned int sqrt_16(unsigned int value)
+N  {
+N  unsigned char num_iter=0;
+N  unsigned long result = 1000;
+N  unsigned long last_result = 1000;
+N   do
+N    {
+N     last_result = result;
+N     result = (result + value/result)/2;
+N    }
+N   while (num_iter++<7 && last_result!= result);
+N   return (unsigned int)result;
+N  }
+N
+N

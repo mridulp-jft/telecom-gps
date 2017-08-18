@@ -1,0 +1,268 @@
+L 1 "..\..\..\src\common\memtest.c"
+N/**********************************************************************
+N *
+N * Filename:    memtest.c
+N * 
+N * Description: General-purpose memory testing functions.
+N *
+N * Notes:       This software can be easily ported to systems with
+N *              different data bus widths by redefining 'datum'.
+N *
+N * 
+N * Copyright (c) 1998 by Michael Barr.  This software is placed into
+N * the public domain and may be used for any purpose.  However, this
+N * notice must not be changed or removed and no warranty is either
+N * expressed or implied by its publication or distribution.
+N **********************************************************************/
+N
+N
+N#include "memtest.h"
+L 1 "..\..\..\src\common\memtest.h" 1
+N/**********************************************************************
+N *
+N * Filename:    memtest.h
+N * 
+N * Description: Memory-testing module API.
+N *
+N * Notes:       The memory tests can be easily ported to systems with
+N *              different data bus widths by redefining 'datum' type.
+N *
+N * 
+N * Copyright (c) 2000 by Michael Barr.  This software is placed into
+N * the public domain and may be used for any purpose.  However, this
+N * notice must not be changed or removed and no warranty is either
+N * expressed or implied by its publication or distribution.
+N **********************************************************************/
+N
+N#ifndef _memtest_h
+N#define _memtest_h
+N
+N
+N/*
+N * Define NULL pointer value.
+N */
+N#ifndef NULL
+N#define NULL  (void *) 0
+N#endif
+N
+N/*
+N * Set the data bus width.
+N */
+Ntypedef unsigned long datum;
+N
+N/*
+N * Function prototypes.
+N */
+Ndatum   memTestDataBus(volatile datum * address);
+Ndatum * memTestAddressBus(volatile datum * baseAddress, unsigned long nBytes);
+Ndatum * memTestDevice(volatile datum * baseAddress, unsigned long nBytes);
+N
+N
+N#endif /* _memtest_h */
+N
+L 19 "..\..\..\src\common\memtest.c" 2
+N
+N
+N/**********************************************************************
+N *
+N * Function:    memTestDataBus()
+N *
+N * Description: Test the data bus wiring in a memory region by
+N *              performing a walking 1's test at a fixed address
+N *              within that region.  The address (and hence the
+N *              memory region) is selected by the caller.
+N *
+N * Notes:       
+N *
+N * Returns:     0 if the test succeeds.  
+N *              A non-zero result is the first pattern that failed.
+N *
+N **********************************************************************/
+Ndatum
+NmemTestDataBus(volatile datum * address)
+N{
+N    datum pattern;
+N
+N
+N    /*
+N     * Perform a walking 1's test at the given address.
+N     */
+N    for (pattern = 1; pattern != 0; pattern <<= 1)
+N    {
+N        /*
+N         * Write the test pattern.
+N         */
+N        *address = pattern;
+N
+N        /*
+N         * Read it back (immediately is okay for this test).
+N         */
+N        if (*address != pattern) 
+N        {
+N            return (pattern);
+N        }
+N    }
+N
+N    return (0);
+N
+N}   /* memTestDataBus() */
+N
+N
+N/**********************************************************************
+N *
+N * Function:    memTestAddressBus()
+N *
+N * Description: Test the address bus wiring in a memory region by
+N *              performing a walking 1's test on the relevant bits
+N *              of the address and checking for aliasing. This test
+N *              will find single-bit address failures such as stuck
+N *              -high, stuck-low, and shorted pins.  The base address
+N *              and size of the region are selected by the caller.
+N *
+N * Notes:       For best results, the selected base address should
+N *              have enough LSB 0's to guarantee single address bit
+N *              changes.  For example, to test a 64-Kbyte region, 
+N *              select a base address on a 64-Kbyte boundary.  Also, 
+N *              select the region size as a power-of-two--if at all 
+N *              possible.
+N *
+N * Returns:     NULL if the test succeeds.  
+N *              A non-zero result is the first address at which an
+N *              aliasing problem was uncovered.  By examining the
+N *              contents of memory, it may be possible to gather
+N *              additional information about the problem.
+N *
+N **********************************************************************/
+Ndatum * 
+NmemTestAddressBus(volatile datum * baseAddress, unsigned long nBytes)
+N{
+N    unsigned long addressMask = (nBytes/sizeof(datum) - 1);
+N    unsigned long offset;
+N    unsigned long testOffset;
+N
+N    datum pattern     = (datum) 0xAAAAAAAA;
+N    datum antipattern = (datum) 0x55555555;
+N
+N
+N    /*
+N     * Write the default pattern at each of the power-of-two offsets.
+N     */
+N    for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+N    {
+N        baseAddress[offset] = pattern;
+N    }
+N
+N    /* 
+N     * Check for address bits stuck high.
+N     */
+N    testOffset = 0;
+N    baseAddress[testOffset] = antipattern;
+N
+N    for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+N    {
+N        if (baseAddress[offset] != pattern)
+N        {
+N            return ((datum *) &baseAddress[offset]);
+N        }
+N    }
+N
+N    baseAddress[testOffset] = pattern;
+N
+N    /*
+N     * Check for address bits stuck low or shorted.
+N     */
+N    for (testOffset = 1; (testOffset & addressMask) != 0; testOffset <<= 1)
+N    {
+N        baseAddress[testOffset] = antipattern;
+N
+N		if (baseAddress[0] != pattern)
+N		{
+N			return ((datum *) &baseAddress[testOffset]);
+N		}
+N
+N        for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+N        {
+N            if ((baseAddress[offset] != pattern) && (offset != testOffset))
+N            {
+N                return ((datum *) &baseAddress[testOffset]);
+N            }
+N        }
+N
+N        baseAddress[testOffset] = pattern;
+N    }
+N
+N    return (NULL);
+X    return ((void *) 0);
+N
+N}   /* memTestAddressBus() */
+N
+N
+N/**********************************************************************
+N *
+N * Function:    memTestDevice()
+N *
+N * Description: Test the integrity of a physical memory device by
+N *              performing an increment/decrement test over the
+N *              entire region.  In the process every storage bit 
+N *              in the device is tested as a zero and a one.  The
+N *              base address and the size of the region are
+N *              selected by the caller.
+N *
+N * Notes:       
+N *
+N * Returns:     NULL if the test succeeds.
+N *
+N *              A non-zero result is the first address at which an
+N *              incorrect value was read back.  By examining the
+N *              contents of memory, it may be possible to gather
+N *              additional information about the problem.
+N *
+N **********************************************************************/
+Ndatum * 
+NmemTestDevice(volatile datum * baseAddress, unsigned long nBytes)	
+N{
+N    unsigned long offset;
+N    unsigned long nWords = nBytes / sizeof(datum);
+N
+N    datum pattern;
+N    datum antipattern;
+N
+N
+N    /*
+N     * Fill memory with a known pattern.
+N     */
+N    for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+N    {
+N        baseAddress[offset] = pattern;
+N    }
+N
+N    /*
+N     * Check each location and invert it for the second pass.
+N     */
+N    for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+N    {
+N        if (baseAddress[offset] != pattern)
+N        {
+N            return ((datum *) &baseAddress[offset]);
+N        }
+N
+N        antipattern = ~pattern;
+N        baseAddress[offset] = antipattern;
+N    }
+N
+N    /*
+N     * Check each location for the inverted pattern and zero it.
+N     */
+N    for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+N    {
+N        antipattern = ~pattern;
+N        if (baseAddress[offset] != antipattern)
+N        {
+N            return ((datum *) &baseAddress[offset]);
+N        }
+N    }
+N
+N    return (NULL);
+X    return ((void *) 0);
+N
+N}   /* memTestDevice() */

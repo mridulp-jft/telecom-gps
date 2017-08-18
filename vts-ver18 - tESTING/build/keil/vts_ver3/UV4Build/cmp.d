@@ -1,0 +1,11 @@
+.\uv4build\cmp.o: ..\..\..\src\drivers\cmp\cmp.c
+.\uv4build\cmp.o: ..\..\..\src\common\common.h
+.\uv4build\cmp.o: ..\..\..\src\platforms\freedom.h
+.\uv4build\cmp.o: ..\..\..\src\drivers\mcg\mcg.h
+.\uv4build\cmp.o: C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h
+.\uv4build\cmp.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h
+.\uv4build\cmp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\uv4build\cmp.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h
+.\uv4build\cmp.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h
+.\uv4build\cmp.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h
+.\uv4build\cmp.o: C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h

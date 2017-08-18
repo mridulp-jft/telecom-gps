@@ -1,0 +1,5092 @@
+L 1 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\library\timing.c"
+N/*
+N *  Portable interface to the CPU cycle counter
+N *
+N *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+N *  SPDX-License-Identifier: Apache-2.0
+N *
+N *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+N *  not use this file except in compliance with the License.
+N *  You may obtain a copy of the License at
+N *
+N *  http://www.apache.org/licenses/LICENSE-2.0
+N *
+N *  Unless required by applicable law or agreed to in writing, software
+N *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+N *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+N *  See the License for the specific language governing permissions and
+N *  limitations under the License.
+N *
+N *  This file is part of mbed TLS (https://tls.mbed.org)
+N */
+N
+N#if !defined(MBEDTLS_CONFIG_FILE)
+X#if !0L
+N#include "mbedtls/config.h"
+L 1 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls/config.h" 1
+N/**
+N * \file config.h
+N *
+N * \brief Configuration options (set of defines)
+N *
+N *  This set of compile-time options may be used to enable
+N *  or disable features selectively, and reduce the global
+N *  memory footprint.
+N *
+N *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+N *  SPDX-License-Identifier: Apache-2.0
+N *
+N *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+N *  not use this file except in compliance with the License.
+N *  You may obtain a copy of the License at
+N *
+N *  http://www.apache.org/licenses/LICENSE-2.0
+N *
+N *  Unless required by applicable law or agreed to in writing, software
+N *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+N *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+N *  See the License for the specific language governing permissions and
+N *  limitations under the License.
+N *
+N *  This file is part of mbed TLS (https://tls.mbed.org)
+N */
+N
+N#ifdef _RTE_
+N#include "mbedTLS_config.h"
+L 1 ".\RTE\Security\mbedTLS_config.h" 1
+N/*
+N *  Configuration template
+N *
+N *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+N *  SPDX-License-Identifier: Apache-2.0
+N *
+N *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+N *  not use this file except in compliance with the License.
+N *  You may obtain a copy of the License at
+N *
+N *  http://www.apache.org/licenses/LICENSE-2.0
+N *
+N *  Unless required by applicable law or agreed to in writing, software
+N *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+N *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+N *  See the License for the specific language governing permissions and
+N *  limitations under the License.
+N *
+N *  This file is part of mbed TLS (https://tls.mbed.org)
+N */
+N
+N/*
+N * This set of compile-time options may be used to enable
+N * or disable features selectively, and reduce the global
+N * memory footprint.
+N */
+N#ifndef MBEDTLS_CONFIG_H
+N#define MBEDTLS_CONFIG_H
+N
+N/* System support */
+N//#define MBEDTLS_HAVE_ASM
+N//#define MBEDTLS_HAVE_TIME
+N//#define MBEDTLS_HAVE_TIME_DATE
+N//#define MBEDTLS_PLATFORM_MEMORY
+N//#define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+N
+N/* mbed TLS feature support */
+N//#define MBEDTLS_AES_ROM_TABLES
+N//#define MBEDTLS_CAMELLIA_SMALL_MEMORY
+N//#define MBEDTLS_CIPHER_MODE_CBC
+N//#define MBEDTLS_CIPHER_MODE_CFB
+N//#define MBEDTLS_CIPHER_MODE_CTR
+N//#define MBEDTLS_CIPHER_PADDING_PKCS7
+N//#define MBEDTLS_CIPHER_PADDING_ONE_AND_ZEROS
+N//#define MBEDTLS_CIPHER_PADDING_ZEROS_AND_LEN
+N//#define MBEDTLS_CIPHER_PADDING_ZEROS
+N//#define MBEDTLS_REMOVE_ARC4_CIPHERSUITES
+N//#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+N//#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+N//#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+N//#define MBEDTLS_ECP_DP_BP512R1_ENABLED
+N//#define MBEDTLS_ECP_DP_CURVE25519_ENABLED
+N//#define MBEDTLS_ECP_NIST_OPTIM
+N//#define MBEDTLS_ECDSA_DETERMINISTIC
+N//#define MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_RSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED
+N//#define MBEDTLS_PK_PARSE_EC_EXTENDED
+N//#define MBEDTLS_ERROR_STRERROR_DUMMY
+N//#define MBEDTLS_GENPRIME
+N//#define MBEDTLS_FS_IO
+N//#define MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES
+N//#define MBEDTLS_NO_PLATFORM_ENTROPY
+N//#define MBEDTLS_ENTROPY_FORCE_SHA256
+N//#define MBEDTLS_MEMORY_DEBUG
+N//#define MBEDTLS_MEMORY_BACKTRACE
+N//#define MBEDTLS_PK_RSA_ALT_SUPPORT
+N//#define MBEDTLS_PKCS1_V15
+N//#define MBEDTLS_PKCS1_V21
+N//#define MBEDTLS_RSA_NO_CRT
+N//#define MBEDTLS_SELF_TEST
+N//#define MBEDTLS_SHA256_SMALLER
+N//#define MBEDTLS_SSL_AEAD_RANDOM_IV
+N//#define MBEDTLS_SSL_ALL_ALERT_MESSAGES
+N//#define MBEDTLS_SSL_DEBUG_ALL
+N//#define MBEDTLS_SSL_ENCRYPT_THEN_MAC
+N//#define MBEDTLS_SSL_EXTENDED_MASTER_SECRET
+N//#define MBEDTLS_SSL_FALLBACK_SCSV
+N//#define MBEDTLS_SSL_HW_RECORD_ACCEL
+N//#define MBEDTLS_SSL_CBC_RECORD_SPLITTING
+N//#define MBEDTLS_SSL_RENEGOTIATION
+N//#define MBEDTLS_SSL_SRV_SUPPORT_SSLV2_CLIENT_HELLO
+N//#define MBEDTLS_SSL_SRV_RESPECT_CLIENT_PREFERENCE
+N//#define MBEDTLS_SSL_MAX_FRAGMENT_LENGTH
+N//#define MBEDTLS_SSL_PROTO_SSL3
+N//#define MBEDTLS_SSL_PROTO_TLS1
+N//#define MBEDTLS_SSL_PROTO_TLS1_1
+N//#define MBEDTLS_SSL_PROTO_TLS1_2
+N//#define MBEDTLS_SSL_PROTO_DTLS
+N//#define MBEDTLS_SSL_ALPN
+N//#define MBEDTLS_SSL_DTLS_ANTI_REPLAY
+N//#define MBEDTLS_SSL_DTLS_HELLO_VERIFY
+N//#define MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE
+N//#define MBEDTLS_SSL_DTLS_BADMAC_LIMIT
+N//#define MBEDTLS_SSL_SESSION_TICKETS
+N//#define MBEDTLS_SSL_EXPORT_KEYS
+N//#define MBEDTLS_SSL_SERVER_NAME_INDICATION
+N//#define MBEDTLS_SSL_TRUNCATED_HMAC
+N//#define MBEDTLS_VERSION_FEATURES
+N//#define MBEDTLS_X509_ALLOW_EXTENSIONS_NON_V3
+N//#define MBEDTLS_X509_ALLOW_UNSUPPORTED_CRITICAL_EXTENSION
+N//#define MBEDTLS_X509_CHECK_KEY_USAGE
+N//#define MBEDTLS_X509_CHECK_EXTENDED_KEY_USAGE
+N//#define MBEDTLS_X509_RSASSA_PSS_SUPPORT
+N
+N/* mbed TLS modules */
+N//#define MBEDTLS_AES_C
+N//#define MBEDTLS_ARC4_C
+N//#define MBEDTLS_ASN1_PARSE_C
+N//#define MBEDTLS_ASN1_WRITE_C
+N//#define MBEDTLS_BASE64_C
+N//#define MBEDTLS_BIGNUM_C
+N//#define MBEDTLS_BLOWFISH_C
+N//#define MBEDTLS_CAMELLIA_C
+N//#define MBEDTLS_CCM_C
+N//#define MBEDTLS_CERTS_C
+N//#define MBEDTLS_CIPHER_C
+N//#define MBEDTLS_CTR_DRBG_C
+N//#define MBEDTLS_DEBUG_C
+N//#define MBEDTLS_DES_C
+N//#define MBEDTLS_DHM_C
+N//#define MBEDTLS_ECDH_C
+N//#define MBEDTLS_ECDSA_C
+N//#define MBEDTLS_ECJPAKE_C
+N//#define MBEDTLS_ECP_C
+N//#define MBEDTLS_ENTROPY_C
+N//#define MBEDTLS_ERROR_C
+N//#define MBEDTLS_GCM_C
+N//#define MBEDTLS_HAVEGE_C
+N//#define MBEDTLS_HMAC_DRBG_C
+N//#define MBEDTLS_MD_C
+N//#define MBEDTLS_MD2_C
+N//#define MBEDTLS_MD4_C
+N//#define MBEDTLS_MD5_C
+N//#define MBEDTLS_MEMORY_BUFFER_ALLOC_C
+N//#define MBEDTLS_NET_C
+N//#define MBEDTLS_OID_C
+N//#define MBEDTLS_PEM_PARSE_C
+N//#define MBEDTLS_PEM_WRITE_C
+N//#define MBEDTLS_PK_C
+N//#define MBEDTLS_PK_PARSE_C
+N//#define MBEDTLS_PK_WRITE_C
+N//#define MBEDTLS_PKCS5_C
+N//#define MBEDTLS_PKCS11_C
+N//#define MBEDTLS_PKCS12_C
+N//#define MBEDTLS_PLATFORM_C
+N//#define MBEDTLS_RIPEMD160_C
+N//#define MBEDTLS_RSA_C
+N//#define MBEDTLS_SHA1_C
+N//#define MBEDTLS_SHA256_C
+N//#define MBEDTLS_SHA512_C
+N//#define MBEDTLS_SSL_CACHE_C
+N//#define MBEDTLS_SSL_COOKIE_C
+N//#define MBEDTLS_SSL_TICKET_C
+N//#define MBEDTLS_SSL_CLI_C
+N//#define MBEDTLS_SSL_SRV_C
+N//#define MBEDTLS_SSL_TLS_C
+N//#define MBEDTLS_THREADING_C
+N//#define MBEDTLS_TIMING_C
+N//#define MBEDTLS_VERSION_C
+N//#define MBEDTLS_X509_USE_C
+N//#define MBEDTLS_X509_CRT_PARSE_C
+N//#define MBEDTLS_X509_CRL_PARSE_C
+N//#define MBEDTLS_X509_CSR_PARSE_C
+N//#define MBEDTLS_X509_CREATE_C
+N//#define MBEDTLS_X509_CRT_WRITE_C
+N//#define MBEDTLS_X509_CSR_WRITE_C
+N//#define MBEDTLS_XTEA_C
+N
+N#include "check_config.h"
+L 1 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls\check_config.h" 1
+N/**
+N * \file check_config.h
+N *
+N * \brief Consistency checks for configuration options
+N *
+N *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+N *  SPDX-License-Identifier: Apache-2.0
+N *
+N *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+N *  not use this file except in compliance with the License.
+N *  You may obtain a copy of the License at
+N *
+N *  http://www.apache.org/licenses/LICENSE-2.0
+N *
+N *  Unless required by applicable law or agreed to in writing, software
+N *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+N *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+N *  See the License for the specific language governing permissions and
+N *  limitations under the License.
+N *
+N *  This file is part of mbed TLS (https://tls.mbed.org)
+N */
+N
+N/*
+N * It is recommended to include this file from your config.h
+N * in order to catch dependency issues early.
+N */
+N
+N#ifndef MBEDTLS_CHECK_CONFIG_H
+N#define MBEDTLS_CHECK_CONFIG_H
+N
+N/*
+N * We assume CHAR_BIT is 8 in many places. In practice, this is true on our
+N * target platforms, so not an issue, but let's just be extra sure.
+N */
+N#include <limits.h>
+L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h" 1
+N/* limits.h: ANSI 'C' (X3J11 Oct 88) library header, section 2.2.4.2 */
+N/* Copyright (C) Codemist Ltd., 1988                            */
+N/* Copyright 1991-1997 ARM Limited. All rights reserved         */
+N
+N/*
+N * RCS $Revision: 190986 $
+N * Checkin $Date: 2015-02-04 14:26:49 +0000 (Wed, 04 Feb 2015) $
+N * Revising $Author: drodgman $
+N */
+N
+N#ifndef __limits_h
+N#define __limits_h
+N#define __ARMCLIB_VERSION 5060002
+N
+N#define CHAR_BIT 8
+N    /* max number of bits for smallest object that is not a bit-field (byte) */
+N#define SCHAR_MIN (-128)
+N    /* mimimum value for an object of type signed char */
+N#define SCHAR_MAX 127
+N    /* maximum value for an object of type signed char */
+N#define UCHAR_MAX 255
+N    /* maximum value for an object of type unsigned char */
+N#ifdef __FEATURE_SIGNED_CHAR
+S  #define CHAR_MIN (-128)
+S      /* minimum value for an object of type char */
+S  #define CHAR_MAX 127
+S      /* maximum value for an object of type char */
+N#else
+N  #define CHAR_MIN 0
+N      /* minimum value for an object of type char */
+N  #define CHAR_MAX 255
+N      /* maximum value for an object of type char */
+N#endif
+N
+N#if _AEABI_PORTABILITY_LEVEL != 0 && !defined _AEABI_PORTABLE
+X#if _AEABI_PORTABILITY_LEVEL != 0 && !0L
+S  #define _AEABI_PORTABLE
+N#endif
+N
+N#if _AEABI_PORTABILITY_LEVEL != 0 || (!defined _AEABI_PORTABILITY_LEVEL && __DEFAULT_AEABI_PORTABILITY_LEVEL != 0)
+X#if _AEABI_PORTABILITY_LEVEL != 0 || (!0L && __DEFAULT_AEABI_PORTABILITY_LEVEL != 0)
+Sextern const int __aeabi_MB_LEN_MAX;
+S#define MB_LEN_MAX (__aeabi_MB_LEN_MAX)
+N#else
+N#define MB_LEN_MAX 6
+N#endif
+N    /* maximum number of bytes in a multibyte character, */
+N    /* for any supported locale */
+N
+N#define SHRT_MIN  (-0x8000)
+N    /* minimum value for an object of type short int */
+N#define SHRT_MAX  0x7fff
+N    /* maximum value for an object of type short int */
+N#define USHRT_MAX 65535
+N    /* maximum value for an object of type unsigned short int */
+N#define INT_MIN   (~0x7fffffff)  /* -2147483648 and 0x80000000 are unsigned */
+N    /* minimum value for an object of type int */
+N#define INT_MAX   0x7fffffff
+N    /* maximum value for an object of type int */
+N#define UINT_MAX  0xffffffffU
+N    /* maximum value for an object of type unsigned int */
+N#if __sizeof_long == 8
+X#if 4 == 8
+S  #define LONG_MIN  (~0x7fffffffffffffffL)
+N#else
+N  #define LONG_MIN  (~0x7fffffffL)
+N#endif
+N    /* minimum value for an object of type long int */
+N#if __sizeof_long == 8
+X#if 4 == 8
+S  #define LONG_MAX  0x7fffffffffffffffL
+N#else
+N  #define LONG_MAX  0x7fffffffL
+N#endif
+N    /* maximum value for an object of type long int */
+N#if __sizeof_long == 8
+X#if 4 == 8
+S  #define ULONG_MAX 0xffffffffffffffffUL
+N#else
+N  #define ULONG_MAX 0xffffffffUL
+N#endif
+N    /* maximum value for an object of type unsigned long int */
+N#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
+X#if !0L || (1L && 199901L <= 199409L) || (0L && 201103L <= __cplusplus)
+N  #define LLONG_MIN  (~0x7fffffffffffffffLL)
+N      /* minimum value for an object of type long long int */
+N  #define LLONG_MAX    0x7fffffffffffffffLL
+N      /* maximum value for an object of type long long int */
+N  #define ULLONG_MAX   0xffffffffffffffffULL
+N      /* maximum value for an object of type unsigned long int */
+N#endif
+N
+N#endif
+N
+N/* end of limits.h */
+N
+L 37 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls\check_config.h" 2
+N#if CHAR_BIT != 8
+X#if 8 != 8
+S#error "mbed TLS requires a platform with 8-bit chars"
+N#endif
+N
+N#if defined(_WIN32)
+X#if 0L
+S#if !defined(MBEDTLS_PLATFORM_C)
+S#error "MBEDTLS_PLATFORM_C is required on Windows"
+S#endif
+S
+S/* Fix the config here. Not convenient to put an #ifdef _WIN32 in config.h as
+S * it would confuse config.pl. */
+S#if !defined(MBEDTLS_PLATFORM_SNPRINTF_ALT) && \
+S    !defined(MBEDTLS_PLATFORM_SNPRINTF_MACRO)
+X#if !defined(MBEDTLS_PLATFORM_SNPRINTF_ALT) &&     !defined(MBEDTLS_PLATFORM_SNPRINTF_MACRO)
+S#define MBEDTLS_PLATFORM_SNPRINTF_ALT
+S#endif
+N#endif /* _WIN32 */
+N
+N#if defined(TARGET_LIKE_MBED) && \
+N    ( defined(MBEDTLS_NET_C) || defined(MBEDTLS_TIMING_C) )
+X#if 0L &&     ( 0L || 0L )
+S#error "The NET and TIMING modules are not available for mbed OS - please use the network and timing functions provided by mbed OS"
+N#endif
+N
+N#if defined(MBEDTLS_DEPRECATED_WARNING) && \
+N    !defined(__GNUC__) && !defined(__clang__)
+X#if 0L &&     !0L && !0L
+S#error "MBEDTLS_DEPRECATED_WARNING only works with GCC and Clang"
+N#endif
+N
+N#if defined(MBEDTLS_HAVE_TIME_DATE) && !defined(MBEDTLS_HAVE_TIME)
+X#if 0L && !0L
+S#error "MBEDTLS_HAVE_TIME_DATE without MBEDTLS_HAVE_TIME does not make sense"
+N#endif
+N
+N#if defined(MBEDTLS_AESNI_C) && !defined(MBEDTLS_HAVE_ASM)
+X#if 0L && !0L
+S#error "MBEDTLS_AESNI_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_CTR_DRBG_C) && !defined(MBEDTLS_AES_C)
+X#if 0L && !0L
+S#error "MBEDTLS_CTR_DRBG_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_DHM_C) && !defined(MBEDTLS_BIGNUM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_DHM_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECDH_C) && !defined(MBEDTLS_ECP_C)
+X#if 0L && !0L
+S#error "MBEDTLS_ECDH_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECDSA_C) &&            \
+N    ( !defined(MBEDTLS_ECP_C) ||           \
+N      !defined(MBEDTLS_ASN1_PARSE_C) ||    \
+N      !defined(MBEDTLS_ASN1_WRITE_C) )
+X#if 0L &&                ( !0L ||                 !0L ||          !0L )
+S#error "MBEDTLS_ECDSA_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECJPAKE_C) &&           \
+N    ( !defined(MBEDTLS_ECP_C) || !defined(MBEDTLS_MD_C) )
+X#if 0L &&               ( !0L || !0L )
+S#error "MBEDTLS_ECJPAKE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECDSA_DETERMINISTIC) && !defined(MBEDTLS_HMAC_DRBG_C)
+X#if 0L && !0L
+S#error "MBEDTLS_ECDSA_DETERMINISTIC defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECP_C) && ( !defined(MBEDTLS_BIGNUM_C) || (   \
+N    !defined(MBEDTLS_ECP_DP_SECP192R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP224R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP256R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP384R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP521R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_BP256R1_ENABLED)   &&                  \
+N    !defined(MBEDTLS_ECP_DP_BP384R1_ENABLED)   &&                  \
+N    !defined(MBEDTLS_ECP_DP_BP512R1_ENABLED)   &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP192K1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP224K1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP256K1_ENABLED) ) )
+X#if 0L && ( !0L || (       !0L &&                      !0L &&                      !0L &&                      !0L &&                      !0L &&                      !0L   &&                      !0L   &&                      !0L   &&                      !0L &&                      !0L &&                      !0L ) )
+S#error "MBEDTLS_ECP_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ENTROPY_C) && (!defined(MBEDTLS_SHA512_C) &&      \
+N                                    !defined(MBEDTLS_SHA256_C))
+X#if 0L && (!0L &&                                          !0L)
+S#error "MBEDTLS_ENTROPY_C defined, but not all prerequisites"
+N#endif
+N#if defined(MBEDTLS_ENTROPY_C) && defined(MBEDTLS_SHA512_C) &&         \
+N    defined(MBEDTLS_CTR_DRBG_ENTROPY_LEN) && (MBEDTLS_CTR_DRBG_ENTROPY_LEN > 64)
+X#if 0L && 0L &&             0L && (MBEDTLS_CTR_DRBG_ENTROPY_LEN > 64)
+S#error "MBEDTLS_CTR_DRBG_ENTROPY_LEN value too high"
+N#endif
+N#if defined(MBEDTLS_ENTROPY_C) &&                                            \
+N    ( !defined(MBEDTLS_SHA512_C) || defined(MBEDTLS_ENTROPY_FORCE_SHA256) ) \
+N    && defined(MBEDTLS_CTR_DRBG_ENTROPY_LEN) && (MBEDTLS_CTR_DRBG_ENTROPY_LEN > 32)
+X#if 0L &&                                                ( !0L || 0L )     && 0L && (MBEDTLS_CTR_DRBG_ENTROPY_LEN > 32)
+S#error "MBEDTLS_CTR_DRBG_ENTROPY_LEN value too high"
+N#endif
+N#if defined(MBEDTLS_ENTROPY_C) && \
+N    defined(MBEDTLS_ENTROPY_FORCE_SHA256) && !defined(MBEDTLS_SHA256_C)
+X#if 0L &&     0L && !0L
+S#error "MBEDTLS_ENTROPY_FORCE_SHA256 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_GCM_C) && (                                        \
+N        !defined(MBEDTLS_AES_C) && !defined(MBEDTLS_CAMELLIA_C) )
+X#if 0L && (                                                !0L && !0L )
+S#error "MBEDTLS_GCM_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_HAVEGE_C) && !defined(MBEDTLS_TIMING_C)
+X#if 0L && !0L
+S#error "MBEDTLS_HAVEGE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_HMAC_DRBG_C) && !defined(MBEDTLS_MD_C)
+X#if 0L && !0L
+S#error "MBEDTLS_HMAC_DRBG_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED) &&                 \
+N    ( !defined(MBEDTLS_ECDH_C) || !defined(MBEDTLS_X509_CRT_PARSE_C) )
+X#if 0L &&                     ( !0L || !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED) &&                 \
+N    ( !defined(MBEDTLS_ECDH_C) || !defined(MBEDTLS_X509_CRT_PARSE_C) )
+X#if 0L &&                     ( !0L || !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED) && !defined(MBEDTLS_DHM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED) &&                     \
+N    !defined(MBEDTLS_ECDH_C)
+X#if 0L &&                         !0L
+S#error "MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED) &&                   \
+N    ( !defined(MBEDTLS_DHM_C) || !defined(MBEDTLS_RSA_C) ||           \
+N      !defined(MBEDTLS_X509_CRT_PARSE_C) || !defined(MBEDTLS_PKCS1_V15) )
+X#if 0L &&                       ( !0L || !0L ||                 !0L || !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED) &&                 \
+N    ( !defined(MBEDTLS_ECDH_C) || !defined(MBEDTLS_RSA_C) ||          \
+N      !defined(MBEDTLS_X509_CRT_PARSE_C) || !defined(MBEDTLS_PKCS1_V15) )
+X#if 0L &&                     ( !0L || !0L ||                !0L || !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED) &&                 \
+N    ( !defined(MBEDTLS_ECDH_C) || !defined(MBEDTLS_ECDSA_C) ||          \
+N      !defined(MBEDTLS_X509_CRT_PARSE_C) )
+X#if 0L &&                     ( !0L || !0L ||                !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED) &&                   \
+N    ( !defined(MBEDTLS_RSA_C) || !defined(MBEDTLS_X509_CRT_PARSE_C) || \
+N      !defined(MBEDTLS_PKCS1_V15) )
+X#if 0L &&                       ( !0L || !0L ||       !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_RSA_ENABLED) &&                       \
+N    ( !defined(MBEDTLS_RSA_C) || !defined(MBEDTLS_X509_CRT_PARSE_C) || \
+N      !defined(MBEDTLS_PKCS1_V15) )
+X#if 0L &&                           ( !0L || !0L ||       !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_RSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED) &&                    \
+N    ( !defined(MBEDTLS_ECJPAKE_C) || !defined(MBEDTLS_SHA256_C) ||      \
+N      !defined(MBEDTLS_ECP_DP_SECP256R1_ENABLED) )
+X#if 0L &&                        ( !0L || !0L ||            !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_MEMORY_BUFFER_ALLOC_C) &&                          \
+N    ( !defined(MBEDTLS_PLATFORM_C) || !defined(MBEDTLS_PLATFORM_MEMORY) )
+X#if 0L &&                              ( !0L || !0L )
+S#error "MBEDTLS_MEMORY_BUFFER_ALLOC_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PADLOCK_C) && !defined(MBEDTLS_HAVE_ASM)
+X#if 0L && !0L
+S#error "MBEDTLS_PADLOCK_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PEM_PARSE_C) && !defined(MBEDTLS_BASE64_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PEM_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PEM_WRITE_C) && !defined(MBEDTLS_BASE64_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PEM_WRITE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PK_C) && \
+N    ( !defined(MBEDTLS_RSA_C) && !defined(MBEDTLS_ECP_C) )
+X#if 0L &&     ( !0L && !0L )
+S#error "MBEDTLS_PK_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PK_PARSE_C) && !defined(MBEDTLS_PK_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PK_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PK_WRITE_C) && !defined(MBEDTLS_PK_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PK_WRITE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PKCS11_C) && !defined(MBEDTLS_PK_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PKCS11_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_EXIT_ALT) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_EXIT_ALT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_EXIT_MACRO) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_EXIT_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_EXIT_MACRO) &&\
+N    ( defined(MBEDTLS_PLATFORM_STD_EXIT) ||\
+N        defined(MBEDTLS_PLATFORM_EXIT_ALT) )
+X#if 0L &&    ( 0L ||        0L )
+S#error "MBEDTLS_PLATFORM_EXIT_MACRO and MBEDTLS_PLATFORM_STD_EXIT/MBEDTLS_PLATFORM_EXIT_ALT cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FPRINTF_ALT) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_FPRINTF_ALT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FPRINTF_MACRO) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_FPRINTF_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FPRINTF_MACRO) &&\
+N    ( defined(MBEDTLS_PLATFORM_STD_FPRINTF) ||\
+N        defined(MBEDTLS_PLATFORM_FPRINTF_ALT) )
+X#if 0L &&    ( 0L ||        0L )
+S#error "MBEDTLS_PLATFORM_FPRINTF_MACRO and MBEDTLS_PLATFORM_STD_FPRINTF/MBEDTLS_PLATFORM_FPRINTF_ALT cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FREE_MACRO) &&\
+N    ( !defined(MBEDTLS_PLATFORM_C) || !defined(MBEDTLS_PLATFORM_MEMORY) )
+X#if 0L &&    ( !0L || !0L )
+S#error "MBEDTLS_PLATFORM_FREE_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FREE_MACRO) &&\
+N    defined(MBEDTLS_PLATFORM_STD_FREE)
+X#if 0L &&    0L
+S#error "MBEDTLS_PLATFORM_FREE_MACRO and MBEDTLS_PLATFORM_STD_FREE cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FREE_MACRO) && !defined(MBEDTLS_PLATFORM_CALLOC_MACRO)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_CALLOC_MACRO must be defined if MBEDTLS_PLATFORM_FREE_MACRO is"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_CALLOC_MACRO) &&\
+N    ( !defined(MBEDTLS_PLATFORM_C) || !defined(MBEDTLS_PLATFORM_MEMORY) )
+X#if 0L &&    ( !0L || !0L )
+S#error "MBEDTLS_PLATFORM_CALLOC_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_CALLOC_MACRO) &&\
+N    defined(MBEDTLS_PLATFORM_STD_CALLOC)
+X#if 0L &&    0L
+S#error "MBEDTLS_PLATFORM_CALLOC_MACRO and MBEDTLS_PLATFORM_STD_CALLOC cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_CALLOC_MACRO) && !defined(MBEDTLS_PLATFORM_FREE_MACRO)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_FREE_MACRO must be defined if MBEDTLS_PLATFORM_CALLOC_MACRO is"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_MEMORY) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_MEMORY defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_PRINTF_ALT) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_PRINTF_ALT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_PRINTF_MACRO) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_PRINTF_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_PRINTF_MACRO) &&\
+N    ( defined(MBEDTLS_PLATFORM_STD_PRINTF) ||\
+N        defined(MBEDTLS_PLATFORM_PRINTF_ALT) )
+X#if 0L &&    ( 0L ||        0L )
+S#error "MBEDTLS_PLATFORM_PRINTF_MACRO and MBEDTLS_PLATFORM_STD_PRINTF/MBEDTLS_PLATFORM_PRINTF_ALT cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_SNPRINTF_ALT) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_SNPRINTF_ALT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_SNPRINTF_MACRO) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_SNPRINTF_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_SNPRINTF_MACRO) &&\
+N    ( defined(MBEDTLS_PLATFORM_STD_SNPRINTF) ||\
+N        defined(MBEDTLS_PLATFORM_SNPRINTF_ALT) )
+X#if 0L &&    ( 0L ||        0L )
+S#error "MBEDTLS_PLATFORM_SNPRINTF_MACRO and MBEDTLS_PLATFORM_STD_SNPRINTF/MBEDTLS_PLATFORM_SNPRINTF_ALT cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_MEM_HDR) &&\
+N    !defined(MBEDTLS_PLATFORM_NO_STD_FUNCTIONS)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_MEM_HDR defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_CALLOC) && !defined(MBEDTLS_PLATFORM_MEMORY)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_STD_CALLOC defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_CALLOC) && !defined(MBEDTLS_PLATFORM_MEMORY)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_STD_CALLOC defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_FREE) && !defined(MBEDTLS_PLATFORM_MEMORY)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_STD_FREE defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_EXIT) &&\
+N    !defined(MBEDTLS_PLATFORM_EXIT_ALT)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_EXIT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_FPRINTF) &&\
+N    !defined(MBEDTLS_PLATFORM_FPRINTF_ALT)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_FPRINTF defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_PRINTF) &&\
+N    !defined(MBEDTLS_PLATFORM_PRINTF_ALT)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_PRINTF defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_SNPRINTF) &&\
+N    !defined(MBEDTLS_PLATFORM_SNPRINTF_ALT)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_SNPRINTF defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_RSA_C) && ( !defined(MBEDTLS_BIGNUM_C) ||         \
+N    !defined(MBEDTLS_OID_C) )
+X#if 0L && ( !0L ||             !0L )
+S#error "MBEDTLS_RSA_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_RSASSA_PSS_SUPPORT) &&                        \
+N    ( !defined(MBEDTLS_RSA_C) || !defined(MBEDTLS_PKCS1_V21) )
+X#if 0L &&                            ( !0L || !0L )
+S#error "MBEDTLS_X509_RSASSA_PSS_SUPPORT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_SSL3) && ( !defined(MBEDTLS_MD5_C) ||     \
+N    !defined(MBEDTLS_SHA1_C) )
+X#if 0L && ( !0L ||         !0L )
+S#error "MBEDTLS_SSL_PROTO_SSL3 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_TLS1) && ( !defined(MBEDTLS_MD5_C) ||     \
+N    !defined(MBEDTLS_SHA1_C) )
+X#if 0L && ( !0L ||         !0L )
+S#error "MBEDTLS_SSL_PROTO_TLS1 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_TLS1_1) && ( !defined(MBEDTLS_MD5_C) ||     \
+N    !defined(MBEDTLS_SHA1_C) )
+X#if 0L && ( !0L ||         !0L )
+S#error "MBEDTLS_SSL_PROTO_TLS1_1 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_TLS1_2) && ( !defined(MBEDTLS_SHA1_C) &&     \
+N    !defined(MBEDTLS_SHA256_C) && !defined(MBEDTLS_SHA512_C) )
+X#if 0L && ( !0L &&         !0L && !0L )
+S#error "MBEDTLS_SSL_PROTO_TLS1_2 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_DTLS)     && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_1)  && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_2)
+X#if 0L     &&     !0L  &&     !0L
+S#error "MBEDTLS_SSL_PROTO_DTLS defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_CLI_C) && !defined(MBEDTLS_SSL_TLS_C)
+X#if 0L && !0L
+S#error "MBEDTLS_SSL_CLI_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && ( !defined(MBEDTLS_CIPHER_C) ||     \
+N    !defined(MBEDTLS_MD_C) )
+X#if 0L && ( !0L ||         !0L )
+S#error "MBEDTLS_SSL_TLS_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_SRV_C) && !defined(MBEDTLS_SSL_TLS_C)
+X#if 0L && !0L
+S#error "MBEDTLS_SSL_SRV_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && (!defined(MBEDTLS_SSL_PROTO_SSL3) && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1) && !defined(MBEDTLS_SSL_PROTO_TLS1_1) && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_2))
+X#if 0L && (!0L &&     !0L && !0L &&     !0L)
+S#error "MBEDTLS_SSL_TLS_C defined, but no protocols are active"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && (defined(MBEDTLS_SSL_PROTO_SSL3) && \
+N    defined(MBEDTLS_SSL_PROTO_TLS1_1) && !defined(MBEDTLS_SSL_PROTO_TLS1))
+X#if 0L && (0L &&     0L && !0L)
+S#error "Illegal protocol selection"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && (defined(MBEDTLS_SSL_PROTO_TLS1) && \
+N    defined(MBEDTLS_SSL_PROTO_TLS1_2) && !defined(MBEDTLS_SSL_PROTO_TLS1_1))
+X#if 0L && (0L &&     0L && !0L)
+S#error "Illegal protocol selection"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && (defined(MBEDTLS_SSL_PROTO_SSL3) && \
+N    defined(MBEDTLS_SSL_PROTO_TLS1_2) && (!defined(MBEDTLS_SSL_PROTO_TLS1) || \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_1)))
+X#if 0L && (0L &&     0L && (!0L ||     !0L))
+S#error "Illegal protocol selection"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_DTLS_HELLO_VERIFY) && !defined(MBEDTLS_SSL_PROTO_DTLS)
+X#if 0L && !0L
+S#error "MBEDTLS_SSL_DTLS_HELLO_VERIFY  defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE) && \
+N    !defined(MBEDTLS_SSL_DTLS_HELLO_VERIFY)
+X#if 0L &&     !0L
+S#error "MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE  defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_DTLS_ANTI_REPLAY) &&                              \
+N    ( !defined(MBEDTLS_SSL_TLS_C) || !defined(MBEDTLS_SSL_PROTO_DTLS) )
+X#if 0L &&                                  ( !0L || !0L )
+S#error "MBEDTLS_SSL_DTLS_ANTI_REPLAY  defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_DTLS_BADMAC_LIMIT) &&                              \
+N    ( !defined(MBEDTLS_SSL_TLS_C) || !defined(MBEDTLS_SSL_PROTO_DTLS) )
+X#if 0L &&                                  ( !0L || !0L )
+S#error "MBEDTLS_SSL_DTLS_BADMAC_LIMIT  defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_ENCRYPT_THEN_MAC) &&   \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1)   &&      \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_1) &&      \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_2)
+X#if 0L &&       !0L   &&          !0L &&          !0L
+S#error "MBEDTLS_SSL_ENCRYPT_THEN_MAC defined, but not all prerequsites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_EXTENDED_MASTER_SECRET) && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1)   &&          \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_1) &&          \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_2)
+X#if 0L &&     !0L   &&              !0L &&              !0L
+S#error "MBEDTLS_SSL_EXTENDED_MASTER_SECRET defined, but not all prerequsites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TICKET_C) && !defined(MBEDTLS_CIPHER_C)
+X#if 0L && !0L
+S#error "MBEDTLS_SSL_TICKET_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_CBC_RECORD_SPLITTING) && \
+N    !defined(MBEDTLS_SSL_PROTO_SSL3) && !defined(MBEDTLS_SSL_PROTO_TLS1)
+X#if 0L &&     !0L && !0L
+S#error "MBEDTLS_SSL_CBC_RECORD_SPLITTING defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_SERVER_NAME_INDICATION) && \
+N        !defined(MBEDTLS_X509_CRT_PARSE_C)
+X#if 0L &&         !0L
+S#error "MBEDTLS_SSL_SERVER_NAME_INDICATION defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_THREADING_PTHREAD)
+X#if 0L
+S#if !defined(MBEDTLS_THREADING_C) || defined(MBEDTLS_THREADING_IMPL)
+S#error "MBEDTLS_THREADING_PTHREAD defined, but not all prerequisites"
+S#endif
+S#define MBEDTLS_THREADING_IMPL
+N#endif
+N
+N#if defined(MBEDTLS_THREADING_ALT)
+X#if 0L
+S#if !defined(MBEDTLS_THREADING_C) || defined(MBEDTLS_THREADING_IMPL)
+S#error "MBEDTLS_THREADING_ALT defined, but not all prerequisites"
+S#endif
+S#define MBEDTLS_THREADING_IMPL
+N#endif
+N
+N#if defined(MBEDTLS_THREADING_C) && !defined(MBEDTLS_THREADING_IMPL)
+X#if 0L && !0L
+S#error "MBEDTLS_THREADING_C defined, single threading implementation required"
+N#endif
+N#undef MBEDTLS_THREADING_IMPL
+N
+N#if defined(MBEDTLS_VERSION_FEATURES) && !defined(MBEDTLS_VERSION_C)
+X#if 0L && !0L
+S#error "MBEDTLS_VERSION_FEATURES defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_USE_C) && ( !defined(MBEDTLS_BIGNUM_C) ||  \
+N    !defined(MBEDTLS_OID_C) || !defined(MBEDTLS_ASN1_PARSE_C) ||      \
+N    !defined(MBEDTLS_PK_PARSE_C) )
+X#if 0L && ( !0L ||      !0L || !0L ||          !0L )
+S#error "MBEDTLS_X509_USE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CREATE_C) && ( !defined(MBEDTLS_BIGNUM_C) ||  \
+N    !defined(MBEDTLS_OID_C) || !defined(MBEDTLS_ASN1_WRITE_C) ||       \
+N    !defined(MBEDTLS_PK_WRITE_C) )
+X#if 0L && ( !0L ||      !0L || !0L ||           !0L )
+S#error "MBEDTLS_X509_CREATE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CRT_PARSE_C) && ( !defined(MBEDTLS_X509_USE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CRT_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CRL_PARSE_C) && ( !defined(MBEDTLS_X509_USE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CRL_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CSR_PARSE_C) && ( !defined(MBEDTLS_X509_USE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CSR_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CRT_WRITE_C) && ( !defined(MBEDTLS_X509_CREATE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CRT_WRITE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CSR_WRITE_C) && ( !defined(MBEDTLS_X509_CREATE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CSR_WRITE_C defined, but not all prerequisites"
+N#endif
+N
+N/*
+N * Avoid warning from -pedantic. This is a convenient place for this
+N * workaround since this is included by every single file before the
+N * #if defined(MBEDTLS_xxx_C) that results in emtpy translation units.
+N */
+Ntypedef int mbedtls_iso_c_forbids_empty_translation_units;
+N
+N#endif /* MBEDTLS_CHECK_CONFIG_H */
+L 186 ".\RTE\Security\mbedTLS_config.h" 2
+N
+N#endif /* MBEDTLS_CONFIG_H */
+L 30 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls/config.h" 2
+N#endif
+N
+N#ifndef MBEDTLS_CONFIG_H
+S#define MBEDTLS_CONFIG_H
+S
+S#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_DEPRECATE)
+S#define _CRT_SECURE_NO_DEPRECATE 1
+S#endif
+S
+S/**
+S * \name SECTION: System support
+S *
+S * This section sets system specific settings.
+S * \{
+S */
+S
+S/**
+S * \def MBEDTLS_HAVE_ASM
+S *
+S * The compiler has support for asm().
+S *
+S * Requires support for asm() in compiler.
+S *
+S * Used in:
+S *      library/timing.c
+S *      library/padlock.c
+S *      include/mbedtls/bn_mul.h
+S *
+S * Comment to disable the use of assembly code.
+S */
+S#define MBEDTLS_HAVE_ASM
+S
+S/**
+S * \def MBEDTLS_HAVE_SSE2
+S *
+S * CPU supports SSE2 instruction set.
+S *
+S * Uncomment if the CPU supports SSE2 (IA-32 specific).
+S */
+S//#define MBEDTLS_HAVE_SSE2
+S
+S/**
+S * \def MBEDTLS_HAVE_TIME
+S *
+S * System has time.h and time().
+S * The time does not need to be correct, only time differences are used,
+S * by contrast with MBEDTLS_HAVE_TIME_DATE
+S *
+S * Comment if your system does not support time functions
+S */
+S#define MBEDTLS_HAVE_TIME
+S
+S/**
+S * \def MBEDTLS_HAVE_TIME_DATE
+S *
+S * System has time.h and time(), gmtime() and the clock is correct.
+S * The time needs to be correct (not necesarily very accurate, but at least
+S * the date should be correct). This is used to verify the validity period of
+S * X.509 certificates.
+S *
+S * Comment if your system does not have a correct clock.
+S */
+S#define MBEDTLS_HAVE_TIME_DATE
+S
+S/**
+S * \def MBEDTLS_PLATFORM_MEMORY
+S *
+S * Enable the memory allocation layer.
+S *
+S * By default mbed TLS uses the system-provided calloc() and free().
+S * This allows different allocators (self-implemented or provided) to be
+S * provided to the platform abstraction layer.
+S *
+S * Enabling MBEDTLS_PLATFORM_MEMORY without the
+S * MBEDTLS_PLATFORM_{FREE,CALLOC}_MACROs will provide
+S * "mbedtls_platform_set_calloc_free()" allowing you to set an alternative calloc() and
+S * free() function pointer at runtime.
+S *
+S * Enabling MBEDTLS_PLATFORM_MEMORY and specifying
+S * MBEDTLS_PLATFORM_{CALLOC,FREE}_MACROs will allow you to specify the
+S * alternate function at compile time.
+S *
+S * Requires: MBEDTLS_PLATFORM_C
+S *
+S * Enable this layer to allow use of alternative memory allocators.
+S */
+S//#define MBEDTLS_PLATFORM_MEMORY
+S
+S/**
+S * \def MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+S *
+S * Do not assign standard functions in the platform layer (e.g. calloc() to
+S * MBEDTLS_PLATFORM_STD_CALLOC and printf() to MBEDTLS_PLATFORM_STD_PRINTF)
+S *
+S * This makes sure there are no linking errors on platforms that do not support
+S * these functions. You will HAVE to provide alternatives, either at runtime
+S * via the platform_set_xxx() functions or at compile time by setting
+S * the MBEDTLS_PLATFORM_STD_XXX defines, or enabling a
+S * MBEDTLS_PLATFORM_XXX_MACRO.
+S *
+S * Requires: MBEDTLS_PLATFORM_C
+S *
+S * Uncomment to prevent default assignment of standard functions in the
+S * platform layer.
+S */
+S//#define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+S
+S/**
+S * \def MBEDTLS_PLATFORM_EXIT_ALT
+S *
+S * MBEDTLS_PLATFORM_XXX_ALT: Uncomment a macro to let mbed TLS support the
+S * function in the platform abstraction layer.
+S *
+S * Example: In case you uncomment MBEDTLS_PLATFORM_PRINTF_ALT, mbed TLS will
+S * provide a function "mbedtls_platform_set_printf()" that allows you to set an
+S * alternative printf function pointer.
+S *
+S * All these define require MBEDTLS_PLATFORM_C to be defined!
+S *
+S * \note MBEDTLS_PLATFORM_SNPRINTF_ALT is required on Windows;
+S * it will be enabled automatically by check_config.h
+S *
+S * \warning MBEDTLS_PLATFORM_XXX_ALT cannot be defined at the same time as
+S * MBEDTLS_PLATFORM_XXX_MACRO!
+S *
+S * Uncomment a macro to enable alternate implementation of specific base
+S * platform function
+S */
+S//#define MBEDTLS_PLATFORM_EXIT_ALT
+S//#define MBEDTLS_PLATFORM_FPRINTF_ALT
+S//#define MBEDTLS_PLATFORM_PRINTF_ALT
+S//#define MBEDTLS_PLATFORM_SNPRINTF_ALT
+S
+S/**
+S * \def MBEDTLS_DEPRECATED_WARNING
+S *
+S * Mark deprecated functions so that they generate a warning if used.
+S * Functions deprecated in one version will usually be removed in the next
+S * version. You can enable this to help you prepare the transition to a new
+S * major version by making sure your code is not using these functions.
+S *
+S * This only works with GCC and Clang. With other compilers, you may want to
+S * use MBEDTLS_DEPRECATED_REMOVED
+S *
+S * Uncomment to get warnings on using deprecated functions.
+S */
+S//#define MBEDTLS_DEPRECATED_WARNING
+S
+S/**
+S * \def MBEDTLS_DEPRECATED_REMOVED
+S *
+S * Remove deprecated functions so that they generate an error if used.
+S * Functions deprecated in one version will usually be removed in the next
+S * version. You can enable this to help you prepare the transition to a new
+S * major version by making sure your code is not using these functions.
+S *
+S * Uncomment to get errors on using deprecated functions.
+S */
+S//#define MBEDTLS_DEPRECATED_REMOVED
+S
+S/* \} name SECTION: System support */
+S
+S/**
+S * \name SECTION: mbed TLS feature support
+S *
+S * This section sets support for features that are or are not needed
+S * within the modules that are enabled.
+S * \{
+S */
+S
+S/**
+S * \def MBEDTLS_TIMING_ALT
+S *
+S * Uncomment to provide your own alternate implementation for mbedtls_timing_hardclock(),
+S * mbedtls_timing_get_timer(), mbedtls_set_alarm(), mbedtls_set/get_delay()
+S *
+S * Only works if you have MBEDTLS_TIMING_C enabled.
+S *
+S * You will need to provide a header "timing_alt.h" and an implementation at
+S * compile time.
+S */
+S//#define MBEDTLS_TIMING_ALT
+S
+S/**
+S * \def MBEDTLS_AES_ALT
+S *
+S * MBEDTLS__MODULE_NAME__ALT: Uncomment a macro to let mbed TLS use your
+S * alternate core implementation of a symmetric crypto or hash module (e.g.
+S * platform specific assembly optimized implementations). Keep in mind that
+S * the function prototypes should remain the same.
+S *
+S * This replaces the whole module. If you only want to replace one of the
+S * functions, use one of the MBEDTLS__FUNCTION_NAME__ALT flags.
+S *
+S * Example: In case you uncomment MBEDTLS_AES_ALT, mbed TLS will no longer
+S * provide the "struct mbedtls_aes_context" definition and omit the base function
+S * declarations and implementations. "aes_alt.h" will be included from
+S * "aes.h" to include the new function definitions.
+S *
+S * Uncomment a macro to enable alternate implementation of the corresponding
+S * module.
+S */
+S//#define MBEDTLS_AES_ALT
+S//#define MBEDTLS_ARC4_ALT
+S//#define MBEDTLS_BLOWFISH_ALT
+S//#define MBEDTLS_CAMELLIA_ALT
+S//#define MBEDTLS_DES_ALT
+S//#define MBEDTLS_XTEA_ALT
+S//#define MBEDTLS_MD2_ALT
+S//#define MBEDTLS_MD4_ALT
+S//#define MBEDTLS_MD5_ALT
+S//#define MBEDTLS_RIPEMD160_ALT
+S//#define MBEDTLS_SHA1_ALT
+S//#define MBEDTLS_SHA256_ALT
+S//#define MBEDTLS_SHA512_ALT
+S
+S/**
+S * \def MBEDTLS_MD2_PROCESS_ALT
+S *
+S * MBEDTLS__FUNCTION_NAME__ALT: Uncomment a macro to let mbed TLS use you
+S * alternate core implementation of symmetric crypto or hash function. Keep in
+S * mind that function prototypes should remain the same.
+S *
+S * This replaces only one function. The header file from mbed TLS is still
+S * used, in contrast to the MBEDTLS__MODULE_NAME__ALT flags.
+S *
+S * Example: In case you uncomment MBEDTLS_SHA256_PROCESS_ALT, mbed TLS will
+S * no longer provide the mbedtls_sha1_process() function, but it will still provide
+S * the other function (using your mbedtls_sha1_process() function) and the definition
+S * of mbedtls_sha1_context, so your implementation of mbedtls_sha1_process must be compatible
+S * with this definition.
+S *
+S * Note: if you use the AES_xxx_ALT macros, then is is recommended to also set
+S * MBEDTLS_AES_ROM_TABLES in order to help the linker garbage-collect the AES
+S * tables.
+S *
+S * Uncomment a macro to enable alternate implementation of the corresponding
+S * function.
+S */
+S//#define MBEDTLS_MD2_PROCESS_ALT
+S//#define MBEDTLS_MD4_PROCESS_ALT
+S//#define MBEDTLS_MD5_PROCESS_ALT
+S//#define MBEDTLS_RIPEMD160_PROCESS_ALT
+S//#define MBEDTLS_SHA1_PROCESS_ALT
+S//#define MBEDTLS_SHA256_PROCESS_ALT
+S//#define MBEDTLS_SHA512_PROCESS_ALT
+S//#define MBEDTLS_DES_SETKEY_ALT
+S//#define MBEDTLS_DES_CRYPT_ECB_ALT
+S//#define MBEDTLS_DES3_CRYPT_ECB_ALT
+S//#define MBEDTLS_AES_SETKEY_ENC_ALT
+S//#define MBEDTLS_AES_SETKEY_DEC_ALT
+S//#define MBEDTLS_AES_ENCRYPT_ALT
+S//#define MBEDTLS_AES_DECRYPT_ALT
+S
+S/**
+S * \def MBEDTLS_ENTROPY_HARDWARE_ALT
+S *
+S * Uncomment this macro to let mbed TLS use your own implementation of a
+S * hardware entropy collector.
+S *
+S * Your function must be called \c mbedtls_hardware_poll(), have the same
+S * prototype as declared in entropy_poll.h, and accept NULL as first argument.
+S *
+S * Uncomment to use your own hardware entropy collector.
+S */
+S//#define MBEDTLS_ENTROPY_HARDWARE_ALT
+S
+S/**
+S * \def MBEDTLS_AES_ROM_TABLES
+S *
+S * Store the AES tables in ROM.
+S *
+S * Uncomment this macro to store the AES tables in ROM.
+S */
+S//#define MBEDTLS_AES_ROM_TABLES
+S
+S/**
+S * \def MBEDTLS_CAMELLIA_SMALL_MEMORY
+S *
+S * Use less ROM for the Camellia implementation (saves about 768 bytes).
+S *
+S * Uncomment this macro to use less memory for Camellia.
+S */
+S//#define MBEDTLS_CAMELLIA_SMALL_MEMORY
+S
+S/**
+S * \def MBEDTLS_CIPHER_MODE_CBC
+S *
+S * Enable Cipher Block Chaining mode (CBC) for symmetric ciphers.
+S */
+S#define MBEDTLS_CIPHER_MODE_CBC
+S
+S/**
+S * \def MBEDTLS_CIPHER_MODE_CFB
+S *
+S * Enable Cipher Feedback mode (CFB) for symmetric ciphers.
+S */
+S#define MBEDTLS_CIPHER_MODE_CFB
+S
+S/**
+S * \def MBEDTLS_CIPHER_MODE_CTR
+S *
+S * Enable Counter Block Cipher mode (CTR) for symmetric ciphers.
+S */
+S#define MBEDTLS_CIPHER_MODE_CTR
+S
+S/**
+S * \def MBEDTLS_CIPHER_NULL_CIPHER
+S *
+S * Enable NULL cipher.
+S * Warning: Only do so when you know what you are doing. This allows for
+S * encryption or channels without any security!
+S *
+S * Requires MBEDTLS_ENABLE_WEAK_CIPHERSUITES as well to enable
+S * the following ciphersuites:
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA
+S *      MBEDTLS_TLS_RSA_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_RSA_WITH_NULL_MD5
+S *      MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA
+S *      MBEDTLS_TLS_PSK_WITH_NULL_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_NULL_SHA
+S *
+S * Uncomment this macro to enable the NULL cipher and ciphersuites
+S */
+S//#define MBEDTLS_CIPHER_NULL_CIPHER
+S
+S/**
+S * \def MBEDTLS_CIPHER_PADDING_PKCS7
+S *
+S * MBEDTLS_CIPHER_PADDING_XXX: Uncomment or comment macros to add support for
+S * specific padding modes in the cipher layer with cipher modes that support
+S * padding (e.g. CBC)
+S *
+S * If you disable all padding modes, only full blocks can be used with CBC.
+S *
+S * Enable padding modes in the cipher layer.
+S */
+S#define MBEDTLS_CIPHER_PADDING_PKCS7
+S#define MBEDTLS_CIPHER_PADDING_ONE_AND_ZEROS
+S#define MBEDTLS_CIPHER_PADDING_ZEROS_AND_LEN
+S#define MBEDTLS_CIPHER_PADDING_ZEROS
+S
+S/**
+S * \def MBEDTLS_ENABLE_WEAK_CIPHERSUITES
+S *
+S * Enable weak ciphersuites in SSL / TLS.
+S * Warning: Only do so when you know what you are doing. This allows for
+S * channels with virtually no security at all!
+S *
+S * This enables the following ciphersuites:
+S *      MBEDTLS_TLS_RSA_WITH_DES_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_DES_CBC_SHA
+S *
+S * Uncomment this macro to enable weak ciphersuites
+S */
+S//#define MBEDTLS_ENABLE_WEAK_CIPHERSUITES
+S
+S/**
+S * \def MBEDTLS_REMOVE_ARC4_CIPHERSUITES
+S *
+S * Remove RC4 ciphersuites by default in SSL / TLS.
+S * This flag removes the ciphersuites based on RC4 from the default list as
+S * returned by mbedtls_ssl_list_ciphersuites(). However, it is still possible to
+S * enable (some of) them with mbedtls_ssl_conf_ciphersuites() by including them
+S * explicitly.
+S *
+S * Uncomment this macro to remove RC4 ciphersuites by default.
+S */
+S#define MBEDTLS_REMOVE_ARC4_CIPHERSUITES
+S
+S/**
+S * \def MBEDTLS_ECP_DP_SECP192R1_ENABLED
+S *
+S * MBEDTLS_ECP_XXXX_ENABLED: Enables specific curves within the Elliptic Curve
+S * module.  By default all supported curves are enabled.
+S *
+S * Comment macros to disable the curve and functions for it
+S */
+S#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+S#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+S#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+S#define MBEDTLS_ECP_DP_BP512R1_ENABLED
+S#define MBEDTLS_ECP_DP_CURVE25519_ENABLED
+S
+S/**
+S * \def MBEDTLS_ECP_NIST_OPTIM
+S *
+S * Enable specific 'modulo p' routines for each NIST prime.
+S * Depending on the prime and architecture, makes operations 4 to 8 times
+S * faster on the corresponding curve.
+S *
+S * Comment this macro to disable NIST curves optimisation.
+S */
+S#define MBEDTLS_ECP_NIST_OPTIM
+S
+S/**
+S * \def MBEDTLS_ECDSA_DETERMINISTIC
+S *
+S * Enable deterministic ECDSA (RFC 6979).
+S * Standard ECDSA is "fragile" in the sense that lack of entropy when signing
+S * may result in a compromise of the long-term signing key. This is avoided by
+S * the deterministic variant.
+S *
+S * Requires: MBEDTLS_HMAC_DRBG_C
+S *
+S * Comment this macro to disable deterministic ECDSA.
+S */
+S#define MBEDTLS_ECDSA_DETERMINISTIC
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
+S *
+S * Enable the PSK based ciphersuite modes in SSL / TLS.
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED
+S *
+S * Enable the DHE-PSK based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_DHM_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED
+S *
+S * Enable the ECDHE-PSK based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED
+S *
+S * Enable the RSA-PSK based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_RSA_C, MBEDTLS_PKCS1_V15,
+S *           MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_RSA_ENABLED
+S *
+S * Enable the RSA-only based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_RSA_C, MBEDTLS_PKCS1_V15,
+S *           MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_RSA_WITH_RC4_128_MD5
+S */
+S#define MBEDTLS_KEY_EXCHANGE_RSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED
+S *
+S * Enable the DHE-RSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_DHM_C, MBEDTLS_RSA_C, MBEDTLS_PKCS1_V15,
+S *           MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
+S *
+S * Enable the ECDHE-RSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C, MBEDTLS_RSA_C, MBEDTLS_PKCS1_V15,
+S *           MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+S *
+S * Enable the ECDHE-ECDSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C, MBEDTLS_ECDSA_C, MBEDTLS_X509_CRT_PARSE_C,
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+S *
+S * Enable the ECDH-ECDSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C, MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
+S *
+S * Enable the ECDH-RSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C, MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED
+S *
+S * Enable the ECJPAKE based ciphersuite modes in SSL / TLS.
+S *
+S * \warning This is currently experimental. EC J-PAKE support is based on the
+S * Thread v1.0.0 specification; incompatible changes to the specification
+S * might still happen. For this reason, this is disabled by default.
+S *
+S * Requires: MBEDTLS_ECJPAKE_C
+S *           MBEDTLS_SHA256_C
+S *           MBEDTLS_ECP_DP_SECP256R1_ENABLED
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8
+S */
+S//#define MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED
+S
+S/**
+S * \def MBEDTLS_PK_PARSE_EC_EXTENDED
+S *
+S * Enhance support for reading EC keys using variants of SEC1 not allowed by
+S * RFC 5915 and RFC 5480.
+S *
+S * Currently this means parsing the SpecifiedECDomain choice of EC
+S * parameters (only known groups are supported, not arbitrary domains, to
+S * avoid validation issues).
+S *
+S * Disable if you only need to support RFC 5915 + 5480 key formats.
+S */
+S#define MBEDTLS_PK_PARSE_EC_EXTENDED
+S
+S/**
+S * \def MBEDTLS_ERROR_STRERROR_DUMMY
+S *
+S * Enable a dummy error function to make use of mbedtls_strerror() in
+S * third party libraries easier when MBEDTLS_ERROR_C is disabled
+S * (no effect when MBEDTLS_ERROR_C is enabled).
+S *
+S * You can safely disable this if MBEDTLS_ERROR_C is enabled, or if you're
+S * not using mbedtls_strerror() or error_strerror() in your application.
+S *
+S * Disable if you run into name conflicts and want to really remove the
+S * mbedtls_strerror()
+S */
+S#define MBEDTLS_ERROR_STRERROR_DUMMY
+S
+S/**
+S * \def MBEDTLS_GENPRIME
+S *
+S * Enable the prime-number generation code.
+S *
+S * Requires: MBEDTLS_BIGNUM_C
+S */
+S#define MBEDTLS_GENPRIME
+S
+S/**
+S * \def MBEDTLS_FS_IO
+S *
+S * Enable functions that use the filesystem.
+S */
+S#define MBEDTLS_FS_IO
+S
+S/**
+S * \def MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES
+S *
+S * Do not add default entropy sources. These are the platform specific,
+S * mbedtls_timing_hardclock and HAVEGE based poll functions.
+S *
+S * This is useful to have more control over the added entropy sources in an
+S * application.
+S *
+S * Uncomment this macro to prevent loading of default entropy functions.
+S */
+S//#define MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES
+S
+S/**
+S * \def MBEDTLS_NO_PLATFORM_ENTROPY
+S *
+S * Do not use built-in platform entropy functions.
+S * This is useful if your platform does not support
+S * standards like the /dev/urandom or Windows CryptoAPI.
+S *
+S * Uncomment this macro to disable the built-in platform entropy functions.
+S */
+S//#define MBEDTLS_NO_PLATFORM_ENTROPY
+S
+S/**
+S * \def MBEDTLS_ENTROPY_FORCE_SHA256
+S *
+S * Force the entropy accumulator to use a SHA-256 accumulator instead of the
+S * default SHA-512 based one (if both are available).
+S *
+S * Requires: MBEDTLS_SHA256_C
+S *
+S * On 32-bit systems SHA-256 can be much faster than SHA-512. Use this option
+S * if you have performance concerns.
+S *
+S * This option is only useful if both MBEDTLS_SHA256_C and
+S * MBEDTLS_SHA512_C are defined. Otherwise the available hash module is used.
+S */
+S//#define MBEDTLS_ENTROPY_FORCE_SHA256
+S
+S/**
+S * \def MBEDTLS_MEMORY_DEBUG
+S *
+S * Enable debugging of buffer allocator memory issues. Automatically prints
+S * (to stderr) all (fatal) messages on memory allocation issues. Enables
+S * function for 'debug output' of allocated memory.
+S *
+S * Requires: MBEDTLS_MEMORY_BUFFER_ALLOC_C
+S *
+S * Uncomment this macro to let the buffer allocator print out error messages.
+S */
+S//#define MBEDTLS_MEMORY_DEBUG
+S
+S/**
+S * \def MBEDTLS_MEMORY_BACKTRACE
+S *
+S * Include backtrace information with each allocated block.
+S *
+S * Requires: MBEDTLS_MEMORY_BUFFER_ALLOC_C
+S *           GLIBC-compatible backtrace() an backtrace_symbols() support
+S *
+S * Uncomment this macro to include backtrace information
+S */
+S//#define MBEDTLS_MEMORY_BACKTRACE
+S
+S/**
+S * \def MBEDTLS_PK_RSA_ALT_SUPPORT
+S *
+S * Support external private RSA keys (eg from a HSM) in the PK layer.
+S *
+S * Comment this macro to disable support for external private RSA keys.
+S */
+S#define MBEDTLS_PK_RSA_ALT_SUPPORT
+S
+S/**
+S * \def MBEDTLS_PKCS1_V15
+S *
+S * Enable support for PKCS#1 v1.5 encoding.
+S *
+S * Requires: MBEDTLS_RSA_C
+S *
+S * This enables support for PKCS#1 v1.5 operations.
+S */
+S#define MBEDTLS_PKCS1_V15
+S
+S/**
+S * \def MBEDTLS_PKCS1_V21
+S *
+S * Enable support for PKCS#1 v2.1 encoding.
+S *
+S * Requires: MBEDTLS_MD_C, MBEDTLS_RSA_C
+S *
+S * This enables support for RSAES-OAEP and RSASSA-PSS operations.
+S */
+S#define MBEDTLS_PKCS1_V21
+S
+S/**
+S * \def MBEDTLS_RSA_NO_CRT
+S *
+S * Do not use the Chinese Remainder Theorem for the RSA private operation.
+S *
+S * Uncomment this macro to disable the use of CRT in RSA.
+S *
+S */
+S//#define MBEDTLS_RSA_NO_CRT
+S
+S/**
+S * \def MBEDTLS_SELF_TEST
+S *
+S * Enable the checkup functions (*_self_test).
+S */
+S#define MBEDTLS_SELF_TEST
+S
+S/**
+S * \def MBEDTLS_SHA256_SMALLER
+S *
+S * Enable an implementation of SHA-256 that has lower ROM footprint but also
+S * lower performance.
+S *
+S * The default implementation is meant to be a reasonnable compromise between
+S * performance and size. This version optimizes more aggressively for size at
+S * the expense of performance. Eg on Cortex-M4 it reduces the size of
+S * mbedtls_sha256_process() from ~2KB to ~0.5KB for a performance hit of about
+S * 30%.
+S *
+S * Uncomment to enable the smaller implementation of SHA256.
+S */
+S//#define MBEDTLS_SHA256_SMALLER
+S
+S/**
+S * \def MBEDTLS_SSL_AEAD_RANDOM_IV
+S *
+S * Generate a random IV rather than using the record sequence number as a
+S * nonce for ciphersuites using and AEAD algorithm (GCM or CCM).
+S *
+S * Using the sequence number is generally recommended.
+S *
+S * Uncomment this macro to always use random IVs with AEAD ciphersuites.
+S */
+S//#define MBEDTLS_SSL_AEAD_RANDOM_IV
+S
+S/**
+S * \def MBEDTLS_SSL_ALL_ALERT_MESSAGES
+S *
+S * Enable sending of alert messages in case of encountered errors as per RFC.
+S * If you choose not to send the alert messages, mbed TLS can still communicate
+S * with other servers, only debugging of failures is harder.
+S *
+S * The advantage of not sending alert messages, is that no information is given
+S * about reasons for failures thus preventing adversaries of gaining intel.
+S *
+S * Enable sending of all alert messages
+S */
+S#define MBEDTLS_SSL_ALL_ALERT_MESSAGES
+S
+S/**
+S * \def MBEDTLS_SSL_DEBUG_ALL
+S *
+S * Enable the debug messages in SSL module for all issues.
+S * Debug messages have been disabled in some places to prevent timing
+S * attacks due to (unbalanced) debugging function calls.
+S *
+S * If you need all error reporting you should enable this during debugging,
+S * but remove this for production servers that should log as well.
+S *
+S * Uncomment this macro to report all debug messages on errors introducing
+S * a timing side-channel.
+S *
+S */
+S//#define MBEDTLS_SSL_DEBUG_ALL
+S
+S/** \def MBEDTLS_SSL_ENCRYPT_THEN_MAC
+S *
+S * Enable support for Encrypt-then-MAC, RFC 7366.
+S *
+S * This allows peers that both support it to use a more robust protection for
+S * ciphersuites using CBC, providing deep resistance against timing attacks
+S * on the padding or underlying cipher.
+S *
+S * This only affects CBC ciphersuites, and is useless if none is defined.
+S *
+S * Requires: MBEDTLS_SSL_PROTO_TLS1    or
+S *           MBEDTLS_SSL_PROTO_TLS1_1  or
+S *           MBEDTLS_SSL_PROTO_TLS1_2
+S *
+S * Comment this macro to disable support for Encrypt-then-MAC
+S */
+S#define MBEDTLS_SSL_ENCRYPT_THEN_MAC
+S
+S/** \def MBEDTLS_SSL_EXTENDED_MASTER_SECRET
+S *
+S * Enable support for Extended Master Secret, aka Session Hash
+S * (draft-ietf-tls-session-hash-02).
+S *
+S * This was introduced as "the proper fix" to the Triple Handshake familiy of
+S * attacks, but it is recommended to always use it (even if you disable
+S * renegotiation), since it actually fixes a more fundamental issue in the
+S * original SSL/TLS design, and has implications beyond Triple Handshake.
+S *
+S * Requires: MBEDTLS_SSL_PROTO_TLS1    or
+S *           MBEDTLS_SSL_PROTO_TLS1_1  or
+S *           MBEDTLS_SSL_PROTO_TLS1_2
+S *
+S * Comment this macro to disable support for Extended Master Secret.
+S */
+S#define MBEDTLS_SSL_EXTENDED_MASTER_SECRET
+S
+S/**
+S * \def MBEDTLS_SSL_FALLBACK_SCSV
+S *
+S * Enable support for FALLBACK_SCSV (draft-ietf-tls-downgrade-scsv-00).
+S *
+S * For servers, it is recommended to always enable this, unless you support
+S * only one version of TLS, or know for sure that none of your clients
+S * implements a fallback strategy.
+S *
+S * For clients, you only need this if you're using a fallback strategy, which
+S * is not recommended in the first place, unless you absolutely need it to
+S * interoperate with buggy (version-intolerant) servers.
+S *
+S * Comment this macro to disable support for FALLBACK_SCSV
+S */
+S#define MBEDTLS_SSL_FALLBACK_SCSV
+S
+S/**
+S * \def MBEDTLS_SSL_HW_RECORD_ACCEL
+S *
+S * Enable hooking functions in SSL module for hardware acceleration of
+S * individual records.
+S *
+S * Uncomment this macro to enable hooking functions.
+S */
+S//#define MBEDTLS_SSL_HW_RECORD_ACCEL
+S
+S/**
+S * \def MBEDTLS_SSL_CBC_RECORD_SPLITTING
+S *
+S * Enable 1/n-1 record splitting for CBC mode in SSLv3 and TLS 1.0.
+S *
+S * This is a countermeasure to the BEAST attack, which also minimizes the risk
+S * of interoperability issues compared to sending 0-length records.
+S *
+S * Comment this macro to disable 1/n-1 record splitting.
+S */
+S#define MBEDTLS_SSL_CBC_RECORD_SPLITTING
+S
+S/**
+S * \def MBEDTLS_SSL_RENEGOTIATION
+S *
+S * Disable support for TLS renegotiation.
+S *
+S * The two main uses of renegotiation are (1) refresh keys on long-lived
+S * connections and (2) client authentication after the initial handshake.
+S * If you don't need renegotiation, it's probably better to disable it, since
+S * it has been associated with security issues in the past and is easy to
+S * misuse/misunderstand.
+S *
+S * Comment this to disable support for renegotiation.
+S */
+S#define MBEDTLS_SSL_RENEGOTIATION
+S
+S/**
+S * \def MBEDTLS_SSL_SRV_SUPPORT_SSLV2_CLIENT_HELLO
+S *
+S * Enable support for receiving and parsing SSLv2 Client Hello messages for the
+S * SSL Server module (MBEDTLS_SSL_SRV_C).
+S *
+S * Uncomment this macro to enable support for SSLv2 Client Hello messages.
+S */
+S//#define MBEDTLS_SSL_SRV_SUPPORT_SSLV2_CLIENT_HELLO
+S
+S/**
+S * \def MBEDTLS_SSL_SRV_RESPECT_CLIENT_PREFERENCE
+S *
+S * Pick the ciphersuite according to the client's preferences rather than ours
+S * in the SSL Server module (MBEDTLS_SSL_SRV_C).
+S *
+S * Uncomment this macro to respect client's ciphersuite order
+S */
+S//#define MBEDTLS_SSL_SRV_RESPECT_CLIENT_PREFERENCE
+S
+S/**
+S * \def MBEDTLS_SSL_MAX_FRAGMENT_LENGTH
+S *
+S * Enable support for RFC 6066 max_fragment_length extension in SSL.
+S *
+S * Comment this macro to disable support for the max_fragment_length extension
+S */
+S#define MBEDTLS_SSL_MAX_FRAGMENT_LENGTH
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_SSL3
+S *
+S * Enable support for SSL 3.0.
+S *
+S * Requires: MBEDTLS_MD5_C
+S *           MBEDTLS_SHA1_C
+S *
+S * Comment this macro to disable support for SSL 3.0
+S */
+S#define MBEDTLS_SSL_PROTO_SSL3
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_TLS1
+S *
+S * Enable support for TLS 1.0.
+S *
+S * Requires: MBEDTLS_MD5_C
+S *           MBEDTLS_SHA1_C
+S *
+S * Comment this macro to disable support for TLS 1.0
+S */
+S#define MBEDTLS_SSL_PROTO_TLS1
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_TLS1_1
+S *
+S * Enable support for TLS 1.1 (and DTLS 1.0 if DTLS is enabled).
+S *
+S * Requires: MBEDTLS_MD5_C
+S *           MBEDTLS_SHA1_C
+S *
+S * Comment this macro to disable support for TLS 1.1 / DTLS 1.0
+S */
+S#define MBEDTLS_SSL_PROTO_TLS1_1
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_TLS1_2
+S *
+S * Enable support for TLS 1.2 (and DTLS 1.2 if DTLS is enabled).
+S *
+S * Requires: MBEDTLS_SHA1_C or MBEDTLS_SHA256_C or MBEDTLS_SHA512_C
+S *           (Depends on ciphersuites)
+S *
+S * Comment this macro to disable support for TLS 1.2 / DTLS 1.2
+S */
+S#define MBEDTLS_SSL_PROTO_TLS1_2
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_DTLS
+S *
+S * Enable support for DTLS (all available versions).
+S *
+S * Enable this and MBEDTLS_SSL_PROTO_TLS1_1 to enable DTLS 1.0,
+S * and/or this and MBEDTLS_SSL_PROTO_TLS1_2 to enable DTLS 1.2.
+S *
+S * Requires: MBEDTLS_SSL_PROTO_TLS1_1
+S *        or MBEDTLS_SSL_PROTO_TLS1_2
+S *
+S * Comment this macro to disable support for DTLS
+S */
+S#define MBEDTLS_SSL_PROTO_DTLS
+S
+S/**
+S * \def MBEDTLS_SSL_ALPN
+S *
+S * Enable support for RFC 7301 Application Layer Protocol Negotiation.
+S *
+S * Comment this macro to disable support for ALPN.
+S */
+S#define MBEDTLS_SSL_ALPN
+S
+S/**
+S * \def MBEDTLS_SSL_DTLS_ANTI_REPLAY
+S *
+S * Enable support for the anti-replay mechanism in DTLS.
+S *
+S * Requires: MBEDTLS_SSL_TLS_C
+S *           MBEDTLS_SSL_PROTO_DTLS
+S *
+S * \warning Disabling this is often a security risk!
+S * See mbedtls_ssl_conf_dtls_anti_replay() for details.
+S *
+S * Comment this to disable anti-replay in DTLS.
+S */
+S#define MBEDTLS_SSL_DTLS_ANTI_REPLAY
+S
+S/**
+S * \def MBEDTLS_SSL_DTLS_HELLO_VERIFY
+S *
+S * Enable support for HelloVerifyRequest on DTLS servers.
+S *
+S * This feature is highly recommended to prevent DTLS servers being used as
+S * amplifiers in DoS attacks against other hosts. It should always be enabled
+S * unless you know for sure amplification cannot be a problem in the
+S * environment in which your server operates.
+S *
+S * \warning Disabling this can ba a security risk! (see above)
+S *
+S * Requires: MBEDTLS_SSL_PROTO_DTLS
+S *
+S * Comment this to disable support for HelloVerifyRequest.
+S */
+S#define MBEDTLS_SSL_DTLS_HELLO_VERIFY
+S
+S/**
+S * \def MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE
+S *
+S * Enable server-side support for clients that reconnect from the same port.
+S *
+S * Some clients unexpectedly close the connection and try to reconnect using the
+S * same source port. This needs special support from the server to handle the
+S * new connection securely, as described in section 4.2.8 of RFC 6347. This
+S * flag enables that support.
+S *
+S * Requires: MBEDTLS_SSL_DTLS_HELLO_VERIFY
+S *
+S * Comment this to disable support for clients reusing the source port.
+S */
+S#define MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE
+S
+S/**
+S * \def MBEDTLS_SSL_DTLS_BADMAC_LIMIT
+S *
+S * Enable support for a limit of records with bad MAC.
+S *
+S * See mbedtls_ssl_conf_dtls_badmac_limit().
+S *
+S * Requires: MBEDTLS_SSL_PROTO_DTLS
+S */
+S#define MBEDTLS_SSL_DTLS_BADMAC_LIMIT
+S
+S/**
+S * \def MBEDTLS_SSL_SESSION_TICKETS
+S *
+S * Enable support for RFC 5077 session tickets in SSL.
+S * Client-side, provides full support for session tickets (maintainance of a
+S * session store remains the responsibility of the application, though).
+S * Server-side, you also need to provide callbacks for writing and parsing
+S * tickets, including authenticated encryption and key management. Example
+S * callbacks are provided by MBEDTLS_SSL_TICKET_C.
+S *
+S * Comment this macro to disable support for SSL session tickets
+S */
+S#define MBEDTLS_SSL_SESSION_TICKETS
+S
+S/**
+S * \def MBEDTLS_SSL_EXPORT_KEYS
+S *
+S * Enable support for exporting key block and master secret.
+S * This is required for certain users of TLS, e.g. EAP-TLS.
+S *
+S * Comment this macro to disable support for key export
+S */
+S#define MBEDTLS_SSL_EXPORT_KEYS
+S
+S/**
+S * \def MBEDTLS_SSL_SERVER_NAME_INDICATION
+S *
+S * Enable support for RFC 6066 server name indication (SNI) in SSL.
+S *
+S * Requires: MBEDTLS_X509_CRT_PARSE_C
+S *
+S * Comment this macro to disable support for server name indication in SSL
+S */
+S#define MBEDTLS_SSL_SERVER_NAME_INDICATION
+S
+S/**
+S * \def MBEDTLS_SSL_TRUNCATED_HMAC
+S *
+S * Enable support for RFC 6066 truncated HMAC in SSL.
+S *
+S * Comment this macro to disable support for truncated HMAC in SSL
+S */
+S#define MBEDTLS_SSL_TRUNCATED_HMAC
+S
+S/**
+S * \def MBEDTLS_THREADING_ALT
+S *
+S * Provide your own alternate threading implementation.
+S *
+S * Requires: MBEDTLS_THREADING_C
+S *
+S * Uncomment this to allow your own alternate threading implementation.
+S */
+S//#define MBEDTLS_THREADING_ALT
+S
+S/**
+S * \def MBEDTLS_THREADING_PTHREAD
+S *
+S * Enable the pthread wrapper layer for the threading layer.
+S *
+S * Requires: MBEDTLS_THREADING_C
+S *
+S * Uncomment this to enable pthread mutexes.
+S */
+S//#define MBEDTLS_THREADING_PTHREAD
+S
+S/**
+S * \def MBEDTLS_VERSION_FEATURES
+S *
+S * Allow run-time checking of compile-time enabled features. Thus allowing users
+S * to check at run-time if the library is for instance compiled with threading
+S * support via mbedtls_version_check_feature().
+S *
+S * Requires: MBEDTLS_VERSION_C
+S *
+S * Comment this to disable run-time checking and save ROM space
+S */
+S#define MBEDTLS_VERSION_FEATURES
+S
+S/**
+S * \def MBEDTLS_X509_ALLOW_EXTENSIONS_NON_V3
+S *
+S * If set, the X509 parser will not break-off when parsing an X509 certificate
+S * and encountering an extension in a v1 or v2 certificate.
+S *
+S * Uncomment to prevent an error.
+S */
+S//#define MBEDTLS_X509_ALLOW_EXTENSIONS_NON_V3
+S
+S/**
+S * \def MBEDTLS_X509_ALLOW_UNSUPPORTED_CRITICAL_EXTENSION
+S *
+S * If set, the X509 parser will not break-off when parsing an X509 certificate
+S * and encountering an unknown critical extension.
+S *
+S * \warning Depending on your PKI use, enabling this can be a security risk!
+S *
+S * Uncomment to prevent an error.
+S */
+S//#define MBEDTLS_X509_ALLOW_UNSUPPORTED_CRITICAL_EXTENSION
+S
+S/**
+S * \def MBEDTLS_X509_CHECK_KEY_USAGE
+S *
+S * Enable verification of the keyUsage extension (CA and leaf certificates).
+S *
+S * Disabling this avoids problems with mis-issued and/or misused
+S * (intermediate) CA and leaf certificates.
+S *
+S * \warning Depending on your PKI use, disabling this can be a security risk!
+S *
+S * Comment to skip keyUsage checking for both CA and leaf certificates.
+S */
+S#define MBEDTLS_X509_CHECK_KEY_USAGE
+S
+S/**
+S * \def MBEDTLS_X509_CHECK_EXTENDED_KEY_USAGE
+S *
+S * Enable verification of the extendedKeyUsage extension (leaf certificates).
+S *
+S * Disabling this avoids problems with mis-issued and/or misused certificates.
+S *
+S * \warning Depending on your PKI use, disabling this can be a security risk!
+S *
+S * Comment to skip extendedKeyUsage checking for certificates.
+S */
+S#define MBEDTLS_X509_CHECK_EXTENDED_KEY_USAGE
+S
+S/**
+S * \def MBEDTLS_X509_RSASSA_PSS_SUPPORT
+S *
+S * Enable parsing and verification of X.509 certificates, CRLs and CSRS
+S * signed with RSASSA-PSS (aka PKCS#1 v2.1).
+S *
+S * Comment this macro to disallow using RSASSA-PSS in certificates.
+S */
+S#define MBEDTLS_X509_RSASSA_PSS_SUPPORT
+S
+S/**
+S * \def MBEDTLS_ZLIB_SUPPORT
+S *
+S * If set, the SSL/TLS module uses ZLIB to support compression and
+S * decompression of packet data.
+S *
+S * \warning TLS-level compression MAY REDUCE SECURITY! See for example the
+S * CRIME attack. Before enabling this option, you should examine with care if
+S * CRIME or similar exploits may be a applicable to your use case.
+S *
+S * \note Currently compression can't be used with DTLS.
+S *
+S * Used in: library/ssl_tls.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * This feature requires zlib library and headers to be present.
+S *
+S * Uncomment to enable use of ZLIB
+S */
+S//#define MBEDTLS_ZLIB_SUPPORT
+S/* \} name SECTION: mbed TLS feature support */
+S
+S/**
+S * \name SECTION: mbed TLS modules
+S *
+S * This section enables or disables entire modules in mbed TLS
+S * \{
+S */
+S
+S/**
+S * \def MBEDTLS_AESNI_C
+S *
+S * Enable AES-NI support on x86-64.
+S *
+S * Module:  library/aesni.c
+S * Caller:  library/aes.c
+S *
+S * Requires: MBEDTLS_HAVE_ASM
+S *
+S * This modules adds support for the AES-NI instructions on x86-64
+S */
+S#define MBEDTLS_AESNI_C
+S
+S/**
+S * \def MBEDTLS_AES_C
+S *
+S * Enable the AES block cipher.
+S *
+S * Module:  library/aes.c
+S * Caller:  library/ssl_tls.c
+S *          library/pem.c
+S *          library/ctr_drbg.c
+S *
+S * This module enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA
+S *
+S * PEM_PARSE uses AES for decrypting encrypted keys.
+S */
+S#define MBEDTLS_AES_C
+S
+S/**
+S * \def MBEDTLS_ARC4_C
+S *
+S * Enable the ARCFOUR stream cipher.
+S *
+S * Module:  library/arc4.c
+S * Caller:  library/ssl_tls.c
+S *
+S * This module enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_RSA_WITH_RC4_128_MD5
+S *      MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_ARC4_C
+S
+S/**
+S * \def MBEDTLS_ASN1_PARSE_C
+S *
+S * Enable the generic ASN1 parser.
+S *
+S * Module:  library/asn1.c
+S * Caller:  library/x509.c
+S *          library/dhm.c
+S *          library/pkcs12.c
+S *          library/pkcs5.c
+S *          library/pkparse.c
+S */
+S#define MBEDTLS_ASN1_PARSE_C
+S
+S/**
+S * \def MBEDTLS_ASN1_WRITE_C
+S *
+S * Enable the generic ASN1 writer.
+S *
+S * Module:  library/asn1write.c
+S * Caller:  library/ecdsa.c
+S *          library/pkwrite.c
+S *          library/x509_create.c
+S *          library/x509write_crt.c
+S *          library/mbedtls_x509write_csr.c
+S */
+S#define MBEDTLS_ASN1_WRITE_C
+S
+S/**
+S * \def MBEDTLS_BASE64_C
+S *
+S * Enable the Base64 module.
+S *
+S * Module:  library/base64.c
+S * Caller:  library/pem.c
+S *
+S * This module is required for PEM support (required by X.509).
+S */
+S#define MBEDTLS_BASE64_C
+S
+S/**
+S * \def MBEDTLS_BIGNUM_C
+S *
+S * Enable the multi-precision integer library.
+S *
+S * Module:  library/bignum.c
+S * Caller:  library/dhm.c
+S *          library/ecp.c
+S *          library/ecdsa.c
+S *          library/rsa.c
+S *          library/ssl_tls.c
+S *
+S * This module is required for RSA, DHM and ECC (ECDH, ECDSA) support.
+S */
+S#define MBEDTLS_BIGNUM_C
+S
+S/**
+S * \def MBEDTLS_BLOWFISH_C
+S *
+S * Enable the Blowfish block cipher.
+S *
+S * Module:  library/blowfish.c
+S */
+S#define MBEDTLS_BLOWFISH_C
+S
+S/**
+S * \def MBEDTLS_CAMELLIA_C
+S *
+S * Enable the Camellia block cipher.
+S *
+S * Module:  library/camellia.c
+S * Caller:  library/ssl_tls.c
+S *
+S * This module enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S */
+S#define MBEDTLS_CAMELLIA_C
+S
+S/**
+S * \def MBEDTLS_CCM_C
+S *
+S * Enable the Counter with CBC-MAC (CCM) mode for 128-bit block cipher.
+S *
+S * Module:  library/ccm.c
+S *
+S * Requires: MBEDTLS_AES_C or MBEDTLS_CAMELLIA_C
+S *
+S * This module enables the AES-CCM ciphersuites, if other requisites are
+S * enabled as well.
+S */
+S#define MBEDTLS_CCM_C
+S
+S/**
+S * \def MBEDTLS_CERTS_C
+S *
+S * Enable the test certificates.
+S *
+S * Module:  library/certs.c
+S * Caller:
+S *
+S * This module is used for testing (ssl_client/server).
+S */
+S#define MBEDTLS_CERTS_C
+S
+S/**
+S * \def MBEDTLS_CIPHER_C
+S *
+S * Enable the generic cipher layer.
+S *
+S * Module:  library/cipher.c
+S * Caller:  library/ssl_tls.c
+S *
+S * Uncomment to enable generic cipher wrappers.
+S */
+S#define MBEDTLS_CIPHER_C
+S
+S/**
+S * \def MBEDTLS_CTR_DRBG_C
+S *
+S * Enable the CTR_DRBG AES-256-based random generator.
+S *
+S * Module:  library/ctr_drbg.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_AES_C
+S *
+S * This module provides the CTR_DRBG AES-256 random number generator.
+S */
+S#define MBEDTLS_CTR_DRBG_C
+S
+S/**
+S * \def MBEDTLS_DEBUG_C
+S *
+S * Enable the debug functions.
+S *
+S * Module:  library/debug.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *
+S * This module provides debugging functions.
+S */
+S#define MBEDTLS_DEBUG_C
+S
+S/**
+S * \def MBEDTLS_DES_C
+S *
+S * Enable the DES block cipher.
+S *
+S * Module:  library/des.c
+S * Caller:  library/pem.c
+S *          library/ssl_tls.c
+S *
+S * This module enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA
+S *
+S * PEM_PARSE uses DES/3DES for decrypting encrypted keys.
+S */
+S#define MBEDTLS_DES_C
+S
+S/**
+S * \def MBEDTLS_DHM_C
+S *
+S * Enable the Diffie-Hellman-Merkle module.
+S *
+S * Module:  library/dhm.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * This module is used by the following key exchanges:
+S *      DHE-RSA, DHE-PSK
+S */
+S#define MBEDTLS_DHM_C
+S
+S/**
+S * \def MBEDTLS_ECDH_C
+S *
+S * Enable the elliptic curve Diffie-Hellman library.
+S *
+S * Module:  library/ecdh.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * This module is used by the following key exchanges:
+S *      ECDHE-ECDSA, ECDHE-RSA, DHE-PSK
+S *
+S * Requires: MBEDTLS_ECP_C
+S */
+S#define MBEDTLS_ECDH_C
+S
+S/**
+S * \def MBEDTLS_ECDSA_C
+S *
+S * Enable the elliptic curve DSA library.
+S *
+S * Module:  library/ecdsa.c
+S * Caller:
+S *
+S * This module is used by the following key exchanges:
+S *      ECDHE-ECDSA
+S *
+S * Requires: MBEDTLS_ECP_C, MBEDTLS_ASN1_WRITE_C, MBEDTLS_ASN1_PARSE_C
+S */
+S#define MBEDTLS_ECDSA_C
+S
+S/**
+S * \def MBEDTLS_ECJPAKE_C
+S *
+S * Enable the elliptic curve J-PAKE library.
+S *
+S * \warning This is currently experimental. EC J-PAKE support is based on the
+S * Thread v1.0.0 specification; incompatible changes to the specification
+S * might still happen. For this reason, this is disabled by default.
+S *
+S * Module:  library/ecjpake.c
+S * Caller:
+S *
+S * This module is used by the following key exchanges:
+S *      ECJPAKE
+S *
+S * Requires: MBEDTLS_ECP_C, MBEDTLS_MD_C
+S */
+S//#define MBEDTLS_ECJPAKE_C
+S
+S/**
+S * \def MBEDTLS_ECP_C
+S *
+S * Enable the elliptic curve over GF(p) library.
+S *
+S * Module:  library/ecp.c
+S * Caller:  library/ecdh.c
+S *          library/ecdsa.c
+S *          library/ecjpake.c
+S *
+S * Requires: MBEDTLS_BIGNUM_C and at least one MBEDTLS_ECP_DP_XXX_ENABLED
+S */
+S#define MBEDTLS_ECP_C
+S
+S/**
+S * \def MBEDTLS_ENTROPY_C
+S *
+S * Enable the platform-specific entropy code.
+S *
+S * Module:  library/entropy.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_SHA512_C or MBEDTLS_SHA256_C
+S *
+S * This module provides a generic entropy pool
+S */
+S#define MBEDTLS_ENTROPY_C
+S
+S/**
+S * \def MBEDTLS_ERROR_C
+S *
+S * Enable error code to error string conversion.
+S *
+S * Module:  library/error.c
+S * Caller:
+S *
+S * This module enables mbedtls_strerror().
+S */
+S#define MBEDTLS_ERROR_C
+S
+S/**
+S * \def MBEDTLS_GCM_C
+S *
+S * Enable the Galois/Counter Mode (GCM) for AES.
+S *
+S * Module:  library/gcm.c
+S *
+S * Requires: MBEDTLS_AES_C or MBEDTLS_CAMELLIA_C
+S *
+S * This module enables the AES-GCM and CAMELLIA-GCM ciphersuites, if other
+S * requisites are enabled as well.
+S */
+S#define MBEDTLS_GCM_C
+S
+S/**
+S * \def MBEDTLS_HAVEGE_C
+S *
+S * Enable the HAVEGE random generator.
+S *
+S * Warning: the HAVEGE random generator is not suitable for virtualized
+S *          environments
+S *
+S * Warning: the HAVEGE random generator is dependent on timing and specific
+S *          processor traits. It is therefore not advised to use HAVEGE as
+S *          your applications primary random generator or primary entropy pool
+S *          input. As a secondary input to your entropy pool, it IS able add
+S *          the (limited) extra entropy it provides.
+S *
+S * Module:  library/havege.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_TIMING_C
+S *
+S * Uncomment to enable the HAVEGE random generator.
+S */
+S//#define MBEDTLS_HAVEGE_C
+S
+S/**
+S * \def MBEDTLS_HMAC_DRBG_C
+S *
+S * Enable the HMAC_DRBG random generator.
+S *
+S * Module:  library/hmac_drbg.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_MD_C
+S *
+S * Uncomment to enable the HMAC_DRBG random number geerator.
+S */
+S#define MBEDTLS_HMAC_DRBG_C
+S
+S/**
+S * \def MBEDTLS_MD_C
+S *
+S * Enable the generic message digest layer.
+S *
+S * Module:  library/mbedtls_md.c
+S * Caller:
+S *
+S * Uncomment to enable generic message digest wrappers.
+S */
+S#define MBEDTLS_MD_C
+S
+S/**
+S * \def MBEDTLS_MD2_C
+S *
+S * Enable the MD2 hash algorithm.
+S *
+S * Module:  library/mbedtls_md2.c
+S * Caller:
+S *
+S * Uncomment to enable support for (rare) MD2-signed X.509 certs.
+S */
+S//#define MBEDTLS_MD2_C
+S
+S/**
+S * \def MBEDTLS_MD4_C
+S *
+S * Enable the MD4 hash algorithm.
+S *
+S * Module:  library/mbedtls_md4.c
+S * Caller:
+S *
+S * Uncomment to enable support for (rare) MD4-signed X.509 certs.
+S */
+S//#define MBEDTLS_MD4_C
+S
+S/**
+S * \def MBEDTLS_MD5_C
+S *
+S * Enable the MD5 hash algorithm.
+S *
+S * Module:  library/mbedtls_md5.c
+S * Caller:  library/mbedtls_md.c
+S *          library/pem.c
+S *          library/ssl_tls.c
+S *
+S * This module is required for SSL/TLS and X.509.
+S * PEM_PARSE uses MD5 for decrypting encrypted keys.
+S */
+S#define MBEDTLS_MD5_C
+S
+S/**
+S * \def MBEDTLS_MEMORY_BUFFER_ALLOC_C
+S *
+S * Enable the buffer allocator implementation that makes use of a (stack)
+S * based buffer to 'allocate' dynamic memory. (replaces calloc() and free()
+S * calls)
+S *
+S * Module:  library/memory_buffer_alloc.c
+S *
+S * Requires: MBEDTLS_PLATFORM_C
+S *           MBEDTLS_PLATFORM_MEMORY (to use it within mbed TLS)
+S *
+S * Enable this module to enable the buffer memory allocator.
+S */
+S//#define MBEDTLS_MEMORY_BUFFER_ALLOC_C
+S
+S/**
+S * \def MBEDTLS_NET_C
+S *
+S * Enable the TCP/IP networking routines.
+S *
+S * Module:  library/net.c
+S *
+S * This module provides TCP/IP networking routines.
+S */
+S#define MBEDTLS_NET_C
+S
+S/**
+S * \def MBEDTLS_OID_C
+S *
+S * Enable the OID database.
+S *
+S * Module:  library/oid.c
+S * Caller:  library/asn1write.c
+S *          library/pkcs5.c
+S *          library/pkparse.c
+S *          library/pkwrite.c
+S *          library/rsa.c
+S *          library/x509.c
+S *          library/x509_create.c
+S *          library/mbedtls_x509_crl.c
+S *          library/mbedtls_x509_crt.c
+S *          library/mbedtls_x509_csr.c
+S *          library/x509write_crt.c
+S *          library/mbedtls_x509write_csr.c
+S *
+S * This modules translates between OIDs and internal values.
+S */
+S#define MBEDTLS_OID_C
+S
+S/**
+S * \def MBEDTLS_PADLOCK_C
+S *
+S * Enable VIA Padlock support on x86.
+S *
+S * Module:  library/padlock.c
+S * Caller:  library/aes.c
+S *
+S * Requires: MBEDTLS_HAVE_ASM
+S *
+S * This modules adds support for the VIA PadLock on x86.
+S */
+S#define MBEDTLS_PADLOCK_C
+S
+S/**
+S * \def MBEDTLS_PEM_PARSE_C
+S *
+S * Enable PEM decoding / parsing.
+S *
+S * Module:  library/pem.c
+S * Caller:  library/dhm.c
+S *          library/pkparse.c
+S *          library/mbedtls_x509_crl.c
+S *          library/mbedtls_x509_crt.c
+S *          library/mbedtls_x509_csr.c
+S *
+S * Requires: MBEDTLS_BASE64_C
+S *
+S * This modules adds support for decoding / parsing PEM files.
+S */
+S#define MBEDTLS_PEM_PARSE_C
+S
+S/**
+S * \def MBEDTLS_PEM_WRITE_C
+S *
+S * Enable PEM encoding / writing.
+S *
+S * Module:  library/pem.c
+S * Caller:  library/pkwrite.c
+S *          library/x509write_crt.c
+S *          library/mbedtls_x509write_csr.c
+S *
+S * Requires: MBEDTLS_BASE64_C
+S *
+S * This modules adds support for encoding / writing PEM files.
+S */
+S#define MBEDTLS_PEM_WRITE_C
+S
+S/**
+S * \def MBEDTLS_PK_C
+S *
+S * Enable the generic public (asymetric) key layer.
+S *
+S * Module:  library/pk.c
+S * Caller:  library/ssl_tls.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * Requires: MBEDTLS_RSA_C or MBEDTLS_ECP_C
+S *
+S * Uncomment to enable generic public key wrappers.
+S */
+S#define MBEDTLS_PK_C
+S
+S/**
+S * \def MBEDTLS_PK_PARSE_C
+S *
+S * Enable the generic public (asymetric) key parser.
+S *
+S * Module:  library/pkparse.c
+S * Caller:  library/mbedtls_x509_crt.c
+S *          library/mbedtls_x509_csr.c
+S *
+S * Requires: MBEDTLS_PK_C
+S *
+S * Uncomment to enable generic public key parse functions.
+S */
+S#define MBEDTLS_PK_PARSE_C
+S
+S/**
+S * \def MBEDTLS_PK_WRITE_C
+S *
+S * Enable the generic public (asymetric) key writer.
+S *
+S * Module:  library/pkwrite.c
+S * Caller:  library/x509write.c
+S *
+S * Requires: MBEDTLS_PK_C
+S *
+S * Uncomment to enable generic public key write functions.
+S */
+S#define MBEDTLS_PK_WRITE_C
+S
+S/**
+S * \def MBEDTLS_PKCS5_C
+S *
+S * Enable PKCS#5 functions.
+S *
+S * Module:  library/pkcs5.c
+S *
+S * Requires: MBEDTLS_MD_C
+S *
+S * This module adds support for the PKCS#5 functions.
+S */
+S#define MBEDTLS_PKCS5_C
+S
+S/**
+S * \def MBEDTLS_PKCS11_C
+S *
+S * Enable wrapper for PKCS#11 smartcard support.
+S *
+S * Module:  library/pkcs11.c
+S * Caller:  library/pk.c
+S *
+S * Requires: MBEDTLS_PK_C
+S *
+S * This module enables SSL/TLS PKCS #11 smartcard support.
+S * Requires the presence of the PKCS#11 helper library (libpkcs11-helper)
+S */
+S//#define MBEDTLS_PKCS11_C
+S
+S/**
+S * \def MBEDTLS_PKCS12_C
+S *
+S * Enable PKCS#12 PBE functions.
+S * Adds algorithms for parsing PKCS#8 encrypted private keys
+S *
+S * Module:  library/pkcs12.c
+S * Caller:  library/pkparse.c
+S *
+S * Requires: MBEDTLS_ASN1_PARSE_C, MBEDTLS_CIPHER_C, MBEDTLS_MD_C
+S * Can use:  MBEDTLS_ARC4_C
+S *
+S * This module enables PKCS#12 functions.
+S */
+S#define MBEDTLS_PKCS12_C
+S
+S/**
+S * \def MBEDTLS_PLATFORM_C
+S *
+S * Enable the platform abstraction layer that allows you to re-assign
+S * functions like calloc(), free(), snprintf(), printf(), fprintf(), exit().
+S *
+S * Enabling MBEDTLS_PLATFORM_C enables to use of MBEDTLS_PLATFORM_XXX_ALT
+S * or MBEDTLS_PLATFORM_XXX_MACRO directives, allowing the functions mentioned
+S * above to be specified at runtime or compile time respectively.
+S *
+S * \note This abstraction layer must be enabled on Windows (including MSYS2)
+S * as other module rely on it for a fixed snprintf implementation.
+S *
+S * Module:  library/platform.c
+S * Caller:  Most other .c files
+S *
+S * This module enables abstraction of common (libc) functions.
+S */
+S#define MBEDTLS_PLATFORM_C
+S
+S/**
+S * \def MBEDTLS_RIPEMD160_C
+S *
+S * Enable the RIPEMD-160 hash algorithm.
+S *
+S * Module:  library/mbedtls_ripemd160.c
+S * Caller:  library/mbedtls_md.c
+S *
+S */
+S#define MBEDTLS_RIPEMD160_C
+S
+S/**
+S * \def MBEDTLS_RSA_C
+S *
+S * Enable the RSA public-key cryptosystem.
+S *
+S * Module:  library/rsa.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *          library/x509.c
+S *
+S * This module is used by the following key exchanges:
+S *      RSA, DHE-RSA, ECDHE-RSA, RSA-PSK
+S *
+S * Requires: MBEDTLS_BIGNUM_C, MBEDTLS_OID_C
+S */
+S#define MBEDTLS_RSA_C
+S
+S/**
+S * \def MBEDTLS_SHA1_C
+S *
+S * Enable the SHA1 cryptographic hash algorithm.
+S *
+S * Module:  library/mbedtls_sha1.c
+S * Caller:  library/mbedtls_md.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *          library/x509write_crt.c
+S *
+S * This module is required for SSL/TLS and SHA1-signed certificates.
+S */
+S#define MBEDTLS_SHA1_C
+S
+S/**
+S * \def MBEDTLS_SHA256_C
+S *
+S * Enable the SHA-224 and SHA-256 cryptographic hash algorithms.
+S *
+S * Module:  library/mbedtls_sha256.c
+S * Caller:  library/entropy.c
+S *          library/mbedtls_md.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *
+S * This module adds support for SHA-224 and SHA-256.
+S * This module is required for the SSL/TLS 1.2 PRF function.
+S */
+S#define MBEDTLS_SHA256_C
+S
+S/**
+S * \def MBEDTLS_SHA512_C
+S *
+S * Enable the SHA-384 and SHA-512 cryptographic hash algorithms.
+S *
+S * Module:  library/mbedtls_sha512.c
+S * Caller:  library/entropy.c
+S *          library/mbedtls_md.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * This module adds support for SHA-384 and SHA-512.
+S */
+S#define MBEDTLS_SHA512_C
+S
+S/**
+S * \def MBEDTLS_SSL_CACHE_C
+S *
+S * Enable simple SSL cache implementation.
+S *
+S * Module:  library/ssl_cache.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_SSL_CACHE_C
+S */
+S#define MBEDTLS_SSL_CACHE_C
+S
+S/**
+S * \def MBEDTLS_SSL_COOKIE_C
+S *
+S * Enable basic implementation of DTLS cookies for hello verification.
+S *
+S * Module:  library/ssl_cookie.c
+S * Caller:
+S */
+S#define MBEDTLS_SSL_COOKIE_C
+S
+S/**
+S * \def MBEDTLS_SSL_TICKET_C
+S *
+S * Enable an implementation of TLS server-side callbacks for session tickets.
+S *
+S * Module:  library/ssl_ticket.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_CIPHER_C
+S */
+S#define MBEDTLS_SSL_TICKET_C
+S
+S/**
+S * \def MBEDTLS_SSL_CLI_C
+S *
+S * Enable the SSL/TLS client code.
+S *
+S * Module:  library/ssl_cli.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_SSL_TLS_C
+S *
+S * This module is required for SSL/TLS client support.
+S */
+S#define MBEDTLS_SSL_CLI_C
+S
+S/**
+S * \def MBEDTLS_SSL_SRV_C
+S *
+S * Enable the SSL/TLS server code.
+S *
+S * Module:  library/ssl_srv.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_SSL_TLS_C
+S *
+S * This module is required for SSL/TLS server support.
+S */
+S#define MBEDTLS_SSL_SRV_C
+S
+S/**
+S * \def MBEDTLS_SSL_TLS_C
+S *
+S * Enable the generic SSL/TLS code.
+S *
+S * Module:  library/ssl_tls.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * Requires: MBEDTLS_CIPHER_C, MBEDTLS_MD_C
+S *           and at least one of the MBEDTLS_SSL_PROTO_XXX defines
+S *
+S * This module is required for SSL/TLS.
+S */
+S#define MBEDTLS_SSL_TLS_C
+S
+S/**
+S * \def MBEDTLS_THREADING_C
+S *
+S * Enable the threading abstraction layer.
+S * By default mbed TLS assumes it is used in a non-threaded environment or that
+S * contexts are not shared between threads. If you do intend to use contexts
+S * between threads, you will need to enable this layer to prevent race
+S * conditions.
+S *
+S * Module:  library/threading.c
+S *
+S * This allows different threading implementations (self-implemented or
+S * provided).
+S *
+S * You will have to enable either MBEDTLS_THREADING_ALT or
+S * MBEDTLS_THREADING_PTHREAD.
+S *
+S * Enable this layer to allow use of mutexes within mbed TLS
+S */
+S//#define MBEDTLS_THREADING_C
+S
+S/**
+S * \def MBEDTLS_TIMING_C
+S *
+S * Enable the portable timing interface.
+S *
+S * Module:  library/timing.c
+S * Caller:  library/havege.c
+S *
+S * This module is used by the HAVEGE random number generator.
+S */
+S#define MBEDTLS_TIMING_C
+S
+S/**
+S * \def MBEDTLS_VERSION_C
+S *
+S * Enable run-time version information.
+S *
+S * Module:  library/version.c
+S *
+S * This module provides run-time version information.
+S */
+S#define MBEDTLS_VERSION_C
+S
+S/**
+S * \def MBEDTLS_X509_USE_C
+S *
+S * Enable X.509 core for using certificates.
+S *
+S * Module:  library/x509.c
+S * Caller:  library/mbedtls_x509_crl.c
+S *          library/mbedtls_x509_crt.c
+S *          library/mbedtls_x509_csr.c
+S *
+S * Requires: MBEDTLS_ASN1_PARSE_C, MBEDTLS_BIGNUM_C, MBEDTLS_OID_C,
+S *           MBEDTLS_PK_PARSE_C
+S *
+S * This module is required for the X.509 parsing modules.
+S */
+S#define MBEDTLS_X509_USE_C
+S
+S/**
+S * \def MBEDTLS_X509_CRT_PARSE_C
+S *
+S * Enable X.509 certificate parsing.
+S *
+S * Module:  library/mbedtls_x509_crt.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *
+S * Requires: MBEDTLS_X509_USE_C
+S *
+S * This module is required for X.509 certificate parsing.
+S */
+S#define MBEDTLS_X509_CRT_PARSE_C
+S
+S/**
+S * \def MBEDTLS_X509_CRL_PARSE_C
+S *
+S * Enable X.509 CRL parsing.
+S *
+S * Module:  library/mbedtls_x509_crl.c
+S * Caller:  library/mbedtls_x509_crt.c
+S *
+S * Requires: MBEDTLS_X509_USE_C
+S *
+S * This module is required for X.509 CRL parsing.
+S */
+S#define MBEDTLS_X509_CRL_PARSE_C
+S
+S/**
+S * \def MBEDTLS_X509_CSR_PARSE_C
+S *
+S * Enable X.509 Certificate Signing Request (CSR) parsing.
+S *
+S * Module:  library/mbedtls_x509_csr.c
+S * Caller:  library/x509_crt_write.c
+S *
+S * Requires: MBEDTLS_X509_USE_C
+S *
+S * This module is used for reading X.509 certificate request.
+S */
+S#define MBEDTLS_X509_CSR_PARSE_C
+S
+S/**
+S * \def MBEDTLS_X509_CREATE_C
+S *
+S * Enable X.509 core for creating certificates.
+S *
+S * Module:  library/x509_create.c
+S *
+S * Requires: MBEDTLS_BIGNUM_C, MBEDTLS_OID_C, MBEDTLS_PK_WRITE_C
+S *
+S * This module is the basis for creating X.509 certificates and CSRs.
+S */
+S#define MBEDTLS_X509_CREATE_C
+S
+S/**
+S * \def MBEDTLS_X509_CRT_WRITE_C
+S *
+S * Enable creating X.509 certificates.
+S *
+S * Module:  library/x509_crt_write.c
+S *
+S * Requires: MBEDTLS_X509_CREATE_C
+S *
+S * This module is required for X.509 certificate creation.
+S */
+S#define MBEDTLS_X509_CRT_WRITE_C
+S
+S/**
+S * \def MBEDTLS_X509_CSR_WRITE_C
+S *
+S * Enable creating X.509 Certificate Signing Requests (CSR).
+S *
+S * Module:  library/x509_csr_write.c
+S *
+S * Requires: MBEDTLS_X509_CREATE_C
+S *
+S * This module is required for X.509 certificate request writing.
+S */
+S#define MBEDTLS_X509_CSR_WRITE_C
+S
+S/**
+S * \def MBEDTLS_XTEA_C
+S *
+S * Enable the XTEA block cipher.
+S *
+S * Module:  library/xtea.c
+S * Caller:
+S */
+S#define MBEDTLS_XTEA_C
+S
+S/* \} name SECTION: mbed TLS modules */
+S
+S/**
+S * \name SECTION: Module configuration options
+S *
+S * This section allows for the setting of module specific sizes and
+S * configuration options. The default values are already present in the
+S * relevant header files and should suffice for the regular use cases.
+S *
+S * Our advice is to enable options and change their values here
+S * only if you have a good reason and know the consequences.
+S *
+S * Please check the respective header file for documentation on these
+S * parameters (to prevent duplicate documentation).
+S * \{
+S */
+S
+S/* MPI / BIGNUM options */
+S//#define MBEDTLS_MPI_WINDOW_SIZE            6 /**< Maximum windows size used. */
+S//#define MBEDTLS_MPI_MAX_SIZE            1024 /**< Maximum number of bytes for usable MPIs. */
+S
+S/* CTR_DRBG options */
+S//#define MBEDTLS_CTR_DRBG_ENTROPY_LEN               48 /**< Amount of entropy used per seed by default (48 with SHA-512, 32 with SHA-256) */
+S//#define MBEDTLS_CTR_DRBG_RESEED_INTERVAL        10000 /**< Interval before reseed is performed by default */
+S//#define MBEDTLS_CTR_DRBG_MAX_INPUT                256 /**< Maximum number of additional input bytes */
+S//#define MBEDTLS_CTR_DRBG_MAX_REQUEST             1024 /**< Maximum number of requested bytes per call */
+S//#define MBEDTLS_CTR_DRBG_MAX_SEED_INPUT           384 /**< Maximum size of (re)seed buffer */
+S
+S/* HMAC_DRBG options */
+S//#define MBEDTLS_HMAC_DRBG_RESEED_INTERVAL   10000 /**< Interval before reseed is performed by default */
+S//#define MBEDTLS_HMAC_DRBG_MAX_INPUT           256 /**< Maximum number of additional input bytes */
+S//#define MBEDTLS_HMAC_DRBG_MAX_REQUEST        1024 /**< Maximum number of requested bytes per call */
+S//#define MBEDTLS_HMAC_DRBG_MAX_SEED_INPUT      384 /**< Maximum size of (re)seed buffer */
+S
+S/* ECP options */
+S//#define MBEDTLS_ECP_MAX_BITS             521 /**< Maximum bit size of groups */
+S//#define MBEDTLS_ECP_WINDOW_SIZE            6 /**< Maximum window size used */
+S//#define MBEDTLS_ECP_FIXED_POINT_OPTIM      1 /**< Enable fixed-point speed-up */
+S
+S/* Entropy options */
+S//#define MBEDTLS_ENTROPY_MAX_SOURCES                20 /**< Maximum number of sources supported */
+S//#define MBEDTLS_ENTROPY_MAX_GATHER                128 /**< Maximum amount requested from entropy sources */
+S
+S/* Memory buffer allocator options */
+S//#define MBEDTLS_MEMORY_ALIGN_MULTIPLE      4 /**< Align on multiples of this value */
+S
+S/* Platform options */
+S//#define MBEDTLS_PLATFORM_STD_MEM_HDR   <stdlib.h> /**< Header to include if MBEDTLS_PLATFORM_NO_STD_FUNCTIONS is defined. Don't define if no header is needed. */
+S//#define MBEDTLS_PLATFORM_STD_CALLOC        calloc /**< Default allocator to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_STD_FREE            free /**< Default free to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_STD_EXIT            exit /**< Default exit to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_STD_FPRINTF      fprintf /**< Default fprintf to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_STD_PRINTF        printf /**< Default printf to use, can be undefined */
+S/* Note: your snprintf must correclty zero-terminate the buffer! */
+S//#define MBEDTLS_PLATFORM_STD_SNPRINTF    snprintf /**< Default snprintf to use, can be undefined */
+S
+S/* To Use Function Macros MBEDTLS_PLATFORM_C must be enabled */
+S/* MBEDTLS_PLATFORM_XXX_MACRO and MBEDTLS_PLATFORM_XXX_ALT cannot both be defined */
+S//#define MBEDTLS_PLATFORM_CALLOC_MACRO        calloc /**< Default allocator macro to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_FREE_MACRO            free /**< Default free macro to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_EXIT_MACRO            exit /**< Default exit macro to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_FPRINTF_MACRO      fprintf /**< Default fprintf macro to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_PRINTF_MACRO        printf /**< Default printf macro to use, can be undefined */
+S/* Note: your snprintf must correclty zero-terminate the buffer! */
+S//#define MBEDTLS_PLATFORM_SNPRINTF_MACRO    snprintf /**< Default snprintf macro to use, can be undefined */
+S
+S/* SSL Cache options */
+S//#define MBEDTLS_SSL_CACHE_DEFAULT_TIMEOUT       86400 /**< 1 day  */
+S//#define MBEDTLS_SSL_CACHE_DEFAULT_MAX_ENTRIES      50 /**< Maximum entries in cache */
+S
+S/* SSL options */
+S//#define MBEDTLS_SSL_MAX_CONTENT_LEN             16384 /**< Maxium fragment length in bytes, determines the size of each of the two internal I/O buffers */
+S//#define MBEDTLS_SSL_DEFAULT_TICKET_LIFETIME     86400 /**< Lifetime of session tickets (if enabled) */
+S//#define MBEDTLS_PSK_MAX_LEN               32 /**< Max size of TLS pre-shared keys, in bytes (default 256 bits) */
+S//#define MBEDTLS_SSL_COOKIE_TIMEOUT        60 /**< Default expiration delay of DTLS cookies, in seconds if HAVE_TIME, or in number of cookies issued */
+S
+S/**
+S * Complete list of ciphersuites to use, in order of preference.
+S *
+S * \warning No dependency checking is done on that field! This option can only
+S * be used to restrict the set of available ciphersuites. It is your
+S * responsibility to make sure the needed modules are active.
+S *
+S * Use this to save a few hundred bytes of ROM (default ordering of all
+S * available ciphersuites) and a few to a few hundred bytes of RAM.
+S *
+S * The value below is only an example, not the default.
+S */
+S//#define MBEDTLS_SSL_CIPHERSUITES MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+S
+S/* X509 options */
+S//#define MBEDTLS_X509_MAX_INTERMEDIATE_CA   8   /**< Maximum number of intermediate CAs in a verification chain. */
+S
+S/* \} name SECTION: Module configuration options */
+S
+S#if defined(TARGET_LIKE_MBED)
+S#include "mbedtls/target_config.h"
+S#endif
+S
+S/*
+S * Allow user to override any previous default.
+S *
+S * Use two macro names for that, as:
+S * - with yotta the prefix YOTTA_CFG_ is forced
+S * - without yotta is looks weird to have a YOTTA prefix.
+S */
+S#if defined(YOTTA_CFG_MBEDTLS_USER_CONFIG_FILE)
+S#include YOTTA_CFG_MBEDTLS_USER_CONFIG_FILE
+S#elif defined(MBEDTLS_USER_CONFIG_FILE)
+S#include MBEDTLS_USER_CONFIG_FILE
+S#endif
+S
+S#include "check_config.h"
+S
+N#endif /* MBEDTLS_CONFIG_H */
+L 24 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\library\timing.c" 2
+N#else
+S#include MBEDTLS_CONFIG_FILE
+N#endif
+N
+N#if defined(MBEDTLS_SELF_TEST) && defined(MBEDTLS_PLATFORM_C)
+X#if 0L && 0L
+S#include "mbedtls/platform.h"
+N#else
+N#include <stdio.h>
+L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h" 1
+N/* stdio.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.9 */
+N/* Copyright (C) Codemist Ltd., 1988-1993                       */
+N/* Copyright 1991-1998 ARM Limited. All rights reserved.        */
+N
+N/*
+N * RCS $Revision: 192842 $
+N * Checkin $Date: 2015-04-28 10:58:32 +0100 (Tue, 28 Apr 2015) $
+N * Revising $Author: sdouglas $
+N */
+N
+N/*
+N * stdio.h declares two types, several macros, and many functions for
+N * performing input and output. For a discussion on Streams and Files
+N * refer to sections 4.9.2 and 4.9.3 in the above ANSI draft, or to a
+N * modern textbook on C.
+N */
+N
+N#ifndef __stdio_h
+N#define __stdio_h
+N#define __ARMCLIB_VERSION 5060002
+N
+N/*
+N * Depending on compiler version __int64 or __INT64_TYPE__ should be defined.
+N */
+N#ifndef __int64
+N  #ifdef __INT64_TYPE__
+S    #define __int64 __INT64_TYPE__
+N  #endif
+N  /* On some architectures neither of these may be defined - if so, fall
+N     through and error out if used. */
+N#endif
+N
+N
+N#define _ARMABI __declspec(__nothrow)
+N
+N  #ifndef __STDIO_DECLS
+N  #define __STDIO_DECLS
+N
+N    #undef __CLIBNS
+N    #ifdef __cplusplus
+S      namespace std {
+S      #define __CLIBNS ::std::
+S        extern "C" {
+N    #else /* ndef __cplusplus */
+N      #define __CLIBNS
+N    #endif /* ndef __cplusplus */
+N
+N#if defined(__cplusplus) || !defined(__STRICT_ANSI__) || !defined(__size_t)
+X#if 0L || !0L || !0L
+N /* always defined in C++ and non-strict C for consistency of debug info */
+N  #if __sizeof_ptr == 8
+X  #if 4 == 8
+S    typedef unsigned long size_t;   /* see <stddef.h> */
+N  #else
+N    typedef unsigned int size_t;   /* see <stddef.h> */
+N  #endif
+N  #if !defined(__cplusplus) && defined(__STRICT_ANSI__)
+X  #if !0L && 0L
+S    #define __size_t 1
+N  #endif
+N#endif
+N
+N#undef NULL
+N#define NULL 0                   /* see <stddef.h> */
+N
+N/* ANSI forbids va_list to be defined here */
+N/* keep in step with <stdarg.h> and <wchar.h> */
+N#if !defined(__va_list) && (defined(__cplusplus) || !defined(__STRICT_ANSI__) || !defined(__va_list_defined))
+X#if !0L && (0L || !0L || !0L)
+N/* always defined in C++ and non-strict C for consistency of debug info */
+N  #ifdef __clang__
+S    typedef __builtin_va_list __va_list;
+N  #else
+N    typedef struct __va_list __va_list;
+N  #endif
+N  #if !defined(__cplusplus) && defined(__STRICT_ANSI__)
+X  #if !0L && 0L
+S    #define __va_list_defined 1
+N  #endif
+N#endif
+N
+N   /*
+N    * If the compiler supports signalling nans as per N965 then it
+N    * will define __SUPPORT_SNAN__, in which case a user may define
+N    * _WANT_SNAN in order to obtain compliant versions of the printf
+N    * and scanf families of functions
+N    */
+N#if defined(__SUPPORT_SNAN__) && defined(_WANT_SNAN)
+X#if 0L && 0L
+S#pragma import(__use_snan)
+N#endif
+N
+Ntypedef struct __fpos_t_struct {
+N    unsigned __int64 __pos;
+N    /*
+N     * this structure is equivalent to an mbstate_t, but we're not
+N     * allowed to actually define the type name `mbstate_t' within
+N     * stdio.h
+N     */
+N    struct {
+N        unsigned int __state1, __state2;
+N    } __mbstate;
+N} fpos_t;
+N   /*
+N    * fpos_t is an object capable of recording all information needed to
+N    * specify uniquely every position within a file.
+N    */
+N
+N#define _SYS_OPEN 16
+N   /* _SYS_OPEN defines a limit on the number of open files that is imposed
+N    * by this C library
+N    */
+N
+Ntypedef struct __FILE FILE;
+N   /*
+N    * FILE is an object capable of recording all information needed to control
+N    * a stream, such as its file position indicator, a pointer to its
+N    * associated buffer, an error indicator that records whether a read/write
+N    * error has occurred and an end-of-file indicator that records whether the
+N    * end-of-file has been reached.
+N    * Its structure is not made known to library clients.
+N    */
+N
+N#if defined(__STRICT_ANSI__) && !__FILE_INCOMPLETE
+X#if 0L && !__FILE_INCOMPLETE
+Sstruct __FILE {
+S    union {
+S        long __FILE_alignment;
+S#ifdef __TARGET_ARCH_AARCH64
+S        char __FILE_size[136];
+S#else /* __TARGET_ARCH_AARCH64 */
+S        char __FILE_size[84];
+S#endif /* __TARGET_ARCH_AARCH64 */
+S    } __FILE_opaque;
+S};
+S    /*
+S     * FILE must be an object type (C99 - 7.19.1) and an object type fully
+S     * describes an object [including its static size] (C99 - 6.2.5).
+S     * This definition is a placeholder which matches the struct __FILE in
+S     * size and alignment as used internally by libc.
+S     */
+N#endif
+N
+N
+Nextern FILE __stdin, __stdout, __stderr;
+Nextern FILE *__aeabi_stdin, *__aeabi_stdout, *__aeabi_stderr;
+N
+N#if _AEABI_PORTABILITY_LEVEL != 0 || (!defined _AEABI_PORTABILITY_LEVEL && __DEFAULT_AEABI_PORTABILITY_LEVEL != 0)
+X#if _AEABI_PORTABILITY_LEVEL != 0 || (!0L && __DEFAULT_AEABI_PORTABILITY_LEVEL != 0)
+S#define stdin  (__CLIBNS __aeabi_stdin)
+S   /* pointer to a FILE object associated with standard input stream */
+S#define stdout (__CLIBNS __aeabi_stdout)
+S   /* pointer to a FILE object associated with standard output stream */
+S#define stderr (__CLIBNS __aeabi_stderr)
+S   /* pointer to a FILE object associated with standard error stream */
+Sextern const int __aeabi_IOFBF;
+S#define _IOFBF (__CLIBNS __aeabi_IOFBF)
+Sextern const int __aeabi_IONBF;
+S#define _IONBF (__CLIBNS __aeabi_IONBF)
+Sextern const int __aeabi_IOLBF;
+S#define _IOLBF (__CLIBNS __aeabi_IOLBF)
+Sextern const int __aeabi_BUFSIZ;
+S#define BUFSIZ (__CLIBNS __aeabi_BUFSIZ)
+Sextern const int __aeabi_FOPEN_MAX;
+S#define FOPEN_MAX (__CLIBNS __aeabi_FOPEN_MAX)
+Sextern const int __aeabi_TMP_MAX;
+S#define TMP_MAX (__CLIBNS __aeabi_TMP_MAX)
+Sextern const int __aeabi_FILENAME_MAX;
+S#define FILENAME_MAX (__CLIBNS __aeabi_FILENAME_MAX)
+Sextern const int __aeabi_L_tmpnam;
+S#define L_tmpnam (__CLIBNS __aeabi_L_tmpnam)
+N#else
+N#define stdin  (&__CLIBNS __stdin)
+N   /* pointer to a FILE object associated with standard input stream */
+N#define stdout (&__CLIBNS __stdout)
+N   /* pointer to a FILE object associated with standard output stream */
+N#define stderr (&__CLIBNS __stderr)
+N   /* pointer to a FILE object associated with standard error stream */
+N
+N#define _IOFBF           0x100 /* fully buffered IO */
+N#define _IOLBF           0x200 /* line buffered IO */
+N#define _IONBF           0x400 /* unbuffered IO */
+N
+N    /* Various default file IO buffer sizes */
+N#define BUFSIZ       (512)  /* system buffer size (as used by setbuf) */
+N
+N#define FOPEN_MAX _SYS_OPEN
+N   /*
+N    * an integral constant expression that is the minimum number of files that
+N    * this implementation guarantees can be open simultaneously.
+N    */
+N
+N#define FILENAME_MAX 256
+N   /*
+N    * an integral constant expression that is the size of an array of char
+N    * large enough to hold the longest filename string
+N    */
+N#define L_tmpnam FILENAME_MAX
+N   /*
+N    * an integral constant expression that is the size of an array of char
+N    * large enough to hold a temporary file name string generated by the
+N    * tmpnam function.
+N    */
+N#define TMP_MAX 256
+N   /*
+N    * an integral constant expression that is the minimum number of unique
+N    * file names that shall be generated by the tmpnam function.
+N    */
+N
+N#endif
+N
+N#define EOF      (-1)
+N   /*
+N    * negative integral constant, indicates end-of-file, that is, no more input
+N    * from a stream.
+N    */
+N
+N#define SEEK_SET 0 /* start of stream (see fseek) */
+N#define SEEK_CUR 1 /* current position in stream (see fseek) */
+N#define SEEK_END 2 /* end of stream (see fseek) */
+N
+N    /*
+N     * _IOBIN is the flag passed to _sys_write to denote a binary
+N     * file.
+N     */
+N#define _IOBIN            0x04     /* binary stream */
+N
+N#define __STDIN_BUFSIZ  (64)  /* default stdin buffer size */
+N#define __STDOUT_BUFSIZ (64)  /* default stdout buffer size */
+N#define __STDERR_BUFSIZ (16)  /* default stderr buffer size */
+N
+Nextern _ARMABI int remove(const char * /*filename*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int remove(const char *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * causes the file whose name is the string pointed to by filename to be
+N    * removed. Subsequent attempts to open the file will fail, unless it is
+N    * created anew. If the file is open, the behaviour of the remove function
+N    * is implementation-defined.
+N    * Returns: zero if the operation succeeds, nonzero if it fails.
+N    */
+Nextern _ARMABI int rename(const char * /*old*/, const char * /*new*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int rename(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * causes the file whose name is the string pointed to by old to be
+N    * henceforth known by the name given by the string pointed to by new. The
+N    * file named old is effectively removed. If a file named by the string
+N    * pointed to by new exists prior to the call of the rename function, the
+N    * behaviour is implementation-defined.
+N    * Returns: zero if the operation succeeds, nonzero if it fails, in which
+N    *          case if the file existed previously it is still known by its
+N    *          original name.
+N    */
+Nextern _ARMABI FILE *tmpfile(void);
+Xextern __declspec(__nothrow) FILE *tmpfile(void);
+N   /*
+N    * creates a temporary binary file that will be automatically removed when
+N    * it is closed or at program termination. The file is opened for update.
+N    * Returns: a pointer to the stream of the file that it created. If the file
+N    *          cannot be created, a null pointer is returned.
+N    */
+Nextern _ARMABI char *tmpnam(char * /*s*/);
+Xextern __declspec(__nothrow) char *tmpnam(char *  );
+N   /*
+N    * generates a string that is not the same as the name of an existing file.
+N    * The tmpnam function generates a different string each time it is called,
+N    * up to TMP_MAX times. If it is called more than TMP_MAX times, the
+N    * behaviour is implementation-defined.
+N    * Returns: If the argument is a null pointer, the tmpnam function leaves
+N    *          its result in an internal static object and returns a pointer to
+N    *          that object. Subsequent calls to the tmpnam function may modify
+N    *          the same object. if the argument is not a null pointer, it is
+N    *          assumed to point to an array of at least L_tmpnam characters;
+N    *          the tmpnam function writes its result in that array and returns
+N    *          the argument as its value.
+N    */
+N
+Nextern _ARMABI int fclose(FILE * /*stream*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int fclose(FILE *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * causes the stream pointed to by stream to be flushed and the associated
+N    * file to be closed. Any unwritten buffered data for the stream are
+N    * delivered to the host environment to be written to the file; any unread
+N    * buffered data are discarded. The stream is disassociated from the file.
+N    * If the associated buffer was automatically allocated, it is deallocated.
+N    * Returns: zero if the stream was succesfully closed, or nonzero if any
+N    *          errors were detected or if the stream was already closed.
+N    */
+Nextern _ARMABI int fflush(FILE * /*stream*/);
+Xextern __declspec(__nothrow) int fflush(FILE *  );
+N   /*
+N    * If the stream points to an output or update stream in which the most
+N    * recent operation was output, the fflush function causes any unwritten
+N    * data for that stream to be delivered to the host environment to be
+N    * written to the file. If the stream points to an input or update stream,
+N    * the fflush function undoes the effect of any preceding ungetc operation
+N    * on the stream.
+N    * Returns: nonzero if a write error occurs.
+N    */
+Nextern _ARMABI FILE *fopen(const char * __restrict /*filename*/,
+Xextern __declspec(__nothrow) FILE *fopen(const char * __restrict  ,
+N                           const char * __restrict /*mode*/) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * opens the file whose name is the string pointed to by filename, and
+N    * associates a stream with it.
+N    * The argument mode points to a string beginning with one of the following
+N    * sequences:
+N    * "r"         open text file for reading
+N    * "w"         create text file for writing, or truncate to zero length
+N    * "a"         append; open text file or create for writing at eof
+N    * "rb"        open binary file for reading
+N    * "wb"        create binary file for writing, or truncate to zero length
+N    * "ab"        append; open binary file or create for writing at eof
+N    * "r+"        open text file for update (reading and writing)
+N    * "w+"        create text file for update, or truncate to zero length
+N    * "a+"        append; open text file or create for update, writing at eof
+N    * "r+b"/"rb+" open binary file for update (reading and writing)
+N    * "w+b"/"wb+" create binary file for update, or truncate to zero length
+N    * "a+b"/"ab+" append; open binary file or create for update, writing at eof
+N    *
+N    * Opening a file with read mode ('r' as the first character in the mode
+N    * argument) fails if the file does not exist or cannot be read.
+N    * Opening a file with append mode ('a' as the first character in the mode
+N    * argument) causes all subsequent writes to be forced to the current end of
+N    * file, regardless of intervening calls to the fseek function. In some
+N    * implementations, opening a binary file with append mode ('b' as the
+N    * second or third character in the mode argument) may initially position
+N    * the file position indicator beyond the last data written, because of the
+N    * NUL padding.
+N    * When a file is opened with update mode ('+' as the second or third
+N    * character in the mode argument), both input and output may be performed
+N    * on the associated stream. However, output may not be directly followed
+N    * by input without an intervening call to the fflush fuction or to a file
+N    * positioning function (fseek, fsetpos, or rewind), and input be not be
+N    * directly followed by output without an intervening call to the fflush
+N    * fuction or to a file positioning function, unless the input operation
+N    * encounters end-of-file. Opening a file with update mode may open or
+N    * create a binary stream in some implementations. When opened, a stream
+N    * is fully buffered if and only if it does not refer to an interactive
+N    * device. The error and end-of-file indicators for the stream are
+N    * cleared.
+N    * Returns: a pointer to the object controlling the stream. If the open
+N    *          operation fails, fopen returns a null pointer.
+N    */
+Nextern _ARMABI FILE *freopen(const char * __restrict /*filename*/,
+Xextern __declspec(__nothrow) FILE *freopen(const char * __restrict  ,
+N                    const char * __restrict /*mode*/,
+N                    FILE * __restrict /*stream*/) __attribute__((__nonnull__(2,3)));
+N   /*
+N    * opens the file whose name is the string pointed to by filename and
+N    * associates the stream pointed to by stream with it. The mode argument is
+N    * used just as in the fopen function.
+N    * The freopen function first attempts to close any file that is associated
+N    * with the specified stream. Failure to close the file successfully is
+N    * ignored. The error and end-of-file indicators for the stream are cleared.
+N    * Returns: a null pointer if the operation fails. Otherwise, freopen
+N    *          returns the value of the stream.
+N    */
+Nextern _ARMABI void setbuf(FILE * __restrict /*stream*/,
+Xextern __declspec(__nothrow) void setbuf(FILE * __restrict  ,
+N                    char * __restrict /*buf*/) __attribute__((__nonnull__(1)));
+N   /*
+N    * Except that it returns no value, the setbuf function is equivalent to the
+N    * setvbuf function invoked with the values _IOFBF for mode and BUFSIZ for
+N    * size, or (if buf is a null pointer), with the value _IONBF for mode.
+N    * Returns: no value.
+N    */
+Nextern _ARMABI int setvbuf(FILE * __restrict /*stream*/,
+Xextern __declspec(__nothrow) int setvbuf(FILE * __restrict  ,
+N                   char * __restrict /*buf*/,
+N                   int /*mode*/, size_t /*size*/) __attribute__((__nonnull__(1)));
+N   /*
+N    * may be used after the stream pointed to by stream has been associated
+N    * with an open file but before it is read or written. The argument mode
+N    * determines how stream will be buffered, as follows: _IOFBF causes
+N    * input/output to be fully buffered; _IOLBF causes output to be line
+N    * buffered (the buffer will be flushed when a new-line character is
+N    * written, when the buffer is full, or when input is requested); _IONBF
+N    * causes input/output to be completely unbuffered. If buf is not the null
+N    * pointer, the array it points to may be used instead of an automatically
+N    * allocated buffer (the buffer must have a lifetime at least as great as
+N    * the open stream, so the stream should be closed before a buffer that has
+N    * automatic storage duration is deallocated upon block exit). The argument
+N    * size specifies the size of the array. The contents of the array at any
+N    * time are indeterminate.
+N    * Returns: zero on success, or nonzero if an invalid value is given for
+N    *          mode or size, or if the request cannot be honoured.
+N    */
+N#pragma __printf_args
+Nextern _ARMABI int fprintf(FILE * __restrict /*stream*/,
+Xextern __declspec(__nothrow) int fprintf(FILE * __restrict  ,
+N                    const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * writes output to the stream pointed to by stream, under control of the
+N    * string pointed to by format that specifies how subsequent arguments are
+N    * converted for output. If there are insufficient arguments for the format,
+N    * the behaviour is undefined. If the format is exhausted while arguments
+N    * remain, the excess arguments are evaluated but otherwise ignored. The
+N    * fprintf function returns when the end of the format string is reached.
+N    * The format shall be a multibyte character sequence, beginning and ending
+N    * in its initial shift state. The format is composed of zero or more
+N    * directives: ordinary multibyte characters (not %), which are copied
+N    * unchanged to the output stream; and conversion specifiers, each of which
+N    * results in fetching zero or more subsequent arguments. Each conversion
+N    * specification is introduced by the character %. For a description of the
+N    * available conversion specifiers refer to section 4.9.6.1 in the ANSI
+N    * draft mentioned at the start of this file or to any modern textbook on C.
+N    * The minimum value for the maximum number of characters producable by any
+N    * single conversion is at least 509.
+N    * Returns: the number of characters transmitted, or a negative value if an
+N    *          output error occurred.
+N    */
+N#pragma __printf_args
+Nextern _ARMABI int _fprintf(FILE * __restrict /*stream*/,
+Xextern __declspec(__nothrow) int _fprintf(FILE * __restrict  ,
+N                     const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to fprintf, but does not support floating-point formats.
+N    * You can use instead of fprintf to improve code size.
+N    * Returns: as fprintf.
+N    */
+N#pragma __printf_args
+Nextern _ARMABI int printf(const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int printf(const char * __restrict  , ...) __attribute__((__nonnull__(1)));
+N   /*
+N    * is equivalent to fprintf with the argument stdout interposed before the
+N    * arguments to printf.
+N    * Returns: the number of characters transmitted, or a negative value if an
+N    *          output error occurred.
+N    */
+N#pragma __printf_args
+Nextern _ARMABI int _printf(const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int _printf(const char * __restrict  , ...) __attribute__((__nonnull__(1)));
+N   /*
+N    * is equivalent to printf, but does not support floating-point formats.
+N    * You can use instead of printf to improve code size.
+N    * Returns: as printf.
+N    */
+N#pragma __printf_args
+Nextern _ARMABI int sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int sprintf(char * __restrict  , const char * __restrict  , ...) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to fprintf, except that the argument s specifies an array
+N    * into which the generated output is to be written, rather than to a
+N    * stream. A null character is written at the end of the characters written;
+N    * it is not counted as part of the returned sum.
+N    * Returns: the number of characters written to the array, not counting the
+N    *          terminating null character.
+N    */
+N#pragma __printf_args
+Nextern _ARMABI int _sprintf(char * __restrict /*s*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int _sprintf(char * __restrict  , const char * __restrict  , ...) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to sprintf, but does not support floating-point formats.
+N    * You can use instead of sprintf to improve code size.
+N    * Returns: as sprintf.
+N    */
+N
+N#pragma __printf_args
+Nextern _ARMABI int __ARM_snprintf(char * __restrict /*s*/, size_t /*n*/,
+Xextern __declspec(__nothrow) int __ARM_snprintf(char * __restrict  , size_t  ,
+N                     const char * __restrict /*format*/, ...) __attribute__((__nonnull__(3)));
+N
+N#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
+X#if !0L || (1L && 199901L <= 199409L) || (0L && 201103L <= __cplusplus)
+N#pragma __printf_args
+Nextern _ARMABI int snprintf(char * __restrict /*s*/, size_t /*n*/,
+Xextern __declspec(__nothrow) int snprintf(char * __restrict  , size_t  ,
+N                     const char * __restrict /*format*/, ...) __attribute__((__nonnull__(3)));
+N   /*
+N    * is equivalent to fprintf, except that the argument s specifies an array
+N    * into which the generated output is to be written, rather than to a
+N    * stream. The argument n specifies the size of the output array, so as to
+N    * avoid overflowing the buffer.
+N    * A null character is written at the end of the characters written, even
+N    * if the formatting was not completed; it is not counted as part of the
+N    * returned sum. At most n characters of the output buffer are used,
+N    * _including_ the null character.
+N    * Returns: the number of characters that would have been written to the
+N    *          array, not counting the terminating null character, if the
+N    *          array had been big enough. So if the return is >=0 and <n, then
+N    *          the entire string was successfully formatted; if the return is
+N    *          >=n, the string was truncated (but there is still a null char
+N    *          at the end of what was written); if the return is <0, there was
+N    *          an error.
+N    */
+N#endif
+N#pragma __printf_args
+Nextern _ARMABI int _snprintf(char * __restrict /*s*/, size_t /*n*/,
+Xextern __declspec(__nothrow) int _snprintf(char * __restrict  , size_t  ,
+N                      const char * __restrict /*format*/, ...) __attribute__((__nonnull__(3)));
+N   /*
+N    * is equivalent to snprintf, but does not support floating-point formats.
+N    * You can use instead of snprintf to improve code size.
+N    * Returns: as snprintf.
+N    */
+N#pragma __scanf_args
+Nextern _ARMABI int fscanf(FILE * __restrict /*stream*/,
+Xextern __declspec(__nothrow) int fscanf(FILE * __restrict  ,
+N                    const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * reads input from the stream pointed to by stream, under control of the
+N    * string pointed to by format that specifies the admissible input sequences
+N    * and how thay are to be converted for assignment, using subsequent
+N    * arguments as pointers to the objects to receive the converted input. If
+N    * there are insufficient arguments for the format, the behaviour is
+N    * undefined. If the format is exhausted while arguments remain, the excess
+N    * arguments are evaluated but otherwise ignored.
+N    * The format is composed of zero or more directives: one or more
+N    * white-space characters; an ordinary character (not %); or a conversion
+N    * specification. Each conversion specification is introduced by the
+N    * character %. For a description of the available conversion specifiers
+N    * refer to section 4.9.6.2 in the ANSI draft mentioned at the start of this
+N    * file, or to any modern textbook on C.
+N    * If end-of-file is encountered during input, conversion is terminated. If
+N    * end-of-file occurs before any characters matching the current directive
+N    * have been read (other than leading white space, where permitted),
+N    * execution of the current directive terminates with an input failure;
+N    * otherwise, unless execution of the current directive is terminated with a
+N    * matching failure, execution of the following directive (if any) is
+N    * terminated with an input failure.
+N    * If conversions terminates on a conflicting input character, the offending
+N    * input character is left unread in the input strem. Trailing white space
+N    * (including new-line characters) is left unread unless matched by a
+N    * directive. The success of literal matches and suppressed asignments is
+N    * not directly determinable other than via the %n directive.
+N    * Returns: the value of the macro EOF if an input failure occurs before any
+N    *          conversion. Otherwise, the fscanf function returns the number of
+N    *          input items assigned, which can be fewer than provided for, or
+N    *          even zero, in the event of an early conflict between an input
+N    *          character and the format.
+N    */
+N#pragma __scanf_args
+Nextern _ARMABI int _fscanf(FILE * __restrict /*stream*/,
+Xextern __declspec(__nothrow) int _fscanf(FILE * __restrict  ,
+N                     const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to fscanf, but does not support floating-point formats.
+N    * You can use instead of fscanf to improve code size.
+N    * Returns: as fscanf.
+N    */
+N#pragma __scanf_args
+Nextern _ARMABI int scanf(const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int scanf(const char * __restrict  , ...) __attribute__((__nonnull__(1)));
+N   /*
+N    * is equivalent to fscanf with the argument stdin interposed before the
+N    * arguments to scanf.
+N    * Returns: the value of the macro EOF if an input failure occurs before any
+N    *          conversion. Otherwise, the scanf function returns the number of
+N    *          input items assigned, which can be fewer than provided for, or
+N    *          even zero, in the event of an early matching failure.
+N    */
+N#pragma __scanf_args
+Nextern _ARMABI int _scanf(const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int _scanf(const char * __restrict  , ...) __attribute__((__nonnull__(1)));
+N   /*
+N    * is equivalent to scanf, but does not support floating-point formats.
+N    * You can use instead of scanf to improve code size.
+N    * Returns: as scanf.
+N    */
+N#pragma __scanf_args
+Nextern _ARMABI int sscanf(const char * __restrict /*s*/,
+Xextern __declspec(__nothrow) int sscanf(const char * __restrict  ,
+N                    const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to fscanf except that the argument s specifies a string
+N    * from which the input is to be obtained, rather than from a stream.
+N    * Reaching the end of the string is equivalent to encountering end-of-file
+N    * for the fscanf function.
+N    * Returns: the value of the macro EOF if an input failure occurs before any
+N    *          conversion. Otherwise, the scanf function returns the number of
+N    *          input items assigned, which can be fewer than provided for, or
+N    *          even zero, in the event of an early matching failure.
+N    */
+N#pragma __scanf_args
+Nextern _ARMABI int _sscanf(const char * __restrict /*s*/,
+Xextern __declspec(__nothrow) int _sscanf(const char * __restrict  ,
+N                     const char * __restrict /*format*/, ...) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to sscanf, but does not support floating-point formats.
+N    * You can use instead of sscanf to improve code size.
+N    * Returns: as sscanf.
+N    */
+N#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
+X#if !0L || (1L && 199901L <= 199409L) || (0L && 201103L <= __cplusplus)
+N/* C99 additions */
+Nextern _ARMABI int vfscanf(FILE * __restrict /*stream*/, const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int vfscanf(FILE * __restrict  , const char * __restrict  , __va_list) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI int vscanf(const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int vscanf(const char * __restrict  , __va_list) __attribute__((__nonnull__(1)));
+Nextern _ARMABI int vsscanf(const char * __restrict /*s*/, const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int vsscanf(const char * __restrict  , const char * __restrict  , __va_list) __attribute__((__nonnull__(1,2)));
+N#endif
+Nextern _ARMABI int _vfscanf(FILE * __restrict /*stream*/, const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int _vfscanf(FILE * __restrict  , const char * __restrict  , __va_list) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI int _vscanf(const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int _vscanf(const char * __restrict  , __va_list) __attribute__((__nonnull__(1)));
+Nextern _ARMABI int _vsscanf(const char * __restrict /*s*/, const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int _vsscanf(const char * __restrict  , const char * __restrict  , __va_list) __attribute__((__nonnull__(1,2)));
+Nextern _ARMABI int __ARM_vsscanf(const char * __restrict /*s*/, const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int __ARM_vsscanf(const char * __restrict  , const char * __restrict  , __va_list) __attribute__((__nonnull__(1,2)));
+N
+Nextern _ARMABI int vprintf(const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int vprintf(const char * __restrict  , __va_list  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * is equivalent to printf, with the variable argument list replaced by arg,
+N    * which has been initialised by the va_start macro (and possibly subsequent
+N    * va_arg calls). The vprintf function does not invoke the va_end function.
+N    * Returns: the number of characters transmitted, or a negative value if an
+N    *          output error occurred.
+N    */
+Nextern _ARMABI int _vprintf(const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int _vprintf(const char * __restrict  , __va_list  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * is equivalent to vprintf, but does not support floating-point formats.
+N    * You can use instead of vprintf to improve code size.
+N    * Returns: as vprintf.
+N    */
+Nextern _ARMABI int vfprintf(FILE * __restrict /*stream*/,
+Xextern __declspec(__nothrow) int vfprintf(FILE * __restrict  ,
+N                    const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to fprintf, with the variable argument list replaced by
+N    * arg, which has been initialised by the va_start macro (and possibly
+N    * subsequent va_arg calls). The vfprintf function does not invoke the
+N    * va_end function.
+N    * Returns: the number of characters transmitted, or a negative value if an
+N    *          output error occurred.
+N    */
+Nextern _ARMABI int vsprintf(char * __restrict /*s*/,
+Xextern __declspec(__nothrow) int vsprintf(char * __restrict  ,
+N                     const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to sprintf, with the variable argument list replaced by
+N    * arg, which has been initialised by the va_start macro (and possibly
+N    * subsequent va_arg calls). The vsprintf function does not invoke the
+N    * va_end function.
+N    * Returns: the number of characters written in the array, not counting the
+N    *          terminating null character.
+N    */
+Nextern _ARMABI int __ARM_vsnprintf(char * __restrict /*s*/, size_t /*n*/,
+Xextern __declspec(__nothrow) int __ARM_vsnprintf(char * __restrict  , size_t  ,
+N                     const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(3)));
+N#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
+X#if !0L || (1L && 199901L <= 199409L) || (0L && 201103L <= __cplusplus)
+Nextern _ARMABI int vsnprintf(char * __restrict /*s*/, size_t /*n*/,
+Xextern __declspec(__nothrow) int vsnprintf(char * __restrict  , size_t  ,
+N                     const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(3)));
+N   /*
+N    * is equivalent to snprintf, with the variable argument list replaced by
+N    * arg, which has been initialised by the va_start macro (and possibly
+N    * subsequent va_arg calls). The vsprintf function does not invoke the
+N    * va_end function.
+N    * Returns: the number of characters that would have been written in the
+N    *          array, not counting the terminating null character. As
+N    *          snprintf.
+N    */
+N#endif
+Nextern _ARMABI int _vsprintf(char * __restrict /*s*/,
+Xextern __declspec(__nothrow) int _vsprintf(char * __restrict  ,
+N                      const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to vsprintf, but does not support floating-point formats.
+N    * You can use instead of vsprintf to improve code size.
+N    * Returns: as vsprintf.
+N    */
+Nextern _ARMABI int _vfprintf(FILE * __restrict /*stream*/,
+Xextern __declspec(__nothrow) int _vfprintf(FILE * __restrict  ,
+N                     const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * is equivalent to vfprintf, but does not support floating-point formats.
+N    * You can use instead of vfprintf to improve code size.
+N    * Returns: as vfprintf.
+N    */
+Nextern _ARMABI int _vsnprintf(char * __restrict /*s*/, size_t /*n*/,
+Xextern __declspec(__nothrow) int _vsnprintf(char * __restrict  , size_t  ,
+N                      const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(3)));
+N   /*
+N    * is equivalent to vsnprintf, but does not support floating-point formats.
+N    * You can use instead of vsnprintf to improve code size.
+N    * Returns: as vsnprintf.
+N    */
+N#if !defined(__STRICT_ANSI__)
+X#if !0L
+N#pragma __printf_args
+Nextern _ARMABI int asprintf(char ** /*strp*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(2)));
+Xextern __declspec(__nothrow) int asprintf(char **  , const char * __restrict  , ...) __attribute__((__nonnull__(2)));
+Nextern _ARMABI int vasprintf(char ** /*strp*/, const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(2)));
+Xextern __declspec(__nothrow) int vasprintf(char **  , const char * __restrict  , __va_list  ) __attribute__((__nonnull__(2)));
+N#endif
+N#pragma __printf_args
+Nextern _ARMABI int __ARM_asprintf(char ** /*strp*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(2)));
+Xextern __declspec(__nothrow) int __ARM_asprintf(char **  , const char * __restrict  , ...) __attribute__((__nonnull__(2)));
+Nextern _ARMABI int __ARM_vasprintf(char ** /*strp*/, const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(2)));
+Xextern __declspec(__nothrow) int __ARM_vasprintf(char **  , const char * __restrict  , __va_list  ) __attribute__((__nonnull__(2)));
+N   /*
+N    * dynamically allocates a buffer of the right size for the
+N    * formatted string, and returns it in (*strp). Formal return value
+N    * is the same as any other printf variant, except that it returns
+N    * -1 if the buffer could not be allocated.
+N    *
+N    * (The functions with __ARM_ prefixed names are identical to the
+N    * ones without, but are available in all compilation modes without
+N    * violating user namespace.)
+N    */
+N
+Nextern _ARMABI int fgetc(FILE * /*stream*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int fgetc(FILE *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * obtains the next character (if present) as an unsigned char converted to
+N    * an int, from the input stream pointed to by stream, and advances the
+N    * associated file position indicator (if defined).
+N    * Returns: the next character from the input stream pointed to by stream.
+N    *          If the stream is at end-of-file, the end-of-file indicator is
+N    *          set and fgetc returns EOF. If a read error occurs, the error
+N    *          indicator is set and fgetc returns EOF.
+N    */
+Nextern _ARMABI char *fgets(char * __restrict /*s*/, int /*n*/,
+Xextern __declspec(__nothrow) char *fgets(char * __restrict  , int  ,
+N                    FILE * __restrict /*stream*/) __attribute__((__nonnull__(1,3)));
+N   /*
+N    * reads at most one less than the number of characters specified by n from
+N    * the stream pointed to by stream into the array pointed to by s. No
+N    * additional characters are read after a new-line character (which is
+N    * retained) or after end-of-file. A null character is written immediately
+N    * after the last character read into the array.
+N    * Returns: s if successful. If end-of-file is encountered and no characters
+N    *          have been read into the array, the contents of the array remain
+N    *          unchanged and a null pointer is returned. If a read error occurs
+N    *          during the operation, the array contents are indeterminate and a
+N    *          null pointer is returned.
+N    */
+Nextern _ARMABI int fputc(int /*c*/, FILE * /*stream*/) __attribute__((__nonnull__(2)));
+Xextern __declspec(__nothrow) int fputc(int  , FILE *  ) __attribute__((__nonnull__(2)));
+N   /*
+N    * writes the character specified by c (converted to an unsigned char) to
+N    * the output stream pointed to by stream, at the position indicated by the
+N    * asociated file position indicator (if defined), and advances the
+N    * indicator appropriately. If the file position indicator is not defined,
+N    * the character is appended to the output stream.
+N    * Returns: the character written. If a write error occurs, the error
+N    *          indicator is set and fputc returns EOF.
+N    */
+Nextern _ARMABI int fputs(const char * __restrict /*s*/, FILE * __restrict /*stream*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int fputs(const char * __restrict  , FILE * __restrict  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * writes the string pointed to by s to the stream pointed to by stream.
+N    * The terminating null character is not written.
+N    * Returns: EOF if a write error occurs; otherwise it returns a nonnegative
+N    *          value.
+N    */
+Nextern _ARMABI int getc(FILE * /*stream*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int getc(FILE *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * is equivalent to fgetc except that it may be implemented as an unsafe
+N    * macro (stream may be evaluated more than once, so the argument should
+N    * never be an expression with side-effects).
+N    * Returns: the next character from the input stream pointed to by stream.
+N    *          If the stream is at end-of-file, the end-of-file indicator is
+N    *          set and getc returns EOF. If a read error occurs, the error
+N    *          indicator is set and getc returns EOF.
+N    */
+N#ifdef __cplusplus
+S    inline int getchar() { return getc(stdin); }
+N#else
+N    #define getchar() getc(stdin)
+N    extern _ARMABI int (getchar)(void);
+X    extern __declspec(__nothrow) int (getchar)(void);
+N#endif
+N   /*
+N    * is equivalent to getc with the argument stdin.
+N    * Returns: the next character from the input stream pointed to by stdin.
+N    *          If the stream is at end-of-file, the end-of-file indicator is
+N    *          set and getchar returns EOF. If a read error occurs, the error
+N    *          indicator is set and getchar returns EOF.
+N    */
+Nextern _ARMABI char *gets(char * /*s*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) char *gets(char *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * reads characters from the input stream pointed to by stdin into the array
+N    * pointed to by s, until end-of-file is encountered or a new-line character
+N    * is read. Any new-line character is discarded, and a null character is
+N    * written immediately after the last character read into the array.
+N    * Returns: s if successful. If end-of-file is encountered and no characters
+N    *          have been read into the array, the contents of the array remain
+N    *          unchanged and a null pointer is returned. If a read error occurs
+N    *          during the operation, the array contents are indeterminate and a
+N    *          null pointer is returned.
+N    */
+Nextern _ARMABI int putc(int /*c*/, FILE * /*stream*/) __attribute__((__nonnull__(2)));
+Xextern __declspec(__nothrow) int putc(int  , FILE *  ) __attribute__((__nonnull__(2)));
+N   /*
+N    * is equivalent to fputc except that it may be implemented as aan unsafe
+N    * macro (stream may be evaluated more than once, so the argument should
+N    * never be an expression with side-effects).
+N    * Returns: the character written. If a write error occurs, the error
+N    *          indicator is set and putc returns EOF.
+N    */
+N#ifdef __cplusplus
+S    inline int putchar(int __c) { return putc(__c, stdout); }
+N#else
+N    #define putchar(c) putc(c, stdout)
+N    extern _ARMABI int (putchar)(int /*c*/);
+X    extern __declspec(__nothrow) int (putchar)(int  );
+N#endif
+N   /*
+N    * is equivalent to putc with the second argument stdout.
+N    * Returns: the character written. If a write error occurs, the error
+N    *          indicator is set and putc returns EOF.
+N    */
+Nextern _ARMABI int puts(const char * /*s*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int puts(const char *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * writes the string pointed to by s to the stream pointed to by stdout, and
+N    * appends a new-line character to the output. The terminating null
+N    * character is not written.
+N    * Returns: EOF if a write error occurs; otherwise it returns a nonnegative
+N    *          value.
+N    */
+Nextern _ARMABI int ungetc(int /*c*/, FILE * /*stream*/) __attribute__((__nonnull__(2)));
+Xextern __declspec(__nothrow) int ungetc(int  , FILE *  ) __attribute__((__nonnull__(2)));
+N   /*
+N    * pushes the character specified by c (converted to an unsigned char) back
+N    * onto the input stream pointed to by stream. The character will be
+N    * returned by the next read on that stream. An intervening call to the
+N    * fflush function or to a file positioning function (fseek, fsetpos,
+N    * rewind) discards any pushed-back characters. The extern _ARMABIal storage
+N    * corresponding to the stream is unchanged.
+N    * One character pushback is guaranteed. If the unget function is called too
+N    * many times on the same stream without an intervening read or file
+N    * positioning operation on that stream, the operation may fail.
+N    * If the value of c equals that of the macro EOF, the operation fails and
+N    * the input stream is unchanged.
+N    * A successful call to the ungetc function clears the end-of-file
+N    * indicator. The value of the file position indicator after reading or
+N    * discarding all pushed-back characters shall be the same as it was before
+N    * the characters were pushed back. For a text stream, the value of the file
+N    * position indicator after a successful call to the ungetc function is
+N    * unspecified until all pushed-back characters are read or discarded. For a
+N    * binary stream, the file position indicator is decremented by each
+N    * successful call to the ungetc function; if its value was zero before a
+N    * call, it is indeterminate after the call.
+N    * Returns: the character pushed back after conversion, or EOF if the
+N    *          operation fails.
+N    */
+N
+Nextern _ARMABI size_t fread(void * __restrict /*ptr*/,
+Xextern __declspec(__nothrow) size_t fread(void * __restrict  ,
+N                    size_t /*size*/, size_t /*nmemb*/, FILE * __restrict /*stream*/) __attribute__((__nonnull__(1,4)));
+N   /*
+N    * reads into the array pointed to by ptr, up to nmemb members whose size is
+N    * specified by size, from the stream pointed to by stream. The file
+N    * position indicator (if defined) is advanced by the number of characters
+N    * successfully read. If an error occurs, the resulting value of the file
+N    * position indicator is indeterminate. If a partial member is read, its
+N    * value is indeterminate. The ferror or feof function shall be used to
+N    * distinguish between a read error and end-of-file.
+N    * Returns: the number of members successfully read, which may be less than
+N    *          nmemb if a read error or end-of-file is encountered. If size or
+N    *          nmemb is zero, fread returns zero and the contents of the array
+N    *          and the state of the stream remain unchanged.
+N    */
+N
+Nextern _ARMABI size_t __fread_bytes_avail(void * __restrict /*ptr*/,
+Xextern __declspec(__nothrow) size_t __fread_bytes_avail(void * __restrict  ,
+N                    size_t /*count*/, FILE * __restrict /*stream*/) __attribute__((__nonnull__(1,3)));
+N   /*
+N    * reads into the array pointed to by ptr, up to count characters from the
+N    * stream pointed to by stream. The file position indicator (if defined)
+N    * is advanced by the number of characters successfully read. If an error
+N    * occurs, the resulting value of the file position indicator is
+N    * indeterminate. The ferror or feof function shall be used to
+N    * distinguish between a read error and end-of-file.  The call will block
+N    * only if no characters are available.
+N    * Returns: the number of characters successfully read, which may be less than
+N    *          count. If count is zero, __fread_bytes_avail returns zero and
+N    *          the contents of the array and the state of the stream remain
+N    *          unchanged.
+N    */
+N
+Nextern _ARMABI size_t fwrite(const void * __restrict /*ptr*/,
+Xextern __declspec(__nothrow) size_t fwrite(const void * __restrict  ,
+N                    size_t /*size*/, size_t /*nmemb*/, FILE * __restrict /*stream*/) __attribute__((__nonnull__(1,4)));
+N   /*
+N    * writes, from the array pointed to by ptr up to nmemb members whose size
+N    * is specified by size, to the stream pointed to by stream. The file
+N    * position indicator (if defined) is advanced by the number of characters
+N    * successfully written. If an error occurs, the resulting value of the file
+N    * position indicator is indeterminate.
+N    * Returns: the number of members successfully written, which will be less
+N    *          than nmemb only if a write error is encountered.
+N    */
+N
+Nextern _ARMABI int fgetpos(FILE * __restrict /*stream*/, fpos_t * __restrict /*pos*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int fgetpos(FILE * __restrict  , fpos_t * __restrict  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * stores the current value of the file position indicator for the stream
+N    * pointed to by stream in the object pointed to by pos. The value stored
+N    * contains unspecified information usable by the fsetpos function for
+N    * repositioning the stream to its position at the time  of the call to the
+N    * fgetpos function.
+N    * Returns: zero, if successful. Otherwise nonzero is returned and the
+N    *          integer expression errno is set to an implementation-defined
+N    *          nonzero value.
+N    */
+Nextern _ARMABI int fseek(FILE * /*stream*/, long int /*offset*/, int /*whence*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int fseek(FILE *  , long int  , int  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * sets the file position indicator for the stream pointed to by stream.
+N    * For a binary stream, the new position is at the signed number of
+N    * characters specified by offset away from the point specified by whence.
+N    * The specified point is the beginning of the file for SEEK_SET, the
+N    * current position in the file for SEEK_CUR, or end-of-file for SEEK_END.
+N    * A binary stream need not meaningfully support fseek calls with a whence
+N    * value of SEEK_END.
+N    * For a text stream, either offset shall be zero, or offset shall be a
+N    * value returned by an earlier call to the ftell function on the same
+N    * stream and whence shall be SEEK_SET.
+N    * The fseek function clears the end-of-file indicator and undoes any
+N    * effects of the ungetc function on the same stream. After an fseek call,
+N    * the next operation on an update stream may be either input or output.
+N    * Returns: nonzero only for a request that cannot be satisfied.
+N    */
+Nextern _ARMABI int fsetpos(FILE * __restrict /*stream*/, const fpos_t * __restrict /*pos*/) __attribute__((__nonnull__(1,2)));
+Xextern __declspec(__nothrow) int fsetpos(FILE * __restrict  , const fpos_t * __restrict  ) __attribute__((__nonnull__(1,2)));
+N   /*
+N    * sets  the file position indicator for the stream pointed to by stream
+N    * according to the value of the object pointed to by pos, which shall be a
+N    * value returned by an earlier call to the fgetpos function on the same
+N    * stream.
+N    * The fsetpos function clears the end-of-file indicator and undoes any
+N    * effects of the ungetc function on the same stream. After an fsetpos call,
+N    * the next operation on an update stream may be either input or output.
+N    * Returns: zero, if successful. Otherwise nonzero is returned and the
+N    *          integer expression errno is set to an implementation-defined
+N    *          nonzero value.
+N    */
+Nextern _ARMABI long int ftell(FILE * /*stream*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) long int ftell(FILE *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * obtains the current value of the file position indicator for the stream
+N    * pointed to by stream. For a binary stream, the value is the number of
+N    * characters from the beginning of the file. For a text stream, the file
+N    * position indicator contains unspecified information, usable by the fseek
+N    * function for returning the file position indicator to its position at the
+N    * time of the ftell call; the difference between two such return values is
+N    * not necessarily a meaningful measure of the number of characters written
+N    * or read.
+N    * Returns: if successful, the current value of the file position indicator.
+N    *          On failure, the ftell function returns -1L and sets the integer
+N    *          expression errno to an implementation-defined nonzero value.
+N    */
+Nextern _ARMABI void rewind(FILE * /*stream*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) void rewind(FILE *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * sets the file position indicator for the stream pointed to by stream to
+N    * the beginning of the file. It is equivalent to
+N    *          (void)fseek(stream, 0L, SEEK_SET)
+N    * except that the error indicator for the stream is also cleared.
+N    * Returns: no value.
+N    */
+N
+Nextern _ARMABI void clearerr(FILE * /*stream*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) void clearerr(FILE *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * clears the end-of-file and error indicators for the stream pointed to by
+N    * stream. These indicators are cleared only when the file is opened or by
+N    * an explicit call to the clearerr function or to the rewind function.
+N    * Returns: no value.
+N    */
+N
+Nextern _ARMABI int feof(FILE * /*stream*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int feof(FILE *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * tests the end-of-file indicator for the stream pointed to by stream.
+N    * Returns: nonzero iff the end-of-file indicator is set for stream.
+N    */
+Nextern _ARMABI int ferror(FILE * /*stream*/) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int ferror(FILE *  ) __attribute__((__nonnull__(1)));
+N   /*
+N    * tests the error indicator for the stream pointed to by stream.
+N    * Returns: nonzero iff the error indicator is set for stream.
+N    */
+Nextern _ARMABI void perror(const char * /*s*/);
+Xextern __declspec(__nothrow) void perror(const char *  );
+N   /*
+N    * maps the error number  in the integer expression errno to an error
+N    * message. It writes a sequence of characters to the standard error stream
+N    * thus: first (if s is not a null pointer and the character pointed to by
+N    * s is not the null character), the string pointed to by s followed by a
+N    * colon and a space; then an appropriate error message string followed by
+N    * a new-line character. The contents of the error message strings are the
+N    * same as those returned by the strerror function with argument errno,
+N    * which are implementation-defined.
+N    * Returns: no value.
+N    */
+N
+Nextern _ARMABI int _fisatty(FILE * /*stream*/ ) __attribute__((__nonnull__(1)));
+Xextern __declspec(__nothrow) int _fisatty(FILE *   ) __attribute__((__nonnull__(1)));
+N    /* Returns 1 if the stream is tty (stdin), 0 otherwise. Not ANSI compliant.
+N     */
+N
+Nextern _ARMABI void __use_no_semihosting_swi(void);
+Xextern __declspec(__nothrow) void __use_no_semihosting_swi(void);
+Nextern _ARMABI void __use_no_semihosting(void);
+Xextern __declspec(__nothrow) void __use_no_semihosting(void);
+N    /*
+N     * Referencing either of these symbols will cause a link-time
+N     * error if any library functions that use semihosting SWI
+N     * calls are also present in the link, i.e. you define it if
+N     * you want to make sure you haven't accidentally used any such
+N     * SWIs.
+N     */
+N
+N    #ifdef __cplusplus
+S        }  /* extern "C" */
+S      }  /* namespace std */
+N    #endif
+N  #endif /* __STDIO_DECLS */
+N
+N  #if _AEABI_PORTABILITY_LEVEL != 0 && !defined _AEABI_PORTABLE
+X  #if _AEABI_PORTABILITY_LEVEL != 0 && !0L
+S    #define _AEABI_PORTABLE
+N  #endif
+N
+N  #if defined(__cplusplus) && !defined(__STDIO_NO_EXPORTS)
+X  #if 0L && !0L
+S    using ::std::size_t;
+S    using ::std::fpos_t;
+S    using ::std::FILE;
+S    using ::std::remove;
+S    using ::std::rename;
+S    using ::std::tmpfile;
+S    using ::std::tmpnam;
+S    using ::std::fclose;
+S    using ::std::fflush;
+S    using ::std::fopen;
+S    using ::std::freopen;
+S    using ::std::setbuf;
+S    using ::std::setvbuf;
+S    using ::std::fprintf;
+S    using ::std::_fprintf;
+S    using ::std::printf;
+S    using ::std::_printf;
+S    using ::std::sprintf;
+S    using ::std::_sprintf;
+S    #if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
+S      using ::std::snprintf;
+S      using ::std::vsnprintf;
+S      using ::std::vfscanf;
+S      using ::std::vscanf;
+S      using ::std::vsscanf;
+S    #endif
+S    using ::std::_snprintf;
+S    using ::std::_vsnprintf;
+S#if !defined(__STRICT_ANSI__)
+S    using ::std::asprintf;
+S    using ::std::vasprintf;
+S#endif
+S    using ::std::__ARM_asprintf;
+S    using ::std::__ARM_vasprintf;
+S    using ::std::__ARM_vsnprintf;
+S    using ::std::__ARM_snprintf;
+S    using ::std::__ARM_vsscanf;
+S    using ::std::fscanf;
+S    using ::std::_fscanf;
+S    using ::std::scanf;
+S    using ::std::_scanf;
+S    using ::std::sscanf;
+S    using ::std::_sscanf;
+S    using ::std::_vfscanf;
+S    using ::std::_vscanf;
+S    using ::std::_vsscanf;
+S    using ::std::vprintf;
+S    using ::std::_vprintf;
+S    using ::std::vfprintf;
+S    using ::std::_vfprintf;
+S    using ::std::vsprintf;
+S    using ::std::_vsprintf;
+S    using ::std::fgetc;
+S    using ::std::fgets;
+S    using ::std::fputc;
+S    using ::std::fputs;
+S    using ::std::getc;
+S    using ::std::getchar;
+S    using ::std::gets;
+S    using ::std::putc;
+S    using ::std::putchar;
+S    using ::std::puts;
+S    using ::std::ungetc;
+S    using ::std::fread;
+S    using ::std::__fread_bytes_avail;
+S    using ::std::fwrite;
+S    using ::std::fgetpos;
+S    using ::std::fseek;
+S    using ::std::fsetpos;
+S    using ::std::ftell;
+S    using ::std::rewind;
+S    using ::std::clearerr;
+S    using ::std::feof;
+S    using ::std::ferror;
+S    using ::std::perror;
+S    using ::std::_fisatty;
+S    using ::std::__use_no_semihosting_swi;
+S    using ::std::__use_no_semihosting;
+N  #endif
+N
+N#endif /* ndef __stdio_h */
+N
+N/* end of stdio.h */
+N
+L 32 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\library\timing.c" 2
+N#define mbedtls_printf     printf
+N#endif
+N
+N#if defined(MBEDTLS_TIMING_C)
+X#if 0L
+S
+S#include "mbedtls/timing.h"
+S
+S#if !defined(MBEDTLS_TIMING_ALT)
+S
+S#ifndef asm
+S#define asm __asm
+S#endif
+S
+S#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32)
+S
+S#include <windows.h>
+S#include <winbase.h>
+S
+Sstruct _hr_time
+S{
+S    LARGE_INTEGER start;
+S};
+S
+S#else
+S
+S#include <unistd.h>
+S#include <sys/types.h>
+S#include <sys/time.h>
+S#include <signal.h>
+S#include <time.h>
+S
+Sstruct _hr_time
+S{
+S    struct timeval start;
+S};
+S
+S#endif /* _WIN32 && !EFIX64 && !EFI32 */
+S
+S#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&  \
+S    ( defined(_MSC_VER) && defined(_M_IX86) ) || defined(__WATCOMC__)
+X#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&      ( defined(_MSC_VER) && defined(_M_IX86) ) || defined(__WATCOMC__)
+S
+S#define HAVE_HARDCLOCK
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    unsigned long tsc;
+S    __asm   rdtsc
+S    __asm   mov  [tsc], eax
+S    return( tsc );
+S}
+S#endif /* !HAVE_HARDCLOCK && MBEDTLS_HAVE_ASM &&
+S          ( _MSC_VER && _M_IX86 ) || __WATCOMC__ */
+S
+S/* some versions of mingw-64 have 32-bit longs even on x84_64 */
+S#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&  \
+S    defined(__GNUC__) && ( defined(__i386__) || (                       \
+S    ( defined(__amd64__) || defined( __x86_64__) ) && __SIZEOF_LONG__ == 4 ) )
+X#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&      defined(__GNUC__) && ( defined(__i386__) || (                           ( defined(__amd64__) || defined( __x86_64__) ) && __SIZEOF_LONG__ == 4 ) )
+S
+S#define HAVE_HARDCLOCK
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    unsigned long lo, hi;
+S    asm volatile( "rdtsc" : "=a" (lo), "=d" (hi) );
+S    return( lo );
+S}
+S#endif /* !HAVE_HARDCLOCK && MBEDTLS_HAVE_ASM &&
+S          __GNUC__ && __i386__ */
+S
+S#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&  \
+S    defined(__GNUC__) && ( defined(__amd64__) || defined(__x86_64__) )
+X#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&      defined(__GNUC__) && ( defined(__amd64__) || defined(__x86_64__) )
+S
+S#define HAVE_HARDCLOCK
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    unsigned long lo, hi;
+S    asm volatile( "rdtsc" : "=a" (lo), "=d" (hi) );
+S    return( lo | ( hi << 32 ) );
+S}
+S#endif /* !HAVE_HARDCLOCK && MBEDTLS_HAVE_ASM &&
+S          __GNUC__ && ( __amd64__ || __x86_64__ ) */
+S
+S#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&  \
+S    defined(__GNUC__) && ( defined(__powerpc__) || defined(__ppc__) )
+X#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&      defined(__GNUC__) && ( defined(__powerpc__) || defined(__ppc__) )
+S
+S#define HAVE_HARDCLOCK
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    unsigned long tbl, tbu0, tbu1;
+S
+S    do
+S    {
+S        asm volatile( "mftbu %0" : "=r" (tbu0) );
+S        asm volatile( "mftb  %0" : "=r" (tbl ) );
+S        asm volatile( "mftbu %0" : "=r" (tbu1) );
+S    }
+S    while( tbu0 != tbu1 );
+S
+S    return( tbl );
+S}
+S#endif /* !HAVE_HARDCLOCK && MBEDTLS_HAVE_ASM &&
+S          __GNUC__ && ( __powerpc__ || __ppc__ ) */
+S
+S#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&  \
+S    defined(__GNUC__) && defined(__sparc64__)
+X#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&      defined(__GNUC__) && defined(__sparc64__)
+S
+S#if defined(__OpenBSD__)
+S#warning OpenBSD does not allow access to tick register using software version instead
+S#else
+S#define HAVE_HARDCLOCK
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    unsigned long tick;
+S    asm volatile( "rdpr %%tick, %0;" : "=&r" (tick) );
+S    return( tick );
+S}
+S#endif /* __OpenBSD__ */
+S#endif /* !HAVE_HARDCLOCK && MBEDTLS_HAVE_ASM &&
+S          __GNUC__ && __sparc64__ */
+S
+S#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&  \
+S    defined(__GNUC__) && defined(__sparc__) && !defined(__sparc64__)
+X#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&      defined(__GNUC__) && defined(__sparc__) && !defined(__sparc64__)
+S
+S#define HAVE_HARDCLOCK
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    unsigned long tick;
+S    asm volatile( ".byte 0x83, 0x41, 0x00, 0x00" );
+S    asm volatile( "mov   %%g1, %0" : "=r" (tick) );
+S    return( tick );
+S}
+S#endif /* !HAVE_HARDCLOCK && MBEDTLS_HAVE_ASM &&
+S          __GNUC__ && __sparc__ && !__sparc64__ */
+S
+S#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&      \
+S    defined(__GNUC__) && defined(__alpha__)
+X#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&          defined(__GNUC__) && defined(__alpha__)
+S
+S#define HAVE_HARDCLOCK
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    unsigned long cc;
+S    asm volatile( "rpcc %0" : "=r" (cc) );
+S    return( cc & 0xFFFFFFFF );
+S}
+S#endif /* !HAVE_HARDCLOCK && MBEDTLS_HAVE_ASM &&
+S          __GNUC__ && __alpha__ */
+S
+S#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&      \
+S    defined(__GNUC__) && defined(__ia64__)
+X#if !defined(HAVE_HARDCLOCK) && defined(MBEDTLS_HAVE_ASM) &&          defined(__GNUC__) && defined(__ia64__)
+S
+S#define HAVE_HARDCLOCK
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    unsigned long itc;
+S    asm volatile( "mov %0 = ar.itc" : "=r" (itc) );
+S    return( itc );
+S}
+S#endif /* !HAVE_HARDCLOCK && MBEDTLS_HAVE_ASM &&
+S          __GNUC__ && __ia64__ */
+S
+S#if !defined(HAVE_HARDCLOCK) && defined(_MSC_VER) && \
+S    !defined(EFIX64) && !defined(EFI32)
+X#if !defined(HAVE_HARDCLOCK) && defined(_MSC_VER) &&     !defined(EFIX64) && !defined(EFI32)
+S
+S#define HAVE_HARDCLOCK
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    LARGE_INTEGER offset;
+S
+S    QueryPerformanceCounter( &offset );
+S
+S    return( (unsigned long)( offset.QuadPart ) );
+S}
+S#endif /* !HAVE_HARDCLOCK && _MSC_VER && !EFIX64 && !EFI32 */
+S
+S#if !defined(HAVE_HARDCLOCK)
+S
+S#define HAVE_HARDCLOCK
+S
+Sstatic int hardclock_init = 0;
+Sstatic struct timeval tv_init;
+S
+Sunsigned long mbedtls_timing_hardclock( void )
+S{
+S    struct timeval tv_cur;
+S
+S    if( hardclock_init == 0 )
+S    {
+S        gettimeofday( &tv_init, NULL );
+S        hardclock_init = 1;
+S    }
+S
+S    gettimeofday( &tv_cur, NULL );
+S    return( ( tv_cur.tv_sec  - tv_init.tv_sec  ) * 1000000
+S          + ( tv_cur.tv_usec - tv_init.tv_usec ) );
+S}
+S#endif /* !HAVE_HARDCLOCK */
+S
+Svolatile int mbedtls_timing_alarmed = 0;
+S
+S#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32)
+S
+Sunsigned long mbedtls_timing_get_timer( struct mbedtls_timing_hr_time *val, int reset )
+S{
+S    unsigned long delta;
+S    LARGE_INTEGER offset, hfreq;
+S    struct _hr_time *t = (struct _hr_time *) val;
+S
+S    QueryPerformanceCounter(  &offset );
+S    QueryPerformanceFrequency( &hfreq );
+S
+S    delta = (unsigned long)( ( 1000 *
+S        ( offset.QuadPart - t->start.QuadPart ) ) /
+S           hfreq.QuadPart );
+S
+S    if( reset )
+S        QueryPerformanceCounter( &t->start );
+S
+S    return( delta );
+S}
+S
+S/* It's OK to use a global because alarm() is supposed to be global anyway */
+Sstatic DWORD alarmMs;
+S
+Sstatic DWORD WINAPI TimerProc( LPVOID TimerContext )
+S{
+S    ((void) TimerContext);
+S    Sleep( alarmMs );
+S    mbedtls_timing_alarmed = 1;
+S    return( TRUE );
+S}
+S
+Svoid mbedtls_set_alarm( int seconds )
+S{
+S    DWORD ThreadId;
+S
+S    mbedtls_timing_alarmed = 0;
+S    alarmMs = seconds * 1000;
+S    CloseHandle( CreateThread( NULL, 0, TimerProc, NULL, 0, &ThreadId ) );
+S}
+S
+S#else /* _WIN32 && !EFIX64 && !EFI32 */
+S
+Sunsigned long mbedtls_timing_get_timer( struct mbedtls_timing_hr_time *val, int reset )
+S{
+S    unsigned long delta;
+S    struct timeval offset;
+S    struct _hr_time *t = (struct _hr_time *) val;
+S
+S    gettimeofday( &offset, NULL );
+S
+S    if( reset )
+S    {
+S        t->start.tv_sec  = offset.tv_sec;
+S        t->start.tv_usec = offset.tv_usec;
+S        return( 0 );
+S    }
+S
+S    delta = ( offset.tv_sec  - t->start.tv_sec  ) * 1000
+S          + ( offset.tv_usec - t->start.tv_usec ) / 1000;
+S
+S    return( delta );
+S}
+S
+Sstatic void sighandler( int signum )
+S{
+S    mbedtls_timing_alarmed = 1;
+S    signal( signum, sighandler );
+S}
+S
+Svoid mbedtls_set_alarm( int seconds )
+S{
+S    mbedtls_timing_alarmed = 0;
+S    signal( SIGALRM, sighandler );
+S    alarm( seconds );
+S}
+S
+S#endif /* _WIN32 && !EFIX64 && !EFI32 */
+S
+S/*
+S * Set delays to watch
+S */
+Svoid mbedtls_timing_set_delay( void *data, uint32_t int_ms, uint32_t fin_ms )
+S{
+S    mbedtls_timing_delay_context *ctx = (mbedtls_timing_delay_context *) data;
+S
+S    ctx->int_ms = int_ms;
+S    ctx->fin_ms = fin_ms;
+S
+S    if( fin_ms != 0 )
+S        (void) mbedtls_timing_get_timer( &ctx->timer, 1 );
+S}
+S
+S/*
+S * Get number of delays expired
+S */
+Sint mbedtls_timing_get_delay( void *data )
+S{
+S    mbedtls_timing_delay_context *ctx = (mbedtls_timing_delay_context *) data;
+S    unsigned long elapsed_ms;
+S
+S    if( ctx->fin_ms == 0 )
+S        return( -1 );
+S
+S    elapsed_ms = mbedtls_timing_get_timer( &ctx->timer, 0 );
+S
+S    if( elapsed_ms >= ctx->fin_ms )
+S        return( 2 );
+S
+S    if( elapsed_ms >= ctx->int_ms )
+S        return( 1 );
+S
+S    return( 0 );
+S}
+S
+S#endif /* !MBEDTLS_TIMING_ALT */
+S
+S#if defined(MBEDTLS_SELF_TEST)
+S
+S/*
+S * Busy-waits for the given number of milliseconds.
+S * Used for testing mbedtls_timing_hardclock.
+S */
+Sstatic void busy_msleep( unsigned long msec )
+S{
+S    struct mbedtls_timing_hr_time hires;
+S    unsigned long i = 0; /* for busy-waiting */
+S    volatile unsigned long j; /* to prevent optimisation */
+S
+S    (void) mbedtls_timing_get_timer( &hires, 1 );
+S
+S    while( mbedtls_timing_get_timer( &hires, 0 ) < msec )
+S        i++;
+S
+S    j = i;
+S    (void) j;
+S}
+S
+S#define FAIL    do                      \
+S{                                       \
+S    if( verbose != 0 )                  \
+S        mbedtls_printf( "failed\n" );   \
+S                                        \
+S    return( 1 );                        \
+S} while( 0 )
+X#define FAIL    do                      {                                           if( verbose != 0 )                          mbedtls_printf( "failed\n" );                                               return( 1 );                        } while( 0 )
+S
+S/*
+S * Checkup routine
+S *
+S * Warning: this is work in progress, some tests may not be reliable enough
+S * yet! False positives may happen.
+S */
+Sint mbedtls_timing_self_test( int verbose )
+S{
+S    unsigned long cycles, ratio;
+S    unsigned long millisecs, secs;
+S    int hardfail;
+S    struct mbedtls_timing_hr_time hires;
+S    uint32_t a, b;
+S    mbedtls_timing_delay_context ctx;
+S
+S    if( verbose != 0 )
+S        mbedtls_printf( "  TIMING tests note: will take some time!\n" );
+S
+S
+S    if( verbose != 0 )
+S        mbedtls_printf( "  TIMING test #1 (set_alarm / get_timer): " );
+S
+S    for( secs = 1; secs <= 3; secs++ )
+S    {
+S        (void) mbedtls_timing_get_timer( &hires, 1 );
+S
+S        mbedtls_set_alarm( (int) secs );
+S        while( !mbedtls_timing_alarmed )
+S            ;
+S
+S        millisecs = mbedtls_timing_get_timer( &hires, 0 );
+S
+S        /* For some reason on Windows it looks like alarm has an extra delay
+S         * (maybe related to creating a new thread). Allow some room here. */
+S        if( millisecs < 800 * secs || millisecs > 1200 * secs + 300 )
+S        {
+S            if( verbose != 0 )
+S                mbedtls_printf( "failed\n" );
+S
+S            return( 1 );
+S        }
+S    }
+S
+S    if( verbose != 0 )
+S        mbedtls_printf( "passed\n" );
+S
+S    if( verbose != 0 )
+S        mbedtls_printf( "  TIMING test #2 (set/get_delay        ): " );
+S
+S    for( a = 200; a <= 400; a += 200 )
+S    {
+S        for( b = 200; b <= 400; b += 200 )
+S        {
+S            mbedtls_timing_set_delay( &ctx, a, a + b );
+S
+S            busy_msleep( a - a / 8 );
+S            if( mbedtls_timing_get_delay( &ctx ) != 0 )
+S                FAIL;
+S
+S            busy_msleep( a / 4 );
+S            if( mbedtls_timing_get_delay( &ctx ) != 1 )
+S                FAIL;
+S
+S            busy_msleep( b - a / 8 - b / 8 );
+S            if( mbedtls_timing_get_delay( &ctx ) != 1 )
+S                FAIL;
+S
+S            busy_msleep( b / 4 );
+S            if( mbedtls_timing_get_delay( &ctx ) != 2 )
+S                FAIL;
+S        }
+S    }
+S
+S    mbedtls_timing_set_delay( &ctx, 0, 0 );
+S    busy_msleep( 200 );
+S    if( mbedtls_timing_get_delay( &ctx ) != -1 )
+S        FAIL;
+S
+S    if( verbose != 0 )
+S        mbedtls_printf( "passed\n" );
+S
+S    if( verbose != 0 )
+S        mbedtls_printf( "  TIMING test #3 (hardclock / get_timer): " );
+S
+S    /*
+S     * Allow one failure for possible counter wrapping.
+S     * On a 4Ghz 32-bit machine the cycle counter wraps about once per second;
+S     * since the whole test is about 10ms, it shouldn't happen twice in a row.
+S     */
+S    hardfail = 0;
+S
+Shard_test:
+S    if( hardfail > 1 )
+S    {
+S        if( verbose != 0 )
+S            mbedtls_printf( "failed (ignored)\n" );
+S
+S        goto hard_test_done;
+S    }
+S
+S    /* Get a reference ratio cycles/ms */
+S    millisecs = 1;
+S    cycles = mbedtls_timing_hardclock();
+S    busy_msleep( millisecs );
+S    cycles = mbedtls_timing_hardclock() - cycles;
+S    ratio = cycles / millisecs;
+S
+S    /* Check that the ratio is mostly constant */
+S    for( millisecs = 2; millisecs <= 4; millisecs++ )
+S    {
+S        cycles = mbedtls_timing_hardclock();
+S        busy_msleep( millisecs );
+S        cycles = mbedtls_timing_hardclock() - cycles;
+S
+S        /* Allow variation up to 20% */
+S        if( cycles / millisecs < ratio - ratio / 5 ||
+S            cycles / millisecs > ratio + ratio / 5 )
+S        {
+S            hardfail++;
+S            goto hard_test;
+S        }
+S    }
+S
+S    if( verbose != 0 )
+S        mbedtls_printf( "passed\n" );
+S
+Shard_test_done:
+S
+S    if( verbose != 0 )
+S        mbedtls_printf( "\n" );
+S
+S    return( 0 );
+S}
+S
+S#endif /* MBEDTLS_SELF_TEST */
+S
+N#endif /* MBEDTLS_TIMING_C */

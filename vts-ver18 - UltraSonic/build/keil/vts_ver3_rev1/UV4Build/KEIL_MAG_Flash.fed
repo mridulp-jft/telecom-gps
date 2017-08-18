@@ -1,0 +1,246 @@
+;#<FEEDBACK># ARM Linker, 5040049: Last Updated: Fri Sep 11 12:07:22 2015
+;VERSION 0.2
+;FILE alloc.o
+__asm___7_alloc_c_free____REV16 <= USED 0
+__asm___7_alloc_c_free____REVSH <= USED 0
+free <= USED 0
+malloc <= USED 0
+;FILE asin.o
+;FILE assert.o
+__asm___8_assert_c_ae791a4b____REV16 <= USED 0
+__asm___8_assert_c_ae791a4b____REVSH <= USED 0
+assert_failed <= USED 0
+;FILE cmp.o
+__asm___5_cmp_c_cmp_init____REV16 <= USED 0
+__asm___5_cmp_c_cmp_init____REVSH <= USED 0
+cmp0_isr <= USED 0
+cmp_init <= USED 0
+;FILE io.o
+__asm___4_io_c_in_char____REV16 <= USED 0
+__asm___4_io_c_in_char____REVSH <= USED 0
+char_present <= USED 0
+in_char <= USED 0
+in_char1 <= USED 0
+in_char2 <= USED 0
+out_char <= USED 0
+out_char1 <= USED 0
+out_char2 <= USED 0
+;FILE llwu.o
+__asm___6_llwu_c_5d5b657e____REV16 <= USED 0
+__asm___6_llwu_c_5d5b657e____REVSH <= USED 0
+llwu_configure <= USED 0
+llwu_configure_filter <= USED 0
+;FILE lptmr.o
+__asm___7_lptmr_c_ff64738d____REV16 <= USED 0
+__asm___7_lptmr_c_ff64738d____REVSH <= USED 0
+lptmr_init <= USED 0
+time_delay_ms <= USED 0
+;FILE mcg.o
+__asm___5_mcg_c_pll_init____REV16 <= USED 0
+__asm___5_mcg_c_pll_init____REVSH <= USED 0
+atc <= USED 0
+blpe_fbe <= USED 0
+blpe_pbe <= USED 0
+blpi_fbi <= USED 0
+chk_for_resistor <= USED 0
+clk_monitor_0 <= USED 0
+fbe_blpe <= USED 0
+fbe_fbi <= USED 0
+fbe_fee <= USED 0
+fbe_fei <= USED 0
+fbe_pbe <= USED 0
+fbi_blpi <= USED 0
+fbi_fbe <= USED 0
+fbi_fee <= USED 0
+fbi_fei <= USED 0
+fee_fbe <= USED 0
+fee_fbi <= USED 0
+fee_fei <= USED 0
+fei_fbe <= USED 0
+fei_fbi <= USED 0
+fei_fee <= USED 0
+fll_freq <= USED 0
+new_pll_freq <= USED 0
+pbe_blpe <= USED 0
+pbe_fbe <= USED 0
+pbe_pee <= USED 0
+pee_pbe <= USED 0
+pll_init <= USED 0
+what_mcg_mode <= USED 0
+;FILE median.o
+median <= USED 0
+;FILE memtest.o
+memTestAddressBus <= USED 0
+memTestDataBus <= USED 0
+memTestDevice <= USED 0
+;FILE nmi_isr_handler.o
+__asm___17_nmi_isr_handler_c_bb8ca80c____REV16 <= USED 0
+__asm___17_nmi_isr_handler_c_bb8ca80c____REVSH <= USED 0
+enable_NMI_button <= USED 0
+;FILE pmc.o
+LVD_Init <= USED 0
+LVD_Initalize <= USED 0
+__asm___5_pmc_c_96ea85e0____REV16 <= USED 0
+__asm___5_pmc_c_96ea85e0____REVSH <= USED 0
+pmc_lvd_isr <= USED 0
+;FILE queue.o
+__asm___7_queue_c_6324ac82____REV16 <= USED 0
+__asm___7_queue_c_6324ac82____REVSH <= USED 0
+queue_add <= USED 0
+queue_init <= USED 0
+queue_isempty <= USED 0
+queue_move <= USED 0
+queue_peek <= USED 0
+queue_remove <= USED 0
+;FILE rcm.o
+__asm___5_rcm_c_outSRS____REV16 <= USED 0
+__asm___5_rcm_c_outSRS____REVSH <= USED 0
+;FILE retarget.o
+_sys_exit <= USED 0
+_ttywrch <= USED 0
+ferror <= USED 0
+fgetc <= USED 0
+;FILE rtc.o
+__asm___5_rtc_c_rtc_init____REV16 <= USED 0
+__asm___5_rtc_c_rtc_init____REVSH <= USED 0
+rtc_init <= USED 0
+rtc_isr <= USED 0
+rtc_reg_report <= USED 0
+;FILE serial.o
+SER_GetChar <= USED 0
+__asm___8_Serial_c_5b0a5ac0____REV16 <= USED 0
+__asm___8_Serial_c_5b0a5ac0____REVSH <= USED 0
+;FILE smc.o
+__asm___5_smc_c_sleep____REV16 <= USED 0
+__asm___5_smc_c_sleep____REVSH <= USED 0
+deepsleep <= USED 0
+enter_lls <= USED 0
+enter_stop <= USED 0
+enter_vlls0 <= USED 0
+enter_vlls0_nopor <= USED 0
+enter_vlls1 <= USED 0
+enter_vlls2 <= USED 0
+enter_vlls3 <= USED 0
+enter_vlpr <= USED 0
+enter_vlps <= USED 0
+enter_wait <= USED 0
+exit_vlpr <= USED 0
+sleep <= USED 0
+;FILE sqrt16.o
+sqrt_16 <= USED 0
+;FILE start.o
+__asm___7_start_c_start____REV16 <= USED 0
+__asm___7_start_c_start____REVSH <= USED 0
+flash_identify <= USED 0
+;FILE startup_mkl26z4.o
+;FILE stdlib.o
+__asm___8_stdlib_c_isspace____REV16 <= USED 0
+__asm___8_stdlib_c_isspace____REVSH <= USED 0
+isalnum <= USED 0
+isdigit <= USED 0
+isspace <= USED 0
+isupper <= USED 0
+memcpy <= USED 0
+memset <= USED 0
+strcasecmp <= USED 0
+strcat <= USED 0
+strcmp <= USED 0
+strcpy <= USED 0
+strncasecmp <= USED 0
+strncat <= USED 0
+strncmp <= USED 0
+strncpy <= USED 0
+strtoul <= USED 0
+;FILE sysinit.o
+__asm___9_sysinit_c_sysinit____REV16 <= USED 0
+__asm___9_sysinit_c_sysinit____REVSH <= USED 0
+clk_out_init <= USED 0
+enable_abort_button <= USED 0
+;FILE system_mkl26z4.o
+SystemCoreClockUpdate <= USED 0
+__asm___16_system_MKL26Z4_c_5d646a67____REV16 <= USED 0
+__asm___16_system_MKL26Z4_c_5d646a67____REVSH <= USED 0
+;FILE uart.o
+__asm___6_uart_c_f64bdfb6____REV16 <= USED 0
+__asm___6_uart_c_f64bdfb6____REVSH <= USED 0
+uart0_getchar <= USED 0
+uart0_getchar_present <= USED 0
+uart_getchar <= USED 0
+uart_getchar_present <= USED 0
+;FILE uif.o
+__asm___5_uif_c_HELPMSG____REV16 <= USED 0
+__asm___5_uif_c_HELPMSG____REVSH <= USED 0
+get_line <= USED 0
+get_value <= USED 0
+make_argv <= USED 0
+run_cmd <= USED 0
+uif_cmd_help <= USED 0
+uif_cmd_set <= USED 0
+uif_cmd_show <= USED 0
+;FILE vts_ver2.o
+GPS_COLLECT <= USED 0
+LED_init <= USED 0
+LED_state2 <= USED 0
+PORTC_action <= USED 0
+RELAY_init <= USED 0
+SW1_init <= USED 0
+__asm___10_vts_ver2_c_8dde92bb____REV16 <= USED 0
+__asm___10_vts_ver2_c_8dde92bb____REVSH <= USED 0
+accel_init <= USED 0
+accel_read <= USED 0
+angle_calculation <= USED 0
+auto_caliberate_accelerometer <= USED 0
+bat_cind <= USED 0
+cal_systick_read_overhead <= USED 0
+clear2 <= USED 0
+count_char <= USED 0
+delay2 <= USED 0
+detect_fall_detection <= USED 0
+detect_motion <= USED 0
+get_gpsdata <= USED 0
+get_imei <= USED 0
+gsm_gps_sleep <= USED 0
+hal_dev_mma8451_init <= USED 0
+hal_dev_mma8451_read_reg <= USED 0
+hal_dev_mma8451_write_reg <= USED 0
+hal_i2c_deinit <= USED 0
+hal_i2c_init <= USED 0
+i2c_get_ack <= USED 0
+i2c_give_ack <= USED 0
+i2c_give_nack <= USED 0
+i2c_read_byte <= USED 0
+i2c_repeated_start <= USED 0
+i2c_set_master_mode <= USED 0
+i2c_set_rx_mode <= USED 0
+i2c_set_slave_mode <= USED 0
+i2c_set_tx_mode <= USED 0
+i2c_start <= USED 0
+i2c_stop <= USED 0
+i2c_wait <= USED 0
+i2c_write_byte <= USED 0
+log_it <= USED 0
+loop <= USED 0
+msg_sim800 <= USED 0
+myAtoi <= USED 0
+mystrstr <= USED 0
+parse <= USED 0
+parse_g <= USED 0
+parse_gsm <= USED 0
+process0 <= USED 0
+read <= USED 0
+read2 <= USED 0
+read_interval <= USED 0
+read_ip_port <= USED 0
+remove_all_chars <= USED 0
+save_interval <= USED 0
+save_ip_port <= USED 0
+send_GPS <= USED 0
+send_MSG <= USED 0
+send_chunk <= USED 0
+send_message <= USED 0
+send_modem2 <= USED 0
+send_tcp <= USED 0
+stof <= USED 0
+systick_disable <= USED 0
+tcp_initialization <= USED 0
+tcp_initialization2 <= USED 0

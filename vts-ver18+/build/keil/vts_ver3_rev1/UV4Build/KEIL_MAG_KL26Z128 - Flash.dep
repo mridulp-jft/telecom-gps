@@ -1,0 +1,37 @@
+Dependencies for Project 'KEIL_MAG', Target 'KL26Z128 - Flash': (DO NOT MODIFY !)
+F (..\..\..\src\projects\KEIL_MAG\vts_ver2.c)(0x58EDF428)(-c --cpu Cortex-M0+ -g -O0 --apcs=interwork --asm --interleave --asm_dir ".\\UV4Build\\" -I ..\..\..\src\projects\KEIL_MAG -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\CMSIS\Source -I ..\..\..\src\cpu\CMSIS\Source\arm -I ..\..\..\..\inc -I ..\vts_ver3_rev1-I E:\bitbuck\gps-trackr\Software\vts-ver18+\build\keil\vts_ver3_rev1\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL26Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\vts_ver2.o --list_dir ".\\UV4Build\\" --list --omf_browse .\uv4build\vts_ver2.crf --depend .\uv4build\vts_ver2.d)
+I (..\..\..\src\common\common.h)(0x5731745C)
+I (..\..\..\src\platforms\freedom.h)(0x58EB653F)
+I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
+I (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x58EC8DD0)
+F (..\..\..\src\common\asin.c)(0x57B2B6F6)()
+F (..\..\..\src\common\median.c)(0x57B2B56A)()
+F (..\..\..\src\common\sqrt16.c)(0x5731745C)()
+F (..\..\..\src\common\uif.c)(0x5731745C)()
+F (..\..\..\src\common\alloc.c)(0x5731745C)()
+F (..\..\..\src\common\assert.c)(0x5731745C)()
+F (..\..\..\src\common\io.c)(0x5731745C)()
+F (..\..\..\src\common\memtest.c)(0x5731745C)()
+F (..\..\..\src\common\queue.c)(0x5731745C)()
+F (..\..\..\src\common\stdlib.c)(0x580474BE)()
+F (..\..\..\src\common\common.h)(0x5731745C)()
+F (..\..\..\src\cpu\nmi_isr_handler.c)(0x57BE8952)()
+F (..\..\..\src\cpu\start.c)(0x57BE7D7E)()
+F (..\..\..\src\cpu\sysinit.c)(0x57BE7E82)()
+F (..\..\..\src\cpu\CMSIS\Source\system_MKL26Z4.c)(0x57C41424)()
+F (..\..\..\src\cpu\CMSIS\Source\arm\startup_MKL26Z4.s)(0x58EC91DC)()
+F (..\..\..\src\drivers\cmp\cmp.c)(0x5731745C)()
+F (..\..\..\src\drivers\llwu\llwu.c)(0x5731745C)()
+F (..\..\..\src\drivers\lptmr\lptmr.c)(0x57A9C996)()
+F (..\..\..\src\drivers\mcg\mcg.c)(0x5731745C)()
+F (..\..\..\src\drivers\pmc\pmc.c)(0x5731745C)()
+F (..\..\..\src\drivers\rcm\rcm.c)(0x57A9BE28)()
+F (..\..\..\src\drivers\rtc\rtc.c)(0x5731745C)()
+F (..\..\..\src\drivers\smc\smc.c)(0x5731745C)()
+F (..\..\..\src\drivers\uart\uart.c)(0x58ECA6B4)()
+F (..\..\..\src\drivers\uart\Serial.c)(0x5731745C)()
+F (..\..\..\src\drivers\uart\Retarget.c)(0x5731745C)()
+F (..\..\..\src\platforms\tower.h)(0x5731745C)()
+F (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MKL26Z4.h)(0x58EC8DD2)()
+F (..\..\..\src\cpu\headers\CMSIS\MKL26Z4\Include\MemMapPtr_KL26Z4.h)(0x5731745C)()
+F (..\..\..\src\platforms\freedom.h)(0x58EB6540)()

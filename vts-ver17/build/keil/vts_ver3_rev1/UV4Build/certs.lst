@@ -1,0 +1,4032 @@
+L 1 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\library\certs.c"
+N/*
+N *  X.509 test certificates
+N *
+N *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+N *  SPDX-License-Identifier: Apache-2.0
+N *
+N *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+N *  not use this file except in compliance with the License.
+N *  You may obtain a copy of the License at
+N *
+N *  http://www.apache.org/licenses/LICENSE-2.0
+N *
+N *  Unless required by applicable law or agreed to in writing, software
+N *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+N *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+N *  See the License for the specific language governing permissions and
+N *  limitations under the License.
+N *
+N *  This file is part of mbed TLS (https://tls.mbed.org)
+N */
+N
+N#if !defined(MBEDTLS_CONFIG_FILE)
+X#if !0L
+N#include "mbedtls/config.h"
+L 1 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls/config.h" 1
+N/**
+N * \file config.h
+N *
+N * \brief Configuration options (set of defines)
+N *
+N *  This set of compile-time options may be used to enable
+N *  or disable features selectively, and reduce the global
+N *  memory footprint.
+N *
+N *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+N *  SPDX-License-Identifier: Apache-2.0
+N *
+N *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+N *  not use this file except in compliance with the License.
+N *  You may obtain a copy of the License at
+N *
+N *  http://www.apache.org/licenses/LICENSE-2.0
+N *
+N *  Unless required by applicable law or agreed to in writing, software
+N *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+N *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+N *  See the License for the specific language governing permissions and
+N *  limitations under the License.
+N *
+N *  This file is part of mbed TLS (https://tls.mbed.org)
+N */
+N
+N#ifdef _RTE_
+N#include "mbedTLS_config.h"
+L 1 ".\RTE\Security\mbedTLS_config.h" 1
+N/*
+N *  Configuration template
+N *
+N *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+N *  SPDX-License-Identifier: Apache-2.0
+N *
+N *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+N *  not use this file except in compliance with the License.
+N *  You may obtain a copy of the License at
+N *
+N *  http://www.apache.org/licenses/LICENSE-2.0
+N *
+N *  Unless required by applicable law or agreed to in writing, software
+N *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+N *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+N *  See the License for the specific language governing permissions and
+N *  limitations under the License.
+N *
+N *  This file is part of mbed TLS (https://tls.mbed.org)
+N */
+N
+N/*
+N * This set of compile-time options may be used to enable
+N * or disable features selectively, and reduce the global
+N * memory footprint.
+N */
+N#ifndef MBEDTLS_CONFIG_H
+N#define MBEDTLS_CONFIG_H
+N
+N/* System support */
+N//#define MBEDTLS_HAVE_ASM
+N//#define MBEDTLS_HAVE_TIME
+N//#define MBEDTLS_HAVE_TIME_DATE
+N//#define MBEDTLS_PLATFORM_MEMORY
+N//#define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+N
+N/* mbed TLS feature support */
+N//#define MBEDTLS_AES_ROM_TABLES
+N//#define MBEDTLS_CAMELLIA_SMALL_MEMORY
+N//#define MBEDTLS_CIPHER_MODE_CBC
+N//#define MBEDTLS_CIPHER_MODE_CFB
+N//#define MBEDTLS_CIPHER_MODE_CTR
+N//#define MBEDTLS_CIPHER_PADDING_PKCS7
+N//#define MBEDTLS_CIPHER_PADDING_ONE_AND_ZEROS
+N//#define MBEDTLS_CIPHER_PADDING_ZEROS_AND_LEN
+N//#define MBEDTLS_CIPHER_PADDING_ZEROS
+N//#define MBEDTLS_REMOVE_ARC4_CIPHERSUITES
+N//#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+N//#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+N//#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+N//#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+N//#define MBEDTLS_ECP_DP_BP512R1_ENABLED
+N//#define MBEDTLS_ECP_DP_CURVE25519_ENABLED
+N//#define MBEDTLS_ECP_NIST_OPTIM
+N//#define MBEDTLS_ECDSA_DETERMINISTIC
+N//#define MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_RSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
+N//#define MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED
+N//#define MBEDTLS_PK_PARSE_EC_EXTENDED
+N//#define MBEDTLS_ERROR_STRERROR_DUMMY
+N//#define MBEDTLS_GENPRIME
+N//#define MBEDTLS_FS_IO
+N//#define MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES
+N//#define MBEDTLS_NO_PLATFORM_ENTROPY
+N//#define MBEDTLS_ENTROPY_FORCE_SHA256
+N//#define MBEDTLS_MEMORY_DEBUG
+N//#define MBEDTLS_MEMORY_BACKTRACE
+N//#define MBEDTLS_PK_RSA_ALT_SUPPORT
+N//#define MBEDTLS_PKCS1_V15
+N//#define MBEDTLS_PKCS1_V21
+N//#define MBEDTLS_RSA_NO_CRT
+N//#define MBEDTLS_SELF_TEST
+N//#define MBEDTLS_SHA256_SMALLER
+N//#define MBEDTLS_SSL_AEAD_RANDOM_IV
+N//#define MBEDTLS_SSL_ALL_ALERT_MESSAGES
+N//#define MBEDTLS_SSL_DEBUG_ALL
+N//#define MBEDTLS_SSL_ENCRYPT_THEN_MAC
+N//#define MBEDTLS_SSL_EXTENDED_MASTER_SECRET
+N//#define MBEDTLS_SSL_FALLBACK_SCSV
+N//#define MBEDTLS_SSL_HW_RECORD_ACCEL
+N//#define MBEDTLS_SSL_CBC_RECORD_SPLITTING
+N//#define MBEDTLS_SSL_RENEGOTIATION
+N//#define MBEDTLS_SSL_SRV_SUPPORT_SSLV2_CLIENT_HELLO
+N//#define MBEDTLS_SSL_SRV_RESPECT_CLIENT_PREFERENCE
+N//#define MBEDTLS_SSL_MAX_FRAGMENT_LENGTH
+N//#define MBEDTLS_SSL_PROTO_SSL3
+N//#define MBEDTLS_SSL_PROTO_TLS1
+N//#define MBEDTLS_SSL_PROTO_TLS1_1
+N//#define MBEDTLS_SSL_PROTO_TLS1_2
+N//#define MBEDTLS_SSL_PROTO_DTLS
+N//#define MBEDTLS_SSL_ALPN
+N//#define MBEDTLS_SSL_DTLS_ANTI_REPLAY
+N//#define MBEDTLS_SSL_DTLS_HELLO_VERIFY
+N//#define MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE
+N//#define MBEDTLS_SSL_DTLS_BADMAC_LIMIT
+N//#define MBEDTLS_SSL_SESSION_TICKETS
+N//#define MBEDTLS_SSL_EXPORT_KEYS
+N//#define MBEDTLS_SSL_SERVER_NAME_INDICATION
+N//#define MBEDTLS_SSL_TRUNCATED_HMAC
+N//#define MBEDTLS_VERSION_FEATURES
+N//#define MBEDTLS_X509_ALLOW_EXTENSIONS_NON_V3
+N//#define MBEDTLS_X509_ALLOW_UNSUPPORTED_CRITICAL_EXTENSION
+N//#define MBEDTLS_X509_CHECK_KEY_USAGE
+N//#define MBEDTLS_X509_CHECK_EXTENDED_KEY_USAGE
+N//#define MBEDTLS_X509_RSASSA_PSS_SUPPORT
+N
+N/* mbed TLS modules */
+N//#define MBEDTLS_AES_C
+N//#define MBEDTLS_ARC4_C
+N//#define MBEDTLS_ASN1_PARSE_C
+N//#define MBEDTLS_ASN1_WRITE_C
+N//#define MBEDTLS_BASE64_C
+N//#define MBEDTLS_BIGNUM_C
+N//#define MBEDTLS_BLOWFISH_C
+N//#define MBEDTLS_CAMELLIA_C
+N//#define MBEDTLS_CCM_C
+N//#define MBEDTLS_CERTS_C
+N//#define MBEDTLS_CIPHER_C
+N//#define MBEDTLS_CTR_DRBG_C
+N//#define MBEDTLS_DEBUG_C
+N//#define MBEDTLS_DES_C
+N//#define MBEDTLS_DHM_C
+N//#define MBEDTLS_ECDH_C
+N//#define MBEDTLS_ECDSA_C
+N//#define MBEDTLS_ECJPAKE_C
+N//#define MBEDTLS_ECP_C
+N//#define MBEDTLS_ENTROPY_C
+N//#define MBEDTLS_ERROR_C
+N//#define MBEDTLS_GCM_C
+N//#define MBEDTLS_HAVEGE_C
+N//#define MBEDTLS_HMAC_DRBG_C
+N//#define MBEDTLS_MD_C
+N//#define MBEDTLS_MD2_C
+N//#define MBEDTLS_MD4_C
+N//#define MBEDTLS_MD5_C
+N//#define MBEDTLS_MEMORY_BUFFER_ALLOC_C
+N//#define MBEDTLS_NET_C
+N//#define MBEDTLS_OID_C
+N//#define MBEDTLS_PEM_PARSE_C
+N//#define MBEDTLS_PEM_WRITE_C
+N//#define MBEDTLS_PK_C
+N//#define MBEDTLS_PK_PARSE_C
+N//#define MBEDTLS_PK_WRITE_C
+N//#define MBEDTLS_PKCS5_C
+N//#define MBEDTLS_PKCS11_C
+N//#define MBEDTLS_PKCS12_C
+N//#define MBEDTLS_PLATFORM_C
+N//#define MBEDTLS_RIPEMD160_C
+N//#define MBEDTLS_RSA_C
+N//#define MBEDTLS_SHA1_C
+N//#define MBEDTLS_SHA256_C
+N//#define MBEDTLS_SHA512_C
+N//#define MBEDTLS_SSL_CACHE_C
+N//#define MBEDTLS_SSL_COOKIE_C
+N//#define MBEDTLS_SSL_TICKET_C
+N//#define MBEDTLS_SSL_CLI_C
+N//#define MBEDTLS_SSL_SRV_C
+N//#define MBEDTLS_SSL_TLS_C
+N//#define MBEDTLS_THREADING_C
+N//#define MBEDTLS_TIMING_C
+N//#define MBEDTLS_VERSION_C
+N//#define MBEDTLS_X509_USE_C
+N//#define MBEDTLS_X509_CRT_PARSE_C
+N//#define MBEDTLS_X509_CRL_PARSE_C
+N//#define MBEDTLS_X509_CSR_PARSE_C
+N//#define MBEDTLS_X509_CREATE_C
+N//#define MBEDTLS_X509_CRT_WRITE_C
+N//#define MBEDTLS_X509_CSR_WRITE_C
+N//#define MBEDTLS_XTEA_C
+N
+N#include "check_config.h"
+L 1 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls\check_config.h" 1
+N/**
+N * \file check_config.h
+N *
+N * \brief Consistency checks for configuration options
+N *
+N *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+N *  SPDX-License-Identifier: Apache-2.0
+N *
+N *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+N *  not use this file except in compliance with the License.
+N *  You may obtain a copy of the License at
+N *
+N *  http://www.apache.org/licenses/LICENSE-2.0
+N *
+N *  Unless required by applicable law or agreed to in writing, software
+N *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+N *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+N *  See the License for the specific language governing permissions and
+N *  limitations under the License.
+N *
+N *  This file is part of mbed TLS (https://tls.mbed.org)
+N */
+N
+N/*
+N * It is recommended to include this file from your config.h
+N * in order to catch dependency issues early.
+N */
+N
+N#ifndef MBEDTLS_CHECK_CONFIG_H
+N#define MBEDTLS_CHECK_CONFIG_H
+N
+N/*
+N * We assume CHAR_BIT is 8 in many places. In practice, this is true on our
+N * target platforms, so not an issue, but let's just be extra sure.
+N */
+N#include <limits.h>
+L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h" 1
+N/* limits.h: ANSI 'C' (X3J11 Oct 88) library header, section 2.2.4.2 */
+N/* Copyright (C) Codemist Ltd., 1988                            */
+N/* Copyright 1991-1997 ARM Limited. All rights reserved         */
+N
+N/*
+N * RCS $Revision: 190986 $
+N * Checkin $Date: 2015-02-04 14:26:49 +0000 (Wed, 04 Feb 2015) $
+N * Revising $Author: drodgman $
+N */
+N
+N#ifndef __limits_h
+N#define __limits_h
+N#define __ARMCLIB_VERSION 5060002
+N
+N#define CHAR_BIT 8
+N    /* max number of bits for smallest object that is not a bit-field (byte) */
+N#define SCHAR_MIN (-128)
+N    /* mimimum value for an object of type signed char */
+N#define SCHAR_MAX 127
+N    /* maximum value for an object of type signed char */
+N#define UCHAR_MAX 255
+N    /* maximum value for an object of type unsigned char */
+N#ifdef __FEATURE_SIGNED_CHAR
+S  #define CHAR_MIN (-128)
+S      /* minimum value for an object of type char */
+S  #define CHAR_MAX 127
+S      /* maximum value for an object of type char */
+N#else
+N  #define CHAR_MIN 0
+N      /* minimum value for an object of type char */
+N  #define CHAR_MAX 255
+N      /* maximum value for an object of type char */
+N#endif
+N
+N#if _AEABI_PORTABILITY_LEVEL != 0 && !defined _AEABI_PORTABLE
+X#if _AEABI_PORTABILITY_LEVEL != 0 && !0L
+S  #define _AEABI_PORTABLE
+N#endif
+N
+N#if _AEABI_PORTABILITY_LEVEL != 0 || (!defined _AEABI_PORTABILITY_LEVEL && __DEFAULT_AEABI_PORTABILITY_LEVEL != 0)
+X#if _AEABI_PORTABILITY_LEVEL != 0 || (!0L && __DEFAULT_AEABI_PORTABILITY_LEVEL != 0)
+Sextern const int __aeabi_MB_LEN_MAX;
+S#define MB_LEN_MAX (__aeabi_MB_LEN_MAX)
+N#else
+N#define MB_LEN_MAX 6
+N#endif
+N    /* maximum number of bytes in a multibyte character, */
+N    /* for any supported locale */
+N
+N#define SHRT_MIN  (-0x8000)
+N    /* minimum value for an object of type short int */
+N#define SHRT_MAX  0x7fff
+N    /* maximum value for an object of type short int */
+N#define USHRT_MAX 65535
+N    /* maximum value for an object of type unsigned short int */
+N#define INT_MIN   (~0x7fffffff)  /* -2147483648 and 0x80000000 are unsigned */
+N    /* minimum value for an object of type int */
+N#define INT_MAX   0x7fffffff
+N    /* maximum value for an object of type int */
+N#define UINT_MAX  0xffffffffU
+N    /* maximum value for an object of type unsigned int */
+N#if __sizeof_long == 8
+X#if 4 == 8
+S  #define LONG_MIN  (~0x7fffffffffffffffL)
+N#else
+N  #define LONG_MIN  (~0x7fffffffL)
+N#endif
+N    /* minimum value for an object of type long int */
+N#if __sizeof_long == 8
+X#if 4 == 8
+S  #define LONG_MAX  0x7fffffffffffffffL
+N#else
+N  #define LONG_MAX  0x7fffffffL
+N#endif
+N    /* maximum value for an object of type long int */
+N#if __sizeof_long == 8
+X#if 4 == 8
+S  #define ULONG_MAX 0xffffffffffffffffUL
+N#else
+N  #define ULONG_MAX 0xffffffffUL
+N#endif
+N    /* maximum value for an object of type unsigned long int */
+N#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
+X#if !0L || (1L && 199901L <= 199409L) || (0L && 201103L <= __cplusplus)
+N  #define LLONG_MIN  (~0x7fffffffffffffffLL)
+N      /* minimum value for an object of type long long int */
+N  #define LLONG_MAX    0x7fffffffffffffffLL
+N      /* maximum value for an object of type long long int */
+N  #define ULLONG_MAX   0xffffffffffffffffULL
+N      /* maximum value for an object of type unsigned long int */
+N#endif
+N
+N#endif
+N
+N/* end of limits.h */
+N
+L 37 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls\check_config.h" 2
+N#if CHAR_BIT != 8
+X#if 8 != 8
+S#error "mbed TLS requires a platform with 8-bit chars"
+N#endif
+N
+N#if defined(_WIN32)
+X#if 0L
+S#if !defined(MBEDTLS_PLATFORM_C)
+S#error "MBEDTLS_PLATFORM_C is required on Windows"
+S#endif
+S
+S/* Fix the config here. Not convenient to put an #ifdef _WIN32 in config.h as
+S * it would confuse config.pl. */
+S#if !defined(MBEDTLS_PLATFORM_SNPRINTF_ALT) && \
+S    !defined(MBEDTLS_PLATFORM_SNPRINTF_MACRO)
+X#if !defined(MBEDTLS_PLATFORM_SNPRINTF_ALT) &&     !defined(MBEDTLS_PLATFORM_SNPRINTF_MACRO)
+S#define MBEDTLS_PLATFORM_SNPRINTF_ALT
+S#endif
+N#endif /* _WIN32 */
+N
+N#if defined(TARGET_LIKE_MBED) && \
+N    ( defined(MBEDTLS_NET_C) || defined(MBEDTLS_TIMING_C) )
+X#if 0L &&     ( 0L || 0L )
+S#error "The NET and TIMING modules are not available for mbed OS - please use the network and timing functions provided by mbed OS"
+N#endif
+N
+N#if defined(MBEDTLS_DEPRECATED_WARNING) && \
+N    !defined(__GNUC__) && !defined(__clang__)
+X#if 0L &&     !0L && !0L
+S#error "MBEDTLS_DEPRECATED_WARNING only works with GCC and Clang"
+N#endif
+N
+N#if defined(MBEDTLS_HAVE_TIME_DATE) && !defined(MBEDTLS_HAVE_TIME)
+X#if 0L && !0L
+S#error "MBEDTLS_HAVE_TIME_DATE without MBEDTLS_HAVE_TIME does not make sense"
+N#endif
+N
+N#if defined(MBEDTLS_AESNI_C) && !defined(MBEDTLS_HAVE_ASM)
+X#if 0L && !0L
+S#error "MBEDTLS_AESNI_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_CTR_DRBG_C) && !defined(MBEDTLS_AES_C)
+X#if 0L && !0L
+S#error "MBEDTLS_CTR_DRBG_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_DHM_C) && !defined(MBEDTLS_BIGNUM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_DHM_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECDH_C) && !defined(MBEDTLS_ECP_C)
+X#if 0L && !0L
+S#error "MBEDTLS_ECDH_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECDSA_C) &&            \
+N    ( !defined(MBEDTLS_ECP_C) ||           \
+N      !defined(MBEDTLS_ASN1_PARSE_C) ||    \
+N      !defined(MBEDTLS_ASN1_WRITE_C) )
+X#if 0L &&                ( !0L ||                 !0L ||          !0L )
+S#error "MBEDTLS_ECDSA_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECJPAKE_C) &&           \
+N    ( !defined(MBEDTLS_ECP_C) || !defined(MBEDTLS_MD_C) )
+X#if 0L &&               ( !0L || !0L )
+S#error "MBEDTLS_ECJPAKE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECDSA_DETERMINISTIC) && !defined(MBEDTLS_HMAC_DRBG_C)
+X#if 0L && !0L
+S#error "MBEDTLS_ECDSA_DETERMINISTIC defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ECP_C) && ( !defined(MBEDTLS_BIGNUM_C) || (   \
+N    !defined(MBEDTLS_ECP_DP_SECP192R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP224R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP256R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP384R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP521R1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_BP256R1_ENABLED)   &&                  \
+N    !defined(MBEDTLS_ECP_DP_BP384R1_ENABLED)   &&                  \
+N    !defined(MBEDTLS_ECP_DP_BP512R1_ENABLED)   &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP192K1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP224K1_ENABLED) &&                  \
+N    !defined(MBEDTLS_ECP_DP_SECP256K1_ENABLED) ) )
+X#if 0L && ( !0L || (       !0L &&                      !0L &&                      !0L &&                      !0L &&                      !0L &&                      !0L   &&                      !0L   &&                      !0L   &&                      !0L &&                      !0L &&                      !0L ) )
+S#error "MBEDTLS_ECP_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_ENTROPY_C) && (!defined(MBEDTLS_SHA512_C) &&      \
+N                                    !defined(MBEDTLS_SHA256_C))
+X#if 0L && (!0L &&                                          !0L)
+S#error "MBEDTLS_ENTROPY_C defined, but not all prerequisites"
+N#endif
+N#if defined(MBEDTLS_ENTROPY_C) && defined(MBEDTLS_SHA512_C) &&         \
+N    defined(MBEDTLS_CTR_DRBG_ENTROPY_LEN) && (MBEDTLS_CTR_DRBG_ENTROPY_LEN > 64)
+X#if 0L && 0L &&             0L && (MBEDTLS_CTR_DRBG_ENTROPY_LEN > 64)
+S#error "MBEDTLS_CTR_DRBG_ENTROPY_LEN value too high"
+N#endif
+N#if defined(MBEDTLS_ENTROPY_C) &&                                            \
+N    ( !defined(MBEDTLS_SHA512_C) || defined(MBEDTLS_ENTROPY_FORCE_SHA256) ) \
+N    && defined(MBEDTLS_CTR_DRBG_ENTROPY_LEN) && (MBEDTLS_CTR_DRBG_ENTROPY_LEN > 32)
+X#if 0L &&                                                ( !0L || 0L )     && 0L && (MBEDTLS_CTR_DRBG_ENTROPY_LEN > 32)
+S#error "MBEDTLS_CTR_DRBG_ENTROPY_LEN value too high"
+N#endif
+N#if defined(MBEDTLS_ENTROPY_C) && \
+N    defined(MBEDTLS_ENTROPY_FORCE_SHA256) && !defined(MBEDTLS_SHA256_C)
+X#if 0L &&     0L && !0L
+S#error "MBEDTLS_ENTROPY_FORCE_SHA256 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_GCM_C) && (                                        \
+N        !defined(MBEDTLS_AES_C) && !defined(MBEDTLS_CAMELLIA_C) )
+X#if 0L && (                                                !0L && !0L )
+S#error "MBEDTLS_GCM_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_HAVEGE_C) && !defined(MBEDTLS_TIMING_C)
+X#if 0L && !0L
+S#error "MBEDTLS_HAVEGE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_HMAC_DRBG_C) && !defined(MBEDTLS_MD_C)
+X#if 0L && !0L
+S#error "MBEDTLS_HMAC_DRBG_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED) &&                 \
+N    ( !defined(MBEDTLS_ECDH_C) || !defined(MBEDTLS_X509_CRT_PARSE_C) )
+X#if 0L &&                     ( !0L || !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED) &&                 \
+N    ( !defined(MBEDTLS_ECDH_C) || !defined(MBEDTLS_X509_CRT_PARSE_C) )
+X#if 0L &&                     ( !0L || !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED) && !defined(MBEDTLS_DHM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED) &&                     \
+N    !defined(MBEDTLS_ECDH_C)
+X#if 0L &&                         !0L
+S#error "MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED) &&                   \
+N    ( !defined(MBEDTLS_DHM_C) || !defined(MBEDTLS_RSA_C) ||           \
+N      !defined(MBEDTLS_X509_CRT_PARSE_C) || !defined(MBEDTLS_PKCS1_V15) )
+X#if 0L &&                       ( !0L || !0L ||                 !0L || !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED) &&                 \
+N    ( !defined(MBEDTLS_ECDH_C) || !defined(MBEDTLS_RSA_C) ||          \
+N      !defined(MBEDTLS_X509_CRT_PARSE_C) || !defined(MBEDTLS_PKCS1_V15) )
+X#if 0L &&                     ( !0L || !0L ||                !0L || !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED) &&                 \
+N    ( !defined(MBEDTLS_ECDH_C) || !defined(MBEDTLS_ECDSA_C) ||          \
+N      !defined(MBEDTLS_X509_CRT_PARSE_C) )
+X#if 0L &&                     ( !0L || !0L ||                !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED) &&                   \
+N    ( !defined(MBEDTLS_RSA_C) || !defined(MBEDTLS_X509_CRT_PARSE_C) || \
+N      !defined(MBEDTLS_PKCS1_V15) )
+X#if 0L &&                       ( !0L || !0L ||       !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_RSA_ENABLED) &&                       \
+N    ( !defined(MBEDTLS_RSA_C) || !defined(MBEDTLS_X509_CRT_PARSE_C) || \
+N      !defined(MBEDTLS_PKCS1_V15) )
+X#if 0L &&                           ( !0L || !0L ||       !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_RSA_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED) &&                    \
+N    ( !defined(MBEDTLS_ECJPAKE_C) || !defined(MBEDTLS_SHA256_C) ||      \
+N      !defined(MBEDTLS_ECP_DP_SECP256R1_ENABLED) )
+X#if 0L &&                        ( !0L || !0L ||            !0L )
+S#error "MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_MEMORY_BUFFER_ALLOC_C) &&                          \
+N    ( !defined(MBEDTLS_PLATFORM_C) || !defined(MBEDTLS_PLATFORM_MEMORY) )
+X#if 0L &&                              ( !0L || !0L )
+S#error "MBEDTLS_MEMORY_BUFFER_ALLOC_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PADLOCK_C) && !defined(MBEDTLS_HAVE_ASM)
+X#if 0L && !0L
+S#error "MBEDTLS_PADLOCK_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PEM_PARSE_C) && !defined(MBEDTLS_BASE64_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PEM_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PEM_WRITE_C) && !defined(MBEDTLS_BASE64_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PEM_WRITE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PK_C) && \
+N    ( !defined(MBEDTLS_RSA_C) && !defined(MBEDTLS_ECP_C) )
+X#if 0L &&     ( !0L && !0L )
+S#error "MBEDTLS_PK_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PK_PARSE_C) && !defined(MBEDTLS_PK_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PK_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PK_WRITE_C) && !defined(MBEDTLS_PK_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PK_WRITE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PKCS11_C) && !defined(MBEDTLS_PK_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PKCS11_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_EXIT_ALT) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_EXIT_ALT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_EXIT_MACRO) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_EXIT_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_EXIT_MACRO) &&\
+N    ( defined(MBEDTLS_PLATFORM_STD_EXIT) ||\
+N        defined(MBEDTLS_PLATFORM_EXIT_ALT) )
+X#if 0L &&    ( 0L ||        0L )
+S#error "MBEDTLS_PLATFORM_EXIT_MACRO and MBEDTLS_PLATFORM_STD_EXIT/MBEDTLS_PLATFORM_EXIT_ALT cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FPRINTF_ALT) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_FPRINTF_ALT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FPRINTF_MACRO) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_FPRINTF_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FPRINTF_MACRO) &&\
+N    ( defined(MBEDTLS_PLATFORM_STD_FPRINTF) ||\
+N        defined(MBEDTLS_PLATFORM_FPRINTF_ALT) )
+X#if 0L &&    ( 0L ||        0L )
+S#error "MBEDTLS_PLATFORM_FPRINTF_MACRO and MBEDTLS_PLATFORM_STD_FPRINTF/MBEDTLS_PLATFORM_FPRINTF_ALT cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FREE_MACRO) &&\
+N    ( !defined(MBEDTLS_PLATFORM_C) || !defined(MBEDTLS_PLATFORM_MEMORY) )
+X#if 0L &&    ( !0L || !0L )
+S#error "MBEDTLS_PLATFORM_FREE_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FREE_MACRO) &&\
+N    defined(MBEDTLS_PLATFORM_STD_FREE)
+X#if 0L &&    0L
+S#error "MBEDTLS_PLATFORM_FREE_MACRO and MBEDTLS_PLATFORM_STD_FREE cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_FREE_MACRO) && !defined(MBEDTLS_PLATFORM_CALLOC_MACRO)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_CALLOC_MACRO must be defined if MBEDTLS_PLATFORM_FREE_MACRO is"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_CALLOC_MACRO) &&\
+N    ( !defined(MBEDTLS_PLATFORM_C) || !defined(MBEDTLS_PLATFORM_MEMORY) )
+X#if 0L &&    ( !0L || !0L )
+S#error "MBEDTLS_PLATFORM_CALLOC_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_CALLOC_MACRO) &&\
+N    defined(MBEDTLS_PLATFORM_STD_CALLOC)
+X#if 0L &&    0L
+S#error "MBEDTLS_PLATFORM_CALLOC_MACRO and MBEDTLS_PLATFORM_STD_CALLOC cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_CALLOC_MACRO) && !defined(MBEDTLS_PLATFORM_FREE_MACRO)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_FREE_MACRO must be defined if MBEDTLS_PLATFORM_CALLOC_MACRO is"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_MEMORY) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_MEMORY defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_PRINTF_ALT) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_PRINTF_ALT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_PRINTF_MACRO) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_PRINTF_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_PRINTF_MACRO) &&\
+N    ( defined(MBEDTLS_PLATFORM_STD_PRINTF) ||\
+N        defined(MBEDTLS_PLATFORM_PRINTF_ALT) )
+X#if 0L &&    ( 0L ||        0L )
+S#error "MBEDTLS_PLATFORM_PRINTF_MACRO and MBEDTLS_PLATFORM_STD_PRINTF/MBEDTLS_PLATFORM_PRINTF_ALT cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_SNPRINTF_ALT) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_SNPRINTF_ALT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_SNPRINTF_MACRO) && !defined(MBEDTLS_PLATFORM_C)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_SNPRINTF_MACRO defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_SNPRINTF_MACRO) &&\
+N    ( defined(MBEDTLS_PLATFORM_STD_SNPRINTF) ||\
+N        defined(MBEDTLS_PLATFORM_SNPRINTF_ALT) )
+X#if 0L &&    ( 0L ||        0L )
+S#error "MBEDTLS_PLATFORM_SNPRINTF_MACRO and MBEDTLS_PLATFORM_STD_SNPRINTF/MBEDTLS_PLATFORM_SNPRINTF_ALT cannot be defined simultaneously"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_MEM_HDR) &&\
+N    !defined(MBEDTLS_PLATFORM_NO_STD_FUNCTIONS)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_MEM_HDR defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_CALLOC) && !defined(MBEDTLS_PLATFORM_MEMORY)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_STD_CALLOC defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_CALLOC) && !defined(MBEDTLS_PLATFORM_MEMORY)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_STD_CALLOC defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_FREE) && !defined(MBEDTLS_PLATFORM_MEMORY)
+X#if 0L && !0L
+S#error "MBEDTLS_PLATFORM_STD_FREE defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_EXIT) &&\
+N    !defined(MBEDTLS_PLATFORM_EXIT_ALT)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_EXIT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_FPRINTF) &&\
+N    !defined(MBEDTLS_PLATFORM_FPRINTF_ALT)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_FPRINTF defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_PRINTF) &&\
+N    !defined(MBEDTLS_PLATFORM_PRINTF_ALT)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_PRINTF defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_PLATFORM_STD_SNPRINTF) &&\
+N    !defined(MBEDTLS_PLATFORM_SNPRINTF_ALT)
+X#if 0L &&    !0L
+S#error "MBEDTLS_PLATFORM_STD_SNPRINTF defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_RSA_C) && ( !defined(MBEDTLS_BIGNUM_C) ||         \
+N    !defined(MBEDTLS_OID_C) )
+X#if 0L && ( !0L ||             !0L )
+S#error "MBEDTLS_RSA_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_RSASSA_PSS_SUPPORT) &&                        \
+N    ( !defined(MBEDTLS_RSA_C) || !defined(MBEDTLS_PKCS1_V21) )
+X#if 0L &&                            ( !0L || !0L )
+S#error "MBEDTLS_X509_RSASSA_PSS_SUPPORT defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_SSL3) && ( !defined(MBEDTLS_MD5_C) ||     \
+N    !defined(MBEDTLS_SHA1_C) )
+X#if 0L && ( !0L ||         !0L )
+S#error "MBEDTLS_SSL_PROTO_SSL3 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_TLS1) && ( !defined(MBEDTLS_MD5_C) ||     \
+N    !defined(MBEDTLS_SHA1_C) )
+X#if 0L && ( !0L ||         !0L )
+S#error "MBEDTLS_SSL_PROTO_TLS1 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_TLS1_1) && ( !defined(MBEDTLS_MD5_C) ||     \
+N    !defined(MBEDTLS_SHA1_C) )
+X#if 0L && ( !0L ||         !0L )
+S#error "MBEDTLS_SSL_PROTO_TLS1_1 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_TLS1_2) && ( !defined(MBEDTLS_SHA1_C) &&     \
+N    !defined(MBEDTLS_SHA256_C) && !defined(MBEDTLS_SHA512_C) )
+X#if 0L && ( !0L &&         !0L && !0L )
+S#error "MBEDTLS_SSL_PROTO_TLS1_2 defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_PROTO_DTLS)     && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_1)  && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_2)
+X#if 0L     &&     !0L  &&     !0L
+S#error "MBEDTLS_SSL_PROTO_DTLS defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_CLI_C) && !defined(MBEDTLS_SSL_TLS_C)
+X#if 0L && !0L
+S#error "MBEDTLS_SSL_CLI_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && ( !defined(MBEDTLS_CIPHER_C) ||     \
+N    !defined(MBEDTLS_MD_C) )
+X#if 0L && ( !0L ||         !0L )
+S#error "MBEDTLS_SSL_TLS_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_SRV_C) && !defined(MBEDTLS_SSL_TLS_C)
+X#if 0L && !0L
+S#error "MBEDTLS_SSL_SRV_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && (!defined(MBEDTLS_SSL_PROTO_SSL3) && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1) && !defined(MBEDTLS_SSL_PROTO_TLS1_1) && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_2))
+X#if 0L && (!0L &&     !0L && !0L &&     !0L)
+S#error "MBEDTLS_SSL_TLS_C defined, but no protocols are active"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && (defined(MBEDTLS_SSL_PROTO_SSL3) && \
+N    defined(MBEDTLS_SSL_PROTO_TLS1_1) && !defined(MBEDTLS_SSL_PROTO_TLS1))
+X#if 0L && (0L &&     0L && !0L)
+S#error "Illegal protocol selection"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && (defined(MBEDTLS_SSL_PROTO_TLS1) && \
+N    defined(MBEDTLS_SSL_PROTO_TLS1_2) && !defined(MBEDTLS_SSL_PROTO_TLS1_1))
+X#if 0L && (0L &&     0L && !0L)
+S#error "Illegal protocol selection"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TLS_C) && (defined(MBEDTLS_SSL_PROTO_SSL3) && \
+N    defined(MBEDTLS_SSL_PROTO_TLS1_2) && (!defined(MBEDTLS_SSL_PROTO_TLS1) || \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_1)))
+X#if 0L && (0L &&     0L && (!0L ||     !0L))
+S#error "Illegal protocol selection"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_DTLS_HELLO_VERIFY) && !defined(MBEDTLS_SSL_PROTO_DTLS)
+X#if 0L && !0L
+S#error "MBEDTLS_SSL_DTLS_HELLO_VERIFY  defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE) && \
+N    !defined(MBEDTLS_SSL_DTLS_HELLO_VERIFY)
+X#if 0L &&     !0L
+S#error "MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE  defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_DTLS_ANTI_REPLAY) &&                              \
+N    ( !defined(MBEDTLS_SSL_TLS_C) || !defined(MBEDTLS_SSL_PROTO_DTLS) )
+X#if 0L &&                                  ( !0L || !0L )
+S#error "MBEDTLS_SSL_DTLS_ANTI_REPLAY  defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_DTLS_BADMAC_LIMIT) &&                              \
+N    ( !defined(MBEDTLS_SSL_TLS_C) || !defined(MBEDTLS_SSL_PROTO_DTLS) )
+X#if 0L &&                                  ( !0L || !0L )
+S#error "MBEDTLS_SSL_DTLS_BADMAC_LIMIT  defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_ENCRYPT_THEN_MAC) &&   \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1)   &&      \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_1) &&      \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_2)
+X#if 0L &&       !0L   &&          !0L &&          !0L
+S#error "MBEDTLS_SSL_ENCRYPT_THEN_MAC defined, but not all prerequsites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_EXTENDED_MASTER_SECRET) && \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1)   &&          \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_1) &&          \
+N    !defined(MBEDTLS_SSL_PROTO_TLS1_2)
+X#if 0L &&     !0L   &&              !0L &&              !0L
+S#error "MBEDTLS_SSL_EXTENDED_MASTER_SECRET defined, but not all prerequsites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_TICKET_C) && !defined(MBEDTLS_CIPHER_C)
+X#if 0L && !0L
+S#error "MBEDTLS_SSL_TICKET_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_CBC_RECORD_SPLITTING) && \
+N    !defined(MBEDTLS_SSL_PROTO_SSL3) && !defined(MBEDTLS_SSL_PROTO_TLS1)
+X#if 0L &&     !0L && !0L
+S#error "MBEDTLS_SSL_CBC_RECORD_SPLITTING defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_SSL_SERVER_NAME_INDICATION) && \
+N        !defined(MBEDTLS_X509_CRT_PARSE_C)
+X#if 0L &&         !0L
+S#error "MBEDTLS_SSL_SERVER_NAME_INDICATION defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_THREADING_PTHREAD)
+X#if 0L
+S#if !defined(MBEDTLS_THREADING_C) || defined(MBEDTLS_THREADING_IMPL)
+S#error "MBEDTLS_THREADING_PTHREAD defined, but not all prerequisites"
+S#endif
+S#define MBEDTLS_THREADING_IMPL
+N#endif
+N
+N#if defined(MBEDTLS_THREADING_ALT)
+X#if 0L
+S#if !defined(MBEDTLS_THREADING_C) || defined(MBEDTLS_THREADING_IMPL)
+S#error "MBEDTLS_THREADING_ALT defined, but not all prerequisites"
+S#endif
+S#define MBEDTLS_THREADING_IMPL
+N#endif
+N
+N#if defined(MBEDTLS_THREADING_C) && !defined(MBEDTLS_THREADING_IMPL)
+X#if 0L && !0L
+S#error "MBEDTLS_THREADING_C defined, single threading implementation required"
+N#endif
+N#undef MBEDTLS_THREADING_IMPL
+N
+N#if defined(MBEDTLS_VERSION_FEATURES) && !defined(MBEDTLS_VERSION_C)
+X#if 0L && !0L
+S#error "MBEDTLS_VERSION_FEATURES defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_USE_C) && ( !defined(MBEDTLS_BIGNUM_C) ||  \
+N    !defined(MBEDTLS_OID_C) || !defined(MBEDTLS_ASN1_PARSE_C) ||      \
+N    !defined(MBEDTLS_PK_PARSE_C) )
+X#if 0L && ( !0L ||      !0L || !0L ||          !0L )
+S#error "MBEDTLS_X509_USE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CREATE_C) && ( !defined(MBEDTLS_BIGNUM_C) ||  \
+N    !defined(MBEDTLS_OID_C) || !defined(MBEDTLS_ASN1_WRITE_C) ||       \
+N    !defined(MBEDTLS_PK_WRITE_C) )
+X#if 0L && ( !0L ||      !0L || !0L ||           !0L )
+S#error "MBEDTLS_X509_CREATE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CRT_PARSE_C) && ( !defined(MBEDTLS_X509_USE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CRT_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CRL_PARSE_C) && ( !defined(MBEDTLS_X509_USE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CRL_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CSR_PARSE_C) && ( !defined(MBEDTLS_X509_USE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CSR_PARSE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CRT_WRITE_C) && ( !defined(MBEDTLS_X509_CREATE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CRT_WRITE_C defined, but not all prerequisites"
+N#endif
+N
+N#if defined(MBEDTLS_X509_CSR_WRITE_C) && ( !defined(MBEDTLS_X509_CREATE_C) )
+X#if 0L && ( !0L )
+S#error "MBEDTLS_X509_CSR_WRITE_C defined, but not all prerequisites"
+N#endif
+N
+N/*
+N * Avoid warning from -pedantic. This is a convenient place for this
+N * workaround since this is included by every single file before the
+N * #if defined(MBEDTLS_xxx_C) that results in emtpy translation units.
+N */
+Ntypedef int mbedtls_iso_c_forbids_empty_translation_units;
+N
+N#endif /* MBEDTLS_CHECK_CONFIG_H */
+L 186 ".\RTE\Security\mbedTLS_config.h" 2
+N
+N#endif /* MBEDTLS_CONFIG_H */
+L 30 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls/config.h" 2
+N#endif
+N
+N#ifndef MBEDTLS_CONFIG_H
+S#define MBEDTLS_CONFIG_H
+S
+S#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_DEPRECATE)
+S#define _CRT_SECURE_NO_DEPRECATE 1
+S#endif
+S
+S/**
+S * \name SECTION: System support
+S *
+S * This section sets system specific settings.
+S * \{
+S */
+S
+S/**
+S * \def MBEDTLS_HAVE_ASM
+S *
+S * The compiler has support for asm().
+S *
+S * Requires support for asm() in compiler.
+S *
+S * Used in:
+S *      library/timing.c
+S *      library/padlock.c
+S *      include/mbedtls/bn_mul.h
+S *
+S * Comment to disable the use of assembly code.
+S */
+S#define MBEDTLS_HAVE_ASM
+S
+S/**
+S * \def MBEDTLS_HAVE_SSE2
+S *
+S * CPU supports SSE2 instruction set.
+S *
+S * Uncomment if the CPU supports SSE2 (IA-32 specific).
+S */
+S//#define MBEDTLS_HAVE_SSE2
+S
+S/**
+S * \def MBEDTLS_HAVE_TIME
+S *
+S * System has time.h and time().
+S * The time does not need to be correct, only time differences are used,
+S * by contrast with MBEDTLS_HAVE_TIME_DATE
+S *
+S * Comment if your system does not support time functions
+S */
+S#define MBEDTLS_HAVE_TIME
+S
+S/**
+S * \def MBEDTLS_HAVE_TIME_DATE
+S *
+S * System has time.h and time(), gmtime() and the clock is correct.
+S * The time needs to be correct (not necesarily very accurate, but at least
+S * the date should be correct). This is used to verify the validity period of
+S * X.509 certificates.
+S *
+S * Comment if your system does not have a correct clock.
+S */
+S#define MBEDTLS_HAVE_TIME_DATE
+S
+S/**
+S * \def MBEDTLS_PLATFORM_MEMORY
+S *
+S * Enable the memory allocation layer.
+S *
+S * By default mbed TLS uses the system-provided calloc() and free().
+S * This allows different allocators (self-implemented or provided) to be
+S * provided to the platform abstraction layer.
+S *
+S * Enabling MBEDTLS_PLATFORM_MEMORY without the
+S * MBEDTLS_PLATFORM_{FREE,CALLOC}_MACROs will provide
+S * "mbedtls_platform_set_calloc_free()" allowing you to set an alternative calloc() and
+S * free() function pointer at runtime.
+S *
+S * Enabling MBEDTLS_PLATFORM_MEMORY and specifying
+S * MBEDTLS_PLATFORM_{CALLOC,FREE}_MACROs will allow you to specify the
+S * alternate function at compile time.
+S *
+S * Requires: MBEDTLS_PLATFORM_C
+S *
+S * Enable this layer to allow use of alternative memory allocators.
+S */
+S//#define MBEDTLS_PLATFORM_MEMORY
+S
+S/**
+S * \def MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+S *
+S * Do not assign standard functions in the platform layer (e.g. calloc() to
+S * MBEDTLS_PLATFORM_STD_CALLOC and printf() to MBEDTLS_PLATFORM_STD_PRINTF)
+S *
+S * This makes sure there are no linking errors on platforms that do not support
+S * these functions. You will HAVE to provide alternatives, either at runtime
+S * via the platform_set_xxx() functions or at compile time by setting
+S * the MBEDTLS_PLATFORM_STD_XXX defines, or enabling a
+S * MBEDTLS_PLATFORM_XXX_MACRO.
+S *
+S * Requires: MBEDTLS_PLATFORM_C
+S *
+S * Uncomment to prevent default assignment of standard functions in the
+S * platform layer.
+S */
+S//#define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+S
+S/**
+S * \def MBEDTLS_PLATFORM_EXIT_ALT
+S *
+S * MBEDTLS_PLATFORM_XXX_ALT: Uncomment a macro to let mbed TLS support the
+S * function in the platform abstraction layer.
+S *
+S * Example: In case you uncomment MBEDTLS_PLATFORM_PRINTF_ALT, mbed TLS will
+S * provide a function "mbedtls_platform_set_printf()" that allows you to set an
+S * alternative printf function pointer.
+S *
+S * All these define require MBEDTLS_PLATFORM_C to be defined!
+S *
+S * \note MBEDTLS_PLATFORM_SNPRINTF_ALT is required on Windows;
+S * it will be enabled automatically by check_config.h
+S *
+S * \warning MBEDTLS_PLATFORM_XXX_ALT cannot be defined at the same time as
+S * MBEDTLS_PLATFORM_XXX_MACRO!
+S *
+S * Uncomment a macro to enable alternate implementation of specific base
+S * platform function
+S */
+S//#define MBEDTLS_PLATFORM_EXIT_ALT
+S//#define MBEDTLS_PLATFORM_FPRINTF_ALT
+S//#define MBEDTLS_PLATFORM_PRINTF_ALT
+S//#define MBEDTLS_PLATFORM_SNPRINTF_ALT
+S
+S/**
+S * \def MBEDTLS_DEPRECATED_WARNING
+S *
+S * Mark deprecated functions so that they generate a warning if used.
+S * Functions deprecated in one version will usually be removed in the next
+S * version. You can enable this to help you prepare the transition to a new
+S * major version by making sure your code is not using these functions.
+S *
+S * This only works with GCC and Clang. With other compilers, you may want to
+S * use MBEDTLS_DEPRECATED_REMOVED
+S *
+S * Uncomment to get warnings on using deprecated functions.
+S */
+S//#define MBEDTLS_DEPRECATED_WARNING
+S
+S/**
+S * \def MBEDTLS_DEPRECATED_REMOVED
+S *
+S * Remove deprecated functions so that they generate an error if used.
+S * Functions deprecated in one version will usually be removed in the next
+S * version. You can enable this to help you prepare the transition to a new
+S * major version by making sure your code is not using these functions.
+S *
+S * Uncomment to get errors on using deprecated functions.
+S */
+S//#define MBEDTLS_DEPRECATED_REMOVED
+S
+S/* \} name SECTION: System support */
+S
+S/**
+S * \name SECTION: mbed TLS feature support
+S *
+S * This section sets support for features that are or are not needed
+S * within the modules that are enabled.
+S * \{
+S */
+S
+S/**
+S * \def MBEDTLS_TIMING_ALT
+S *
+S * Uncomment to provide your own alternate implementation for mbedtls_timing_hardclock(),
+S * mbedtls_timing_get_timer(), mbedtls_set_alarm(), mbedtls_set/get_delay()
+S *
+S * Only works if you have MBEDTLS_TIMING_C enabled.
+S *
+S * You will need to provide a header "timing_alt.h" and an implementation at
+S * compile time.
+S */
+S//#define MBEDTLS_TIMING_ALT
+S
+S/**
+S * \def MBEDTLS_AES_ALT
+S *
+S * MBEDTLS__MODULE_NAME__ALT: Uncomment a macro to let mbed TLS use your
+S * alternate core implementation of a symmetric crypto or hash module (e.g.
+S * platform specific assembly optimized implementations). Keep in mind that
+S * the function prototypes should remain the same.
+S *
+S * This replaces the whole module. If you only want to replace one of the
+S * functions, use one of the MBEDTLS__FUNCTION_NAME__ALT flags.
+S *
+S * Example: In case you uncomment MBEDTLS_AES_ALT, mbed TLS will no longer
+S * provide the "struct mbedtls_aes_context" definition and omit the base function
+S * declarations and implementations. "aes_alt.h" will be included from
+S * "aes.h" to include the new function definitions.
+S *
+S * Uncomment a macro to enable alternate implementation of the corresponding
+S * module.
+S */
+S//#define MBEDTLS_AES_ALT
+S//#define MBEDTLS_ARC4_ALT
+S//#define MBEDTLS_BLOWFISH_ALT
+S//#define MBEDTLS_CAMELLIA_ALT
+S//#define MBEDTLS_DES_ALT
+S//#define MBEDTLS_XTEA_ALT
+S//#define MBEDTLS_MD2_ALT
+S//#define MBEDTLS_MD4_ALT
+S//#define MBEDTLS_MD5_ALT
+S//#define MBEDTLS_RIPEMD160_ALT
+S//#define MBEDTLS_SHA1_ALT
+S//#define MBEDTLS_SHA256_ALT
+S//#define MBEDTLS_SHA512_ALT
+S
+S/**
+S * \def MBEDTLS_MD2_PROCESS_ALT
+S *
+S * MBEDTLS__FUNCTION_NAME__ALT: Uncomment a macro to let mbed TLS use you
+S * alternate core implementation of symmetric crypto or hash function. Keep in
+S * mind that function prototypes should remain the same.
+S *
+S * This replaces only one function. The header file from mbed TLS is still
+S * used, in contrast to the MBEDTLS__MODULE_NAME__ALT flags.
+S *
+S * Example: In case you uncomment MBEDTLS_SHA256_PROCESS_ALT, mbed TLS will
+S * no longer provide the mbedtls_sha1_process() function, but it will still provide
+S * the other function (using your mbedtls_sha1_process() function) and the definition
+S * of mbedtls_sha1_context, so your implementation of mbedtls_sha1_process must be compatible
+S * with this definition.
+S *
+S * Note: if you use the AES_xxx_ALT macros, then is is recommended to also set
+S * MBEDTLS_AES_ROM_TABLES in order to help the linker garbage-collect the AES
+S * tables.
+S *
+S * Uncomment a macro to enable alternate implementation of the corresponding
+S * function.
+S */
+S//#define MBEDTLS_MD2_PROCESS_ALT
+S//#define MBEDTLS_MD4_PROCESS_ALT
+S//#define MBEDTLS_MD5_PROCESS_ALT
+S//#define MBEDTLS_RIPEMD160_PROCESS_ALT
+S//#define MBEDTLS_SHA1_PROCESS_ALT
+S//#define MBEDTLS_SHA256_PROCESS_ALT
+S//#define MBEDTLS_SHA512_PROCESS_ALT
+S//#define MBEDTLS_DES_SETKEY_ALT
+S//#define MBEDTLS_DES_CRYPT_ECB_ALT
+S//#define MBEDTLS_DES3_CRYPT_ECB_ALT
+S//#define MBEDTLS_AES_SETKEY_ENC_ALT
+S//#define MBEDTLS_AES_SETKEY_DEC_ALT
+S//#define MBEDTLS_AES_ENCRYPT_ALT
+S//#define MBEDTLS_AES_DECRYPT_ALT
+S
+S/**
+S * \def MBEDTLS_ENTROPY_HARDWARE_ALT
+S *
+S * Uncomment this macro to let mbed TLS use your own implementation of a
+S * hardware entropy collector.
+S *
+S * Your function must be called \c mbedtls_hardware_poll(), have the same
+S * prototype as declared in entropy_poll.h, and accept NULL as first argument.
+S *
+S * Uncomment to use your own hardware entropy collector.
+S */
+S//#define MBEDTLS_ENTROPY_HARDWARE_ALT
+S
+S/**
+S * \def MBEDTLS_AES_ROM_TABLES
+S *
+S * Store the AES tables in ROM.
+S *
+S * Uncomment this macro to store the AES tables in ROM.
+S */
+S//#define MBEDTLS_AES_ROM_TABLES
+S
+S/**
+S * \def MBEDTLS_CAMELLIA_SMALL_MEMORY
+S *
+S * Use less ROM for the Camellia implementation (saves about 768 bytes).
+S *
+S * Uncomment this macro to use less memory for Camellia.
+S */
+S//#define MBEDTLS_CAMELLIA_SMALL_MEMORY
+S
+S/**
+S * \def MBEDTLS_CIPHER_MODE_CBC
+S *
+S * Enable Cipher Block Chaining mode (CBC) for symmetric ciphers.
+S */
+S#define MBEDTLS_CIPHER_MODE_CBC
+S
+S/**
+S * \def MBEDTLS_CIPHER_MODE_CFB
+S *
+S * Enable Cipher Feedback mode (CFB) for symmetric ciphers.
+S */
+S#define MBEDTLS_CIPHER_MODE_CFB
+S
+S/**
+S * \def MBEDTLS_CIPHER_MODE_CTR
+S *
+S * Enable Counter Block Cipher mode (CTR) for symmetric ciphers.
+S */
+S#define MBEDTLS_CIPHER_MODE_CTR
+S
+S/**
+S * \def MBEDTLS_CIPHER_NULL_CIPHER
+S *
+S * Enable NULL cipher.
+S * Warning: Only do so when you know what you are doing. This allows for
+S * encryption or channels without any security!
+S *
+S * Requires MBEDTLS_ENABLE_WEAK_CIPHERSUITES as well to enable
+S * the following ciphersuites:
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_NULL_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_NULL_SHA
+S *      MBEDTLS_TLS_RSA_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_NULL_SHA
+S *      MBEDTLS_TLS_RSA_WITH_NULL_MD5
+S *      MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_NULL_SHA
+S *      MBEDTLS_TLS_PSK_WITH_NULL_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_NULL_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_NULL_SHA
+S *
+S * Uncomment this macro to enable the NULL cipher and ciphersuites
+S */
+S//#define MBEDTLS_CIPHER_NULL_CIPHER
+S
+S/**
+S * \def MBEDTLS_CIPHER_PADDING_PKCS7
+S *
+S * MBEDTLS_CIPHER_PADDING_XXX: Uncomment or comment macros to add support for
+S * specific padding modes in the cipher layer with cipher modes that support
+S * padding (e.g. CBC)
+S *
+S * If you disable all padding modes, only full blocks can be used with CBC.
+S *
+S * Enable padding modes in the cipher layer.
+S */
+S#define MBEDTLS_CIPHER_PADDING_PKCS7
+S#define MBEDTLS_CIPHER_PADDING_ONE_AND_ZEROS
+S#define MBEDTLS_CIPHER_PADDING_ZEROS_AND_LEN
+S#define MBEDTLS_CIPHER_PADDING_ZEROS
+S
+S/**
+S * \def MBEDTLS_ENABLE_WEAK_CIPHERSUITES
+S *
+S * Enable weak ciphersuites in SSL / TLS.
+S * Warning: Only do so when you know what you are doing. This allows for
+S * channels with virtually no security at all!
+S *
+S * This enables the following ciphersuites:
+S *      MBEDTLS_TLS_RSA_WITH_DES_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_DES_CBC_SHA
+S *
+S * Uncomment this macro to enable weak ciphersuites
+S */
+S//#define MBEDTLS_ENABLE_WEAK_CIPHERSUITES
+S
+S/**
+S * \def MBEDTLS_REMOVE_ARC4_CIPHERSUITES
+S *
+S * Remove RC4 ciphersuites by default in SSL / TLS.
+S * This flag removes the ciphersuites based on RC4 from the default list as
+S * returned by mbedtls_ssl_list_ciphersuites(). However, it is still possible to
+S * enable (some of) them with mbedtls_ssl_conf_ciphersuites() by including them
+S * explicitly.
+S *
+S * Uncomment this macro to remove RC4 ciphersuites by default.
+S */
+S#define MBEDTLS_REMOVE_ARC4_CIPHERSUITES
+S
+S/**
+S * \def MBEDTLS_ECP_DP_SECP192R1_ENABLED
+S *
+S * MBEDTLS_ECP_XXXX_ENABLED: Enables specific curves within the Elliptic Curve
+S * module.  By default all supported curves are enabled.
+S *
+S * Comment macros to disable the curve and functions for it
+S */
+S#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+S#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+S#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+S#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+S#define MBEDTLS_ECP_DP_BP512R1_ENABLED
+S#define MBEDTLS_ECP_DP_CURVE25519_ENABLED
+S
+S/**
+S * \def MBEDTLS_ECP_NIST_OPTIM
+S *
+S * Enable specific 'modulo p' routines for each NIST prime.
+S * Depending on the prime and architecture, makes operations 4 to 8 times
+S * faster on the corresponding curve.
+S *
+S * Comment this macro to disable NIST curves optimisation.
+S */
+S#define MBEDTLS_ECP_NIST_OPTIM
+S
+S/**
+S * \def MBEDTLS_ECDSA_DETERMINISTIC
+S *
+S * Enable deterministic ECDSA (RFC 6979).
+S * Standard ECDSA is "fragile" in the sense that lack of entropy when signing
+S * may result in a compromise of the long-term signing key. This is avoided by
+S * the deterministic variant.
+S *
+S * Requires: MBEDTLS_HMAC_DRBG_C
+S *
+S * Comment this macro to disable deterministic ECDSA.
+S */
+S#define MBEDTLS_ECDSA_DETERMINISTIC
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
+S *
+S * Enable the PSK based ciphersuite modes in SSL / TLS.
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED
+S *
+S * Enable the DHE-PSK based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_DHM_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED
+S *
+S * Enable the ECDHE-PSK based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED
+S *
+S * Enable the RSA-PSK based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_RSA_C, MBEDTLS_PKCS1_V15,
+S *           MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_RSA_ENABLED
+S *
+S * Enable the RSA-only based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_RSA_C, MBEDTLS_PKCS1_V15,
+S *           MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_RSA_WITH_RC4_128_MD5
+S */
+S#define MBEDTLS_KEY_EXCHANGE_RSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED
+S *
+S * Enable the DHE-RSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_DHM_C, MBEDTLS_RSA_C, MBEDTLS_PKCS1_V15,
+S *           MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
+S *
+S * Enable the ECDHE-RSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C, MBEDTLS_RSA_C, MBEDTLS_PKCS1_V15,
+S *           MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+S *
+S * Enable the ECDHE-ECDSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C, MBEDTLS_ECDSA_C, MBEDTLS_X509_CRT_PARSE_C,
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+S *
+S * Enable the ECDH-ECDSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C, MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
+S *
+S * Enable the ECDH-RSA based ciphersuite modes in SSL / TLS.
+S *
+S * Requires: MBEDTLS_ECDH_C, MBEDTLS_X509_CRT_PARSE_C
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S */
+S#define MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
+S
+S/**
+S * \def MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED
+S *
+S * Enable the ECJPAKE based ciphersuite modes in SSL / TLS.
+S *
+S * \warning This is currently experimental. EC J-PAKE support is based on the
+S * Thread v1.0.0 specification; incompatible changes to the specification
+S * might still happen. For this reason, this is disabled by default.
+S *
+S * Requires: MBEDTLS_ECJPAKE_C
+S *           MBEDTLS_SHA256_C
+S *           MBEDTLS_ECP_DP_SECP256R1_ENABLED
+S *
+S * This enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECJPAKE_WITH_AES_128_CCM_8
+S */
+S//#define MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED
+S
+S/**
+S * \def MBEDTLS_PK_PARSE_EC_EXTENDED
+S *
+S * Enhance support for reading EC keys using variants of SEC1 not allowed by
+S * RFC 5915 and RFC 5480.
+S *
+S * Currently this means parsing the SpecifiedECDomain choice of EC
+S * parameters (only known groups are supported, not arbitrary domains, to
+S * avoid validation issues).
+S *
+S * Disable if you only need to support RFC 5915 + 5480 key formats.
+S */
+S#define MBEDTLS_PK_PARSE_EC_EXTENDED
+S
+S/**
+S * \def MBEDTLS_ERROR_STRERROR_DUMMY
+S *
+S * Enable a dummy error function to make use of mbedtls_strerror() in
+S * third party libraries easier when MBEDTLS_ERROR_C is disabled
+S * (no effect when MBEDTLS_ERROR_C is enabled).
+S *
+S * You can safely disable this if MBEDTLS_ERROR_C is enabled, or if you're
+S * not using mbedtls_strerror() or error_strerror() in your application.
+S *
+S * Disable if you run into name conflicts and want to really remove the
+S * mbedtls_strerror()
+S */
+S#define MBEDTLS_ERROR_STRERROR_DUMMY
+S
+S/**
+S * \def MBEDTLS_GENPRIME
+S *
+S * Enable the prime-number generation code.
+S *
+S * Requires: MBEDTLS_BIGNUM_C
+S */
+S#define MBEDTLS_GENPRIME
+S
+S/**
+S * \def MBEDTLS_FS_IO
+S *
+S * Enable functions that use the filesystem.
+S */
+S#define MBEDTLS_FS_IO
+S
+S/**
+S * \def MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES
+S *
+S * Do not add default entropy sources. These are the platform specific,
+S * mbedtls_timing_hardclock and HAVEGE based poll functions.
+S *
+S * This is useful to have more control over the added entropy sources in an
+S * application.
+S *
+S * Uncomment this macro to prevent loading of default entropy functions.
+S */
+S//#define MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES
+S
+S/**
+S * \def MBEDTLS_NO_PLATFORM_ENTROPY
+S *
+S * Do not use built-in platform entropy functions.
+S * This is useful if your platform does not support
+S * standards like the /dev/urandom or Windows CryptoAPI.
+S *
+S * Uncomment this macro to disable the built-in platform entropy functions.
+S */
+S//#define MBEDTLS_NO_PLATFORM_ENTROPY
+S
+S/**
+S * \def MBEDTLS_ENTROPY_FORCE_SHA256
+S *
+S * Force the entropy accumulator to use a SHA-256 accumulator instead of the
+S * default SHA-512 based one (if both are available).
+S *
+S * Requires: MBEDTLS_SHA256_C
+S *
+S * On 32-bit systems SHA-256 can be much faster than SHA-512. Use this option
+S * if you have performance concerns.
+S *
+S * This option is only useful if both MBEDTLS_SHA256_C and
+S * MBEDTLS_SHA512_C are defined. Otherwise the available hash module is used.
+S */
+S//#define MBEDTLS_ENTROPY_FORCE_SHA256
+S
+S/**
+S * \def MBEDTLS_MEMORY_DEBUG
+S *
+S * Enable debugging of buffer allocator memory issues. Automatically prints
+S * (to stderr) all (fatal) messages on memory allocation issues. Enables
+S * function for 'debug output' of allocated memory.
+S *
+S * Requires: MBEDTLS_MEMORY_BUFFER_ALLOC_C
+S *
+S * Uncomment this macro to let the buffer allocator print out error messages.
+S */
+S//#define MBEDTLS_MEMORY_DEBUG
+S
+S/**
+S * \def MBEDTLS_MEMORY_BACKTRACE
+S *
+S * Include backtrace information with each allocated block.
+S *
+S * Requires: MBEDTLS_MEMORY_BUFFER_ALLOC_C
+S *           GLIBC-compatible backtrace() an backtrace_symbols() support
+S *
+S * Uncomment this macro to include backtrace information
+S */
+S//#define MBEDTLS_MEMORY_BACKTRACE
+S
+S/**
+S * \def MBEDTLS_PK_RSA_ALT_SUPPORT
+S *
+S * Support external private RSA keys (eg from a HSM) in the PK layer.
+S *
+S * Comment this macro to disable support for external private RSA keys.
+S */
+S#define MBEDTLS_PK_RSA_ALT_SUPPORT
+S
+S/**
+S * \def MBEDTLS_PKCS1_V15
+S *
+S * Enable support for PKCS#1 v1.5 encoding.
+S *
+S * Requires: MBEDTLS_RSA_C
+S *
+S * This enables support for PKCS#1 v1.5 operations.
+S */
+S#define MBEDTLS_PKCS1_V15
+S
+S/**
+S * \def MBEDTLS_PKCS1_V21
+S *
+S * Enable support for PKCS#1 v2.1 encoding.
+S *
+S * Requires: MBEDTLS_MD_C, MBEDTLS_RSA_C
+S *
+S * This enables support for RSAES-OAEP and RSASSA-PSS operations.
+S */
+S#define MBEDTLS_PKCS1_V21
+S
+S/**
+S * \def MBEDTLS_RSA_NO_CRT
+S *
+S * Do not use the Chinese Remainder Theorem for the RSA private operation.
+S *
+S * Uncomment this macro to disable the use of CRT in RSA.
+S *
+S */
+S//#define MBEDTLS_RSA_NO_CRT
+S
+S/**
+S * \def MBEDTLS_SELF_TEST
+S *
+S * Enable the checkup functions (*_self_test).
+S */
+S#define MBEDTLS_SELF_TEST
+S
+S/**
+S * \def MBEDTLS_SHA256_SMALLER
+S *
+S * Enable an implementation of SHA-256 that has lower ROM footprint but also
+S * lower performance.
+S *
+S * The default implementation is meant to be a reasonnable compromise between
+S * performance and size. This version optimizes more aggressively for size at
+S * the expense of performance. Eg on Cortex-M4 it reduces the size of
+S * mbedtls_sha256_process() from ~2KB to ~0.5KB for a performance hit of about
+S * 30%.
+S *
+S * Uncomment to enable the smaller implementation of SHA256.
+S */
+S//#define MBEDTLS_SHA256_SMALLER
+S
+S/**
+S * \def MBEDTLS_SSL_AEAD_RANDOM_IV
+S *
+S * Generate a random IV rather than using the record sequence number as a
+S * nonce for ciphersuites using and AEAD algorithm (GCM or CCM).
+S *
+S * Using the sequence number is generally recommended.
+S *
+S * Uncomment this macro to always use random IVs with AEAD ciphersuites.
+S */
+S//#define MBEDTLS_SSL_AEAD_RANDOM_IV
+S
+S/**
+S * \def MBEDTLS_SSL_ALL_ALERT_MESSAGES
+S *
+S * Enable sending of alert messages in case of encountered errors as per RFC.
+S * If you choose not to send the alert messages, mbed TLS can still communicate
+S * with other servers, only debugging of failures is harder.
+S *
+S * The advantage of not sending alert messages, is that no information is given
+S * about reasons for failures thus preventing adversaries of gaining intel.
+S *
+S * Enable sending of all alert messages
+S */
+S#define MBEDTLS_SSL_ALL_ALERT_MESSAGES
+S
+S/**
+S * \def MBEDTLS_SSL_DEBUG_ALL
+S *
+S * Enable the debug messages in SSL module for all issues.
+S * Debug messages have been disabled in some places to prevent timing
+S * attacks due to (unbalanced) debugging function calls.
+S *
+S * If you need all error reporting you should enable this during debugging,
+S * but remove this for production servers that should log as well.
+S *
+S * Uncomment this macro to report all debug messages on errors introducing
+S * a timing side-channel.
+S *
+S */
+S//#define MBEDTLS_SSL_DEBUG_ALL
+S
+S/** \def MBEDTLS_SSL_ENCRYPT_THEN_MAC
+S *
+S * Enable support for Encrypt-then-MAC, RFC 7366.
+S *
+S * This allows peers that both support it to use a more robust protection for
+S * ciphersuites using CBC, providing deep resistance against timing attacks
+S * on the padding or underlying cipher.
+S *
+S * This only affects CBC ciphersuites, and is useless if none is defined.
+S *
+S * Requires: MBEDTLS_SSL_PROTO_TLS1    or
+S *           MBEDTLS_SSL_PROTO_TLS1_1  or
+S *           MBEDTLS_SSL_PROTO_TLS1_2
+S *
+S * Comment this macro to disable support for Encrypt-then-MAC
+S */
+S#define MBEDTLS_SSL_ENCRYPT_THEN_MAC
+S
+S/** \def MBEDTLS_SSL_EXTENDED_MASTER_SECRET
+S *
+S * Enable support for Extended Master Secret, aka Session Hash
+S * (draft-ietf-tls-session-hash-02).
+S *
+S * This was introduced as "the proper fix" to the Triple Handshake familiy of
+S * attacks, but it is recommended to always use it (even if you disable
+S * renegotiation), since it actually fixes a more fundamental issue in the
+S * original SSL/TLS design, and has implications beyond Triple Handshake.
+S *
+S * Requires: MBEDTLS_SSL_PROTO_TLS1    or
+S *           MBEDTLS_SSL_PROTO_TLS1_1  or
+S *           MBEDTLS_SSL_PROTO_TLS1_2
+S *
+S * Comment this macro to disable support for Extended Master Secret.
+S */
+S#define MBEDTLS_SSL_EXTENDED_MASTER_SECRET
+S
+S/**
+S * \def MBEDTLS_SSL_FALLBACK_SCSV
+S *
+S * Enable support for FALLBACK_SCSV (draft-ietf-tls-downgrade-scsv-00).
+S *
+S * For servers, it is recommended to always enable this, unless you support
+S * only one version of TLS, or know for sure that none of your clients
+S * implements a fallback strategy.
+S *
+S * For clients, you only need this if you're using a fallback strategy, which
+S * is not recommended in the first place, unless you absolutely need it to
+S * interoperate with buggy (version-intolerant) servers.
+S *
+S * Comment this macro to disable support for FALLBACK_SCSV
+S */
+S#define MBEDTLS_SSL_FALLBACK_SCSV
+S
+S/**
+S * \def MBEDTLS_SSL_HW_RECORD_ACCEL
+S *
+S * Enable hooking functions in SSL module for hardware acceleration of
+S * individual records.
+S *
+S * Uncomment this macro to enable hooking functions.
+S */
+S//#define MBEDTLS_SSL_HW_RECORD_ACCEL
+S
+S/**
+S * \def MBEDTLS_SSL_CBC_RECORD_SPLITTING
+S *
+S * Enable 1/n-1 record splitting for CBC mode in SSLv3 and TLS 1.0.
+S *
+S * This is a countermeasure to the BEAST attack, which also minimizes the risk
+S * of interoperability issues compared to sending 0-length records.
+S *
+S * Comment this macro to disable 1/n-1 record splitting.
+S */
+S#define MBEDTLS_SSL_CBC_RECORD_SPLITTING
+S
+S/**
+S * \def MBEDTLS_SSL_RENEGOTIATION
+S *
+S * Disable support for TLS renegotiation.
+S *
+S * The two main uses of renegotiation are (1) refresh keys on long-lived
+S * connections and (2) client authentication after the initial handshake.
+S * If you don't need renegotiation, it's probably better to disable it, since
+S * it has been associated with security issues in the past and is easy to
+S * misuse/misunderstand.
+S *
+S * Comment this to disable support for renegotiation.
+S */
+S#define MBEDTLS_SSL_RENEGOTIATION
+S
+S/**
+S * \def MBEDTLS_SSL_SRV_SUPPORT_SSLV2_CLIENT_HELLO
+S *
+S * Enable support for receiving and parsing SSLv2 Client Hello messages for the
+S * SSL Server module (MBEDTLS_SSL_SRV_C).
+S *
+S * Uncomment this macro to enable support for SSLv2 Client Hello messages.
+S */
+S//#define MBEDTLS_SSL_SRV_SUPPORT_SSLV2_CLIENT_HELLO
+S
+S/**
+S * \def MBEDTLS_SSL_SRV_RESPECT_CLIENT_PREFERENCE
+S *
+S * Pick the ciphersuite according to the client's preferences rather than ours
+S * in the SSL Server module (MBEDTLS_SSL_SRV_C).
+S *
+S * Uncomment this macro to respect client's ciphersuite order
+S */
+S//#define MBEDTLS_SSL_SRV_RESPECT_CLIENT_PREFERENCE
+S
+S/**
+S * \def MBEDTLS_SSL_MAX_FRAGMENT_LENGTH
+S *
+S * Enable support for RFC 6066 max_fragment_length extension in SSL.
+S *
+S * Comment this macro to disable support for the max_fragment_length extension
+S */
+S#define MBEDTLS_SSL_MAX_FRAGMENT_LENGTH
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_SSL3
+S *
+S * Enable support for SSL 3.0.
+S *
+S * Requires: MBEDTLS_MD5_C
+S *           MBEDTLS_SHA1_C
+S *
+S * Comment this macro to disable support for SSL 3.0
+S */
+S#define MBEDTLS_SSL_PROTO_SSL3
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_TLS1
+S *
+S * Enable support for TLS 1.0.
+S *
+S * Requires: MBEDTLS_MD5_C
+S *           MBEDTLS_SHA1_C
+S *
+S * Comment this macro to disable support for TLS 1.0
+S */
+S#define MBEDTLS_SSL_PROTO_TLS1
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_TLS1_1
+S *
+S * Enable support for TLS 1.1 (and DTLS 1.0 if DTLS is enabled).
+S *
+S * Requires: MBEDTLS_MD5_C
+S *           MBEDTLS_SHA1_C
+S *
+S * Comment this macro to disable support for TLS 1.1 / DTLS 1.0
+S */
+S#define MBEDTLS_SSL_PROTO_TLS1_1
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_TLS1_2
+S *
+S * Enable support for TLS 1.2 (and DTLS 1.2 if DTLS is enabled).
+S *
+S * Requires: MBEDTLS_SHA1_C or MBEDTLS_SHA256_C or MBEDTLS_SHA512_C
+S *           (Depends on ciphersuites)
+S *
+S * Comment this macro to disable support for TLS 1.2 / DTLS 1.2
+S */
+S#define MBEDTLS_SSL_PROTO_TLS1_2
+S
+S/**
+S * \def MBEDTLS_SSL_PROTO_DTLS
+S *
+S * Enable support for DTLS (all available versions).
+S *
+S * Enable this and MBEDTLS_SSL_PROTO_TLS1_1 to enable DTLS 1.0,
+S * and/or this and MBEDTLS_SSL_PROTO_TLS1_2 to enable DTLS 1.2.
+S *
+S * Requires: MBEDTLS_SSL_PROTO_TLS1_1
+S *        or MBEDTLS_SSL_PROTO_TLS1_2
+S *
+S * Comment this macro to disable support for DTLS
+S */
+S#define MBEDTLS_SSL_PROTO_DTLS
+S
+S/**
+S * \def MBEDTLS_SSL_ALPN
+S *
+S * Enable support for RFC 7301 Application Layer Protocol Negotiation.
+S *
+S * Comment this macro to disable support for ALPN.
+S */
+S#define MBEDTLS_SSL_ALPN
+S
+S/**
+S * \def MBEDTLS_SSL_DTLS_ANTI_REPLAY
+S *
+S * Enable support for the anti-replay mechanism in DTLS.
+S *
+S * Requires: MBEDTLS_SSL_TLS_C
+S *           MBEDTLS_SSL_PROTO_DTLS
+S *
+S * \warning Disabling this is often a security risk!
+S * See mbedtls_ssl_conf_dtls_anti_replay() for details.
+S *
+S * Comment this to disable anti-replay in DTLS.
+S */
+S#define MBEDTLS_SSL_DTLS_ANTI_REPLAY
+S
+S/**
+S * \def MBEDTLS_SSL_DTLS_HELLO_VERIFY
+S *
+S * Enable support for HelloVerifyRequest on DTLS servers.
+S *
+S * This feature is highly recommended to prevent DTLS servers being used as
+S * amplifiers in DoS attacks against other hosts. It should always be enabled
+S * unless you know for sure amplification cannot be a problem in the
+S * environment in which your server operates.
+S *
+S * \warning Disabling this can ba a security risk! (see above)
+S *
+S * Requires: MBEDTLS_SSL_PROTO_DTLS
+S *
+S * Comment this to disable support for HelloVerifyRequest.
+S */
+S#define MBEDTLS_SSL_DTLS_HELLO_VERIFY
+S
+S/**
+S * \def MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE
+S *
+S * Enable server-side support for clients that reconnect from the same port.
+S *
+S * Some clients unexpectedly close the connection and try to reconnect using the
+S * same source port. This needs special support from the server to handle the
+S * new connection securely, as described in section 4.2.8 of RFC 6347. This
+S * flag enables that support.
+S *
+S * Requires: MBEDTLS_SSL_DTLS_HELLO_VERIFY
+S *
+S * Comment this to disable support for clients reusing the source port.
+S */
+S#define MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE
+S
+S/**
+S * \def MBEDTLS_SSL_DTLS_BADMAC_LIMIT
+S *
+S * Enable support for a limit of records with bad MAC.
+S *
+S * See mbedtls_ssl_conf_dtls_badmac_limit().
+S *
+S * Requires: MBEDTLS_SSL_PROTO_DTLS
+S */
+S#define MBEDTLS_SSL_DTLS_BADMAC_LIMIT
+S
+S/**
+S * \def MBEDTLS_SSL_SESSION_TICKETS
+S *
+S * Enable support for RFC 5077 session tickets in SSL.
+S * Client-side, provides full support for session tickets (maintainance of a
+S * session store remains the responsibility of the application, though).
+S * Server-side, you also need to provide callbacks for writing and parsing
+S * tickets, including authenticated encryption and key management. Example
+S * callbacks are provided by MBEDTLS_SSL_TICKET_C.
+S *
+S * Comment this macro to disable support for SSL session tickets
+S */
+S#define MBEDTLS_SSL_SESSION_TICKETS
+S
+S/**
+S * \def MBEDTLS_SSL_EXPORT_KEYS
+S *
+S * Enable support for exporting key block and master secret.
+S * This is required for certain users of TLS, e.g. EAP-TLS.
+S *
+S * Comment this macro to disable support for key export
+S */
+S#define MBEDTLS_SSL_EXPORT_KEYS
+S
+S/**
+S * \def MBEDTLS_SSL_SERVER_NAME_INDICATION
+S *
+S * Enable support for RFC 6066 server name indication (SNI) in SSL.
+S *
+S * Requires: MBEDTLS_X509_CRT_PARSE_C
+S *
+S * Comment this macro to disable support for server name indication in SSL
+S */
+S#define MBEDTLS_SSL_SERVER_NAME_INDICATION
+S
+S/**
+S * \def MBEDTLS_SSL_TRUNCATED_HMAC
+S *
+S * Enable support for RFC 6066 truncated HMAC in SSL.
+S *
+S * Comment this macro to disable support for truncated HMAC in SSL
+S */
+S#define MBEDTLS_SSL_TRUNCATED_HMAC
+S
+S/**
+S * \def MBEDTLS_THREADING_ALT
+S *
+S * Provide your own alternate threading implementation.
+S *
+S * Requires: MBEDTLS_THREADING_C
+S *
+S * Uncomment this to allow your own alternate threading implementation.
+S */
+S//#define MBEDTLS_THREADING_ALT
+S
+S/**
+S * \def MBEDTLS_THREADING_PTHREAD
+S *
+S * Enable the pthread wrapper layer for the threading layer.
+S *
+S * Requires: MBEDTLS_THREADING_C
+S *
+S * Uncomment this to enable pthread mutexes.
+S */
+S//#define MBEDTLS_THREADING_PTHREAD
+S
+S/**
+S * \def MBEDTLS_VERSION_FEATURES
+S *
+S * Allow run-time checking of compile-time enabled features. Thus allowing users
+S * to check at run-time if the library is for instance compiled with threading
+S * support via mbedtls_version_check_feature().
+S *
+S * Requires: MBEDTLS_VERSION_C
+S *
+S * Comment this to disable run-time checking and save ROM space
+S */
+S#define MBEDTLS_VERSION_FEATURES
+S
+S/**
+S * \def MBEDTLS_X509_ALLOW_EXTENSIONS_NON_V3
+S *
+S * If set, the X509 parser will not break-off when parsing an X509 certificate
+S * and encountering an extension in a v1 or v2 certificate.
+S *
+S * Uncomment to prevent an error.
+S */
+S//#define MBEDTLS_X509_ALLOW_EXTENSIONS_NON_V3
+S
+S/**
+S * \def MBEDTLS_X509_ALLOW_UNSUPPORTED_CRITICAL_EXTENSION
+S *
+S * If set, the X509 parser will not break-off when parsing an X509 certificate
+S * and encountering an unknown critical extension.
+S *
+S * \warning Depending on your PKI use, enabling this can be a security risk!
+S *
+S * Uncomment to prevent an error.
+S */
+S//#define MBEDTLS_X509_ALLOW_UNSUPPORTED_CRITICAL_EXTENSION
+S
+S/**
+S * \def MBEDTLS_X509_CHECK_KEY_USAGE
+S *
+S * Enable verification of the keyUsage extension (CA and leaf certificates).
+S *
+S * Disabling this avoids problems with mis-issued and/or misused
+S * (intermediate) CA and leaf certificates.
+S *
+S * \warning Depending on your PKI use, disabling this can be a security risk!
+S *
+S * Comment to skip keyUsage checking for both CA and leaf certificates.
+S */
+S#define MBEDTLS_X509_CHECK_KEY_USAGE
+S
+S/**
+S * \def MBEDTLS_X509_CHECK_EXTENDED_KEY_USAGE
+S *
+S * Enable verification of the extendedKeyUsage extension (leaf certificates).
+S *
+S * Disabling this avoids problems with mis-issued and/or misused certificates.
+S *
+S * \warning Depending on your PKI use, disabling this can be a security risk!
+S *
+S * Comment to skip extendedKeyUsage checking for certificates.
+S */
+S#define MBEDTLS_X509_CHECK_EXTENDED_KEY_USAGE
+S
+S/**
+S * \def MBEDTLS_X509_RSASSA_PSS_SUPPORT
+S *
+S * Enable parsing and verification of X.509 certificates, CRLs and CSRS
+S * signed with RSASSA-PSS (aka PKCS#1 v2.1).
+S *
+S * Comment this macro to disallow using RSASSA-PSS in certificates.
+S */
+S#define MBEDTLS_X509_RSASSA_PSS_SUPPORT
+S
+S/**
+S * \def MBEDTLS_ZLIB_SUPPORT
+S *
+S * If set, the SSL/TLS module uses ZLIB to support compression and
+S * decompression of packet data.
+S *
+S * \warning TLS-level compression MAY REDUCE SECURITY! See for example the
+S * CRIME attack. Before enabling this option, you should examine with care if
+S * CRIME or similar exploits may be a applicable to your use case.
+S *
+S * \note Currently compression can't be used with DTLS.
+S *
+S * Used in: library/ssl_tls.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * This feature requires zlib library and headers to be present.
+S *
+S * Uncomment to enable use of ZLIB
+S */
+S//#define MBEDTLS_ZLIB_SUPPORT
+S/* \} name SECTION: mbed TLS feature support */
+S
+S/**
+S * \name SECTION: mbed TLS modules
+S *
+S * This section enables or disables entire modules in mbed TLS
+S * \{
+S */
+S
+S/**
+S * \def MBEDTLS_AESNI_C
+S *
+S * Enable AES-NI support on x86-64.
+S *
+S * Module:  library/aesni.c
+S * Caller:  library/aes.c
+S *
+S * Requires: MBEDTLS_HAVE_ASM
+S *
+S * This modules adds support for the AES-NI instructions on x86-64
+S */
+S#define MBEDTLS_AESNI_C
+S
+S/**
+S * \def MBEDTLS_AES_C
+S *
+S * Enable the AES block cipher.
+S *
+S * Module:  library/aes.c
+S * Caller:  library/ssl_tls.c
+S *          library/pem.c
+S *          library/ctr_drbg.c
+S *
+S * This module enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_AES_128_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_GCM_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_AES_256_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_GCM_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_AES_128_CBC_SHA
+S *
+S * PEM_PARSE uses AES for decrypting encrypted keys.
+S */
+S#define MBEDTLS_AES_C
+S
+S/**
+S * \def MBEDTLS_ARC4_C
+S *
+S * Enable the ARCFOUR stream cipher.
+S *
+S * Module:  library/arc4.c
+S * Caller:  library/ssl_tls.c
+S *
+S * This module enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_RSA_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_RSA_WITH_RC4_128_MD5
+S *      MBEDTLS_TLS_RSA_PSK_WITH_RC4_128_SHA
+S *      MBEDTLS_TLS_PSK_WITH_RC4_128_SHA
+S */
+S#define MBEDTLS_ARC4_C
+S
+S/**
+S * \def MBEDTLS_ASN1_PARSE_C
+S *
+S * Enable the generic ASN1 parser.
+S *
+S * Module:  library/asn1.c
+S * Caller:  library/x509.c
+S *          library/dhm.c
+S *          library/pkcs12.c
+S *          library/pkcs5.c
+S *          library/pkparse.c
+S */
+S#define MBEDTLS_ASN1_PARSE_C
+S
+S/**
+S * \def MBEDTLS_ASN1_WRITE_C
+S *
+S * Enable the generic ASN1 writer.
+S *
+S * Module:  library/asn1write.c
+S * Caller:  library/ecdsa.c
+S *          library/pkwrite.c
+S *          library/x509_create.c
+S *          library/x509write_crt.c
+S *          library/mbedtls_x509write_csr.c
+S */
+S#define MBEDTLS_ASN1_WRITE_C
+S
+S/**
+S * \def MBEDTLS_BASE64_C
+S *
+S * Enable the Base64 module.
+S *
+S * Module:  library/base64.c
+S * Caller:  library/pem.c
+S *
+S * This module is required for PEM support (required by X.509).
+S */
+S#define MBEDTLS_BASE64_C
+S
+S/**
+S * \def MBEDTLS_BIGNUM_C
+S *
+S * Enable the multi-precision integer library.
+S *
+S * Module:  library/bignum.c
+S * Caller:  library/dhm.c
+S *          library/ecp.c
+S *          library/ecdsa.c
+S *          library/rsa.c
+S *          library/ssl_tls.c
+S *
+S * This module is required for RSA, DHM and ECC (ECDH, ECDSA) support.
+S */
+S#define MBEDTLS_BIGNUM_C
+S
+S/**
+S * \def MBEDTLS_BLOWFISH_C
+S *
+S * Enable the Blowfish block cipher.
+S *
+S * Module:  library/blowfish.c
+S */
+S#define MBEDTLS_BLOWFISH_C
+S
+S/**
+S * \def MBEDTLS_CAMELLIA_C
+S *
+S * Enable the Camellia block cipher.
+S *
+S * Module:  library/camellia.c
+S * Caller:  library/ssl_tls.c
+S *
+S * This module enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_DHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_256_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_RSA_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_GCM_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_256_CBC_SHA384
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_GCM_SHA256
+S *      MBEDTLS_TLS_PSK_WITH_CAMELLIA_128_CBC_SHA256
+S */
+S#define MBEDTLS_CAMELLIA_C
+S
+S/**
+S * \def MBEDTLS_CCM_C
+S *
+S * Enable the Counter with CBC-MAC (CCM) mode for 128-bit block cipher.
+S *
+S * Module:  library/ccm.c
+S *
+S * Requires: MBEDTLS_AES_C or MBEDTLS_CAMELLIA_C
+S *
+S * This module enables the AES-CCM ciphersuites, if other requisites are
+S * enabled as well.
+S */
+S#define MBEDTLS_CCM_C
+S
+S/**
+S * \def MBEDTLS_CERTS_C
+S *
+S * Enable the test certificates.
+S *
+S * Module:  library/certs.c
+S * Caller:
+S *
+S * This module is used for testing (ssl_client/server).
+S */
+S#define MBEDTLS_CERTS_C
+S
+S/**
+S * \def MBEDTLS_CIPHER_C
+S *
+S * Enable the generic cipher layer.
+S *
+S * Module:  library/cipher.c
+S * Caller:  library/ssl_tls.c
+S *
+S * Uncomment to enable generic cipher wrappers.
+S */
+S#define MBEDTLS_CIPHER_C
+S
+S/**
+S * \def MBEDTLS_CTR_DRBG_C
+S *
+S * Enable the CTR_DRBG AES-256-based random generator.
+S *
+S * Module:  library/ctr_drbg.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_AES_C
+S *
+S * This module provides the CTR_DRBG AES-256 random number generator.
+S */
+S#define MBEDTLS_CTR_DRBG_C
+S
+S/**
+S * \def MBEDTLS_DEBUG_C
+S *
+S * Enable the debug functions.
+S *
+S * Module:  library/debug.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *
+S * This module provides debugging functions.
+S */
+S#define MBEDTLS_DEBUG_C
+S
+S/**
+S * \def MBEDTLS_DES_C
+S *
+S * Enable the DES block cipher.
+S *
+S * Module:  library/des.c
+S * Caller:  library/pem.c
+S *          library/ssl_tls.c
+S *
+S * This module enables the following ciphersuites (if other requisites are
+S * enabled as well):
+S *      MBEDTLS_TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_RSA_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA
+S *      MBEDTLS_TLS_PSK_WITH_3DES_EDE_CBC_SHA
+S *
+S * PEM_PARSE uses DES/3DES for decrypting encrypted keys.
+S */
+S#define MBEDTLS_DES_C
+S
+S/**
+S * \def MBEDTLS_DHM_C
+S *
+S * Enable the Diffie-Hellman-Merkle module.
+S *
+S * Module:  library/dhm.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * This module is used by the following key exchanges:
+S *      DHE-RSA, DHE-PSK
+S */
+S#define MBEDTLS_DHM_C
+S
+S/**
+S * \def MBEDTLS_ECDH_C
+S *
+S * Enable the elliptic curve Diffie-Hellman library.
+S *
+S * Module:  library/ecdh.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * This module is used by the following key exchanges:
+S *      ECDHE-ECDSA, ECDHE-RSA, DHE-PSK
+S *
+S * Requires: MBEDTLS_ECP_C
+S */
+S#define MBEDTLS_ECDH_C
+S
+S/**
+S * \def MBEDTLS_ECDSA_C
+S *
+S * Enable the elliptic curve DSA library.
+S *
+S * Module:  library/ecdsa.c
+S * Caller:
+S *
+S * This module is used by the following key exchanges:
+S *      ECDHE-ECDSA
+S *
+S * Requires: MBEDTLS_ECP_C, MBEDTLS_ASN1_WRITE_C, MBEDTLS_ASN1_PARSE_C
+S */
+S#define MBEDTLS_ECDSA_C
+S
+S/**
+S * \def MBEDTLS_ECJPAKE_C
+S *
+S * Enable the elliptic curve J-PAKE library.
+S *
+S * \warning This is currently experimental. EC J-PAKE support is based on the
+S * Thread v1.0.0 specification; incompatible changes to the specification
+S * might still happen. For this reason, this is disabled by default.
+S *
+S * Module:  library/ecjpake.c
+S * Caller:
+S *
+S * This module is used by the following key exchanges:
+S *      ECJPAKE
+S *
+S * Requires: MBEDTLS_ECP_C, MBEDTLS_MD_C
+S */
+S//#define MBEDTLS_ECJPAKE_C
+S
+S/**
+S * \def MBEDTLS_ECP_C
+S *
+S * Enable the elliptic curve over GF(p) library.
+S *
+S * Module:  library/ecp.c
+S * Caller:  library/ecdh.c
+S *          library/ecdsa.c
+S *          library/ecjpake.c
+S *
+S * Requires: MBEDTLS_BIGNUM_C and at least one MBEDTLS_ECP_DP_XXX_ENABLED
+S */
+S#define MBEDTLS_ECP_C
+S
+S/**
+S * \def MBEDTLS_ENTROPY_C
+S *
+S * Enable the platform-specific entropy code.
+S *
+S * Module:  library/entropy.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_SHA512_C or MBEDTLS_SHA256_C
+S *
+S * This module provides a generic entropy pool
+S */
+S#define MBEDTLS_ENTROPY_C
+S
+S/**
+S * \def MBEDTLS_ERROR_C
+S *
+S * Enable error code to error string conversion.
+S *
+S * Module:  library/error.c
+S * Caller:
+S *
+S * This module enables mbedtls_strerror().
+S */
+S#define MBEDTLS_ERROR_C
+S
+S/**
+S * \def MBEDTLS_GCM_C
+S *
+S * Enable the Galois/Counter Mode (GCM) for AES.
+S *
+S * Module:  library/gcm.c
+S *
+S * Requires: MBEDTLS_AES_C or MBEDTLS_CAMELLIA_C
+S *
+S * This module enables the AES-GCM and CAMELLIA-GCM ciphersuites, if other
+S * requisites are enabled as well.
+S */
+S#define MBEDTLS_GCM_C
+S
+S/**
+S * \def MBEDTLS_HAVEGE_C
+S *
+S * Enable the HAVEGE random generator.
+S *
+S * Warning: the HAVEGE random generator is not suitable for virtualized
+S *          environments
+S *
+S * Warning: the HAVEGE random generator is dependent on timing and specific
+S *          processor traits. It is therefore not advised to use HAVEGE as
+S *          your applications primary random generator or primary entropy pool
+S *          input. As a secondary input to your entropy pool, it IS able add
+S *          the (limited) extra entropy it provides.
+S *
+S * Module:  library/havege.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_TIMING_C
+S *
+S * Uncomment to enable the HAVEGE random generator.
+S */
+S//#define MBEDTLS_HAVEGE_C
+S
+S/**
+S * \def MBEDTLS_HMAC_DRBG_C
+S *
+S * Enable the HMAC_DRBG random generator.
+S *
+S * Module:  library/hmac_drbg.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_MD_C
+S *
+S * Uncomment to enable the HMAC_DRBG random number geerator.
+S */
+S#define MBEDTLS_HMAC_DRBG_C
+S
+S/**
+S * \def MBEDTLS_MD_C
+S *
+S * Enable the generic message digest layer.
+S *
+S * Module:  library/mbedtls_md.c
+S * Caller:
+S *
+S * Uncomment to enable generic message digest wrappers.
+S */
+S#define MBEDTLS_MD_C
+S
+S/**
+S * \def MBEDTLS_MD2_C
+S *
+S * Enable the MD2 hash algorithm.
+S *
+S * Module:  library/mbedtls_md2.c
+S * Caller:
+S *
+S * Uncomment to enable support for (rare) MD2-signed X.509 certs.
+S */
+S//#define MBEDTLS_MD2_C
+S
+S/**
+S * \def MBEDTLS_MD4_C
+S *
+S * Enable the MD4 hash algorithm.
+S *
+S * Module:  library/mbedtls_md4.c
+S * Caller:
+S *
+S * Uncomment to enable support for (rare) MD4-signed X.509 certs.
+S */
+S//#define MBEDTLS_MD4_C
+S
+S/**
+S * \def MBEDTLS_MD5_C
+S *
+S * Enable the MD5 hash algorithm.
+S *
+S * Module:  library/mbedtls_md5.c
+S * Caller:  library/mbedtls_md.c
+S *          library/pem.c
+S *          library/ssl_tls.c
+S *
+S * This module is required for SSL/TLS and X.509.
+S * PEM_PARSE uses MD5 for decrypting encrypted keys.
+S */
+S#define MBEDTLS_MD5_C
+S
+S/**
+S * \def MBEDTLS_MEMORY_BUFFER_ALLOC_C
+S *
+S * Enable the buffer allocator implementation that makes use of a (stack)
+S * based buffer to 'allocate' dynamic memory. (replaces calloc() and free()
+S * calls)
+S *
+S * Module:  library/memory_buffer_alloc.c
+S *
+S * Requires: MBEDTLS_PLATFORM_C
+S *           MBEDTLS_PLATFORM_MEMORY (to use it within mbed TLS)
+S *
+S * Enable this module to enable the buffer memory allocator.
+S */
+S//#define MBEDTLS_MEMORY_BUFFER_ALLOC_C
+S
+S/**
+S * \def MBEDTLS_NET_C
+S *
+S * Enable the TCP/IP networking routines.
+S *
+S * Module:  library/net.c
+S *
+S * This module provides TCP/IP networking routines.
+S */
+S#define MBEDTLS_NET_C
+S
+S/**
+S * \def MBEDTLS_OID_C
+S *
+S * Enable the OID database.
+S *
+S * Module:  library/oid.c
+S * Caller:  library/asn1write.c
+S *          library/pkcs5.c
+S *          library/pkparse.c
+S *          library/pkwrite.c
+S *          library/rsa.c
+S *          library/x509.c
+S *          library/x509_create.c
+S *          library/mbedtls_x509_crl.c
+S *          library/mbedtls_x509_crt.c
+S *          library/mbedtls_x509_csr.c
+S *          library/x509write_crt.c
+S *          library/mbedtls_x509write_csr.c
+S *
+S * This modules translates between OIDs and internal values.
+S */
+S#define MBEDTLS_OID_C
+S
+S/**
+S * \def MBEDTLS_PADLOCK_C
+S *
+S * Enable VIA Padlock support on x86.
+S *
+S * Module:  library/padlock.c
+S * Caller:  library/aes.c
+S *
+S * Requires: MBEDTLS_HAVE_ASM
+S *
+S * This modules adds support for the VIA PadLock on x86.
+S */
+S#define MBEDTLS_PADLOCK_C
+S
+S/**
+S * \def MBEDTLS_PEM_PARSE_C
+S *
+S * Enable PEM decoding / parsing.
+S *
+S * Module:  library/pem.c
+S * Caller:  library/dhm.c
+S *          library/pkparse.c
+S *          library/mbedtls_x509_crl.c
+S *          library/mbedtls_x509_crt.c
+S *          library/mbedtls_x509_csr.c
+S *
+S * Requires: MBEDTLS_BASE64_C
+S *
+S * This modules adds support for decoding / parsing PEM files.
+S */
+S#define MBEDTLS_PEM_PARSE_C
+S
+S/**
+S * \def MBEDTLS_PEM_WRITE_C
+S *
+S * Enable PEM encoding / writing.
+S *
+S * Module:  library/pem.c
+S * Caller:  library/pkwrite.c
+S *          library/x509write_crt.c
+S *          library/mbedtls_x509write_csr.c
+S *
+S * Requires: MBEDTLS_BASE64_C
+S *
+S * This modules adds support for encoding / writing PEM files.
+S */
+S#define MBEDTLS_PEM_WRITE_C
+S
+S/**
+S * \def MBEDTLS_PK_C
+S *
+S * Enable the generic public (asymetric) key layer.
+S *
+S * Module:  library/pk.c
+S * Caller:  library/ssl_tls.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * Requires: MBEDTLS_RSA_C or MBEDTLS_ECP_C
+S *
+S * Uncomment to enable generic public key wrappers.
+S */
+S#define MBEDTLS_PK_C
+S
+S/**
+S * \def MBEDTLS_PK_PARSE_C
+S *
+S * Enable the generic public (asymetric) key parser.
+S *
+S * Module:  library/pkparse.c
+S * Caller:  library/mbedtls_x509_crt.c
+S *          library/mbedtls_x509_csr.c
+S *
+S * Requires: MBEDTLS_PK_C
+S *
+S * Uncomment to enable generic public key parse functions.
+S */
+S#define MBEDTLS_PK_PARSE_C
+S
+S/**
+S * \def MBEDTLS_PK_WRITE_C
+S *
+S * Enable the generic public (asymetric) key writer.
+S *
+S * Module:  library/pkwrite.c
+S * Caller:  library/x509write.c
+S *
+S * Requires: MBEDTLS_PK_C
+S *
+S * Uncomment to enable generic public key write functions.
+S */
+S#define MBEDTLS_PK_WRITE_C
+S
+S/**
+S * \def MBEDTLS_PKCS5_C
+S *
+S * Enable PKCS#5 functions.
+S *
+S * Module:  library/pkcs5.c
+S *
+S * Requires: MBEDTLS_MD_C
+S *
+S * This module adds support for the PKCS#5 functions.
+S */
+S#define MBEDTLS_PKCS5_C
+S
+S/**
+S * \def MBEDTLS_PKCS11_C
+S *
+S * Enable wrapper for PKCS#11 smartcard support.
+S *
+S * Module:  library/pkcs11.c
+S * Caller:  library/pk.c
+S *
+S * Requires: MBEDTLS_PK_C
+S *
+S * This module enables SSL/TLS PKCS #11 smartcard support.
+S * Requires the presence of the PKCS#11 helper library (libpkcs11-helper)
+S */
+S//#define MBEDTLS_PKCS11_C
+S
+S/**
+S * \def MBEDTLS_PKCS12_C
+S *
+S * Enable PKCS#12 PBE functions.
+S * Adds algorithms for parsing PKCS#8 encrypted private keys
+S *
+S * Module:  library/pkcs12.c
+S * Caller:  library/pkparse.c
+S *
+S * Requires: MBEDTLS_ASN1_PARSE_C, MBEDTLS_CIPHER_C, MBEDTLS_MD_C
+S * Can use:  MBEDTLS_ARC4_C
+S *
+S * This module enables PKCS#12 functions.
+S */
+S#define MBEDTLS_PKCS12_C
+S
+S/**
+S * \def MBEDTLS_PLATFORM_C
+S *
+S * Enable the platform abstraction layer that allows you to re-assign
+S * functions like calloc(), free(), snprintf(), printf(), fprintf(), exit().
+S *
+S * Enabling MBEDTLS_PLATFORM_C enables to use of MBEDTLS_PLATFORM_XXX_ALT
+S * or MBEDTLS_PLATFORM_XXX_MACRO directives, allowing the functions mentioned
+S * above to be specified at runtime or compile time respectively.
+S *
+S * \note This abstraction layer must be enabled on Windows (including MSYS2)
+S * as other module rely on it for a fixed snprintf implementation.
+S *
+S * Module:  library/platform.c
+S * Caller:  Most other .c files
+S *
+S * This module enables abstraction of common (libc) functions.
+S */
+S#define MBEDTLS_PLATFORM_C
+S
+S/**
+S * \def MBEDTLS_RIPEMD160_C
+S *
+S * Enable the RIPEMD-160 hash algorithm.
+S *
+S * Module:  library/mbedtls_ripemd160.c
+S * Caller:  library/mbedtls_md.c
+S *
+S */
+S#define MBEDTLS_RIPEMD160_C
+S
+S/**
+S * \def MBEDTLS_RSA_C
+S *
+S * Enable the RSA public-key cryptosystem.
+S *
+S * Module:  library/rsa.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *          library/x509.c
+S *
+S * This module is used by the following key exchanges:
+S *      RSA, DHE-RSA, ECDHE-RSA, RSA-PSK
+S *
+S * Requires: MBEDTLS_BIGNUM_C, MBEDTLS_OID_C
+S */
+S#define MBEDTLS_RSA_C
+S
+S/**
+S * \def MBEDTLS_SHA1_C
+S *
+S * Enable the SHA1 cryptographic hash algorithm.
+S *
+S * Module:  library/mbedtls_sha1.c
+S * Caller:  library/mbedtls_md.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *          library/x509write_crt.c
+S *
+S * This module is required for SSL/TLS and SHA1-signed certificates.
+S */
+S#define MBEDTLS_SHA1_C
+S
+S/**
+S * \def MBEDTLS_SHA256_C
+S *
+S * Enable the SHA-224 and SHA-256 cryptographic hash algorithms.
+S *
+S * Module:  library/mbedtls_sha256.c
+S * Caller:  library/entropy.c
+S *          library/mbedtls_md.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *
+S * This module adds support for SHA-224 and SHA-256.
+S * This module is required for the SSL/TLS 1.2 PRF function.
+S */
+S#define MBEDTLS_SHA256_C
+S
+S/**
+S * \def MBEDTLS_SHA512_C
+S *
+S * Enable the SHA-384 and SHA-512 cryptographic hash algorithms.
+S *
+S * Module:  library/mbedtls_sha512.c
+S * Caller:  library/entropy.c
+S *          library/mbedtls_md.c
+S *          library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * This module adds support for SHA-384 and SHA-512.
+S */
+S#define MBEDTLS_SHA512_C
+S
+S/**
+S * \def MBEDTLS_SSL_CACHE_C
+S *
+S * Enable simple SSL cache implementation.
+S *
+S * Module:  library/ssl_cache.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_SSL_CACHE_C
+S */
+S#define MBEDTLS_SSL_CACHE_C
+S
+S/**
+S * \def MBEDTLS_SSL_COOKIE_C
+S *
+S * Enable basic implementation of DTLS cookies for hello verification.
+S *
+S * Module:  library/ssl_cookie.c
+S * Caller:
+S */
+S#define MBEDTLS_SSL_COOKIE_C
+S
+S/**
+S * \def MBEDTLS_SSL_TICKET_C
+S *
+S * Enable an implementation of TLS server-side callbacks for session tickets.
+S *
+S * Module:  library/ssl_ticket.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_CIPHER_C
+S */
+S#define MBEDTLS_SSL_TICKET_C
+S
+S/**
+S * \def MBEDTLS_SSL_CLI_C
+S *
+S * Enable the SSL/TLS client code.
+S *
+S * Module:  library/ssl_cli.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_SSL_TLS_C
+S *
+S * This module is required for SSL/TLS client support.
+S */
+S#define MBEDTLS_SSL_CLI_C
+S
+S/**
+S * \def MBEDTLS_SSL_SRV_C
+S *
+S * Enable the SSL/TLS server code.
+S *
+S * Module:  library/ssl_srv.c
+S * Caller:
+S *
+S * Requires: MBEDTLS_SSL_TLS_C
+S *
+S * This module is required for SSL/TLS server support.
+S */
+S#define MBEDTLS_SSL_SRV_C
+S
+S/**
+S * \def MBEDTLS_SSL_TLS_C
+S *
+S * Enable the generic SSL/TLS code.
+S *
+S * Module:  library/ssl_tls.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *
+S * Requires: MBEDTLS_CIPHER_C, MBEDTLS_MD_C
+S *           and at least one of the MBEDTLS_SSL_PROTO_XXX defines
+S *
+S * This module is required for SSL/TLS.
+S */
+S#define MBEDTLS_SSL_TLS_C
+S
+S/**
+S * \def MBEDTLS_THREADING_C
+S *
+S * Enable the threading abstraction layer.
+S * By default mbed TLS assumes it is used in a non-threaded environment or that
+S * contexts are not shared between threads. If you do intend to use contexts
+S * between threads, you will need to enable this layer to prevent race
+S * conditions.
+S *
+S * Module:  library/threading.c
+S *
+S * This allows different threading implementations (self-implemented or
+S * provided).
+S *
+S * You will have to enable either MBEDTLS_THREADING_ALT or
+S * MBEDTLS_THREADING_PTHREAD.
+S *
+S * Enable this layer to allow use of mutexes within mbed TLS
+S */
+S//#define MBEDTLS_THREADING_C
+S
+S/**
+S * \def MBEDTLS_TIMING_C
+S *
+S * Enable the portable timing interface.
+S *
+S * Module:  library/timing.c
+S * Caller:  library/havege.c
+S *
+S * This module is used by the HAVEGE random number generator.
+S */
+S#define MBEDTLS_TIMING_C
+S
+S/**
+S * \def MBEDTLS_VERSION_C
+S *
+S * Enable run-time version information.
+S *
+S * Module:  library/version.c
+S *
+S * This module provides run-time version information.
+S */
+S#define MBEDTLS_VERSION_C
+S
+S/**
+S * \def MBEDTLS_X509_USE_C
+S *
+S * Enable X.509 core for using certificates.
+S *
+S * Module:  library/x509.c
+S * Caller:  library/mbedtls_x509_crl.c
+S *          library/mbedtls_x509_crt.c
+S *          library/mbedtls_x509_csr.c
+S *
+S * Requires: MBEDTLS_ASN1_PARSE_C, MBEDTLS_BIGNUM_C, MBEDTLS_OID_C,
+S *           MBEDTLS_PK_PARSE_C
+S *
+S * This module is required for the X.509 parsing modules.
+S */
+S#define MBEDTLS_X509_USE_C
+S
+S/**
+S * \def MBEDTLS_X509_CRT_PARSE_C
+S *
+S * Enable X.509 certificate parsing.
+S *
+S * Module:  library/mbedtls_x509_crt.c
+S * Caller:  library/ssl_cli.c
+S *          library/ssl_srv.c
+S *          library/ssl_tls.c
+S *
+S * Requires: MBEDTLS_X509_USE_C
+S *
+S * This module is required for X.509 certificate parsing.
+S */
+S#define MBEDTLS_X509_CRT_PARSE_C
+S
+S/**
+S * \def MBEDTLS_X509_CRL_PARSE_C
+S *
+S * Enable X.509 CRL parsing.
+S *
+S * Module:  library/mbedtls_x509_crl.c
+S * Caller:  library/mbedtls_x509_crt.c
+S *
+S * Requires: MBEDTLS_X509_USE_C
+S *
+S * This module is required for X.509 CRL parsing.
+S */
+S#define MBEDTLS_X509_CRL_PARSE_C
+S
+S/**
+S * \def MBEDTLS_X509_CSR_PARSE_C
+S *
+S * Enable X.509 Certificate Signing Request (CSR) parsing.
+S *
+S * Module:  library/mbedtls_x509_csr.c
+S * Caller:  library/x509_crt_write.c
+S *
+S * Requires: MBEDTLS_X509_USE_C
+S *
+S * This module is used for reading X.509 certificate request.
+S */
+S#define MBEDTLS_X509_CSR_PARSE_C
+S
+S/**
+S * \def MBEDTLS_X509_CREATE_C
+S *
+S * Enable X.509 core for creating certificates.
+S *
+S * Module:  library/x509_create.c
+S *
+S * Requires: MBEDTLS_BIGNUM_C, MBEDTLS_OID_C, MBEDTLS_PK_WRITE_C
+S *
+S * This module is the basis for creating X.509 certificates and CSRs.
+S */
+S#define MBEDTLS_X509_CREATE_C
+S
+S/**
+S * \def MBEDTLS_X509_CRT_WRITE_C
+S *
+S * Enable creating X.509 certificates.
+S *
+S * Module:  library/x509_crt_write.c
+S *
+S * Requires: MBEDTLS_X509_CREATE_C
+S *
+S * This module is required for X.509 certificate creation.
+S */
+S#define MBEDTLS_X509_CRT_WRITE_C
+S
+S/**
+S * \def MBEDTLS_X509_CSR_WRITE_C
+S *
+S * Enable creating X.509 Certificate Signing Requests (CSR).
+S *
+S * Module:  library/x509_csr_write.c
+S *
+S * Requires: MBEDTLS_X509_CREATE_C
+S *
+S * This module is required for X.509 certificate request writing.
+S */
+S#define MBEDTLS_X509_CSR_WRITE_C
+S
+S/**
+S * \def MBEDTLS_XTEA_C
+S *
+S * Enable the XTEA block cipher.
+S *
+S * Module:  library/xtea.c
+S * Caller:
+S */
+S#define MBEDTLS_XTEA_C
+S
+S/* \} name SECTION: mbed TLS modules */
+S
+S/**
+S * \name SECTION: Module configuration options
+S *
+S * This section allows for the setting of module specific sizes and
+S * configuration options. The default values are already present in the
+S * relevant header files and should suffice for the regular use cases.
+S *
+S * Our advice is to enable options and change their values here
+S * only if you have a good reason and know the consequences.
+S *
+S * Please check the respective header file for documentation on these
+S * parameters (to prevent duplicate documentation).
+S * \{
+S */
+S
+S/* MPI / BIGNUM options */
+S//#define MBEDTLS_MPI_WINDOW_SIZE            6 /**< Maximum windows size used. */
+S//#define MBEDTLS_MPI_MAX_SIZE            1024 /**< Maximum number of bytes for usable MPIs. */
+S
+S/* CTR_DRBG options */
+S//#define MBEDTLS_CTR_DRBG_ENTROPY_LEN               48 /**< Amount of entropy used per seed by default (48 with SHA-512, 32 with SHA-256) */
+S//#define MBEDTLS_CTR_DRBG_RESEED_INTERVAL        10000 /**< Interval before reseed is performed by default */
+S//#define MBEDTLS_CTR_DRBG_MAX_INPUT                256 /**< Maximum number of additional input bytes */
+S//#define MBEDTLS_CTR_DRBG_MAX_REQUEST             1024 /**< Maximum number of requested bytes per call */
+S//#define MBEDTLS_CTR_DRBG_MAX_SEED_INPUT           384 /**< Maximum size of (re)seed buffer */
+S
+S/* HMAC_DRBG options */
+S//#define MBEDTLS_HMAC_DRBG_RESEED_INTERVAL   10000 /**< Interval before reseed is performed by default */
+S//#define MBEDTLS_HMAC_DRBG_MAX_INPUT           256 /**< Maximum number of additional input bytes */
+S//#define MBEDTLS_HMAC_DRBG_MAX_REQUEST        1024 /**< Maximum number of requested bytes per call */
+S//#define MBEDTLS_HMAC_DRBG_MAX_SEED_INPUT      384 /**< Maximum size of (re)seed buffer */
+S
+S/* ECP options */
+S//#define MBEDTLS_ECP_MAX_BITS             521 /**< Maximum bit size of groups */
+S//#define MBEDTLS_ECP_WINDOW_SIZE            6 /**< Maximum window size used */
+S//#define MBEDTLS_ECP_FIXED_POINT_OPTIM      1 /**< Enable fixed-point speed-up */
+S
+S/* Entropy options */
+S//#define MBEDTLS_ENTROPY_MAX_SOURCES                20 /**< Maximum number of sources supported */
+S//#define MBEDTLS_ENTROPY_MAX_GATHER                128 /**< Maximum amount requested from entropy sources */
+S
+S/* Memory buffer allocator options */
+S//#define MBEDTLS_MEMORY_ALIGN_MULTIPLE      4 /**< Align on multiples of this value */
+S
+S/* Platform options */
+S//#define MBEDTLS_PLATFORM_STD_MEM_HDR   <stdlib.h> /**< Header to include if MBEDTLS_PLATFORM_NO_STD_FUNCTIONS is defined. Don't define if no header is needed. */
+S//#define MBEDTLS_PLATFORM_STD_CALLOC        calloc /**< Default allocator to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_STD_FREE            free /**< Default free to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_STD_EXIT            exit /**< Default exit to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_STD_FPRINTF      fprintf /**< Default fprintf to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_STD_PRINTF        printf /**< Default printf to use, can be undefined */
+S/* Note: your snprintf must correclty zero-terminate the buffer! */
+S//#define MBEDTLS_PLATFORM_STD_SNPRINTF    snprintf /**< Default snprintf to use, can be undefined */
+S
+S/* To Use Function Macros MBEDTLS_PLATFORM_C must be enabled */
+S/* MBEDTLS_PLATFORM_XXX_MACRO and MBEDTLS_PLATFORM_XXX_ALT cannot both be defined */
+S//#define MBEDTLS_PLATFORM_CALLOC_MACRO        calloc /**< Default allocator macro to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_FREE_MACRO            free /**< Default free macro to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_EXIT_MACRO            exit /**< Default exit macro to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_FPRINTF_MACRO      fprintf /**< Default fprintf macro to use, can be undefined */
+S//#define MBEDTLS_PLATFORM_PRINTF_MACRO        printf /**< Default printf macro to use, can be undefined */
+S/* Note: your snprintf must correclty zero-terminate the buffer! */
+S//#define MBEDTLS_PLATFORM_SNPRINTF_MACRO    snprintf /**< Default snprintf macro to use, can be undefined */
+S
+S/* SSL Cache options */
+S//#define MBEDTLS_SSL_CACHE_DEFAULT_TIMEOUT       86400 /**< 1 day  */
+S//#define MBEDTLS_SSL_CACHE_DEFAULT_MAX_ENTRIES      50 /**< Maximum entries in cache */
+S
+S/* SSL options */
+S//#define MBEDTLS_SSL_MAX_CONTENT_LEN             16384 /**< Maxium fragment length in bytes, determines the size of each of the two internal I/O buffers */
+S//#define MBEDTLS_SSL_DEFAULT_TICKET_LIFETIME     86400 /**< Lifetime of session tickets (if enabled) */
+S//#define MBEDTLS_PSK_MAX_LEN               32 /**< Max size of TLS pre-shared keys, in bytes (default 256 bits) */
+S//#define MBEDTLS_SSL_COOKIE_TIMEOUT        60 /**< Default expiration delay of DTLS cookies, in seconds if HAVE_TIME, or in number of cookies issued */
+S
+S/**
+S * Complete list of ciphersuites to use, in order of preference.
+S *
+S * \warning No dependency checking is done on that field! This option can only
+S * be used to restrict the set of available ciphersuites. It is your
+S * responsibility to make sure the needed modules are active.
+S *
+S * Use this to save a few hundred bytes of ROM (default ordering of all
+S * available ciphersuites) and a few to a few hundred bytes of RAM.
+S *
+S * The value below is only an example, not the default.
+S */
+S//#define MBEDTLS_SSL_CIPHERSUITES MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,MBEDTLS_TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+S
+S/* X509 options */
+S//#define MBEDTLS_X509_MAX_INTERMEDIATE_CA   8   /**< Maximum number of intermediate CAs in a verification chain. */
+S
+S/* \} name SECTION: Module configuration options */
+S
+S#if defined(TARGET_LIKE_MBED)
+S#include "mbedtls/target_config.h"
+S#endif
+S
+S/*
+S * Allow user to override any previous default.
+S *
+S * Use two macro names for that, as:
+S * - with yotta the prefix YOTTA_CFG_ is forced
+S * - without yotta is looks weird to have a YOTTA prefix.
+S */
+S#if defined(YOTTA_CFG_MBEDTLS_USER_CONFIG_FILE)
+S#include YOTTA_CFG_MBEDTLS_USER_CONFIG_FILE
+S#elif defined(MBEDTLS_USER_CONFIG_FILE)
+S#include MBEDTLS_USER_CONFIG_FILE
+S#endif
+S
+S#include "check_config.h"
+S
+N#endif /* MBEDTLS_CONFIG_H */
+L 24 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\library\certs.c" 2
+N#else
+S#include MBEDTLS_CONFIG_FILE
+N#endif
+N
+N#include "mbedtls/certs.h"
+L 1 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls/certs.h" 1
+N/**
+N * \file certs.h
+N *
+N * \brief Sample certificates and DHM parameters for testing
+N *
+N *  Copyright (C) 2006-2015, ARM Limited, All Rights Reserved
+N *  SPDX-License-Identifier: Apache-2.0
+N *
+N *  Licensed under the Apache License, Version 2.0 (the "License"); you may
+N *  not use this file except in compliance with the License.
+N *  You may obtain a copy of the License at
+N *
+N *  http://www.apache.org/licenses/LICENSE-2.0
+N *
+N *  Unless required by applicable law or agreed to in writing, software
+N *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+N *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+N *  See the License for the specific language governing permissions and
+N *  limitations under the License.
+N *
+N *  This file is part of mbed TLS (https://tls.mbed.org)
+N */
+N#ifndef MBEDTLS_CERTS_H
+N#define MBEDTLS_CERTS_H
+N
+N#include <stddef.h>
+L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h" 1
+N/* stddef.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.1.4 */
+N
+N/* Copyright (C) ARM Ltd., 1999
+N * All rights reserved
+N * RCS $Revision: 190986 $
+N * Checkin $Date: 2015-02-04 14:26:49 +0000 (Wed, 04 Feb 2015) $
+N * Revising $Author: agrant $
+N */
+N
+N/* Copyright (C) Codemist Ltd., 1988                            */
+N/* Copyright 1991 ARM Limited. All rights reserved.             */
+N/* version 0.05 */
+N
+N/*
+N * The following types and macros are defined in several headers referred to in
+N * the descriptions of the functions declared in that header. They are also
+N * defined in this header file.
+N */
+N
+N#ifndef __stddef_h
+N#define __stddef_h
+N#define __ARMCLIB_VERSION 5060002
+N
+N  #ifndef __STDDEF_DECLS
+N  #define __STDDEF_DECLS
+N    #undef __CLIBNS
+N    #ifdef __cplusplus
+S        namespace std {
+S        #define __CLIBNS ::std::
+S        extern "C" {
+N    #else
+N      #define __CLIBNS
+N    #endif  /* __cplusplus */
+N
+N#if __sizeof_ptr == 8
+X#if 4 == 8
+S  typedef signed long ptrdiff_t;
+N#else
+N  typedef signed int ptrdiff_t;
+N#endif
+N
+N#if defined(__cplusplus) || !defined(__STRICT_ANSI__)
+X#if 0L || !0L
+N /* unconditional in C++ and non-strict C for consistency of debug info */
+N  #if __sizeof_ptr == 8
+X  #if 4 == 8
+S    typedef unsigned long size_t;   /* see <stddef.h> */
+N  #else
+N    typedef unsigned int size_t;   /* see <stddef.h> */
+N  #endif
+N#elif !defined(__size_t)
+S  #define __size_t 1
+S  #if __sizeof_ptr == 8
+S    typedef unsigned long size_t;   /* see <stddef.h> */
+S  #else
+S    typedef unsigned int size_t;   /* see <stddef.h> */
+S  #endif
+S   /* the unsigned integral type of the result of the sizeof operator. */
+N#endif
+N
+N#ifndef __cplusplus  /* wchar_t is a builtin type for C++ */
+N  #if !defined(__STRICT_ANSI__)
+X  #if !0L
+N  /* unconditional in non-strict C for consistency of debug info */
+N    #if defined(__WCHAR32) || (defined(__ARM_SIZEOF_WCHAR_T) && __ARM_SIZEOF_WCHAR_T == 4)
+X    #if 0L || (0L && __ARM_SIZEOF_WCHAR_T == 4)
+S      typedef unsigned int wchar_t; /* also in <stdlib.h> and <inttypes.h> */
+N    #else
+N      typedef unsigned short wchar_t; /* also in <stdlib.h> and <inttypes.h> */
+N    #endif
+N  #elif !defined(__wchar_t)
+S    #define __wchar_t 1
+S    #if defined(__WCHAR32) || (defined(__ARM_SIZEOF_WCHAR_T) && __ARM_SIZEOF_WCHAR_T == 4)
+S      typedef unsigned int wchar_t; /* also in <stdlib.h> and <inttypes.h> */
+S    #else
+S      typedef unsigned short wchar_t; /* also in <stdlib.h> and <inttypes.h> */
+S    #endif
+S   /*
+S    * An integral type whose range of values can represent distinct codes for
+S    * all members of the largest extended character set specified among the
+S    * supported locales; the null character shall have the code value zero and
+S    * each member of the basic character set shall have a code value when used
+S    * as the lone character in an integer character constant.
+S    */
+N  #endif
+N#endif
+N
+N#undef NULL  /* others (e.g. <stdio.h>) also define */
+N#define NULL 0
+N   /* null pointer constant. */
+N
+N#ifdef __clang__
+S  #define offsetof(t, d) __builtin_offsetof(t, d)
+N#else
+N  /* EDG uses __INTADDR__ to avoid errors when strict */
+N  #define offsetof(t, memb) ((__CLIBNS size_t)__INTADDR__(&(((t *)0)->memb)))
+N#endif
+N
+N#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 201112L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
+X#if !0L || (1L && 201112L <= 199409L) || (0L && 201103L <= __cplusplus)
+N  typedef long double max_align_t;
+N#endif
+N
+N    #ifdef __cplusplus
+S         }  /* extern "C" */
+S      }  /* namespace std */
+N    #endif /* __cplusplus */
+N  #endif /* __STDDEF_DECLS */
+N
+N
+N  #ifdef __cplusplus
+S    #ifndef __STDDEF_NO_EXPORTS
+S      using ::std::size_t;
+S      using ::std::ptrdiff_t;
+S      #if !defined(__STRICT_ANSI__) || (defined(__cplusplus) && 201103L <= __cplusplus)
+S        using ::std::max_align_t;
+S      #endif
+S    #endif 
+N  #endif /* __cplusplus */
+N
+N#endif
+N
+N/* end of stddef.h */
+N
+L 27 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\include\mbedtls/certs.h" 2
+N
+N#ifdef __cplusplus
+Sextern "C" {
+N#endif
+N
+N#if defined(MBEDTLS_PEM_PARSE_C)
+X#if 0L
+S/* Concatenation of all CA certificates in PEM format if available */
+Sextern const char   mbedtls_test_cas_pem[];
+Sextern const size_t mbedtls_test_cas_pem_len;
+N#endif
+N
+N/* List of all CA certificates, terminated by NULL */
+Nextern const char * mbedtls_test_cas[];
+Nextern const size_t mbedtls_test_cas_len[];
+N
+N/*
+N * Convenience for users who just want a certificate:
+N * RSA by default, or ECDSA if RSA is not available
+N */
+Nextern const char * mbedtls_test_ca_crt;
+Nextern const size_t mbedtls_test_ca_crt_len;
+Nextern const char * mbedtls_test_ca_key;
+Nextern const size_t mbedtls_test_ca_key_len;
+Nextern const char * mbedtls_test_ca_pwd;
+Nextern const size_t mbedtls_test_ca_pwd_len;
+Nextern const char * mbedtls_test_srv_crt;
+Nextern const size_t mbedtls_test_srv_crt_len;
+Nextern const char * mbedtls_test_srv_key;
+Nextern const size_t mbedtls_test_srv_key_len;
+Nextern const char * mbedtls_test_cli_crt;
+Nextern const size_t mbedtls_test_cli_crt_len;
+Nextern const char * mbedtls_test_cli_key;
+Nextern const size_t mbedtls_test_cli_key_len;
+N
+N#if defined(MBEDTLS_ECDSA_C)
+X#if 0L
+Sextern const char   mbedtls_test_ca_crt_ec[];
+Sextern const size_t mbedtls_test_ca_crt_ec_len;
+Sextern const char   mbedtls_test_ca_key_ec[];
+Sextern const size_t mbedtls_test_ca_key_ec_len;
+Sextern const char   mbedtls_test_ca_pwd_ec[];
+Sextern const size_t mbedtls_test_ca_pwd_ec_len;
+Sextern const char   mbedtls_test_srv_crt_ec[];
+Sextern const size_t mbedtls_test_srv_crt_ec_len;
+Sextern const char   mbedtls_test_srv_key_ec[];
+Sextern const size_t mbedtls_test_srv_key_ec_len;
+Sextern const char   mbedtls_test_cli_crt_ec[];
+Sextern const size_t mbedtls_test_cli_crt_ec_len;
+Sextern const char   mbedtls_test_cli_key_ec[];
+Sextern const size_t mbedtls_test_cli_key_ec_len;
+N#endif
+N
+N#if defined(MBEDTLS_RSA_C)
+X#if 0L
+Sextern const char   mbedtls_test_ca_crt_rsa[];
+Sextern const size_t mbedtls_test_ca_crt_rsa_len;
+Sextern const char   mbedtls_test_ca_key_rsa[];
+Sextern const size_t mbedtls_test_ca_key_rsa_len;
+Sextern const char   mbedtls_test_ca_pwd_rsa[];
+Sextern const size_t mbedtls_test_ca_pwd_rsa_len;
+Sextern const char   mbedtls_test_srv_crt_rsa[];
+Sextern const size_t mbedtls_test_srv_crt_rsa_len;
+Sextern const char   mbedtls_test_srv_key_rsa[];
+Sextern const size_t mbedtls_test_srv_key_rsa_len;
+Sextern const char   mbedtls_test_cli_crt_rsa[];
+Sextern const size_t mbedtls_test_cli_crt_rsa_len;
+Sextern const char   mbedtls_test_cli_key_rsa[];
+Sextern const size_t mbedtls_test_cli_key_rsa_len;
+N#endif
+N
+N#ifdef __cplusplus
+S}
+N#endif
+N
+N#endif /* certs.h */
+L 29 "C:\Keil_v5\ARM\PACK\ARM\mbedTLS\1.1.1\library\certs.c" 2
+N
+N#if defined(MBEDTLS_CERTS_C)
+X#if 0L
+S
+S#if defined(MBEDTLS_ECDSA_C)
+S#define TEST_CA_CRT_EC                                                  \
+S"-----BEGIN CERTIFICATE-----\r\n"                                       \
+S"MIICUjCCAdegAwIBAgIJAMFD4n5iQ8zoMAoGCCqGSM49BAMCMD4xCzAJBgNVBAYT\r\n"  \
+S"Ak5MMREwDwYDVQQKEwhQb2xhclNTTDEcMBoGA1UEAxMTUG9sYXJzc2wgVGVzdCBF\r\n"  \
+S"QyBDQTAeFw0xMzA5MjQxNTQ5NDhaFw0yMzA5MjIxNTQ5NDhaMD4xCzAJBgNVBAYT\r\n"  \
+S"Ak5MMREwDwYDVQQKEwhQb2xhclNTTDEcMBoGA1UEAxMTUG9sYXJzc2wgVGVzdCBF\r\n"  \
+S"QyBDQTB2MBAGByqGSM49AgEGBSuBBAAiA2IABMPaKzRBN1gvh1b+/Im6KUNLTuBu\r\n"  \
+S"ww5XUzM5WNRStJGVOQsj318XJGJI/BqVKc4sLYfCiFKAr9ZqqyHduNMcbli4yuiy\r\n"  \
+S"aY7zQa0pw7RfdadHb9UZKVVpmlM7ILRmFmAzHqOBoDCBnTAdBgNVHQ4EFgQUnW0g\r\n"  \
+S"JEkBPyvLeLUZvH4kydv7NnwwbgYDVR0jBGcwZYAUnW0gJEkBPyvLeLUZvH4kydv7\r\n"  \
+S"NnyhQqRAMD4xCzAJBgNVBAYTAk5MMREwDwYDVQQKEwhQb2xhclNTTDEcMBoGA1UE\r\n"  \
+S"AxMTUG9sYXJzc2wgVGVzdCBFQyBDQYIJAMFD4n5iQ8zoMAwGA1UdEwQFMAMBAf8w\r\n"  \
+S"CgYIKoZIzj0EAwIDaQAwZgIxAMO0YnNWKJUAfXgSJtJxexn4ipg+kv4znuR50v56\r\n"  \
+S"t4d0PCu412mUC6Nnd7izvtE2MgIxAP1nnJQjZ8BWukszFQDG48wxCCyci9qpdSMv\r\n"  \
+S"uCjn8pwUOkABXK8Mss90fzCfCEOtIA==\r\n"                                  \
+S"-----END CERTIFICATE-----\r\n"
+X#define TEST_CA_CRT_EC                                                  "-----BEGIN CERTIFICATE-----\r\n"                                       "MIICUjCCAdegAwIBAgIJAMFD4n5iQ8zoMAoGCCqGSM49BAMCMD4xCzAJBgNVBAYT\r\n"  "Ak5MMREwDwYDVQQKEwhQb2xhclNTTDEcMBoGA1UEAxMTUG9sYXJzc2wgVGVzdCBF\r\n"  "QyBDQTAeFw0xMzA5MjQxNTQ5NDhaFw0yMzA5MjIxNTQ5NDhaMD4xCzAJBgNVBAYT\r\n"  "Ak5MMREwDwYDVQQKEwhQb2xhclNTTDEcMBoGA1UEAxMTUG9sYXJzc2wgVGVzdCBF\r\n"  "QyBDQTB2MBAGByqGSM49AgEGBSuBBAAiA2IABMPaKzRBN1gvh1b+/Im6KUNLTuBu\r\n"  "ww5XUzM5WNRStJGVOQsj318XJGJI/BqVKc4sLYfCiFKAr9ZqqyHduNMcbli4yuiy\r\n"  "aY7zQa0pw7RfdadHb9UZKVVpmlM7ILRmFmAzHqOBoDCBnTAdBgNVHQ4EFgQUnW0g\r\n"  "JEkBPyvLeLUZvH4kydv7NnwwbgYDVR0jBGcwZYAUnW0gJEkBPyvLeLUZvH4kydv7\r\n"  "NnyhQqRAMD4xCzAJBgNVBAYTAk5MMREwDwYDVQQKEwhQb2xhclNTTDEcMBoGA1UE\r\n"  "AxMTUG9sYXJzc2wgVGVzdCBFQyBDQYIJAMFD4n5iQ8zoMAwGA1UdEwQFMAMBAf8w\r\n"  "CgYIKoZIzj0EAwIDaQAwZgIxAMO0YnNWKJUAfXgSJtJxexn4ipg+kv4znuR50v56\r\n"  "t4d0PCu412mUC6Nnd7izvtE2MgIxAP1nnJQjZ8BWukszFQDG48wxCCyci9qpdSMv\r\n"  "uCjn8pwUOkABXK8Mss90fzCfCEOtIA==\r\n"                                  "-----END CERTIFICATE-----\r\n"
+Sconst char mbedtls_test_ca_crt_ec[] = TEST_CA_CRT_EC;
+S
+Sconst char mbedtls_test_ca_key_ec[] =
+S"-----BEGIN EC PRIVATE KEY-----\r\n"
+S"Proc-Type: 4,ENCRYPTED\r\n"
+S"DEK-Info: DES-EDE3-CBC,307EAB469933D64E\r\n"
+S"\r\n"
+S"IxbrRmKcAzctJqPdTQLA4SWyBYYGYJVkYEna+F7Pa5t5Yg/gKADrFKcm6B72e7DG\r\n"
+S"ihExtZI648s0zdYw6qSJ74vrPSuWDe5qm93BqsfVH9svtCzWHW0pm1p0KTBCFfUq\r\n"
+S"UsuWTITwJImcnlAs1gaRZ3sAWm7cOUidL0fo2G0fYUFNcYoCSLffCFTEHBuPnagb\r\n"
+S"a77x/sY1Bvii8S9/XhDTb6pTMx06wzrm\r\n"
+S"-----END EC PRIVATE KEY-----\r\n";
+S
+Sconst char mbedtls_test_ca_pwd_ec[] = "PolarSSLTest";
+S
+Sconst char mbedtls_test_srv_crt_ec[] =
+S"-----BEGIN CERTIFICATE-----\r\n"
+S"MIICHzCCAaWgAwIBAgIBCTAKBggqhkjOPQQDAjA+MQswCQYDVQQGEwJOTDERMA8G\r\n"
+S"A1UEChMIUG9sYXJTU0wxHDAaBgNVBAMTE1BvbGFyc3NsIFRlc3QgRUMgQ0EwHhcN\r\n"
+S"MTMwOTI0MTU1MjA0WhcNMjMwOTIyMTU1MjA0WjA0MQswCQYDVQQGEwJOTDERMA8G\r\n"
+S"A1UEChMIUG9sYXJTU0wxEjAQBgNVBAMTCWxvY2FsaG9zdDBZMBMGByqGSM49AgEG\r\n"
+S"CCqGSM49AwEHA0IABDfMVtl2CR5acj7HWS3/IG7ufPkGkXTQrRS192giWWKSTuUA\r\n"
+S"2CMR/+ov0jRdXRa9iojCa3cNVc2KKg76Aci07f+jgZ0wgZowCQYDVR0TBAIwADAd\r\n"
+S"BgNVHQ4EFgQUUGGlj9QH2deCAQzlZX+MY0anE74wbgYDVR0jBGcwZYAUnW0gJEkB\r\n"
+S"PyvLeLUZvH4kydv7NnyhQqRAMD4xCzAJBgNVBAYTAk5MMREwDwYDVQQKEwhQb2xh\r\n"
+S"clNTTDEcMBoGA1UEAxMTUG9sYXJzc2wgVGVzdCBFQyBDQYIJAMFD4n5iQ8zoMAoG\r\n"
+S"CCqGSM49BAMCA2gAMGUCMQCaLFzXptui5WQN8LlO3ddh1hMxx6tzgLvT03MTVK2S\r\n"
+S"C12r0Lz3ri/moSEpNZWqPjkCMCE2f53GXcYLqyfyJR078c/xNSUU5+Xxl7VZ414V\r\n"
+S"fGa5kHvHARBPc8YAIVIqDvHH1Q==\r\n"
+S"-----END CERTIFICATE-----\r\n";
+S
+Sconst char mbedtls_test_srv_key_ec[] =
+S"-----BEGIN EC PRIVATE KEY-----\r\n"
+S"MHcCAQEEIPEqEyB2AnCoPL/9U/YDHvdqXYbIogTywwyp6/UfDw6noAoGCCqGSM49\r\n"
+S"AwEHoUQDQgAEN8xW2XYJHlpyPsdZLf8gbu58+QaRdNCtFLX3aCJZYpJO5QDYIxH/\r\n"
+S"6i/SNF1dFr2KiMJrdw1VzYoqDvoByLTt/w==\r\n"
+S"-----END EC PRIVATE KEY-----\r\n";
+S
+Sconst char mbedtls_test_cli_crt_ec[] =
+S"-----BEGIN CERTIFICATE-----\r\n"
+S"MIICLDCCAbKgAwIBAgIBDTAKBggqhkjOPQQDAjA+MQswCQYDVQQGEwJOTDERMA8G\r\n"
+S"A1UEChMIUG9sYXJTU0wxHDAaBgNVBAMTE1BvbGFyc3NsIFRlc3QgRUMgQ0EwHhcN\r\n"
+S"MTMwOTI0MTU1MjA0WhcNMjMwOTIyMTU1MjA0WjBBMQswCQYDVQQGEwJOTDERMA8G\r\n"
+S"A1UEChMIUG9sYXJTU0wxHzAdBgNVBAMTFlBvbGFyU1NMIFRlc3QgQ2xpZW50IDIw\r\n"
+S"WTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARX5a6xc9/TrLuTuIH/Eq7u5lOszlVT\r\n"
+S"9jQOzC7jYyUL35ji81xgNpbA1RgUcOV/n9VLRRjlsGzVXPiWj4dwo+THo4GdMIGa\r\n"
+S"MAkGA1UdEwQCMAAwHQYDVR0OBBYEFHoAX4Zk/OBd5REQO7LmO8QmP8/iMG4GA1Ud\r\n"
+S"IwRnMGWAFJ1tICRJAT8ry3i1Gbx+JMnb+zZ8oUKkQDA+MQswCQYDVQQGEwJOTDER\r\n"
+S"MA8GA1UEChMIUG9sYXJTU0wxHDAaBgNVBAMTE1BvbGFyc3NsIFRlc3QgRUMgQ0GC\r\n"
+S"CQDBQ+J+YkPM6DAKBggqhkjOPQQDAgNoADBlAjBKZQ17IIOimbmoD/yN7o89u3BM\r\n"
+S"lgOsjnhw3fIOoLIWy2WOGsk/LGF++DzvrRzuNiACMQCd8iem1XS4JK7haj8xocpU\r\n"
+S"LwjQje5PDGHfd3h9tP38Qknu5bJqws0md2KOKHyeV0U=\r\n"
+S"-----END CERTIFICATE-----\r\n";
+S
+Sconst char mbedtls_test_cli_key_ec[] =
+S"-----BEGIN EC PRIVATE KEY-----\r\n"
+S"MHcCAQEEIPb3hmTxZ3/mZI3vyk7p3U3wBf+WIop6hDhkFzJhmLcqoAoGCCqGSM49\r\n"
+S"AwEHoUQDQgAEV+WusXPf06y7k7iB/xKu7uZTrM5VU/Y0Dswu42MlC9+Y4vNcYDaW\r\n"
+S"wNUYFHDlf5/VS0UY5bBs1Vz4lo+HcKPkxw==\r\n"
+S"-----END EC PRIVATE KEY-----\r\n";
+S
+Sconst size_t mbedtls_test_ca_crt_ec_len  = sizeof( mbedtls_test_ca_crt_ec );
+Sconst size_t mbedtls_test_ca_key_ec_len  = sizeof( mbedtls_test_ca_key_ec );
+Sconst size_t mbedtls_test_ca_pwd_ec_len  = sizeof( mbedtls_test_ca_pwd_ec ) - 1;
+Sconst size_t mbedtls_test_srv_crt_ec_len = sizeof( mbedtls_test_srv_crt_ec );
+Sconst size_t mbedtls_test_srv_key_ec_len = sizeof( mbedtls_test_srv_key_ec );
+Sconst size_t mbedtls_test_cli_crt_ec_len = sizeof( mbedtls_test_cli_crt_ec );
+Sconst size_t mbedtls_test_cli_key_ec_len = sizeof( mbedtls_test_cli_key_ec );
+S#else
+S#define TEST_CA_CRT_EC
+S#endif /* MBEDTLS_ECDSA_C */
+S
+S#if defined(MBEDTLS_RSA_C)
+S#define TEST_CA_CRT_RSA                                                 \
+S"-----BEGIN CERTIFICATE-----\r\n"                                       \
+S"MIIDhzCCAm+gAwIBAgIBADANBgkqhkiG9w0BAQUFADA7MQswCQYDVQQGEwJOTDER\r\n"  \
+S"MA8GA1UEChMIUG9sYXJTU0wxGTAXBgNVBAMTEFBvbGFyU1NMIFRlc3QgQ0EwHhcN\r\n"  \
+S"MTEwMjEyMTQ0NDAwWhcNMjEwMjEyMTQ0NDAwWjA7MQswCQYDVQQGEwJOTDERMA8G\r\n"  \
+S"A1UEChMIUG9sYXJTU0wxGTAXBgNVBAMTEFBvbGFyU1NMIFRlc3QgQ0EwggEiMA0G\r\n"  \
+S"CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDA3zf8F7vglp0/ht6WMn1EpRagzSHx\r\n"  \
+S"mdTs6st8GFgIlKXsm8WL3xoemTiZhx57wI053zhdcHgH057Zk+i5clHFzqMwUqny\r\n"  \
+S"50BwFMtEonILwuVA+T7lpg6z+exKY8C4KQB0nFc7qKUEkHHxvYPZP9al4jwqj+8n\r\n"  \
+S"YMPGn8u67GB9t+aEMr5P+1gmIgNb1LTV+/Xjli5wwOQuvfwu7uJBVcA0Ln0kcmnL\r\n"  \
+S"R7EUQIN9Z/SG9jGr8XmksrUuEvmEF/Bibyc+E1ixVA0hmnM3oTDPb5Lc9un8rNsu\r\n"  \
+S"KNF+AksjoBXyOGVkCeoMbo4bF6BxyLObyavpw/LPh5aPgAIynplYb6LVAgMBAAGj\r\n"  \
+S"gZUwgZIwDAYDVR0TBAUwAwEB/zAdBgNVHQ4EFgQUtFrkpbPe0lL2udWmlQ/rPrzH\r\n"  \
+S"/f8wYwYDVR0jBFwwWoAUtFrkpbPe0lL2udWmlQ/rPrzH/f+hP6Q9MDsxCzAJBgNV\r\n"  \
+S"BAYTAk5MMREwDwYDVQQKEwhQb2xhclNTTDEZMBcGA1UEAxMQUG9sYXJTU0wgVGVz\r\n"  \
+S"dCBDQYIBADANBgkqhkiG9w0BAQUFAAOCAQEAuP1U2ABUkIslsCfdlc2i94QHHYeJ\r\n"  \
+S"SsR4EdgHtdciUI5I62J6Mom+Y0dT/7a+8S6MVMCZP6C5NyNyXw1GWY/YR82XTJ8H\r\n"  \
+S"DBJiCTok5DbZ6SzaONBzdWHXwWwmi5vg1dxn7YxrM9d0IjxM27WNKs4sDQhZBQkF\r\n"  \
+S"pjmfs2cb4oPl4Y9T9meTx/lvdkRYEug61Jfn6cA+qHpyPYdTH+UshITnmp5/Ztkf\r\n"  \
+S"m/UTSLBNFNHesiTZeH31NcxYGdHSme9Nc/gfidRa0FLOCfWxRlFqAI47zG9jAQCZ\r\n"  \
+S"7Z2mCGDNMhjQc+BYcdnl0lPXjdDK6V0qCg1dVewhUBcW5gZKzV7e9+DpVA==\r\n"      \
+S"-----END CERTIFICATE-----\r\n"
+X#define TEST_CA_CRT_RSA                                                 "-----BEGIN CERTIFICATE-----\r\n"                                       "MIIDhzCCAm+gAwIBAgIBADANBgkqhkiG9w0BAQUFADA7MQswCQYDVQQGEwJOTDER\r\n"  "MA8GA1UEChMIUG9sYXJTU0wxGTAXBgNVBAMTEFBvbGFyU1NMIFRlc3QgQ0EwHhcN\r\n"  "MTEwMjEyMTQ0NDAwWhcNMjEwMjEyMTQ0NDAwWjA7MQswCQYDVQQGEwJOTDERMA8G\r\n"  "A1UEChMIUG9sYXJTU0wxGTAXBgNVBAMTEFBvbGFyU1NMIFRlc3QgQ0EwggEiMA0G\r\n"  "CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDA3zf8F7vglp0/ht6WMn1EpRagzSHx\r\n"  "mdTs6st8GFgIlKXsm8WL3xoemTiZhx57wI053zhdcHgH057Zk+i5clHFzqMwUqny\r\n"  "50BwFMtEonILwuVA+T7lpg6z+exKY8C4KQB0nFc7qKUEkHHxvYPZP9al4jwqj+8n\r\n"  "YMPGn8u67GB9t+aEMr5P+1gmIgNb1LTV+/Xjli5wwOQuvfwu7uJBVcA0Ln0kcmnL\r\n"  "R7EUQIN9Z/SG9jGr8XmksrUuEvmEF/Bibyc+E1ixVA0hmnM3oTDPb5Lc9un8rNsu\r\n"  "KNF+AksjoBXyOGVkCeoMbo4bF6BxyLObyavpw/LPh5aPgAIynplYb6LVAgMBAAGj\r\n"  "gZUwgZIwDAYDVR0TBAUwAwEB/zAdBgNVHQ4EFgQUtFrkpbPe0lL2udWmlQ/rPrzH\r\n"  "/f8wYwYDVR0jBFwwWoAUtFrkpbPe0lL2udWmlQ/rPrzH/f+hP6Q9MDsxCzAJBgNV\r\n"  "BAYTAk5MMREwDwYDVQQKEwhQb2xhclNTTDEZMBcGA1UEAxMQUG9sYXJTU0wgVGVz\r\n"  "dCBDQYIBADANBgkqhkiG9w0BAQUFAAOCAQEAuP1U2ABUkIslsCfdlc2i94QHHYeJ\r\n"  "SsR4EdgHtdciUI5I62J6Mom+Y0dT/7a+8S6MVMCZP6C5NyNyXw1GWY/YR82XTJ8H\r\n"  "DBJiCTok5DbZ6SzaONBzdWHXwWwmi5vg1dxn7YxrM9d0IjxM27WNKs4sDQhZBQkF\r\n"  "pjmfs2cb4oPl4Y9T9meTx/lvdkRYEug61Jfn6cA+qHpyPYdTH+UshITnmp5/Ztkf\r\n"  "m/UTSLBNFNHesiTZeH31NcxYGdHSme9Nc/gfidRa0FLOCfWxRlFqAI47zG9jAQCZ\r\n"  "7Z2mCGDNMhjQc+BYcdnl0lPXjdDK6V0qCg1dVewhUBcW5gZKzV7e9+DpVA==\r\n"      "-----END CERTIFICATE-----\r\n"
+Sconst char mbedtls_test_ca_crt_rsa[] = TEST_CA_CRT_RSA;
+S
+Sconst char mbedtls_test_ca_key_rsa[] =
+S"-----BEGIN RSA PRIVATE KEY-----\r\n"
+S"Proc-Type: 4,ENCRYPTED\r\n"
+S"DEK-Info: DES-EDE3-CBC,A8A95B05D5B7206B\r\n"
+S"\r\n"
+S"9Qd9GeArejl1GDVh2lLV1bHt0cPtfbh5h/5zVpAVaFpqtSPMrElp50Rntn9et+JA\r\n"
+S"7VOyboR+Iy2t/HU4WvA687k3Bppe9GwKHjHhtl//8xFKwZr3Xb5yO5JUP8AUctQq\r\n"
+S"Nb8CLlZyuUC+52REAAthdWgsX+7dJO4yabzUcQ22Tp9JSD0hiL43BlkWYUNK3dAo\r\n"
+S"PZlmiptjnzVTjg1MxsBSydZinWOLBV8/JQgxSPo2yD4uEfig28qbvQ2wNIn0pnAb\r\n"
+S"GxnSAOazkongEGfvcjIIs+LZN9gXFhxcOh6kc4Q/c99B7QWETwLLkYgZ+z1a9VY9\r\n"
+S"gEU7CwCxYCD+h9hY6FPmsK0/lC4O7aeRKpYq00rPPxs6i7phiexg6ax6yTMmArQq\r\n"
+S"QmK3TAsJm8V/J5AWpLEV6jAFgRGymGGHnof0DXzVWZidrcZJWTNuGEX90nB3ee2w\r\n"
+S"PXJEFWKoD3K3aFcSLdHYr3mLGxP7H9ThQai9VsycxZKS5kwvBKQ//YMrmFfwPk8x\r\n"
+S"vTeY4KZMaUrveEel5tWZC94RSMKgxR6cyE1nBXyTQnDOGbfpNNgBKxyKbINWoOJU\r\n"
+S"WJZAwlsQn+QzCDwpri7+sV1mS3gBE6UY7aQmnmiiaC2V3Hbphxct/en5QsfDOt1X\r\n"
+S"JczSfpRWLlbPznZg8OQh/VgCMA58N5DjOzTIK7sJJ5r+94ZBTCpgAMbF588f0NTR\r\n"
+S"KCe4yrxGJR7X02M4nvD4IwOlpsQ8xQxZtOSgXv4LkxvdU9XJJKWZ/XNKJeWztxSe\r\n"
+S"Z1vdTc2YfsDBA2SEv33vxHx2g1vqtw8SjDRT2RaQSS0QuSaMJimdOX6mTOCBKk1J\r\n"
+S"9Q5mXTrER+/LnK0jEmXsBXWA5bqqVZIyahXSx4VYZ7l7w/PHiUDtDgyRhMMKi4n2\r\n"
+S"iQvQcWSQTjrpnlJbca1/DkpRt3YwrvJwdqb8asZU2VrNETh5x0QVefDRLFiVpif/\r\n"
+S"tUaeAe/P1F8OkS7OIZDs1SUbv/sD2vMbhNkUoCms3/PvNtdnvgL4F0zhaDpKCmlT\r\n"
+S"P8vx49E7v5CyRNmED9zZg4o3wmMqrQO93PtTug3Eu9oVx1zPQM1NVMyBa2+f29DL\r\n"
+S"1nuTCeXdo9+ni45xx+jAI4DCwrRdhJ9uzZyC6962H37H6D+5naNvClFR1s6li1Gb\r\n"
+S"nqPoiy/OBsEx9CaDGcqQBp5Wme/3XW+6z1ISOx+igwNTVCT14mHdBMbya0eIKft5\r\n"
+S"X+GnwtgEMyCYyyWuUct8g4RzErcY9+yW9Om5Hzpx4zOuW4NPZgPDTgK+t2RSL/Yq\r\n"
+S"rE1njrgeGYcVeG3f+OftH4s6fPbq7t1A5ZgUscbLMBqr9tK+OqygR4EgKBPsH6Cz\r\n"
+S"L6zlv/2RV0qAHvVuDJcIDIgwY5rJtINEm32rhOeFNJwZS5MNIC1czXZx5//ugX7l\r\n"
+S"I4sy5nbVhwSjtAk8Xg5dZbdTZ6mIrb7xqH+fdakZor1khG7bC2uIwibD3cSl2XkR\r\n"
+S"wN48lslbHnqqagr6Xm1nNOSVl8C/6kbJEsMpLhAezfRtGwvOucoaE+WbeUNolGde\r\n"
+S"P/eQiddSf0brnpiLJRh7qZrl9XuqYdpUqnoEdMAfotDOID8OtV7gt8a48ad8VPW2\r\n"
+S"-----END RSA PRIVATE KEY-----\r\n";
+S
+Sconst char mbedtls_test_ca_pwd_rsa[] = "PolarSSLTest";
+S
+Sconst char mbedtls_test_srv_crt_rsa[] =
+S"-----BEGIN CERTIFICATE-----\r\n"
+S"MIIDNzCCAh+gAwIBAgIBAjANBgkqhkiG9w0BAQUFADA7MQswCQYDVQQGEwJOTDER\r\n"
+S"MA8GA1UEChMIUG9sYXJTU0wxGTAXBgNVBAMTEFBvbGFyU1NMIFRlc3QgQ0EwHhcN\r\n"
+S"MTEwMjEyMTQ0NDA2WhcNMjEwMjEyMTQ0NDA2WjA0MQswCQYDVQQGEwJOTDERMA8G\r\n"
+S"A1UEChMIUG9sYXJTU0wxEjAQBgNVBAMTCWxvY2FsaG9zdDCCASIwDQYJKoZIhvcN\r\n"
+S"AQEBBQADggEPADCCAQoCggEBAMFNo93nzR3RBNdJcriZrA545Do8Ss86ExbQWuTN\r\n"
+S"owCIp+4ea5anUrSQ7y1yej4kmvy2NKwk9XfgJmSMnLAofaHa6ozmyRyWvP7BBFKz\r\n"
+S"NtSj+uGxdtiQwWG0ZlI2oiZTqqt0Xgd9GYLbKtgfoNkNHC1JZvdbJXNG6AuKT2kM\r\n"
+S"tQCQ4dqCEGZ9rlQri2V5kaHiYcPNQEkI7mgM8YuG0ka/0LiqEQMef1aoGh5EGA8P\r\n"
+S"hYvai0Re4hjGYi/HZo36Xdh98yeJKQHFkA4/J/EwyEoO79bex8cna8cFPXrEAjya\r\n"
+S"HT4P6DSYW8tzS1KW2BGiLICIaTla0w+w3lkvEcf36hIBMJcCAwEAAaNNMEswCQYD\r\n"
+S"VR0TBAIwADAdBgNVHQ4EFgQUpQXoZLjc32APUBJNYKhkr02LQ5MwHwYDVR0jBBgw\r\n"
+S"FoAUtFrkpbPe0lL2udWmlQ/rPrzH/f8wDQYJKoZIhvcNAQEFBQADggEBAJxnXClY\r\n"
+S"oHkbp70cqBrsGXLybA74czbO5RdLEgFs7rHVS9r+c293luS/KdliLScZqAzYVylw\r\n"
+S"UfRWvKMoWhHYKp3dEIS4xTXk6/5zXxhv9Rw8SGc8qn6vITHk1S1mPevtekgasY5Y\r\n"
+S"iWQuM3h4YVlRH3HHEMAD1TnAexfXHHDFQGe+Bd1iAbz1/sH9H8l4StwX6egvTK3M\r\n"
+S"wXRwkKkvjKaEDA9ATbZx0mI8LGsxSuCqe9r9dyjmttd47J1p1Rulz3CLzaRcVIuS\r\n"
+S"RRQfaD8neM9c1S/iJ/amTVqJxA1KOdOS5780WhPfSArA+g4qAmSjelc3p4wWpha8\r\n"
+S"zhuYwjVuX6JHG0c=\r\n"
+S"-----END CERTIFICATE-----\r\n";
+S
+Sconst char mbedtls_test_srv_key_rsa[] =
+S"-----BEGIN RSA PRIVATE KEY-----\r\n"
+S"MIIEpAIBAAKCAQEAwU2j3efNHdEE10lyuJmsDnjkOjxKzzoTFtBa5M2jAIin7h5r\r\n"
+S"lqdStJDvLXJ6PiSa/LY0rCT1d+AmZIycsCh9odrqjObJHJa8/sEEUrM21KP64bF2\r\n"
+S"2JDBYbRmUjaiJlOqq3ReB30Zgtsq2B+g2Q0cLUlm91slc0boC4pPaQy1AJDh2oIQ\r\n"
+S"Zn2uVCuLZXmRoeJhw81ASQjuaAzxi4bSRr/QuKoRAx5/VqgaHkQYDw+Fi9qLRF7i\r\n"
+S"GMZiL8dmjfpd2H3zJ4kpAcWQDj8n8TDISg7v1t7HxydrxwU9esQCPJodPg/oNJhb\r\n"
+S"y3NLUpbYEaIsgIhpOVrTD7DeWS8Rx/fqEgEwlwIDAQABAoIBAQCXR0S8EIHFGORZ\r\n"
+S"++AtOg6eENxD+xVs0f1IeGz57Tjo3QnXX7VBZNdj+p1ECvhCE/G7XnkgU5hLZX+G\r\n"
+S"Z0jkz/tqJOI0vRSdLBbipHnWouyBQ4e/A1yIJdlBtqXxJ1KE/ituHRbNc4j4kL8Z\r\n"
+S"/r6pvwnTI0PSx2Eqs048YdS92LT6qAv4flbNDxMn2uY7s4ycS4Q8w1JXnCeaAnYm\r\n"
+S"WYI5wxO+bvRELR2Mcz5DmVnL8jRyml6l6582bSv5oufReFIbyPZbQWlXgYnpu6He\r\n"
+S"GTc7E1zKYQGG/9+DQUl/1vQuCPqQwny0tQoX2w5tdYpdMdVm+zkLtbajzdTviJJa\r\n"
+S"TWzL6lt5AoGBAN86+SVeJDcmQJcv4Eq6UhtRr4QGMiQMz0Sod6ettYxYzMgxtw28\r\n"
+S"CIrgpozCc+UaZJLo7UxvC6an85r1b2nKPCLQFaggJ0H4Q0J/sZOhBIXaoBzWxveK\r\n"
+S"nupceKdVxGsFi8CDy86DBfiyFivfBj+47BbaQzPBj7C4rK7UlLjab2rDAoGBAN2u\r\n"
+S"AM2gchoFiu4v1HFL8D7lweEpi6ZnMJjnEu/dEgGQJFjwdpLnPbsj4c75odQ4Gz8g\r\n"
+S"sw9lao9VVzbusoRE/JGI4aTdO0pATXyG7eG1Qu+5Yc1YGXcCrliA2xM9xx+d7f+s\r\n"
+S"mPzN+WIEg5GJDYZDjAzHG5BNvi/FfM1C9dOtjv2dAoGAF0t5KmwbjWHBhcVqO4Ic\r\n"
+S"BVvN3BIlc1ue2YRXEDlxY5b0r8N4XceMgKmW18OHApZxfl8uPDauWZLXOgl4uepv\r\n"
+S"whZC3EuWrSyyICNhLY21Ah7hbIEBPF3L3ZsOwC+UErL+dXWLdB56Jgy3gZaBeW7b\r\n"
+S"vDrEnocJbqCm7IukhXHOBK8CgYEAwqdHB0hqyNSzIOGY7v9abzB6pUdA3BZiQvEs\r\n"
+S"3LjHVd4HPJ2x0N8CgrBIWOE0q8+0hSMmeE96WW/7jD3fPWwCR5zlXknxBQsfv0gP\r\n"
+S"3BC5PR0Qdypz+d+9zfMf625kyit4T/hzwhDveZUzHnk1Cf+IG7Q+TOEnLnWAWBED\r\n"
+S"ISOWmrUCgYAFEmRxgwAc/u+D6t0syCwAYh6POtscq9Y0i9GyWk89NzgC4NdwwbBH\r\n"
+S"4AgahOxIxXx2gxJnq3yfkJfIjwf0s2DyP0kY2y6Ua1OeomPeY9mrIS4tCuDQ6LrE\r\n"
+S"TB6l9VGoxJL4fyHnZb8L5gGvnB1bbD8cL6YPaDiOhcRseC9vBiEuVg==\r\n"
+S"-----END RSA PRIVATE KEY-----\r\n";
+S
+Sconst char mbedtls_test_cli_crt_rsa[] =
+S"-----BEGIN CERTIFICATE-----\r\n"
+S"MIIDPzCCAiegAwIBAgIBBDANBgkqhkiG9w0BAQUFADA7MQswCQYDVQQGEwJOTDER\r\n"
+S"MA8GA1UEChMIUG9sYXJTU0wxGTAXBgNVBAMTEFBvbGFyU1NMIFRlc3QgQ0EwHhcN\r\n"
+S"MTEwMjEyMTQ0NDA3WhcNMjEwMjEyMTQ0NDA3WjA8MQswCQYDVQQGEwJOTDERMA8G\r\n"
+S"A1UEChMIUG9sYXJTU0wxGjAYBgNVBAMTEVBvbGFyU1NMIENsaWVudCAyMIIBIjAN\r\n"
+S"BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyHTEzLn5tXnpRdkUYLB9u5Pyax6f\r\n"
+S"M60Nj4o8VmXl3ETZzGaFB9X4J7BKNdBjngpuG7fa8H6r7gwQk4ZJGDTzqCrSV/Uu\r\n"
+S"1C93KYRhTYJQj6eVSHD1bk2y1RPD0hrt5kPqQhTrdOrA7R/UV06p86jt0uDBMHEw\r\n"
+S"MjDV0/YI0FZPRo7yX/k9Z5GIMC5Cst99++UMd//sMcB4j7/Cf8qtbCHWjdmLao5v\r\n"
+S"4Jv4EFbMs44TFeY0BGbH7vk2DmqV9gmaBmf0ZXH4yqSxJeD+PIs1BGe64E92hfx/\r\n"
+S"/DZrtenNLQNiTrM9AM+vdqBpVoNq0qjU51Bx5rU2BXcFbXvI5MT9TNUhXwIDAQAB\r\n"
+S"o00wSzAJBgNVHRMEAjAAMB0GA1UdDgQWBBRxoQBzckAvVHZeM/xSj7zx3WtGITAf\r\n"
+S"BgNVHSMEGDAWgBS0WuSls97SUva51aaVD+s+vMf9/zANBgkqhkiG9w0BAQUFAAOC\r\n"
+S"AQEAAn86isAM8X+mVwJqeItt6E9slhEQbAofyk+diH1Lh8Y9iLlWQSKbw/UXYjx5\r\n"
+S"LLPZcniovxIcARC/BjyZR9g3UwTHNGNm+rwrqa15viuNOFBchykX/Orsk02EH7NR\r\n"
+S"Alw5WLPorYjED6cdVQgBl9ot93HdJogRiXCxErM7NC8/eP511mjq+uLDjLKH8ZPQ\r\n"
+S"8I4ekHJnroLsDkIwXKGIsvIBHQy2ac/NwHLCQOK6mfum1pRx52V4Utu5dLLjD5bM\r\n"
+S"xOBC7KU4xZKuMXXZM6/93Yb51K/J4ahf1TxJlTWXtnzDr9saEYdNy2SKY/6ZiDNH\r\n"
+S"D+stpAKiQLAWaAusIWKYEyw9MQ==\r\n"
+S"-----END CERTIFICATE-----\r\n";
+S
+Sconst char mbedtls_test_cli_key_rsa[] =
+S"-----BEGIN RSA PRIVATE KEY-----\r\n"
+S"MIIEpAIBAAKCAQEAyHTEzLn5tXnpRdkUYLB9u5Pyax6fM60Nj4o8VmXl3ETZzGaF\r\n"
+S"B9X4J7BKNdBjngpuG7fa8H6r7gwQk4ZJGDTzqCrSV/Uu1C93KYRhTYJQj6eVSHD1\r\n"
+S"bk2y1RPD0hrt5kPqQhTrdOrA7R/UV06p86jt0uDBMHEwMjDV0/YI0FZPRo7yX/k9\r\n"
+S"Z5GIMC5Cst99++UMd//sMcB4j7/Cf8qtbCHWjdmLao5v4Jv4EFbMs44TFeY0BGbH\r\n"
+S"7vk2DmqV9gmaBmf0ZXH4yqSxJeD+PIs1BGe64E92hfx//DZrtenNLQNiTrM9AM+v\r\n"
+S"dqBpVoNq0qjU51Bx5rU2BXcFbXvI5MT9TNUhXwIDAQABAoIBAGdNtfYDiap6bzst\r\n"
+S"yhCiI8m9TtrhZw4MisaEaN/ll3XSjaOG2dvV6xMZCMV+5TeXDHOAZnY18Yi18vzz\r\n"
+S"4Ut2TnNFzizCECYNaA2fST3WgInnxUkV3YXAyP6CNxJaCmv2aA0yFr2kFVSeaKGt\r\n"
+S"ymvljNp2NVkvm7Th8fBQBO7I7AXhz43k0mR7XmPgewe8ApZOG3hstkOaMvbWAvWA\r\n"
+S"zCZupdDjZYjOJqlA4eEA4H8/w7F83r5CugeBE8LgEREjLPiyejrU5H1fubEY+h0d\r\n"
+S"l5HZBJ68ybTXfQ5U9o/QKA3dd0toBEhhdRUDGzWtjvwkEQfqF1reGWj/tod/gCpf\r\n"
+S"DFi6X0ECgYEA4wOv/pjSC3ty6TuOvKX2rOUiBrLXXv2JSxZnMoMiWI5ipLQt+RYT\r\n"
+S"VPafL/m7Dn6MbwjayOkcZhBwk5CNz5A6Q4lJ64Mq/lqHznRCQQ2Mc1G8eyDF/fYL\r\n"
+S"Ze2pLvwP9VD5jTc2miDfw+MnvJhywRRLcemDFP8k4hQVtm8PMp3ZmNECgYEA4gz7\r\n"
+S"wzObR4gn8ibe617uQPZjWzUj9dUHYd+in1gwBCIrtNnaRn9I9U/Q6tegRYpii4ys\r\n"
+S"c176NmU+umy6XmuSKV5qD9bSpZWG2nLFnslrN15Lm3fhZxoeMNhBaEDTnLT26yoi\r\n"
+S"33gp0mSSWy94ZEqipms+ULF6sY1ZtFW6tpGFoy8CgYAQHhnnvJflIs2ky4q10B60\r\n"
+S"ZcxFp3rtDpkp0JxhFLhiizFrujMtZSjYNm5U7KkgPVHhLELEUvCmOnKTt4ap/vZ0\r\n"
+S"BxJNe1GZH3pW6SAvGDQpl9sG7uu/vTFP+lCxukmzxB0DrrDcvorEkKMom7ZCCRvW\r\n"
+S"KZsZ6YeH2Z81BauRj218kQKBgQCUV/DgKP2985xDTT79N08jUo3hTP5MVYCCuj/+\r\n"
+S"UeEw1TvZcx3LJby7P6Xad6a1/BqveaGyFKIfEFIaBUBItk801sDDpDaYc4gL00Xc\r\n"
+S"7lFuBHOZkxJYlss5QrGpuOEl9ZwUt5IrFLBdYaKqNHzNVC1pCPfb/JyH6Dr2HUxq\r\n"
+S"gxUwAQKBgQCcU6G2L8AG9d9c0UpOyL1tMvFe5Ttw0KjlQVdsh1MP6yigYo9DYuwu\r\n"
+S"bHFVW2r0dBTqegP2/KTOxKzaHfC1qf0RGDsUoJCNJrd1cwoCLG8P2EF4w3OBrKqv\r\n"
+S"8u4ytY0F+Vlanj5lm3TaoHSVF1+NWPyOTiwevIECGKwSxvlki4fDAA==\r\n"
+S"-----END RSA PRIVATE KEY-----\r\n";
+S
+Sconst size_t mbedtls_test_ca_crt_rsa_len  = sizeof( mbedtls_test_ca_crt_rsa );
+Sconst size_t mbedtls_test_ca_key_rsa_len  = sizeof( mbedtls_test_ca_key_rsa );
+Sconst size_t mbedtls_test_ca_pwd_rsa_len  = sizeof( mbedtls_test_ca_pwd_rsa ) - 1;
+Sconst size_t mbedtls_test_srv_crt_rsa_len = sizeof( mbedtls_test_srv_crt_rsa );
+Sconst size_t mbedtls_test_srv_key_rsa_len = sizeof( mbedtls_test_srv_key_rsa );
+Sconst size_t mbedtls_test_cli_crt_rsa_len = sizeof( mbedtls_test_cli_crt_rsa );
+Sconst size_t mbedtls_test_cli_key_rsa_len = sizeof( mbedtls_test_cli_key_rsa );
+S#else
+S#define TEST_CA_CRT_RSA
+S#endif /* MBEDTLS_RSA_C */
+S
+S#if defined(MBEDTLS_PEM_PARSE_C)
+S/* Concatenation of all available CA certificates */
+Sconst char mbedtls_test_cas_pem[] = TEST_CA_CRT_RSA TEST_CA_CRT_EC;
+Sconst size_t mbedtls_test_cas_pem_len = sizeof( mbedtls_test_cas_pem );
+S#endif
+S
+S/* List of all available CA certificates */
+Sconst char * mbedtls_test_cas[] = {
+S#if defined(MBEDTLS_RSA_C)
+S    mbedtls_test_ca_crt_rsa,
+S#endif
+S#if defined(MBEDTLS_ECDSA_C)
+S    mbedtls_test_ca_crt_ec,
+S#endif
+S    NULL
+S};
+Sconst size_t mbedtls_test_cas_len[] = {
+S#if defined(MBEDTLS_RSA_C)
+S    sizeof( mbedtls_test_ca_crt_rsa ),
+S#endif
+S#if defined(MBEDTLS_ECDSA_C)
+S    sizeof( mbedtls_test_ca_crt_ec ),
+S#endif
+S    0
+S};
+S
+S#if defined(MBEDTLS_RSA_C)
+Sconst char *mbedtls_test_ca_crt  = mbedtls_test_ca_crt_rsa;
+Sconst char *mbedtls_test_ca_key  = mbedtls_test_ca_key_rsa;
+Sconst char *mbedtls_test_ca_pwd  = mbedtls_test_ca_pwd_rsa;
+Sconst char *mbedtls_test_srv_crt = mbedtls_test_srv_crt_rsa;
+Sconst char *mbedtls_test_srv_key = mbedtls_test_srv_key_rsa;
+Sconst char *mbedtls_test_cli_crt = mbedtls_test_cli_crt_rsa;
+Sconst char *mbedtls_test_cli_key = mbedtls_test_cli_key_rsa;
+Sconst size_t mbedtls_test_ca_crt_len  = sizeof( mbedtls_test_ca_crt_rsa );
+Sconst size_t mbedtls_test_ca_key_len  = sizeof( mbedtls_test_ca_key_rsa );
+Sconst size_t mbedtls_test_ca_pwd_len  = sizeof( mbedtls_test_ca_pwd_rsa ) - 1;
+Sconst size_t mbedtls_test_srv_crt_len = sizeof( mbedtls_test_srv_crt_rsa );
+Sconst size_t mbedtls_test_srv_key_len = sizeof( mbedtls_test_srv_key_rsa );
+Sconst size_t mbedtls_test_cli_crt_len = sizeof( mbedtls_test_cli_crt_rsa );
+Sconst size_t mbedtls_test_cli_key_len = sizeof( mbedtls_test_cli_key_rsa );
+S#else /* ! MBEDTLS_RSA_C, so MBEDTLS_ECDSA_C */
+Sconst char *mbedtls_test_ca_crt  = mbedtls_test_ca_crt_ec;
+Sconst char *mbedtls_test_ca_key  = mbedtls_test_ca_key_ec;
+Sconst char *mbedtls_test_ca_pwd  = mbedtls_test_ca_pwd_ec;
+Sconst char *mbedtls_test_srv_crt = mbedtls_test_srv_crt_ec;
+Sconst char *mbedtls_test_srv_key = mbedtls_test_srv_key_ec;
+Sconst char *mbedtls_test_cli_crt = mbedtls_test_cli_crt_ec;
+Sconst char *mbedtls_test_cli_key = mbedtls_test_cli_key_ec;
+Sconst size_t mbedtls_test_ca_crt_len  = sizeof( mbedtls_test_ca_crt_ec );
+Sconst size_t mbedtls_test_ca_key_len  = sizeof( mbedtls_test_ca_key_ec );
+Sconst size_t mbedtls_test_ca_pwd_len  = sizeof( mbedtls_test_ca_pwd_ec ) - 1;
+Sconst size_t mbedtls_test_srv_crt_len = sizeof( mbedtls_test_srv_crt_ec );
+Sconst size_t mbedtls_test_srv_key_len = sizeof( mbedtls_test_srv_key_ec );
+Sconst size_t mbedtls_test_cli_crt_len = sizeof( mbedtls_test_cli_crt_ec );
+Sconst size_t mbedtls_test_cli_key_len = sizeof( mbedtls_test_cli_key_ec );
+S#endif /* MBEDTLS_RSA_C */
+S
+N#endif /* MBEDTLS_CERTS_C */

@@ -1,0 +1,94 @@
+L 1 "C:\Keil_v5\ARM\PACK\Oryx-Embedded\Middleware\1.7.6\common\cpu_endian.c"
+N/**
+N * @file cpu_endian.c
+N * @brief Byte order conversion
+N *
+N * @section License
+N *
+N * Copyright (C) 2010-2017 Oryx Embedded SARL. All rights reserved.
+N *
+N * This program is free software; you can redistribute it and/or
+N * modify it under the terms of the GNU General Public License
+N * as published by the Free Software Foundation; either version 2
+N * of the License, or (at your option) any later version.
+N *
+N * This program is distributed in the hope that it will be useful,
+N * but WITHOUT ANY WARRANTY; without even the implied warranty of
+N * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+N * GNU General Public License for more details.
+N *
+N * You should have received a copy of the GNU General Public License
+N * along with this program; if not, write to the Free Software Foundation,
+N * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+N *
+N * @author Oryx Embedded SARL (www.oryx-embedded.com)
+N * @version 1.7.6
+N **/
+N
+N//Dependencies
+N#include "cpu_endian.h"
+L 1 "C:\Keil_v5\ARM\PACK\Oryx-Embedded\Middleware\1.7.6\common\cpu_endian.h" 1
+N/**
+N * @file cpu_endian.h
+N * @brief Byte order conversion
+N *
+N * @section License
+N *
+N * Copyright (C) 2010-2017 Oryx Embedded SARL. All rights reserved.
+N *
+N * This program is free software; you can redistribute it and/or
+N * modify it under the terms of the GNU General Public License
+N * as published by the Free Software Foundation; either version 2
+N * of the License, or (at your option) any later version.
+N *
+N * This program is distributed in the hope that it will be useful,
+N * but WITHOUT ANY WARRANTY; without even the implied warranty of
+N * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+N * GNU General Public License for more details.
+N *
+N * You should have received a copy of the GNU General Public License
+N * along with this program; if not, write to the Free Software Foundation,
+N * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+N *
+N * @author Oryx Embedded SARL (www.oryx-embedded.com)
+N * @version 1.7.6
+N **/
+N
+N#ifndef _CPU_ENDIAN_H
+N#define _CPU_ENDIAN_H
+N
+N//Dependencies
+N#include "os_port.h"
+L 1 "C:\Keil_v5\ARM\PACK\Oryx-Embedded\Middleware\1.7.6\common\os_port.h" 1
+N/**
+N * @file os_port.h
+N * @brief RTOS abstraction layer
+N *
+N * @section License
+N *
+N * Copyright (C) 2010-2017 Oryx Embedded SARL. All rights reserved.
+N *
+N * This program is free software; you can redistribute it and/or
+N * modify it under the terms of the GNU General Public License
+N * as published by the Free Software Foundation; either version 2
+N * of the License, or (at your option) any later version.
+N *
+N * This program is distributed in the hope that it will be useful,
+N * but WITHOUT ANY WARRANTY; without even the implied warranty of
+N * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+N * GNU General Public License for more details.
+N *
+N * You should have received a copy of the GNU General Public License
+N * along with this program; if not, write to the Free Software Foundation,
+N * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+N *
+N * @author Oryx Embedded SARL (www.oryx-embedded.com)
+N * @version 1.7.6
+N **/
+N
+N#ifndef _OS_PORT_H
+N#define _OS_PORT_H
+N
+N//Dependencies
+C "C:\Keil_v5\ARM\PACK\Oryx-Embedded\Middleware\1.7.6\common\os_port.h" 31 28 cannot open source input file "os_port_config.h": No such file or directory
+N#include "os_port_config.h"

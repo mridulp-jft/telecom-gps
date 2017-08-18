@@ -1,0 +1,5 @@
+-c --cpu Cortex-M0 -D__MICROLIB -g -O2 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\lst\\" -I ..\..\..\..\Library\LCDLib\Include -I ..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\..\..\Library\StdDriver\inc -I ..\..\..\..\Library\CMSIS\Include
+-I C:\Keil_v5\ARM\RV31\INC
+-I C:\Keil_v5\ARM\CMSIS\Include
+-D__UVISION_VERSION="518"
+-o .\obj\gpio.o --list_dir ".\\lst\\" --list --omf_browse .\obj\gpio.crf --depend .\obj\gpio.d --feedback ".\obj\PWRDWN_DEMO.fed" "..\..\..\..\Library\StdDriver\src\gpio.c"
