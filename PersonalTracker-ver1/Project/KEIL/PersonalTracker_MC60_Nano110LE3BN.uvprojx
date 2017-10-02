@@ -14,16 +14,16 @@
       <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
-          <Device>NANO110RE3BN</Device>
+          <Device>NANO100LE3BN</Device>
           <Vendor>Nuvoton</Vendor>
           <PackID>Nuvoton.NuMicro_DFP.1.1.0</PackID>
           <PackURL>http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack</PackURL>
           <Cpu>IROM(0x00000000,0x20000) IRAM(0x20000000,0x4000) CPUTYPE("Cortex-M0") CLOCK(12000000)</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0Nano100_AP_123 -FS00 -FL020000 -FP0($$Device:NANO110RE3BN$Flash\Nano100_AP_123.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0Nano100_AP_123 -FS00 -FL020000 -FP0($$Device:NANO100LE3BN$Flash\Nano100_AP_123.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:NANO110RE3BN$Device\NANO100BN\Include\Nano100Series.h</RegisterFile>
+          <RegisterFile>$$Device:NANO100LE3BN$Device\NANO100BN\Include\Nano100Series.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:NANO110RE3BN$SVD\Nuvoton\NANO100BN_v1.svd</SFDFile>
+          <SFDFile>$$Device:NANO100LE3BN$SVD\Nuvoton\NANO100BN_v1.svd</SFDFile>
           <bCustSvd>1</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -194,7 +194,7 @@
             <RoSelD>3</RoSelD>
             <RwSelD>3</RwSelD>
             <CodeSel>0</CodeSel>
-            <OptFeed>1</OptFeed>
+            <OptFeed>0</OptFeed>
             <NoZi1>0</NoZi1>
             <NoZi2>0</NoZi2>
             <NoZi3>0</NoZi3>
@@ -331,7 +331,7 @@
             <vShortWch>1</vShortWch>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>RXBUFSIZE=800 TXBUFSIZE=3300</Define>
+              <Define>RXBUFSIZE=500 TXBUFSIZE=3500</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\Library\CMSIS\Include;..\..\Library\Device\Nuvoton\Nano100Series\Include;..\..\Library\StdDriver\inc;..\..\Library\Device\Nuvoton\Nano100Series\Source</IncludePath>
             </VariousControls>
@@ -436,6 +436,26 @@
               <FileType>1</FileType>
               <FilePath>..\..\Library\StdDriver\src\retarget.c</FilePath>
             </File>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Library\StdDriver\src\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>wdt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Library\StdDriver\src\wdt.c</FilePath>
+            </File>
+            <File>
+              <FileName>wwdt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Library\StdDriver\src\wwdt.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Library\StdDriver\src\i2c.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -476,6 +496,42 @@
         <targetInfos>
           <targetInfo name="PersonalTracker_MC60_Nano110LE3BN"/>
         </targetInfos>
+      </file>
+      <file attr="config" category="sourceC" name="Device\NANO100BN\Driver\retarget.c" version="3.02.002">
+        <instance index="0" removed="1">RTE\Device\NANO100LE3BN\retarget.c</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Nuvoton" Cversion="3.02.002" condition="M0NuMicro NANO100BN Device"/>
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="sourceAsm" condition="Compiler ARM" name="Device\NANO100BN\Source\ARM\startup_Nano100Series.s" version="3.02.002">
+        <instance index="0" removed="1">RTE\Device\NANO100LE3BN\startup_Nano100Series.s</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Nuvoton" Cversion="3.02.002" condition="M0NuMicro NANO100BN Device"/>
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="source" name="Device\NANO100BN\Source\system_Nano100Series.c" version="3.02.002">
+        <instance index="0" removed="1">RTE\Device\NANO100LE3BN\system_Nano100Series.c</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Nuvoton" Cversion="3.02.002" condition="M0NuMicro NANO100BN Device"/>
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="sourceC" name="Device\NANO100BN\Driver\retarget.c" version="3.02.002">
+        <instance index="0" removed="1">RTE\Device\NANO110KE3BN\retarget.c</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Nuvoton" Cversion="3.02.002" condition="M0NuMicro NANO100BN Device"/>
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="sourceAsm" condition="Compiler ARM" name="Device\NANO100BN\Source\ARM\startup_Nano100Series.s" version="3.02.002">
+        <instance index="0" removed="1">RTE\Device\NANO110KE3BN\startup_Nano100Series.s</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Nuvoton" Cversion="3.02.002" condition="M0NuMicro NANO100BN Device"/>
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="source" name="Device\NANO100BN\Source\system_Nano100Series.c" version="3.02.002">
+        <instance index="0" removed="1">RTE\Device\NANO110KE3BN\system_Nano100Series.c</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Nuvoton" Cversion="3.02.002" condition="M0NuMicro NANO100BN Device"/>
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos/>
       </file>
       <file attr="config" category="sourceC" name="Device\NANO100BN\Driver\retarget.c" version="3.02.002">
         <instance index="0" removed="1">RTE\Device\NANO110RE3BN\retarget.c</instance>

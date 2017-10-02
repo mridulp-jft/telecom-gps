@@ -2271,17 +2271,27 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
  
 void Thread (void const *argument);                             
 void Thread1 (void const *argument);                             
+void actgprs(void);
+void remove_all_chars(char* str, char c, char d);
 
 extern void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
 extern void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern __inline void parse_g(char* str, int first, int sec, char f, char s , char *string);
-
-extern char g_u8RecData[800];
-extern char g_u8SendData[3300];
+extern void cpinquerry(void);
+extern void cregquerry(void);
+extern void Send_FS(void);
+void fileclose(void);
+__inline void fileopen(void);
+extern char g_u8RecData[500];
+extern char g_u8SendData[3500];
 extern uint32_t life;
 extern int network;
 char temp_fs[100] = {0};
+extern int8_t charging, cpinready, cregready;
+char fileinstance[20] = {0};
+
+extern osMutexId	(uart_mutex_id); 
 
 osThreadId tid_Thread;                                          
 osThreadId tid_Thread1;                                          
@@ -2289,120 +2299,54 @@ const osThreadDef_t os_thread_def_Thread = { (Thread), (osPriorityNormal), (1), 
 const osThreadDef_t os_thread_def_Thread1 = { (Thread1), (osPriorityNormal), (1), (4048) };                   
 
 
-
+__inline void strreplace(char s[], char chr, char repl_chr);
 extern char temp[100];
-extern __inline void Save_FS(void);
+void Save_FS(void);
 extern __inline void manualdelay(int delayms);
 extern __inline void Send_FS(void);
 extern __inline int count_char(char ch,char* string);
 extern  int qfread(char* fi);
+extern int motion;
+extern uint8_t mainla;
+extern uint8_t th1la;
+extern uint8_t th2la;
+extern char * r1;
+extern char * r2;
+extern char * r3;
 
- void remove_all_chars(char* str, char c, char d) {
-    char *pr = str, *pw = str;
-    while (*pr) {
-        *pw = *pr++;
-			pw += (*pw != c && *pw != d && *pw != ' ' && *pw != '/' && *pw != ':');
-    }
-    *pw = '\0';
-}
-
-
-
-
-
-__inline void Send_FS()
+void Save_FS(void)
 {
-char fileinstance[20] = {0};
-int ret=0;
-int noread=0;
-	
-SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
-if(strstr(g_u8RecData,"CME ERROR"))
-	{
-			SendAT("\r\nAT+CFUN=1,1\r\n", "Ready", "OK" , "ERROR",10);	
-			manualdelay(50);
-			SendAT("\r\nAT+QGNSSC=1\r\n", "OK", "ERROR", "7103", 5);
-			SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n", "Ready", "OK" , "ERROR",5);	
-			SendAT("\r\nAT+QIMUX=1\r\n", "Ready", "OK" , "ERROR",5);	
-			SendAT("\r\nAT+QIMODE=0\r\n", "Ready", "OK" , "ERROR",5);	
-			SendAT("\r\nAT+QSCLK=1\r\n", "Ready", "OK" , "ERROR",5);	
-			SendAT("\r\nAT+QIREGAPP\r\n", "Ready", "OK" , "ERROR",2);	
-			manualdelay(50);
-			SendAT("\r\nAT+QIACT\r\n", "Ready", "OK" , "ERROR",10);	
-			SendAT("\r\nAT+QILOCIP\r\n", "Ready", "OK" , "ERROR",2);	
-			SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n","CONNECT OK\r\n","ERROR","FAIL",10);	
-			SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
-
-	}
-	parse_g(g_u8RecData, 1, 2, ' ', '\n' , fileinstance);
-	remove_all_chars(fileinstance, '\r', '\n');		
-	do{
-				
-	
-	
-			network=0;
-			if(noread == 0){ret = qfread(fileinstance);}
-				TCP_Send("\r\nAT+QISEND\r\n",g_u8SendData,">","ERROR","SEND OK",10);	 
-			if(network == 1)
-			{
-				SendAT("\r\nAT+CFUN=0\r\n", "OK", "NOT INSERTED" , "ERROR",5);
-				SendAT("\r\nAT+CFUN=1\r\n", "SMS Ready", "NOT INSERTED" , "ERROR",5);			
-				SendAT("\r\nAT+QICLOSE\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
-				Save_FS();
-				manualdelay(100);
-				noread=1;
-
-			}
-			else{noread=0;}
-			
-	}while(!ret);
-
-	memset(temp_fs,0,100);
-	sprintf(temp_fs,"\r\nAT+QFCLOSE=%s\r\n",fileinstance);
-	SendAT(temp_fs, "Ready", "OK" , "ERROR",10);	
-	
-}
-
-
-
-
-__inline void Save_FS()
-{
-char fileinstance[20] = {0};
-
-SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
-	if(strstr(g_u8RecData,"CME ERROR"))
-	{
-			SendAT("\r\nAT+CFUN=1,1\r\n", "Ready", "OK" , "ERROR",10);	
-			manualdelay(50);
-			SendAT("\r\nAT+QGNSSC=1\r\n", "OK", "ERROR", "7103", 5);
-			SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
-	}
-	parse_g(g_u8RecData, 1, 2, ' ', '\n' , fileinstance);
-	remove_all_chars(fileinstance, '\r', '\n');		
+  int len=0;
+ 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+  fileopen();
+  SendAT("\r\nAT+QFLDS=\"UFS\"\r\n", "Ready", "OK" , "ERROR",50);
 	memset(temp,0,100);
-	sprintf(temp,"\r\nAT+QFWRITE=%s\r\n",fileinstance);
+	sprintf(temp,"\r\nAT+QFSEEK=%s,0,2\r\n",fileinstance);
+	SendAT(temp, "CONNECT", "OK" , "ERROR",10);	  
+  len = strlen(g_u8SendData);
+  strcat(g_u8SendData,"\n\n\n\n\n");  
+  len = strlen(g_u8SendData);
+
+  strreplace(g_u8SendData, 0x1A, '\n');  
+	memset(temp,0,100);
+	sprintf(temp,"\r\nAT+QFWRITE=%s,%d,3\r\n",fileinstance,(len));
 	SendAT(temp, "CONNECT", "OK" , "ERROR",10);	
-	remove_all_chars(g_u8SendData, '\r', 0x1A);		
-
-	SendAT(g_u8SendData, "QFWRITE", "OK" , "ERROR",20);	
-
-	memset(temp_fs,0,100);
-	sprintf(temp_fs,"\r\nAT+QFCLOSE=%s\r\n",fileinstance);
-	SendAT(temp_fs, "Ready", "OK" , "ERROR",10);	
-	memset(g_u8SendData,0,3300);
-
+  len = strlen(g_u8SendData);
+  remove_all_chars(g_u8SendData,'\r',0x1A);
+  SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",20);	
+  if(strstr(g_u8RecData,"+QFWRITE"))
+  {
+    memset(g_u8SendData,0,3500);
+  }
+ 
+  fileclose();
+	osMutexRelease(uart_mutex_id);
 }
-
-
-
-
-
 
 
 int Init_Thread (void) {
 
- tid_Thread = osThreadCreate (&os_thread_def_Thread, 0);
+	tid_Thread = osThreadCreate (&os_thread_def_Thread, 0);
   if (!tid_Thread) return(-1);
   tid_Thread1 = osThreadCreate (&os_thread_def_Thread1, 0);
   if (!tid_Thread) return(-1);
@@ -2410,14 +2354,20 @@ int Init_Thread (void) {
   return(0);
 }
 
-void Thread (void const *argument) {
+void Thread (void const *argument) 
+{
+  while (1) 
+	{
+    mainla = 0;
+    th1la = 1;
+    th2la = 0;  
 
-  while (1) {
+      SendAT("\r\nAT+QGNSSC=1\r\n", "OK", "ERROR", "7103", 5);
+ 
+      SendAT_GPS("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
 
-		
-		SendAT_GPS("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
     osDelay(5000);                                           
-	
+    
   }
 }
 
@@ -2425,52 +2375,61 @@ void Thread1 (void const *argument)
 {
 	while (1) 
 	{
-		
-		SendAT("\r\nAT+QIACT\r\n", "Ready", "OK" , "ERROR",1);	
-		SendAT("\r\nAT+QGNSSC=1\r\n", "OK", "ERROR", "7103", 5);
-		SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n", "Ready", "OK" , "ERROR",5);	
-
-
-		SendAT("\r\nAT+QSCLK=1\r\n", "Ready", "OK" , "ERROR",5);	
-		osDelay(2000);
-		SendAT("\r\nAT+QIREGAPP\r\n", "Ready", "OK" , "ERROR",2);	
-		SendAT("\r\nAT+QISTAT\r\n", "Ready", "OK" , "ERROR",10);	
-		SendAT("\r\nAT+QILOCIP\r\n", "Ready", "OK" , "ERROR",2);	
+    mainla = 0;
+    th1la = 0;
+    th2la = 1;  
+    cpinquerry();
+    if(cpinready==1)
+    {
+      cregquerry();
+      if(cregready == 1)
+      {
+        SendAT("\r\nAT+CGREG?\r\n", "Ready", "OK" , "ERROR",50);	
+        if(strstr(g_u8RecData,",1"))
+        {
+          SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n", "Ready", "OK" , "ERROR",5);	
+          SendAT("\r\nAT+QIREGAPP\r\n", "Ready", "OK" , "ERROR",2);	
+          SendAT("\r\nAT+QIACT\r\n", "Ready", "OK" , "ERROR",5);	
+          SendAT("\r\nAT+QILOCIP\r\n", "Ready", "OK" , "ERROR",2);	
+        }
+      }
+    }
+		SendAT("\r\nAT+QSCLK=1\r\n", "Ready", "OK" , "ERROR",5);
 		SendAT("\r\nAT+QISTAT\r\n", "Ready", "OK" , "ERROR",10);	
 		SendAT("\r\nAT+CSQ\r\n", "Ready", "OK" , "ERROR",10);	
 		SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n","CONNECT OK\r\n","ERROR","FAIL",10);	
-
-
-
 		network=0;
 		TCP_Send("\r\nAT+QISEND\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
-
 		if(network == 1)
 		{
+      Save_FS();
+  
 			SendAT("\r\nAT+QICLOSE\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
-			SendAT("\r\nAT+CFUN=0\r\n", "OK", "NOT INSERTED" , "ERROR",5);
-			SendAT("\r\nAT+CFUN=1\r\n", "SMS Ready", "NOT INSERTED" , "ERROR",5);			
-			
-
-			manualdelay(100);
-			SendAT("\r\nAT+QIACT\r\n", "Ready", "OK" , "ERROR",10);	
-
-		}
+			SendAT("\r\nAT+CFUN=0\r\n", "OK", "NOT INSERTED" , "ERROR",10);
+			SendAT("\r\nAT+CFUN=1\r\n", "Ready", "NOT INSERTED" , "ERROR",10);	
+ 
+      manualdelay(200);
+    }
 		else
 		{
-			
 			osDelay(32000);                                         
 		}
-	
-	
   }
 }
 
 
-
-
-
-
+__inline void strreplace(char s[], char chr, char repl_chr)
+{
+     int i=0;
+     while(s[i]!='\0')
+     {
+           if(s[i]==chr)
+           {
+               s[i]=repl_chr;
+           }  
+           i++; 
+     }
+}
 
 __inline int count_char(char ch,char* string)
 {
@@ -2499,5 +2458,78 @@ __inline void manualdelay(int delayms)
 	}
 }
 
+ void remove_all_chars(char* str, char c, char d) {
+    char *pr = str, *pw = str;
+    while (*pr) {
+        *pw = *pr++;
+			pw += (*pw != c && *pw != d && *pw != ' ' && *pw != '/' && *pw != ':');
+    }
+    *pw = '\0';
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void actgprs()
+{
+    cpinquerry();
+    if(cpinready == 1)
+    {
+   		cregquerry();
+      if(cregready == 1)
+      {
+        SendAT("\r\nAT+CGREG?\r\n", "Ready", "OK" , "ERROR",50);	
+        SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP\r\n", "Ready", "OK" , "ERROR",2);	
+        SendAT("\r\nAT+QIACT\r\n", "Ready", "OK" , "ERROR",50);	
+        SendAT("\r\nAT+QILOCIP\r\n", "Ready", "OK" , "ERROR",2);	
+      }
+    }
+ }
+
+void fileclose(void)
+{
+    memset(temp,0,100);
+    sprintf(temp,"\r\nAT+QFCLOSE=%s\r\n",fileinstance);
+    SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
+}
+ 
+__inline void fileopen(void)
+{
+    SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
+    if(strstr(g_u8RecData,"CME ERROR"))
+    {
+        SendAT("\r\nAT+CFUN=1,1\r\n", "Ready", "OK" , "ERROR",10);	
+        manualdelay(100);
+        memset(fileinstance,0,20);
+        SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
+    }
+    parse_g(g_u8RecData, 1, 2, ' ', '\n' , fileinstance);
+    remove_all_chars(fileinstance, '\r', '\n');   
+    SendAT("\r\nAT+QGNSSC=1\r\n", "OK", "ERROR", "7103", 5);
+  
+}
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

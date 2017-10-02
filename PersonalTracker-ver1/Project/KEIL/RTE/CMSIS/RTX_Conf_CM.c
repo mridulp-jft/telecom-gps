@@ -48,7 +48,7 @@
 //   <i> Defines max. number of user threads that will run at the same time.
 //   <i> Default: 6
 #ifndef OS_TASKCNT
- #define OS_TASKCNT     6
+ #define OS_TASKCNT     3
 #endif
  
 //   <o>Default Thread stack size [bytes] <64-4096:8><#/4>
@@ -62,7 +62,7 @@
 //   <i> Defines stack size for main thread.
 //   <i> Default: 200
 #ifndef OS_MAINSTKSIZE
- #define OS_MAINSTKSIZE 100      // this stack size value is in words
+ #define OS_MAINSTKSIZE 250      // this stack size value is in words
 #endif
  
 //   <o>Number of threads with user-provided stack size <0-250>
@@ -221,10 +221,16 @@
  
 /*--------------------------- os_idle_demon ---------------------------------*/
 
+extern void Hard_Fault_Handler(void);
+
+
 /// \brief The idle demon is running when no other thread is ready to run
 void os_idle_demon (void) {
  
+//    SYS_UnlockReg();
+//		SYS->IPRST_CTL1 |= SYS_IPRST_CTL1_CHIP_RST_Msk;
   for (;;) {
+
     /* HERE: include optional user code to be executed when no thread runs.*/
   }
 }
@@ -298,8 +304,8 @@ void os_error (uint32_t error_code) {
     default:
       break;
   }
-	SYS_UnlockReg();
-	SYS->IPRST_CTL1 |= SYS_IPRST_CTL1_CHIP_RST_Msk;
+		Hard_Fault_Handler();		
+
 	while(1);
 }
  

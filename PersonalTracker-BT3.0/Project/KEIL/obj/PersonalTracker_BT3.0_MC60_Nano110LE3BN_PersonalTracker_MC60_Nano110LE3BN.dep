@@ -1,0 +1,413 @@
+Dependencies for Project 'PersonalTracker_BT3.0_MC60_Nano110LE3BN', Target 'PersonalTracker_MC60_Nano110LE3BN': (DO NOT MODIFY !)
+F (..\..\Library\Device\Nuvoton\Nano100Series\Source\system_Nano100Series.c)(0x599D0973)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\system_nano100series.o --omf_browse .\obj\system_nano100series.crf --depend .\obj\system_nano100series.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (..\..\Library\Device\Nuvoton\Nano100Series\Source\ARM\startup_Nano100Series.s)(0x5993F294)(--cpu Cortex-M0 --pd "__RTX SETA 1" -g --16 --apcs=interwork --pd "__MICROLIB SETA 1"-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include--pd "__UVISION_VERSION SETA 518" --pd "_RTE_ SETA 1" --pd "DEBUG_ENABLE_SEMIHOST SETA 1"--list .\lst\startup_nano100series.lst --xref -o .\obj\startup_nano100series.o --depend .\obj\startup_nano100series.d)
+F (.\Thread.c)(0x59CCDC04)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\thread.o --omf_browse .\obj\thread.crf --depend .\obj\thread.d)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x58986CB8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB4EA6)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x55DB4EA0)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB4E9E)
+F (.\Timer.c)(0x59B112E5)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\timer.o --omf_browse .\obj\timer.crf --depend .\obj\timer.d)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x58986CB8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB4EA6)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (.\main.c)(0x59CCE591)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x55DB4EA0)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB4E9E)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x55DB4EA0)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x55DB4EA6)
+I (osObjects.h)(0x58986CB8)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x58986CB8)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB4EA6)
+F (..\..\Library\StdDriver\src\sys.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\sys.o --omf_browse .\obj\sys.crf --depend .\obj\sys.d)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (..\..\Library\StdDriver\src\clk.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\clk.o --omf_browse .\obj\clk.crf --depend .\obj\clk.d)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (..\..\Library\StdDriver\src\gpio.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\gpio.o --omf_browse .\obj\gpio.crf --depend .\obj\gpio.d)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (..\..\Library\StdDriver\src\uart.c)(0x599D0F4E)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\uart.o --omf_browse .\obj\uart.crf --depend .\obj\uart.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB4E9E)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (..\..\Library\StdDriver\src\retarget.c)(0x59CCABE5)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\retarget.o --omf_browse .\obj\retarget.crf --depend .\obj\retarget.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB4E9E)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (..\..\Library\StdDriver\src\adc.c)(0x599E78AD)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\adc.o --omf_browse .\obj\adc.crf --depend .\obj\adc.d)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (..\..\Library\StdDriver\src\wdt.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\wdt.o --omf_browse .\obj\wdt.crf --depend .\obj\wdt.d)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (..\..\Library\StdDriver\src\wwdt.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\wwdt.o --omf_browse .\obj\wwdt.crf --depend .\obj\wwdt.d)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (..\..\Library\StdDriver\src\i2c.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\i2c.o --omf_browse .\obj\i2c.crf --depend .\obj\i2c.d)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\nano100series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+F (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib)(0x58986CB8)()
+F (RTE\CMSIS\RTX_Conf_CM.c)(0x59CCB726)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I E:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC-I C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="518" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3000"-o .\obj\rtx_conf_cm.o --omf_browse .\obj\rtx_conf_cm.crf --depend .\obj\rtx_conf_cm.d)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x58986CB8)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB4EA6)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
+I (..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
+I (..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\adc.h)(0x599E7AE9)
+I (..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\uart.h)(0x599D0F68)
+I (..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
+I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC\RTX_CM_lib.h)(0x58986CB8)

@@ -31,7 +31,7 @@
         #define DISABLE_UART
     #endif
 #endif
-
+void send_string_to_uart1(char* string);
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -58,13 +58,11 @@ void stackDump(uint32_t stack[])
 	printf("psr = 0x%x\n", stack[psr]);
 } 
 
-void Hard_Fault_Handler(uint32_t stack[])
+void Hard_Fault_Handler(void)
 {     
-    printf("In Hard Fault Handler\n");
-
-    stackDump(stack);
-	
-	//Chip Reset
+      send_string_to_uart1("In Hard Fault Handler\r\n");
+//    stackDump(stack);
+    //Chip Reset
 		SYS_UnlockReg();
 		SYS->IPRST_CTL1 |= SYS_IPRST_CTL1_CHIP_RST_Msk;
 
@@ -122,7 +120,7 @@ void HardFault_Handler(void)
         "MOV     R1, LR                        \n" //; LR current value 
         "B Hard_Fault_Handler        \n" 
        );
-
+		Hard_Fault_Handler();		
     while(1);
 }
 
@@ -270,7 +268,7 @@ void HardFault_Handler(void)
         "MOV     R1, LR                        \n" //; LR current value 
         "B Hard_Fault_Handler                  \n" 
        );
-     
+ 		Hard_Fault_Handler();		
     while(1);
 }
 
@@ -486,4 +484,58 @@ label:
 # endif
 #endif
 /*** (C) COPYRIGHT 2013 Nuvoton Technology Corp. ***/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*********** Added for UART1********************/
+
+
+/**
+  * @brief  Write a char to UART.
+  * @param  ch The character sent to UART.
+  * @return None
+  */
+
+void SendChar_To_UART1(int ch)
+{
+    while(UART1->FSR & UART_FSR_TX_FULL_F_Msk);
+    UART1->THR = ch;
+    if(ch == '\n') {
+        while(UART1->FSR & UART_FSR_TX_FULL_F_Msk);
+        UART1->THR = '\r';
+    }
+}
+
+void send_string_to_uart1(char* string){
+  int ptr=0;
+  while(*string != '\0'){
+    SendChar_To_UART1(*string);
+    *string++;
+  }
+}
+  
+
 

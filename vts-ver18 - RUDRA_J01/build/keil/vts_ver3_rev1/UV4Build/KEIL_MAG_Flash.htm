@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\UV4Build\KEIL_MAG_Flash.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\UV4Build\KEIL_MAG_Flash.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Tue Jun 27 11:29:11 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Mon Sep 04 16:29:19 2017
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -288,7 +288,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start
 </UL>
 
-<P><STRONG><a name="[110]"></a>enable_abort_button</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, sysinit.o(.text), UNUSED)
+<P><STRONG><a name="[110]"></a>enable_abort_button</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, sysinit.o(.text), UNUSED)
 
 <P><STRONG><a name="[111]"></a>clk_out_init</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, sysinit.o(.text), UNUSED)
 
@@ -455,11 +455,6 @@ Global Symbols
 
 <P><STRONG><a name="[117]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
-<P><STRONG><a name="[42]"></a>__rt_locale</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, rt_locale_intlibspace.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_dec_real
-<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_lc_common
-</UL>
-
 <P><STRONG><a name="[5b]"></a>send_SD</STRONG> (Thumb, 212 bytes, Stack size 40 bytes, vts_ver2.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = send_SD &rArr; send_modem &rArr; uart_putchar
 </UL>
@@ -616,7 +611,7 @@ Global Symbols
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_GSM
 </UL>
 
-<P><STRONG><a name="[80]"></a>SW1_init</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, vts_ver2.o(.text))
+<P><STRONG><a name="[80]"></a>SW1_init</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, vts_ver2.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -847,19 +842,19 @@ Global Symbols
 </UL>
 <P><STRONG><a name="[122]"></a>time_delay_ms</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, lptmr.o(.text), UNUSED)
 
-<P><STRONG><a name="[81]"></a>lptmr_init</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, lptmr.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = lptmr_init &rArr; NVIC_SetPriority
+<P><STRONG><a name="[81]"></a>lptmr_init</STRONG> (Thumb, 98 bytes, Stack size 16 bytes, lptmr.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = lptmr_init &rArr; __NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
+<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[54]"></a>uart_init</STRONG> (Thumb, 134 bytes, Stack size 24 bytes, uart.o(.text))
+<P><STRONG><a name="[54]"></a>uart_init</STRONG> (Thumb, 142 bytes, Stack size 24 bytes, uart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = uart_init &rArr; __aeabi_idivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
 </UL>
 <BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sysinit
 </UL>
@@ -1334,6 +1329,11 @@ Global Symbols
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_cmpreturn
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fcmpeq
+</UL>
+
+<P><STRONG><a name="[42]"></a>__rt_locale</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, rt_locale_intlibspace.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_dec_real
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_lc_common
 </UL>
 
 <P><STRONG><a name="[bc]"></a>_ll_udiv10</STRONG> (Thumb, 122 bytes, Stack size 16 bytes, lludiv10.o(.text))
@@ -2001,14 +2001,14 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[97]"></a>NVIC_SetPriority</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, lptmr.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = NVIC_SetPriority
+<P><STRONG><a name="[97]"></a>__NVIC_SetPriority</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, lptmr.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __NVIC_SetPriority
 </UL>
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lptmr_init
 </UL>
 
-<P><STRONG><a name="[98]"></a>NVIC_SetPriority</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, uart.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = NVIC_SetPriority
+<P><STRONG><a name="[98]"></a>__NVIC_SetPriority</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, uart.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __NVIC_SetPriority
 </UL>
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
 </UL>

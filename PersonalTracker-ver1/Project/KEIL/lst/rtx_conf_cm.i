@@ -19991,15 +19991,21 @@ static __inline void LCD_DisableDisplay(void)
  
  
 
+extern void Hard_Fault_Handler(void);
+
+
 
 void os_idle_demon (void) {
  
+
+
   for (;;) {
+
      
   }
 }
  
-#line 268 "RTE\\CMSIS\\RTX_Conf_CM.c"
+#line 274 "RTE\\CMSIS\\RTX_Conf_CM.c"
  
  
  
@@ -20033,8 +20039,8 @@ void os_error (uint32_t error_code) {
     default:
       break;
   }
-	SYS_UnlockReg();
-	((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->IPRST_CTL1 |= (0x1ul << (0));
+		Hard_Fault_Handler();		
+
 	while(1);
 }
  
@@ -20120,7 +20126,7 @@ extern uint32_t const os_rrobin;
 extern uint32_t const os_trv;
 extern uint8_t  const os_flags;
 
-uint16_t const os_maxtaskrun = (6 + 1);
+uint16_t const os_maxtaskrun = (3 + 1);
 uint32_t const os_stackinfo  = (0<<28) | (1<<24) | ((2 + 2)<<16) | (100*4);
 uint32_t const os_rrobin     = (1 << 16) | 5;
 uint32_t const os_tickfreq   = 12000000;
@@ -20142,7 +20148,7 @@ __attribute__((used)) uint32_t const os_timernum  = 0U;
  
 extern
 uint32_t       mp_tcb[];
-uint32_t mp_tcb[(((52)+3)/4)*((6 + 1)) + 3];
+uint32_t mp_tcb[(((52)+3)/4)*((3 + 1)) + 3];
 extern
 uint16_t const mp_tcb_size;
 uint16_t const mp_tcb_size = sizeof(mp_tcb);
@@ -20150,7 +20156,7 @@ uint16_t const mp_tcb_size = sizeof(mp_tcb);
  
 extern
 uint64_t       mp_stk[];
-uint64_t mp_stk[(((100*4)+7)/8)*((6 + 1)-(2 + 2)+1) + 2];
+uint64_t mp_stk[(((100*4)+7)/8)*((3 + 1)-(2 + 2)+1) + 2];
 extern
 uint32_t const mp_stk_size;
 uint32_t const mp_stk_size = sizeof(mp_stk);
@@ -20158,7 +20164,7 @@ uint32_t const mp_stk_size = sizeof(mp_stk);
  
 extern
 uint64_t       os_stack_mem[];
-uint64_t       os_stack_mem[2+(2 + 2)+((4*(1750+100+124))/8)];
+uint64_t       os_stack_mem[2+(2 + 2)+((4*(1750+250+124))/8)];
 extern
 uint32_t const os_stack_sz;
 uint32_t const os_stack_sz = sizeof(os_stack_mem);
@@ -20178,7 +20184,7 @@ uint8_t  const os_fifo_size = 16;
  
 extern
 void *os_active_TCB[];
-void *os_active_TCB[(6 + 1)];
+void *os_active_TCB[(3 + 1)];
 
  
 
@@ -20244,7 +20250,7 @@ uint16_t const mp_tmr_size = 0U;
 extern int main (void);
 extern
 const osThreadDef_t os_thread_def_main;
-const osThreadDef_t os_thread_def_main = {(os_pthread)main, osPriorityNormal, 1U, 4*100 };
+const osThreadDef_t os_thread_def_main = {(os_pthread)main, osPriorityNormal, 1U, 4*250 };
 
 
 
@@ -20265,7 +20271,7 @@ void _main_init (void) {
 
 
  
-#line 312 "RTE\\CMSIS\\RTX_Conf_CM.c"
+#line 318 "RTE\\CMSIS\\RTX_Conf_CM.c"
  
 
 

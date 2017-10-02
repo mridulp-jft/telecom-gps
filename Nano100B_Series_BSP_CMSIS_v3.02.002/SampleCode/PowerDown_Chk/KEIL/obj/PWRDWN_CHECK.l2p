@@ -1,0 +1,12 @@
+--cpu Cortex-M0
+".\obj\system_nano100series.o"
+".\obj\startup_nano100series.o"
+".\obj\clk.o"
+".\obj\retarget.o"
+".\obj\sys.o"
+".\obj\uart.o"
+".\obj\main.o"
+--library_type=microlib --ro-base 0x00000000 --entry 0x00000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict
+--map --first='startup_nano100series.o(RESET)' --datacompressor=off --info=inline --entry Reset_Handler --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\lst\PWRDWN_CHECK.map" -o .\obj\PWRDWN_CHECK.axf

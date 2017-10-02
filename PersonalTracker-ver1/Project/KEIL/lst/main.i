@@ -20418,6 +20418,1497 @@ static __inline void LCD_DisableDisplay(void)
  
 
 #line 14 "main.c"
+#line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+ 
+ 
+ 
+
+
+
+
+ 
+ 
+
+
+
+ 
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+ 
+
+
+
+
+
+
+
+
+#line 54 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+
+
+  
+
+
+
+    typedef unsigned int size_t;    
+#line 70 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+
+
+
+
+
+
+    
+
+
+
+    typedef unsigned short wchar_t;  
+#line 91 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+
+typedef struct div_t { int quot, rem; } div_t;
+    
+typedef struct ldiv_t { long int quot, rem; } ldiv_t;
+    
+
+typedef struct lldiv_t { long long quot, rem; } lldiv_t;
+    
+
+
+#line 112 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+   
+
+
+
+ 
+
+   
+
+
+
+
+ 
+#line 131 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+   
+
+
+ 
+extern __declspec(__nothrow) int __aeabi_MB_CUR_MAX(void);
+
+   
+
+
+
+
+ 
+
+   
+
+
+
+
+ 
+
+
+
+
+extern __declspec(__nothrow) double atof(const char *  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+ 
+extern __declspec(__nothrow) int atoi(const char *  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+ 
+extern __declspec(__nothrow) long int atol(const char *  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+ 
+
+extern __declspec(__nothrow) long long atoll(const char *  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+ 
+
+
+extern __declspec(__nothrow) double strtod(const char * __restrict  , char ** __restrict  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) float strtof(const char * __restrict  , char ** __restrict  ) __attribute__((__nonnull__(1)));
+extern __declspec(__nothrow) long double strtold(const char * __restrict  , char ** __restrict  ) __attribute__((__nonnull__(1)));
+   
+
+ 
+
+extern __declspec(__nothrow) long int strtol(const char * __restrict  ,
+                        char ** __restrict  , int  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) unsigned long int strtoul(const char * __restrict  ,
+                                       char ** __restrict  , int  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+extern __declspec(__nothrow) long long strtoll(const char * __restrict  ,
+                                  char ** __restrict  , int  )
+                          __attribute__((__nonnull__(1)));
+   
+
+
+
+
+ 
+extern __declspec(__nothrow) unsigned long long strtoull(const char * __restrict  ,
+                                            char ** __restrict  , int  )
+                                   __attribute__((__nonnull__(1)));
+   
+
+
+
+ 
+
+extern __declspec(__nothrow) int rand(void);
+   
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) void srand(unsigned int  );
+   
+
+
+
+
+
+
+ 
+
+struct _rand_state { int __x[57]; };
+extern __declspec(__nothrow) int _rand_r(struct _rand_state *);
+extern __declspec(__nothrow) void _srand_r(struct _rand_state *, unsigned int);
+struct _ANSI_rand_state { int __x[1]; };
+extern __declspec(__nothrow) int _ANSI_rand_r(struct _ANSI_rand_state *);
+extern __declspec(__nothrow) void _ANSI_srand_r(struct _ANSI_rand_state *, unsigned int);
+   
+
+
+ 
+
+extern __declspec(__nothrow) void *calloc(size_t  , size_t  );
+   
+
+
+
+ 
+extern __declspec(__nothrow) void free(void *  );
+   
+
+
+
+
+
+ 
+extern __declspec(__nothrow) void *malloc(size_t  );
+   
+
+
+
+ 
+extern __declspec(__nothrow) void *realloc(void *  , size_t  );
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) int posix_memalign(void **  , size_t  , size_t  );
+   
+
+
+
+
+
+
+
+
+
+ 
+
+typedef int (*__heapprt)(void *, char const *, ...);
+extern __declspec(__nothrow) void __heapstats(int (*  )(void *  ,
+                                           char const *  , ...),
+                        void *  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) int __heapvalid(int (*  )(void *  ,
+                                           char const *  , ...),
+                       void *  , int  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) __declspec(__noreturn) void abort(void);
+   
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) int atexit(void (*  )(void)) __attribute__((__nonnull__(1)));
+   
+
+
+
+
+ 
+#line 436 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+
+
+extern __declspec(__nothrow) __declspec(__noreturn) void exit(int  );
+   
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) __declspec(__noreturn) void _Exit(int  );
+   
+
+
+
+
+
+
+
+      
+
+extern __declspec(__nothrow) char *getenv(const char *  ) __attribute__((__nonnull__(1)));
+   
+
+
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) int  system(const char *  );
+   
+
+
+
+
+
+
+
+
+
+ 
+
+extern  void *bsearch(const void *  , const void *  ,
+              size_t  , size_t  ,
+              int (*  )(const void *, const void *)) __attribute__((__nonnull__(1,2,5)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+#line 524 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+
+
+extern  void qsort(void *  , size_t  , size_t  ,
+           int (*  )(const void *, const void *)) __attribute__((__nonnull__(1,4)));
+   
+
+
+
+
+
+
+
+
+
+ 
+
+#line 553 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+
+extern __declspec(__nothrow) __attribute__((const)) int abs(int  );
+   
+
+
+
+ 
+
+extern __declspec(__nothrow) __attribute__((const)) div_t div(int  , int  );
+   
+
+
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) __attribute__((const)) long int labs(long int  );
+   
+
+
+
+ 
+
+
+
+
+extern __declspec(__nothrow) __attribute__((const)) ldiv_t ldiv(long int  , long int  );
+   
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+extern __declspec(__nothrow) __attribute__((const)) long long llabs(long long  );
+   
+
+
+
+ 
+
+
+
+
+extern __declspec(__nothrow) __attribute__((const)) lldiv_t lldiv(long long  , long long  );
+   
+
+
+
+
+
+
+
+
+
+
+
+ 
+#line 634 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+
+
+
+
+ 
+typedef struct __sdiv32by16 { int quot, rem; } __sdiv32by16;
+typedef struct __udiv32by16 { unsigned int quot, rem; } __udiv32by16;
+    
+typedef struct __sdiv64by32 { int rem, quot; } __sdiv64by32;
+
+__value_in_regs extern __declspec(__nothrow) __attribute__((const)) __sdiv32by16 __rt_sdiv32by16(
+     int  ,
+     short int  );
+   
+
+ 
+__value_in_regs extern __declspec(__nothrow) __attribute__((const)) __udiv32by16 __rt_udiv32by16(
+     unsigned int  ,
+     unsigned short  );
+   
+
+ 
+__value_in_regs extern __declspec(__nothrow) __attribute__((const)) __sdiv64by32 __rt_sdiv64by32(
+     int  , unsigned int  ,
+     int  );
+   
+
+ 
+
+
+
+
+ 
+extern __declspec(__nothrow) unsigned int __fp_status(unsigned int  , unsigned int  );
+   
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) int mblen(const char *  , size_t  );
+   
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) int mbtowc(wchar_t * __restrict  ,
+                   const char * __restrict  , size_t  );
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) int wctomb(char *  , wchar_t  );
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+extern __declspec(__nothrow) size_t mbstowcs(wchar_t * __restrict  ,
+                      const char * __restrict  , size_t  ) __attribute__((__nonnull__(2)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+extern __declspec(__nothrow) size_t wcstombs(char * __restrict  ,
+                      const wchar_t * __restrict  , size_t  ) __attribute__((__nonnull__(2)));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+extern __declspec(__nothrow) void __use_realtime_heap(void);
+extern __declspec(__nothrow) void __use_realtime_division(void);
+extern __declspec(__nothrow) void __use_two_region_memory(void);
+extern __declspec(__nothrow) void __use_no_heap(void);
+extern __declspec(__nothrow) void __use_no_heap_region(void);
+
+extern __declspec(__nothrow) char const *__C_library_version_string(void);
+extern __declspec(__nothrow) int __C_library_version_number(void);
+
+
+
+
+
+
+
+
+
+
+
+#line 892 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
+
+
+
+
+
+ 
+#line 15 "main.c"
+#line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+#line 61 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+#line 75 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+
+
+   
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+#line 112 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+extern __attribute__((__pcs__("aapcs"))) unsigned __ARM_dcmp4(double  , double  );
+extern __attribute__((__pcs__("aapcs"))) unsigned __ARM_fcmp4(float  , float  );
+    
+
+
+
+
+ 
+
+extern __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_fpclassifyf(float  );
+extern __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_fpclassify(double  );
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isfinitef(float __x)
+{
+    return (((*(unsigned *)&(__x)) >> 23) & 0xff) != 0xff;
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isfinite(double __x)
+{
+    return (((*(1 + (unsigned *)&(__x))) >> 20) & 0x7ff) != 0x7ff;
+}
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isinff(float __x)
+{
+    return ((*(unsigned *)&(__x)) << 1) == 0xff000000;
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isinf(double __x)
+{
+    return (((*(1 + (unsigned *)&(__x))) << 1) == 0xffe00000) && ((*(unsigned *)&(__x)) == 0);
+}
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_islessgreaterf(float __x, float __y)
+{
+    unsigned __f = __ARM_fcmp4(__x, __y) >> 28;
+    return (__f == 8) || (__f == 2);  
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_islessgreater(double __x, double __y)
+{
+    unsigned __f = __ARM_dcmp4(__x, __y) >> 28;
+    return (__f == 8) || (__f == 2);  
+}
+    
+
+
+ 
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnanf(float __x)
+{
+    return (0x7f800000 - ((*(unsigned *)&(__x)) & 0x7fffffff)) >> 31;
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnan(double __x)
+{
+    unsigned __xf = (*(1 + (unsigned *)&(__x))) | (((*(unsigned *)&(__x)) == 0) ? 0 : 1);
+    return (0x7ff00000 - (__xf & 0x7fffffff)) >> 31;
+}
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnormalf(float __x)
+{
+    unsigned __xe = ((*(unsigned *)&(__x)) >> 23) & 0xff;
+    return (__xe != 0xff) && (__xe != 0);
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnormal(double __x)
+{
+    unsigned __xe = ((*(1 + (unsigned *)&(__x))) >> 20) & 0x7ff;
+    return (__xe != 0x7ff) && (__xe != 0);
+}
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_signbitf(float __x)
+{
+    return (*(unsigned *)&(__x)) >> 31;
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_signbit(double __x)
+{
+    return (*(1 + (unsigned *)&(__x))) >> 31;
+}
+     
+     
+
+
+
+
+
+
+
+
+#line 230 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+
+
+   
+  typedef float float_t;
+  typedef double double_t;
+#line 251 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+extern const int math_errhandling;
+#line 261 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+extern __declspec(__nothrow) double acos(double  );
+    
+    
+    
+extern __declspec(__nothrow) double asin(double  );
+    
+    
+    
+    
+
+extern __declspec(__nothrow) __attribute__((const)) double atan(double  );
+    
+    
+
+extern __declspec(__nothrow) double atan2(double  , double  );
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double cos(double  );
+    
+    
+    
+    
+extern __declspec(__nothrow) double sin(double  );
+    
+    
+    
+    
+
+extern void __use_accurate_range_reduction(void);
+    
+    
+
+extern __declspec(__nothrow) double tan(double  );
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double cosh(double  );
+    
+    
+    
+    
+extern __declspec(__nothrow) double sinh(double  );
+    
+    
+    
+    
+    
+
+extern __declspec(__nothrow) __attribute__((const)) double tanh(double  );
+    
+    
+
+extern __declspec(__nothrow) double exp(double  );
+    
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double frexp(double  , int *  ) __attribute__((__nonnull__(2)));
+    
+    
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double ldexp(double  , int  );
+    
+    
+    
+    
+extern __declspec(__nothrow) double log(double  );
+    
+    
+    
+    
+    
+extern __declspec(__nothrow) double log10(double  );
+    
+    
+    
+extern __declspec(__nothrow) double modf(double  , double *  ) __attribute__((__nonnull__(2)));
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double pow(double  , double  );
+    
+    
+    
+    
+    
+    
+extern __declspec(__nothrow) double sqrt(double  );
+    
+    
+    
+
+
+
+
+    __inline double _sqrt(double __x) { return sqrt(__x); }
+
+
+
+
+    __inline float _sqrtf(float __x) { return (float)sqrt(__x); }
+
+    
+
+
+
+ 
+
+extern __declspec(__nothrow) __attribute__((const)) double ceil(double  );
+    
+    
+extern __declspec(__nothrow) __attribute__((const)) double fabs(double  );
+    
+    
+
+extern __declspec(__nothrow) __attribute__((const)) double floor(double  );
+    
+    
+
+extern __declspec(__nothrow) double fmod(double  , double  );
+    
+    
+    
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+extern __declspec(__nothrow) double acosh(double  );
+    
+
+ 
+extern __declspec(__nothrow) double asinh(double  );
+    
+
+ 
+extern __declspec(__nothrow) double atanh(double  );
+    
+
+ 
+extern __declspec(__nothrow) double cbrt(double  );
+    
+
+ 
+__inline __declspec(__nothrow) __attribute__((const)) double copysign(double __x, double __y)
+    
+
+ 
+{
+    (*(1 + (unsigned *)&(__x))) = ((*(1 + (unsigned *)&(__x))) & 0x7fffffff) | ((*(1 + (unsigned *)&(__y))) & 0x80000000);
+    return __x;
+}
+__inline __declspec(__nothrow) __attribute__((const)) float copysignf(float __x, float __y)
+    
+
+ 
+{
+    (*(unsigned *)&(__x)) = ((*(unsigned *)&(__x)) & 0x7fffffff) | ((*(unsigned *)&(__y)) & 0x80000000);
+    return __x;
+}
+extern __declspec(__nothrow) double erf(double  );
+    
+
+ 
+extern __declspec(__nothrow) double erfc(double  );
+    
+
+ 
+extern __declspec(__nothrow) double expm1(double  );
+    
+
+ 
+
+
+
+    
+
+ 
+
+
+
+
+
+
+#line 479 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+extern __declspec(__nothrow) double hypot(double  , double  );
+    
+
+
+
+
+ 
+extern __declspec(__nothrow) int ilogb(double  );
+    
+
+ 
+extern __declspec(__nothrow) int ilogbf(float  );
+    
+
+ 
+extern __declspec(__nothrow) int ilogbl(long double  );
+    
+
+ 
+
+
+
+
+
+
+
+    
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+ 
+
+
+
+
+
+    
+
+ 
+
+
+
+
+
+    
+
+
+ 
+
+extern __declspec(__nothrow) double lgamma (double  );
+    
+
+
+ 
+extern __declspec(__nothrow) double log1p(double  );
+    
+
+ 
+extern __declspec(__nothrow) double logb(double  );
+    
+
+ 
+extern __declspec(__nothrow) float logbf(float  );
+    
+
+ 
+extern __declspec(__nothrow) long double logbl(long double  );
+    
+
+ 
+extern __declspec(__nothrow) double nextafter(double  , double  );
+    
+
+
+ 
+extern __declspec(__nothrow) float nextafterf(float  , float  );
+    
+
+
+ 
+extern __declspec(__nothrow) long double nextafterl(long double  , long double  );
+    
+
+
+ 
+extern __declspec(__nothrow) double nexttoward(double  , long double  );
+    
+
+
+ 
+extern __declspec(__nothrow) float nexttowardf(float  , long double  );
+    
+
+
+ 
+extern __declspec(__nothrow) long double nexttowardl(long double  , long double  );
+    
+
+
+ 
+extern __declspec(__nothrow) double remainder(double  , double  );
+    
+
+ 
+extern __declspec(__nothrow) __attribute__((const)) double rint(double  );
+    
+
+ 
+extern __declspec(__nothrow) double scalbln(double  , long int  );
+    
+
+ 
+extern __declspec(__nothrow) float scalblnf(float  , long int  );
+    
+
+ 
+extern __declspec(__nothrow) long double scalblnl(long double  , long int  );
+    
+
+ 
+extern __declspec(__nothrow) double scalbn(double  , int  );
+    
+
+ 
+extern __declspec(__nothrow) float scalbnf(float  , int  );
+    
+
+ 
+extern __declspec(__nothrow) long double scalbnl(long double  , int  );
+    
+
+ 
+
+
+
+
+    
+
+ 
+
+
+
+ 
+extern __declspec(__nothrow) __attribute__((const)) float _fabsf(float);  
+__inline __declspec(__nothrow) __attribute__((const)) float fabsf(float __f) { return _fabsf(__f); }
+extern __declspec(__nothrow) float sinf(float  );
+extern __declspec(__nothrow) float cosf(float  );
+extern __declspec(__nothrow) float tanf(float  );
+extern __declspec(__nothrow) float acosf(float  );
+extern __declspec(__nothrow) float asinf(float  );
+extern __declspec(__nothrow) float atanf(float  );
+extern __declspec(__nothrow) float atan2f(float  , float  );
+extern __declspec(__nothrow) float sinhf(float  );
+extern __declspec(__nothrow) float coshf(float  );
+extern __declspec(__nothrow) float tanhf(float  );
+extern __declspec(__nothrow) float expf(float  );
+extern __declspec(__nothrow) float logf(float  );
+extern __declspec(__nothrow) float log10f(float  );
+extern __declspec(__nothrow) float powf(float  , float  );
+extern __declspec(__nothrow) float sqrtf(float  );
+extern __declspec(__nothrow) float ldexpf(float  , int  );
+extern __declspec(__nothrow) float frexpf(float  , int *  ) __attribute__((__nonnull__(2)));
+extern __declspec(__nothrow) __attribute__((const)) float ceilf(float  );
+extern __declspec(__nothrow) __attribute__((const)) float floorf(float  );
+extern __declspec(__nothrow) float fmodf(float  , float  );
+extern __declspec(__nothrow) float modff(float  , float *  ) __attribute__((__nonnull__(2)));
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+__declspec(__nothrow) long double acosl(long double );
+__declspec(__nothrow) long double asinl(long double );
+__declspec(__nothrow) long double atanl(long double );
+__declspec(__nothrow) long double atan2l(long double , long double );
+__declspec(__nothrow) long double ceill(long double );
+__declspec(__nothrow) long double cosl(long double );
+__declspec(__nothrow) long double coshl(long double );
+__declspec(__nothrow) long double expl(long double );
+__declspec(__nothrow) long double fabsl(long double );
+__declspec(__nothrow) long double floorl(long double );
+__declspec(__nothrow) long double fmodl(long double , long double );
+__declspec(__nothrow) long double frexpl(long double , int* ) __attribute__((__nonnull__(2)));
+__declspec(__nothrow) long double ldexpl(long double , int );
+__declspec(__nothrow) long double logl(long double );
+__declspec(__nothrow) long double log10l(long double );
+__declspec(__nothrow) long double modfl(long double  , long double *  ) __attribute__((__nonnull__(2)));
+__declspec(__nothrow) long double powl(long double , long double );
+__declspec(__nothrow) long double sinl(long double );
+__declspec(__nothrow) long double sinhl(long double );
+__declspec(__nothrow) long double sqrtl(long double );
+__declspec(__nothrow) long double tanl(long double );
+__declspec(__nothrow) long double tanhl(long double );
+
+
+
+
+
+ 
+extern __declspec(__nothrow) float acoshf(float  );
+__declspec(__nothrow) long double acoshl(long double );
+extern __declspec(__nothrow) float asinhf(float  );
+__declspec(__nothrow) long double asinhl(long double );
+extern __declspec(__nothrow) float atanhf(float  );
+__declspec(__nothrow) long double atanhl(long double );
+__declspec(__nothrow) long double copysignl(long double , long double );
+extern __declspec(__nothrow) float cbrtf(float  );
+__declspec(__nothrow) long double cbrtl(long double );
+extern __declspec(__nothrow) float erff(float  );
+__declspec(__nothrow) long double erfl(long double );
+extern __declspec(__nothrow) float erfcf(float  );
+__declspec(__nothrow) long double erfcl(long double );
+extern __declspec(__nothrow) float expm1f(float  );
+__declspec(__nothrow) long double expm1l(long double );
+extern __declspec(__nothrow) float log1pf(float  );
+__declspec(__nothrow) long double log1pl(long double );
+extern __declspec(__nothrow) float hypotf(float  , float  );
+__declspec(__nothrow) long double hypotl(long double , long double );
+extern __declspec(__nothrow) float lgammaf(float  );
+__declspec(__nothrow) long double lgammal(long double );
+extern __declspec(__nothrow) float remainderf(float  , float  );
+__declspec(__nothrow) long double remainderl(long double , long double );
+extern __declspec(__nothrow) float rintf(float  );
+__declspec(__nothrow) long double rintl(long double );
+
+
+
+#line 875 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+#line 896 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+#line 1087 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+
+
+
+
+
+
+#line 1317 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+ 
+#line 16 "main.c"
 
 
  
@@ -21176,73 +22667,112 @@ __declspec(noreturn) void os_error (uint32_t error_code);
 
  
 
-#line 20 "main.c"
-#line 21 "main.c"
 #line 22 "main.c"
+#line 23 "main.c"
+#line 24 "main.c"
 
 
-uint32_t os_mutex_cb_uart_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_uart_mutex = { (os_mutex_cb_uart_mutex) };    
-osMutexId  (uart_mutex_id); 
+uint32_t os_mutex_cb_uart_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_uart_mutex = { (os_mutex_cb_uart_mutex) };		
+osMutexId	(uart_mutex_id); 
 		
-uint32_t os_mutex_cb_tcp_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_tcp_mutex = { (os_mutex_cb_tcp_mutex) };    
-osMutexId  (tcp_mutex_id); 
+uint32_t os_mutex_cb_tcp_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_tcp_mutex = { (os_mutex_cb_tcp_mutex) };		
+osMutexId	(tcp_mutex_id); 
 
- uint32_t os_mutex_cb_fs_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_fs_mutex = { (os_mutex_cb_fs_mutex) };    
- osMutexId  (fs_mutex_id); 
+uint32_t os_mutex_cb_fs_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_fs_mutex = { (os_mutex_cb_fs_mutex) };		
+osMutexId	(fs_mutex_id); 
 
-extern osThreadId tid_Thread1;                                          
-extern int Init_Thread (void);                   
+extern osThreadId tid_Thread1;																					
+extern int Init_Thread (void);									 
 extern void Init_Timers (void);
 extern void SendChar(int ch);
+extern char fileinstance[20];
 
 void clear(void);
-extern  int32_t life;
+extern	int32_t life;
 
 void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout);
-
 __inline void Save_FS(void);
 __inline void manualdelay(int delayms);
 __inline void Send_FS(void);
 __inline int count_char(char ch,char* string);
 __inline void parse_g(char* str, int first, int sec, char f, char s , char *string);
-extern void remove_all_chars(char* str, char c, char d);
 
+__inline int8_t checkallnumsinstring(char* checkstring);
+extern void fileclose(void);
+extern void SendChar_To_UART1(int ch);
+extern void send_string_to_uart1(char* string);
+
+__inline void fileopen(void);
+
+
+extern void remove_all_chars(char* str, char c, char d);
+void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
 void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+void Save_FS(void);
+void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+void I2C_Write(uint16_t u16Address, uint8_t u8Data);
+uint8_t I2C_Read(uint16_t u16Address);
+void I2C_MasterTx(uint32_t u32Status);
+void I2C_MasterRx(uint32_t u32Status);
+ 
+ 
+ 
+ 
+ 
+ 
+uint8_t g_u8DeviceAddr = 0x1D;
+uint32_t u32Status;
 
- 
- 
- 
-char g_u8SendData[3300] = {0};
-char g_u8RecData[800]  = {0};
+uint8_t g_au8TxData[1];
+uint8_t g_u8RxData;
+uint8_t g_u8DataLen = 0;
+volatile uint8_t g_u8EndFlag = 0;
+typedef void (*I2C_FUNC)(uint32_t u32Status);
+static I2C_FUNC s_I2CHandlerFn = 0;
+char g_u8SendData[3500] = {0};
+char g_u8RecData[500]	= {0};
 int32_t	inc=0;
 uint8_t u8InChar=0xFF;
 int32_t g_u8RecDataptr=0;
 int32_t timer0ticks=0;
 int32_t tmr0sec=0;
-
+float	u32ADC0Result;
+float u32ADC0Result1;
+int8_t charging, cpinready, cregready;
+int seeker = 0;
+int breaker=0;
  
-volatile int32_t   _Wakeup_Flag = 0;     
-volatile uint32_t  _Pin_Setting[11];     
-volatile uint32_t  _PullUp_Setting[6];   
+volatile int32_t	 _Wakeup_Flag = 0;		 
+volatile uint32_t	_Pin_Setting[11];		 
+volatile uint32_t	_PullUp_Setting[6];	 
 
 char * r1;
 char * r2;
 char * r3;
 volatile uint32_t g_u32comRbytes = 0;
-volatile uint32_t g_u32comRhead  = 0;
-volatile uint32_t g_u32comRtail  = 0;
-volatile int32_t g_bWait         = (1);
+volatile uint32_t g_u32comRhead	= 0;
+volatile uint32_t g_u32comRtail	= 0;
+volatile int32_t g_bWait				 = (1);
+volatile uint8_t u8ADF;
+uint8_t mainla = 0;
+uint8_t th1la = 0;
+uint8_t th2la = 0;
+  uint16_t OUT_P ,OUT_N;
+int motion = 0;
 volatile int32_t g_i32pointer = 0;
 char temp[100];
 int network=0;
 char imei[25];
 int imeiptr0=0;
 int imeiptr=0;
+char dmsg[50];
  
  
  
+
 int32_t main(void);
+void ADC_IRQHandler(void);
 void UART1_TEST_HANDLE(void);
 void UART_FunctionTest(void);
 
@@ -21250,225 +22780,266 @@ void SavePinSetting(void);
 void RestorePinSetting(void);
 void Enter_PowerDown(void);
 void Leave_PowerDown(void);
+void ADC0_Init(void);
+void Send_FS(void);
 
 void Thread1 (void const *argument);
 
+void WDT_IRQHandler(void){
+    
+    (((WWDT_T *) (((uint32_t)0x40000000) + 0x04100))->RLD = (0x00005AA5));
+    (((WWDT_T *) (((uint32_t)0x40000000) + 0x04100))->STS = (0x1ul << (0)));
+    send_string_to_uart1("WWDT counter reload\n");
 
-__inline int count_char(char ch,char* string)
-{
+}
+
+
+__inline int count_char(char ch,char* string){
 int32_t	count=0;
 int32_t ass=0;
-
-	for(ass=0;ass<strlen(string);ass++)
-	{
+	for(ass=0;ass<strlen(string);ass++){
 		if(string[ass] == ch)
 		{count++;}
-		
 	}
 return count;
 }
 
-
-
-
-
-
-
-__inline void manualdelay(int delayms)
-{
+__inline void manualdelay(int delayms){
 
 	int d1,d2;
-	for(d1 = 0; d1 < delayms ; d1++)
-	{
-		for(d2=0; d2 < 65535; d2++)
-		{
+	for(d1 = 0; d1 < delayms ; d1++){
+		for(d2=0; d2 < 65535; d2++){
 		}
 	}
 }
 
 
-
-
-
-
-
-
-
-void SYS_Init(void)
-{
-     
-     
-     
-     
-    SYS_UnlockReg();
-
-     
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->PWRCTL |= (0x1 << (0)); 
-
-     
-    CLK_WaitClockReady( (0x1ul << (0)));
-
-     
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL0 &= ~(0x7ul << (0));
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL0 |= (0UL<<(0));
-
-     
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(16)); 
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(17)); 
-
-     
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL1 &= ~(0x3ul << (0));
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL1 |= (0x0 << (0));
-
-     
-     
-    SystemCoreClockUpdate();
+__inline int16_t motion_sense(){
+  static int motion_counts,immotion_counts;
+  uint8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A;
+  I2C_Write(0x20, 0x67);  
  
 
+  OUT_X_H_A = I2C_Read(0x29);
+  OUT_Y_H_A = I2C_Read(0x2B);
+  OUT_Z_H_A = I2C_Read(0x2D);
+  OUT_N = sqrt((OUT_X_H_A*OUT_X_H_A) + (OUT_Y_H_A*OUT_Y_H_A) + (OUT_Z_H_A*OUT_Z_H_A));
+  if( ((OUT_N - OUT_P) >= 2) || ((OUT_N - OUT_P) <= -2) ){
+    motion_counts++;
+  }
+  else{
+    immotion_counts++;
+  }
+  OUT_P = OUT_N;
+  if(motion_counts >= 10){
+    motion_counts=0;
+    immotion_counts=0;
+    motion=1;
+  }
+  if(immotion_counts >= 30){
+    motion=0;
+    immotion_counts=0;
+    motion_counts=0;
+
+  }
 
 
 
+return 0;
+}
+
+__inline void SYS_Init(void){
+		 
+		 
+		 
+		 
+		SYS_UnlockReg();
+
+
+		   
+
+		 
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->PWRCTL |= (0x1 << (0)); 
+  
+		 
+		CLK_WaitClockReady( (0x1ul << (0)));
+		   
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL0 &= ~(0x7ul << (0));
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL0 |= (0UL<<(0));
+
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(16)); 
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(17)); 
+		CLK_EnableModuleClock(((1UL<<31)|(1<<29)|(3<<25) |( 2<<20)|(0<<18)|(0xFF<<10) |(16<<5)|(28) ));
+    CLK_EnableModuleClock(((1UL<<31)|(3<<29)|(0x0<<25)|( 0<<20)|(0<<18)|(0x0<<10)|( 0<<5)|(0) ));
+
+    CLK_EnableModuleClock(((1UL<<31)|(0<<29)|(0x0<<25)|( 0<<20)|(0<<18)|(0x0<<10)|( 0<<5)|(9) ));
+    
+		 
+
+
+    CLK_SetModuleClock(((1UL<<31)|(1<<29)|(3<<25) |( 0<<20)|(0<<18)|(0xF<<10) |( 8<<5)|(16) ), (0x0UL<<(0)), (((1-1)<< (8)) & (0xful << (8))));
+    CLK_SetModuleClock(((1UL<<31)|(1<<29)|(3<<25) |( 0<<20)|(0<<18)|(0xF<<10) |( 8<<5)|(17) ), (0x0UL<<(0)), (((1-1)<< (8)) & (0xful << (8))));
 
 
 
+    CLK_SetModuleClock(((1UL<<31)|(3<<29)|(0x0<<25)|( 0<<20)|(0<<18)|(0x0<<10)|( 0<<5)|(0) ), 0, 0);
 
+		 
+		 
+		SystemCoreClockUpdate();
 
+		 
+		 
+		 
+		 
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP &= ~((0x7ul << (0)) | (0x7ul << (4)));
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP |= ((1UL<<(0)) | (1UL<<(4)));
 
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP &= ~((0x7ul << (16)) | (0x7ul << (20)) );
 
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP |= ((1UL<<(16)) | (1UL<<(20))); 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+											
+    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_H_MFP |= ((1UL<<(12)) | (1UL<<(8)));
+    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(9));
 
      
-     
-     
-     
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP &= ~((0x7ul << (0)) | (0x7ul << (4)));
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP |= ((1UL<<(0)) | (1UL<<(4)));
+    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->IPRST_CTL2 |=  (0x1ul << (9));
+    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->IPRST_CTL2 &= ~(0x1ul << (9));											
+		 
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP &= ~((0x7ul << (0)));
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP |= (1UL<<(0));
 
-     
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP &= ~((0x7ul << (16)) | (0x7ul << (20)) );
-                      
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP |= ((1UL<<(16)) | (1UL<<(20))); 
-                      
+		 
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04000))->OFFD |= (((1<<0)) << (16));											
 
-     
-    SYS_LockReg();
+
+		 
+		SYS_LockReg();
 
 }
 
-void UART0_Init()
-{
-     
-     
-     
-    UART_Open(((UART_T *) (((uint32_t)0x40000000) + 0x50000)), 115200);
-	  (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->IER |= (((0x1ul << (0)) )));
-    NVIC_EnableIRQ(UART0_IRQn);
+__inline void UART0_Init(){
+		 
+		 
+		 
+		UART_Open(((UART_T *) (((uint32_t)0x40000000) + 0x50000)), 115200);
+		(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->IER |= (((0x1ul << (0)) )));
+		NVIC_EnableIRQ(UART0_IRQn);
 }
-
-void UART1_Init()
-{
-    UART_Open(((UART_T *) (((uint32_t)0x40100000) + 0x50000)), 115200);
-}
-
-
-void Timer_Init()
-{
-
-
-
-
-
-
-
-
+__inline void UART1_Init(){
+		 
+		 
+		 
+		UART_Open(((UART_T *) (((uint32_t)0x40100000) + 0x50000)), 115200);
 
 
 }
-void delay(int32_t ms)
-{
-	int32_t us;
-	for(;ms>0;ms--)
-	{
-		for(us=0;us<100000;us++){}
+
+__inline void ADC0_Init(){
 		
+		ADC_Open(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000)), (0UL << (10)), (3UL << (2)), ((1UL << 0)));
+		(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR = (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR & ~(0x3ul << (16))) | (2UL << (16)));
+		do { ((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR |= (0x1ul << (0)); while ((!(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->SR & (0x1ul << (16)))) || (!(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->PWRCTL & (0x1ul << (0))))); } while(0);
+		(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR |= (0x1ul << (11)));
+}
+
+__inline void delay(int32_t ms){
+	int32_t us;
+	for(;ms>0;ms--){
+		for(us=0;us<100000;us++){}
 	}
 }
 
-
-int main(void)
-{
+int main(void){
+int freq;int32_t u32Data;
     SYS_Init();
-
-
-
-
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04080)), (0x00000002), 0x1UL);
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04080)), (0x00000001), 0x1UL);
+    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(2))) + ((0)<<2))))=1;
+		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(2))) + ((1)<<2))))=1;
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000008), 0x1UL);
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000010), 0x1UL);
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000020), 0x1UL);
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000040), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04040)), (0x00000004), 0x1UL);
-    UART0_Init();
-    UART1_Init();
+		UART0_Init();
+		UART1_Init();
+    memset(dmsg,0,50);
 
-		Init_Timers();
-		osKernelInitialize ();                    
+    I2C_Open(((I2C_T *) (((uint32_t)0x40100000) + 0x20000)), 100000);  
+    I2C_EnableInt(((I2C_T *) (((uint32_t)0x40100000) + 0x20000)));
+    NVIC_EnableIRQ(I2C1_IRQn); 
+    freq = I2C_GetBusClockFreq(((I2C_T *) (((uint32_t)0x40100000) + 0x20000)));
+    sprintf(dmsg,"\r\nI2C1 clock :%d \r\n", freq);
+
+
+
+
+
+
+
+
+
+    Init_Timers();
+		osKernelInitialize ();										
+		ADC0_Init();
+    
+    SYS_UnlockReg();
+    
+    WWDT_Open((0xCUL << (8)), 0x20, (1));
+    
+    WDT_EnableInt();
+    NVIC_EnableIRQ(WDT_IRQn);
 		uart_mutex_id = osMutexCreate(&os_mutex_def_uart_mutex);
 		tcp_mutex_id = osMutexCreate(&os_mutex_def_tcp_mutex);
 		fs_mutex_id = osMutexCreate(&os_mutex_def_fs_mutex);
-	
-		Init_Thread();
-		osKernelStart ();                         
-    while(1)
-		{
-	
-	
+		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((3)<<2))))=0;  
+		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((4)<<2))))=0;
+		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((5)<<2))))=0;
+		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((6)<<2))))=0;
+    Init_Thread();
+		osKernelStart ();												 
+    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+		SendAT("\r\nAT+QSCLK=1\r\n", "Ready", "OK" , "ERROR",5);
+    SendAT("\r\nAT+SYSTEMSTARTS\r\n\r\n", "Ready", "OK" , "ERROR",10);	
+    fileopen();
+    SendAT("\r\nAT+QGNSSC=1\r\n", "Ready", "OK" , "ERROR",10);	    
+    while(1){
+      mainla = 1;
+      th1la = 0;
+      th2la = 0; 
+ 
+ 
+      
 		}
 }
-
-
  
  
  
 void UART1_IRQHandler(void)
 {
-  
+	
 }
-
  
  
  
 
 void UART0_IRQHandler(void)
-{    
+{		
 					while(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) 
 					{
-            g_u8RecData[g_u8RecDataptr] = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
+						g_u8RecData[g_u8RecDataptr] = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
 						g_u8RecDataptr++;
 					}
+   
 
 }
-
-
 __inline void parse_g(char* str, int first, int sec, char f, char s , char *string)
 {int sz1,sz2,i11,temp11,j11,l;
 
 		sz1=	strlen(str);
-		sz2=  strlen(string);
+		sz2=	strlen(string);
 		memset(string,0,sz2);
 		for(i11=0,temp11=0;i11<sz1;i11++)
 		{
@@ -21494,34 +23065,29 @@ __inline void parse_g(char* str, int first, int sec, char f, char s , char *stri
 		}
 	
 }
-
-
-
 void SavePinSetting()
 {
-     
-    _Pin_Setting[0] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP;
-    _Pin_Setting[1] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_H_MFP;
-    _Pin_Setting[2] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP;
-    _Pin_Setting[3] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_H_MFP;
-    _Pin_Setting[4] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_L_MFP;
-    _Pin_Setting[5] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_H_MFP;
-    _Pin_Setting[6] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_L_MFP;
-    _Pin_Setting[7] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_H_MFP;
-    _Pin_Setting[8] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_L_MFP;
-    _Pin_Setting[9] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_H_MFP;
-    _Pin_Setting[10] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PF_L_MFP;
+		 
+		_Pin_Setting[0] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP;
+		_Pin_Setting[1] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_H_MFP;
+		_Pin_Setting[2] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP;
+		_Pin_Setting[3] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_H_MFP;
+		_Pin_Setting[4] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_L_MFP;
+		_Pin_Setting[5] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_H_MFP;
+		_Pin_Setting[6] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_L_MFP;
+		_Pin_Setting[7] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_H_MFP;
+		_Pin_Setting[8] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_L_MFP;
+		_Pin_Setting[9] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_H_MFP;
+		_Pin_Setting[10] = ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PF_L_MFP;
 
-     
-    _PullUp_Setting[0] =  ((GPIO_T *) (((uint32_t)0x50000000) + 0x04000))->PUEN;
-    _PullUp_Setting[1] =  ((GPIO_T *) (((uint32_t)0x50000000) + 0x04040))->PUEN;
-    _PullUp_Setting[2] =  ((GPIO_T *) (((uint32_t)0x50000000) + 0x04080))->PUEN;
-    _PullUp_Setting[3] =  ((GPIO_T *) (((uint32_t)0x50000000) + 0x040C0))->PUEN;
-    _PullUp_Setting[4] =  ((GPIO_T *) (((uint32_t)0x50000000) + 0x04100))->PUEN;
-    _PullUp_Setting[5] =  ((GPIO_T *) (((uint32_t)0x50000000) + 0x04140))->PUEN;
+		 
+		_PullUp_Setting[0] =	((GPIO_T *) (((uint32_t)0x50000000) + 0x04000))->PUEN;
+		_PullUp_Setting[1] =	((GPIO_T *) (((uint32_t)0x50000000) + 0x04040))->PUEN;
+		_PullUp_Setting[2] =	((GPIO_T *) (((uint32_t)0x50000000) + 0x04080))->PUEN;
+		_PullUp_Setting[3] =	((GPIO_T *) (((uint32_t)0x50000000) + 0x040C0))->PUEN;
+		_PullUp_Setting[4] =	((GPIO_T *) (((uint32_t)0x50000000) + 0x04100))->PUEN;
+		_PullUp_Setting[5] =	((GPIO_T *) (((uint32_t)0x50000000) + 0x04140))->PUEN;
 }
-
-
 
 
 
@@ -21529,29 +23095,27 @@ void SavePinSetting()
  
 void RestorePinSetting()
 {
-     
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP = _Pin_Setting[0];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_H_MFP = _Pin_Setting[1];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP = _Pin_Setting[2];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_H_MFP = _Pin_Setting[3];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_L_MFP = _Pin_Setting[4];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_H_MFP = _Pin_Setting[5];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_L_MFP = _Pin_Setting[6];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_H_MFP = _Pin_Setting[7];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_L_MFP = _Pin_Setting[8];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_H_MFP = _Pin_Setting[9];
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PF_L_MFP = _Pin_Setting[10];
+		 
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP = _Pin_Setting[0];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_H_MFP = _Pin_Setting[1];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP = _Pin_Setting[2];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_H_MFP = _Pin_Setting[3];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_L_MFP = _Pin_Setting[4];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_H_MFP = _Pin_Setting[5];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_L_MFP = _Pin_Setting[6];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_H_MFP = _Pin_Setting[7];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_L_MFP = _Pin_Setting[8];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_H_MFP = _Pin_Setting[9];
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PF_L_MFP = _Pin_Setting[10];
 
-     
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04000))->PUEN = _PullUp_Setting[0];
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04040))->PUEN = _PullUp_Setting[1];
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04080))->PUEN = _PullUp_Setting[2];
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x040C0))->PUEN = _PullUp_Setting[3];
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04100))->PUEN = _PullUp_Setting[4];
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04140))->PUEN = _PullUp_Setting[5];
+		 
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04000))->PUEN = _PullUp_Setting[0];
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04040))->PUEN = _PullUp_Setting[1];
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04080))->PUEN = _PullUp_Setting[2];
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x040C0))->PUEN = _PullUp_Setting[3];
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04100))->PUEN = _PullUp_Setting[4];
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04140))->PUEN = _PullUp_Setting[5];
 }
-
-
 
 
 
@@ -21559,39 +23123,37 @@ void RestorePinSetting()
  
 void Enter_PowerDown()
 {
-     
-    SavePinSetting();
+		 
+		SavePinSetting();
 
-     
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_H_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_H_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_L_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_H_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_L_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_H_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_L_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_H_MFP = 0;
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PF_L_MFP = 0x00007700;
+		 
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_H_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_H_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_L_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PC_H_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_L_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PD_H_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_L_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PE_H_MFP = 0;
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PF_L_MFP = 0x00007700;
 
-     
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04000))->PUEN = 0xFFFF;
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04040))->PUEN = 0xFFFF;
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04080))->PUEN = 0xFFFF;
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x040C0))->PUEN = 0xFFFF;
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04100))->PUEN = 0xFFFF;
-    ((GPIO_T *) (((uint32_t)0x50000000) + 0x04140))->PUEN = 0x0033;       
+		 
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04000))->PUEN = 0xFFFF;
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04040))->PUEN = 0xFFFF;
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04080))->PUEN = 0xFFFF;
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x040C0))->PUEN = 0xFFFF;
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04100))->PUEN = 0xFFFF;
+		((GPIO_T *) (((uint32_t)0x50000000) + 0x04140))->PUEN = 0x0033;			 
 
-     
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK &= ~(0x1UL<<(26));  
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->PWRCTL &= ~(0x1ul << (1));  
+		 
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK &= ~(0x1UL<<(26));  
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->PWRCTL &= ~(0x1ul << (1));  
 
-    CLK_PowerDown();
+		CLK_PowerDown();
 
 }
-
-
 
 
 
@@ -21600,55 +23162,31 @@ void Enter_PowerDown()
 void Leave_PowerDown()
 {
 
-     
-    RestorePinSetting();
+		 
+		RestorePinSetting();
 
-     
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PF_L_MFP |= 0x00000077;
+		 
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PF_L_MFP |= 0x00000077;
 
-     
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->PWRCTL |= (0x1ul << (1));  
-    ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(26));  
+		 
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->PWRCTL |= (0x1ul << (1));  
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(26));  
 
 }
-
-
-
-
-
-
-
-
-
-
 void clear()
 {
 					if(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) 
 					{
-            g_u8RecData[g_u8RecDataptr] = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
+						g_u8RecData[g_u8RecDataptr] = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
 						g_u8RecDataptr++;
 					}
 	
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void SendAT1(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
-
+	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+ 	osDelay(500);
 
 
 	tmr0sec=0;
@@ -21658,7 +23196,7 @@ void SendAT1(char * command, char * response1, char * response2, char * response
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,800);
+	memset(g_u8RecData,0,500);
 	printf("%c",0x1A);
 	clear();
 	printf(command);
@@ -21667,36 +23205,107 @@ void SendAT1(char * command, char * response1, char * response2, char * response
 		r2 = strstr(g_u8RecData, response2);
 		r3 = strstr(g_u8RecData, response3);
 			
-	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));   
+	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
 
 
+  send_string_to_uart1(g_u8RecData);  
+  
 osDelay(5);
 }
+ void cpinquerry()
+{
+  int timeout;
+  osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+	tmr0sec=0;
+	timeout =5;
+  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+	osDelay(100);
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,500);
+	printf("%c",0x1A);
+	clear();
+	printf("\r\nAT+CPIN?\r\n");
+	do{
+		r1 = strstr(g_u8RecData, "CPIN: READY");
+		r2 = strstr(g_u8RecData, "OK");
+		r3 = strstr(g_u8RecData, "ERROR");
+			
+	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
+	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
+  
+  if(r1)
+  {
+    cpinready=1;
+  }
+  else
+  {
+    cpinready=0;
+  }
 
+osMutexRelease(uart_mutex_id);
+osDelay(5);  
+}
 
-
-
-
-
-
+ void cregquerry()
+{
+  int timeout;
+  char cregresp[10];
+  osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+	tmr0sec=0;
+	timeout =5;
+    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+	osDelay(100);
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,500);
+	printf("%c",0x1A);
+	clear();
+	printf("\r\nAT+CREG?\r\n");
+	do{
+		r1 = strstr(g_u8RecData, "CPIN: READY");
+		r2 = strstr(g_u8RecData, "OK");
+		r3 = strstr(g_u8RecData, "ERROR");
+			
+	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
+	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
+  memset(cregresp,0,10);
+  parse_g(g_u8RecData, 1, 2, ',', '\n' , cregresp);
+  if(strstr(cregresp,"1") || strstr(cregresp, "5"))
+  {
+    cregready=1;
+  }
+  else
+  {
+    cregready=0;
+  }
+  
+  
+	osMutexRelease(uart_mutex_id);
+osDelay(5);
+  
+  
+}
 
 
 
 
 void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
-
-
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	tmr0sec=0;
 
-	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-
+  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+	osDelay(10);
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,800);
+	memset(g_u8RecData,0,500);
 	printf("%c",0x1A);
 	clear();
 	printf(command);
@@ -21704,13 +23313,207 @@ void SendAT(char * command, char * response1, char * response2, char * response3
 		r1 = strstr(g_u8RecData, response1);
 		r2 = strstr(g_u8RecData, response2);
 		r3 = strstr(g_u8RecData, response3);
-			
-	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));   
-	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
-	osMutexRelease(uart_mutex_id);
-osDelay(5);
+	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
+
+   if(!strstr(command, "QILOCIP"))
+   {
+     if(!(r1 || r2 || r3))
+      {
+
+
+      }
+   }
+
+
+  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
+  osMutexRelease(uart_mutex_id);
+
 }
 
+void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
+{
+	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+	tmr0sec=0;
+
+  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+	osDelay(10);
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,500);
+
+	clear();
+	printf(command);
+	do{
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
+
+   if(!strstr(command, "QILOCIP"))
+   {
+     if(!(r1 || r2 || r3))
+      {
+
+
+      }
+   }
+  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
+  osMutexRelease(uart_mutex_id);
+osDelay(2);
+}
+
+void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout)
+{
+  int tcpdatalength=0;
+	int tcpdataptr=0;
+	int times = 0;
+	int timesptr=0;
+	int tdp=0;
+	int tdpend=600;
+  char chdatalength[5];
+  char tcpdata[600];
+  int  cc =0;
+  breaker = 0;
+	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+	osMutexWait(tcp_mutex_id, 0xFFFFFFFFU);
+	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+ 
+	printf("%c",0x1A);
+	tmr0sec=0;
+	tcptimeout =5;
+	r1=0;
+	r2=0;
+	r3=0;
+  SendAT("\r\nAT+QFLDs=\"UFS\"\r\n", "Ready", "OK" , "ERROR",50);
+  
+  memset(chdatalength,0,5);
+  SendAT("\r\nAT+QFLST=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",50);
+  parse_g(g_u8RecData, 1, 2, ',', '\n' , chdatalength);
+	remove_all_chars(chdatalength, '\r', 0x1A);		
+  tcpdatalength =  atoi(chdatalength);
+
+  fileopen();
+
+  if(tcpdatalength%600 == 0)
+  {
+    times = (tcpdatalength/600);
+  }
+  else
+  {
+    times = (tcpdatalength/600)+1;
+  }  
+
+  for(timesptr=0; timesptr<times ;timesptr++)
+  {
+	g_u8RecDataptr=0;
+
+		if(tcpdatalength>15)
+		{
+      clear();
+      SendAT_GPS_WO_MUTEX("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
+      memset(temp,0,100);
+      sprintf(temp,"\r\nAT+QFSEEK=%s,%d\r\n",fileinstance,seeker);
+      SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
+      if(seeker > tcpdatalength)
+      {
+        seeker = 0;
+        SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);
+        breaker = 1;
+        break;
+      }
+      if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
+      memset(temp,0,100);
+      sprintf(temp,"\r\nAT+QFREAD=%s,600\r\n",fileinstance);
+      SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
+      if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
+      memset(tcpdata,0,600);
+      remove_all_chars(g_u8RecData, '\r', 0x1A);	
+      cc=count_char('\n',g_u8RecData)-1;      
+      parse_g(g_u8RecData, 2,cc, '\n', '\n' , tcpdata);  
+      memset(temp,0,100);
+			g_u8RecDataptr=0;
+			tmr0sec=0;
+			memset(g_u8RecData,0,500);
+			printf(tcpcommand);
+			do{
+				r1 = strstr(g_u8RecData, tcpresponse1);
+				r2 = strstr(g_u8RecData, tcpresponse2);
+				r3 = strstr(g_u8RecData, tcpresponse3);
+					
+			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
+
+				tmr0sec=0;
+				if(r1)
+					{
+						tmr0sec=0;
+						tcptimeout =5;
+						r1=0;
+						r2=0;
+						r3=0;
+						g_u8RecDataptr=0;
+						memset(g_u8RecData,0,500);
+						clear();
+
+
+ 						tcpdataptr=0;
+            tdpend=strlen(tcpdata);
+           
+						for(tdp=0;tdp<tdpend;tdp++)
+						{
+						SendChar(tcpdata[tdp]);
+						tcpdataptr++;
+            }
+						printf("%c",0x1A);
+						do{
+							r1 = strstr(g_u8RecData, tcpresponse1);
+							r2 = strstr(g_u8RecData, tcpresponse2);
+							r3 = strstr(g_u8RecData, tcpresponse3);
+						}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));
+          }
+
+			if(!(r3))
+			{
+				network=1;
+        breaker = 1;        
+				break;
+
+			}
+			else
+			{
+				network=0;
+			}
+
+    }
+   
+	if(network == 0 && timesptr>=times)
+	{
+
+	}
+  seeker+=600;
+		
+	}
+  
+  fileclose();
+  
+  
+  if(network == 0 && (timesptr>= times))
+  {
+  seeker = 0;
+  SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);    
+
+  }
+	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
+	r1=0;
+	r2=0;
+	r3=0;
+	osMutexRelease(tcp_mutex_id);
+	osMutexRelease(uart_mutex_id);
+
+
+
+}
 
 void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout)
 {
@@ -21719,48 +23522,49 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 	int times = 0;
 	int timesptr=0;
 	int tdp=0;
-	int tdpend=200;
+	int tdpend=600;
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	osMutexWait(tcp_mutex_id, 0xFFFFFFFFU);
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+ 
+
 	tmr0sec=0;
 	tcptimeout =5;
 	r1=0;
 	r2=0;
 	r3=0;
 
+ 
 
 	g_u8RecDataptr=0;
 	printf("%c",0x1A);
 	tcpdatalength = strlen(tcpdata);
-	if(tcpdatalength%200 == 0)
+	if(tcpdatalength%600 == 0)
 	{
-		times = (tcpdatalength/200);
+		times = (tcpdatalength/600);
 	}
 	else
 		{
-			times = (tcpdatalength/200)+1;
+			times = (tcpdatalength/600)+1;
 		}
-		if(tcpdatalength>25)
+		if(tcpdatalength>15)
 		{
 			clear();
 			for(timesptr = 0; timesptr < times ; timesptr++)
 			{
 			g_u8RecDataptr=0;
 			tmr0sec=0;
-			memset(g_u8RecData,0,800);
+			memset(g_u8RecData,0,500);
 			printf(tcpcommand);
 			do{
 				r1 = strstr(g_u8RecData, tcpresponse1);
 				r2 = strstr(g_u8RecData, tcpresponse2);
 				r3 = strstr(g_u8RecData, tcpresponse3);
 					
-			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));   
+			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
 
 				tmr0sec=0;
-			
-
-					if(r1)
+				if(r1)
 					{
 						tmr0sec=0;
 						tcptimeout =5;
@@ -21768,25 +23572,24 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 						r2=0;
 						r3=0;
 						g_u8RecDataptr=0;
-						memset(g_u8RecData,0,800);
+						memset(g_u8RecData,0,500);
 						clear();
 
 						if(timesptr == (times-1))
 						{
-							tdpend = tcpdatalength%200;
+							tdpend = tcpdatalength%600;
 						}
 						for(tdp=0;tdp<tdpend;tdp++)
 						{
 						SendChar(tcpdata[tcpdataptr]);
 						tcpdataptr++;}
 						printf("%c",0x1A);
-
 						do{
 							r1 = strstr(g_u8RecData, tcpresponse1);
 							r2 = strstr(g_u8RecData, tcpresponse2);
 							r3 = strstr(g_u8RecData, tcpresponse3);
 						}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));
-					}
+          }
 
 			if(!(r3))
 			{
@@ -21795,14 +23598,16 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 			}
 			else
 			{
-
 				network=0;
 			}
 		}
+
+   
 	if(network == 0 && timesptr>=times)
 	{
-		memset(g_u8SendData,0,3300);
-	}
+		memset(g_u8SendData,0,3500);
+    Send_FS();
+ 	}
 		
 	}
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
@@ -21820,44 +23625,42 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 {
 
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
-
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-	osDelay(1000);
+	osDelay(500);
 	tmr0sec=0;
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,800);
+	memset(g_u8RecData,0,500);
 	printf("%c",0x1A);
 	clear();
-	if(strlen(imei)<5)
+	if(checkallnumsinstring(imei) ||  (strlen(imei) < 5))
 	{
 		printf("\r\nAT+GSN\r\n");
 		do{
 			r1 = strstr(g_u8RecData, response1);
 			r2 = strstr(g_u8RecData, response2);
 			r3 = strstr(g_u8RecData, response3);
-		}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));   
+		}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
 		memset(imei,0,25);
 		imeiptr0=0;
 		for(imeiptr=0;imeiptr<strlen(g_u8RecData);imeiptr++)
 		{
-			if((g_u8RecData[imeiptr]>47)  && (g_u8RecData[imeiptr]<58))
+			if((g_u8RecData[imeiptr]>47)	&& (g_u8RecData[imeiptr]<58))
 			{
 				imei[imeiptr0] = g_u8RecData[imeiptr];
 				imeiptr0++;
-			}
+      }
 		}
 	remove_all_chars(imei, '\r', 0x1a);		
-
 	}
 	tmr0sec=0;
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,800);
+	memset(g_u8RecData,0,500);
 	clear();
 	printf("%c",0x1A);
 	printf(command);
@@ -21865,67 +23668,342 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		r1 = strstr(g_u8RecData, response1);
 		r2 = strstr(g_u8RecData, response2);
 		r3 = strstr(g_u8RecData, response3);
-	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));   
-
-
-
-
-
-
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
 	if(strstr(g_u8RecData,"GNRMC"))
 	{
+    u32ADC0Result = 3;
+    (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR |= (0x1ul << (11)));
+    u32ADC0Result = (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->RESULT[0] & (0xffful << (0)));
+    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
+    
 		memset(temp,0,100);
-		parse_g(g_u8RecData, 1, 1, ' ', '*' , temp);
-
+		parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
 		strcat(g_u8SendData,imei);
 		strcat(g_u8SendData,",");
-		strcat(temp,"\n");
+		strcat(g_u8SendData,temp);
+		memset(temp,0,100);
+		sprintf(temp,",F=%.1f\n",u32ADC0Result);
 		strcat(g_u8SendData,temp);
 		
-			if(strlen(g_u8SendData) > 2500)
-			{
-					memset(g_u8SendData,0,3300);
-			}
-		
-		
-	}
-
-
+  }
+  if((strlen(g_u8SendData) > 2900))
+  {
+    memset(g_u8SendData,0,3500);
+    strcat(g_u8SendData,imei);
+    strcat(g_u8SendData,"error:RAMfull\n");
+  }
+  
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
 
 	osMutexRelease(uart_mutex_id);
-	osDelay(5);
+	osDelay(1);
 }
 
 
 
+void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, char * response3, int32_t timeout)
+{
 
 
-
-
-
-
-
-
-
-
- int qfread(char* fi)
-{int32_t charcounts=0;
-	osMutexWait(fs_mutex_id, 0xFFFFFFFFU);
+	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+	osDelay(500);
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,500);
+	printf("%c",0x1A);
+	clear();
+	if(checkallnumsinstring(imei) ||  (strlen(imei) < 5))
+	{
+		printf("\r\nAT+GSN\r\n");
+		do{
+			r1 = strstr(g_u8RecData, response1);
+			r2 = strstr(g_u8RecData, response2);
+			r3 = strstr(g_u8RecData, response3);
+		}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+		memset(imei,0,25);
+		imeiptr0=0;
+		for(imeiptr=0;imeiptr<strlen(g_u8RecData);imeiptr++)
+		{
+			if((g_u8RecData[imeiptr]>47)	&& (g_u8RecData[imeiptr]<58))
+			{
+				imei[imeiptr0] = g_u8RecData[imeiptr];
+				imeiptr0++;
+      }
+		}
+	remove_all_chars(imei, '\r', 0x1a);		
+	}
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,500);
+	clear();
+	printf("%c",0x1A);
+	printf(command);
+	do{
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+	if(strstr(g_u8RecData,"GNRMC"))
+	{
+    u32ADC0Result = 3;
+    (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR |= (0x1ul << (11)));
+    u32ADC0Result = (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->RESULT[0] & (0xffful << (0)));
+    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
+    
 		memset(temp,0,100);
-		sprintf(temp,"\r\nAT+QFREAD=%s,1000\r\n",fi);
-		SendAT(temp, "OK", "OK" , "ERROR",5);	
-		charcounts = count_char('\n',g_u8RecData);
-		memset(g_u8SendData,0,3300);
-		parse_g(g_u8RecData, 2, charcounts, '\n', '\n' , g_u8SendData);	
-		remove_all_chars(g_u8SendData, '\r', 0x1A);		
+		parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
+		strcat(g_u8SendData,imei);
+		strcat(g_u8SendData,",");
+		strcat(g_u8SendData,temp);
+		memset(temp,0,100);
+		sprintf(temp,",F=%.1f\n",u32ADC0Result);
+		strcat(g_u8SendData,temp);
+		
+  }
+  if((strlen(g_u8SendData) > 2900))
+  {
+    memset(g_u8SendData,0,3500);
+    strcat(g_u8SendData,imei);
+    strcat(g_u8SendData,"error:RAMfull\n");
+  }
+	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
 
-	osMutexRelease(fs_mutex_id);
-	
-	if(charcounts <= 3)
-	{return 1;}
-	else{return 0;}
+
+
 }
+
+
+
+
+
+
+
+__inline int8_t checkallnumsinstring(char* checkstring)
+{
+  int returnval, checkstringptr, lencheckstring=0;
+  lencheckstring  = strlen(checkstring);
+  for(checkstringptr  = 0 ; checkstringptr < lencheckstring ; checkstringptr++)
+  {
+    if((checkstring[checkstringptr]  > 47 ) && (checkstring[checkstringptr]  < 58 ))
+    {returnval  = 0;}
+    else
+    {returnval  = 1;break;}
+  }
+  return returnval;
+}
+
+
+void Send_FS(void)
+{
+
+		TCP_Send_ch("\r\nAT+QISEND\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
+
+ 
+}
+
+
+
+
+
+
+void I2C1_IRQHandler(void)
+{
+
+    
+    ((I2C_T *) (((uint32_t)0x40100000) + 0x20000))->INTSTS = (0x1ul << (0));
+
+    u32Status = ((I2C_T *) (((uint32_t)0x40100000) + 0x20000))->STATUS;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+ 
+ 
+void I2C_MasterRx(uint32_t u32Status)
+{
+    if (u32Status == 0x08) {                     
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = (g_u8DeviceAddr << 1) );  
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+    } else if (u32Status == 0x18) {              
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_au8TxData[g_u8DataLen++] );
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+    } else if (u32Status == 0x20) {              
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 | 0x04 | 0x10 );
+    } else if (u32Status == 0x28) {              
+        if (g_u8DataLen != 2) {
+            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_au8TxData[g_u8DataLen++] );
+            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+        } else {
+            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 | 0x10 );
+        }
+    } else if (u32Status == 0x10) {              
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = (g_u8DeviceAddr << 1) | 0x01 );   
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+    } else if (u32Status == 0x40) {              
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+    } else if (u32Status == 0x58) {              
+        g_u8RxData = ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA );
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );
+        g_u8EndFlag = 1;
+    } else {
+         
+        printf("Status 0x%x is NOT processed\n", u32Status);
+    }
+}
+
+
+ 
+ 
+ 
+void I2C_MasterTx(uint32_t u32Status)
+{
+    if (u32Status == 0x08) {                     
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_u8DeviceAddr << 1 );   
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+    } else if (u32Status == 0x18) {              
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_au8TxData[g_u8DataLen++] );
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+    } else if (u32Status == 0x20) {              
+        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 | 0x04 | 0x10 );
+    } else if (u32Status == 0x28) {              
+        if (g_u8DataLen != 3) {
+            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_au8TxData[g_u8DataLen++] );
+            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+        } else {
+            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );
+            g_u8EndFlag = 1;
+        }
+    } else {
+         
+        printf("Status 0x%x is NOT processed\n", u32Status);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+void I2C_Write(uint16_t u16Address, uint8_t u8Data)
+{
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 );
+  while(u32Status != 0x08);    
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1)) );   
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+  while(u32Status != 0x18);   
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u16Address) ) );   
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
+  while(u32Status != 0x28);   
+  u32Status = 0;
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u8Data)) );  
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
+  while(u32Status != 0x28);  
+  
+  
+            
+            
+            
+            
+
+
+
+
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+ 
+uint8_t I2C_Read(uint16_t u16Address){
+  
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 );
+  while(u32Status != 0x08);
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1)) );   
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+  while(u32Status != 0x18);
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u16Address)) );   
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
+  while(u32Status != 0x28);
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 | 0x10 );
+  while(u32Status != 0x10);   
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1) | (0x01) ) );   
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
+  while(u32Status != 0x40);
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
+  while(u32Status != 0x58);
+  g_u8RxData = ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA );
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    return g_u8RxData;
+}
+
+
+
+    
+
+
+
+
 
 
 

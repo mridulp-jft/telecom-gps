@@ -20016,7 +20016,7 @@ static __inline void LCD_DisableDisplay(void)
 
 
 
-
+void send_string_to_uart1(char* string);
  
  
  
@@ -20043,13 +20043,11 @@ void stackDump(uint32_t stack[])
 	printf("psr = 0x%x\n", stack[psr]);
 } 
 
-void Hard_Fault_Handler(uint32_t stack[])
+void Hard_Fault_Handler(void)
 {     
-    printf("In Hard Fault Handler\n");
+      send_string_to_uart1("In Hard Fault Handler\r\n");
 
-    stackDump(stack);
-	
-	
+    
 		SYS_UnlockReg();
 		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->IPRST_CTL1 |= (0x1ul << (0));
 
@@ -20057,9 +20055,9 @@ void Hard_Fault_Handler(uint32_t stack[])
 }
 
 
-#line 246 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 244 "..\\..\\Library\\StdDriver\\src\\retarget.c"
 
-#line 278 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 276 "..\\..\\Library\\StdDriver\\src\\retarget.c"
 
 
 
@@ -20119,7 +20117,7 @@ void SendChar_ToUART(int ch)
 
 void SendChar(int ch)
 {
-#line 356 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 354 "..\\..\\Library\\StdDriver\\src\\retarget.c"
     SendChar_ToUART(ch);
 
 }
@@ -20134,7 +20132,7 @@ void SendChar(int ch)
 
 char GetChar(void)
 {
-#line 388 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 386 "..\\..\\Library\\StdDriver\\src\\retarget.c"
     while (1) {
         if(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) {
             return (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
@@ -20206,6 +20204,60 @@ int ferror(FILE *f)
     return (-1);
 }
 
-#line 488 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 486 "..\\..\\Library\\StdDriver\\src\\retarget.c"
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+void SendChar_To_UART1(int ch)
+{
+    while(((UART_T *) (((uint32_t)0x40100000) + 0x50000))->FSR & (0x1ul << (10)));
+    ((UART_T *) (((uint32_t)0x40100000) + 0x50000))->THR = ch;
+    if(ch == '\n') {
+        while(((UART_T *) (((uint32_t)0x40100000) + 0x50000))->FSR & (0x1ul << (10)));
+        ((UART_T *) (((uint32_t)0x40100000) + 0x50000))->THR = '\r';
+    }
+}
+
+void send_string_to_uart1(char* string){
+  int ptr=0;
+  while(*string != '\0'){
+    SendChar_To_UART1(*string);
+    *string++;
+  }
+}
+  
+
 

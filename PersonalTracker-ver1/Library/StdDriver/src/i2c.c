@@ -124,10 +124,8 @@ void I2C_EnableInt(I2C_T *i2c)
   * @param[in] i2c is the base address of I2C module.
   * @return Actual I2C bus clock frequency.
   */
-uint32_t I2C_GetBusClockFreq(I2C_T *i2c)
-{
+uint32_t I2C_GetBusClockFreq(I2C_T *i2c){
     uint32_t u32Divider = i2c->DIV;
-
     return ( SystemCoreClock / ((u32Divider+1)<<2) );
 }
 

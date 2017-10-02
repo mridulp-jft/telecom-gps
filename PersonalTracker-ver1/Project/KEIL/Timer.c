@@ -1,10 +1,17 @@
 
 #include "cmsis_os.h"                                           // CMSIS RTOS header file
+#include "Nano100Series.h"
 
 /*----------------------------------------------------------------------------
  *      Timer: Sample timer functions
  *---------------------------------------------------------------------------*/
- extern int32_t tmr0sec;
+extern int32_t tmr0sec;
+extern int8_t charging;
+extern float	u32ADC0Result;
+extern float u32ADC0Result1;
+extern osMutexId	(uart_mutex_id); // Mutex ID
+__inline void batteryind (void);
+int8_t time;
  //int32_t life=0;
 
 /*----- One-Shoot Timer Example -----*/
@@ -31,13 +38,19 @@ static osTimerDef (Timer2, Timer2_Callback);
 static void Timer2_Callback (void const *arg) 
 {
 	tmr0sec++;
+
+
+
+	batteryind();
+
+//	PA3^=1;
 //	life++;
-	// add user code here
+// add user code here
 }
 
 
 // Example: Create and Start timers
-void Init_Timers (void) {
+ void Init_Timers (void) {
   osStatus status;                                              // function return status
  
   // Create one-shoot timer
@@ -62,3 +75,64 @@ void Init_Timers (void) {
     }
   }
 }
+ 
+
+
+
+
+
+
+__inline void batteryind (void)
+{
+//  motion_sense();
+  time++;
+  if(time == 1)
+  {  
+		PA3=0;
+		PA4=0;
+		PA5=0;
+		PA6=0;
+  }
+  else
+  {
+		if( u32ADC0Result > 4.600 )
+		{      
+ //     PA3=PA4=PA5=PA6^=1;
+      PA3=PA4=PA5=PA6^=1;
+		}
+		else if( u32ADC0Result < 3.25)
+		{
+//			PA3^=1;
+			PA3^=1;
+			charging = 0;
+
+			// battery lowest
+		}
+		else if( u32ADC0Result < 3.50 )
+		{
+//			PA3^=1;PA4^=1;
+			PA3^=1;PA4^=1;
+			charging = 0;
+
+			//battery lesser
+		}
+		else if( u32ADC0Result < 3.75)
+		{
+//			PA3^=1;PA4^=1;PA5^=1;
+			PA3^=1;PA4^=1;PA5^=1;
+			charging = 0;
+
+			//battery less
+		}
+		else
+		{
+//			PA3^=1;PA4^=1;PA5^=1;PA6^=1;
+			PA3^=1;PA4^=1;PA5^=1;PA6^=1;
+			charging = 0;
+			//battery full
+		}
+	time=0;
+  }
+	
+}
+
