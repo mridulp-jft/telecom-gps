@@ -1,4 +1,4 @@
-
+#include "Nano100Series.h"
 #include "cmsis_os.h"                                           // CMSIS RTOS header file
 #include "string.h"
 #include "stdio.h"
@@ -146,6 +146,10 @@ void Thread1 (void const *argument)
     }
 		else
 		{
+      if(life > 1500){
+        SYS_UnlockReg();
+        SYS->IPRST_CTL1 |= SYS_IPRST_CTL1_CHIP_RST_Msk; 
+      }
 			osDelay(32000);                                         // suspend thread
 		}
   }
@@ -202,17 +206,6 @@ __inline void manualdelay(int delayms)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 //SendAT("\r\nAT+CPIN?\r\n", "CPIN: READY", "OK" , "ERROR",2);	
 
 
@@ -245,8 +238,10 @@ __inline void fileopen(void)
     SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
     if(strstr(g_u8RecData,"CME ERROR"))
     {
-        SendAT("\r\nAT+CFUN=1,1\r\n", "Ready", "OK" , "ERROR",10);	
-        manualdelay(50);
+        PA13=1;
+        printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
+        manualdelay(100);
+        PA13=0;
         memset(fileinstance,0,20);
     SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
     }
@@ -258,12 +253,6 @@ __inline void fileopen(void)
 
 
 
- 
- 
- 
- 
- 
- 
  
  
  

@@ -305,6 +305,7 @@ __inline int16_t motion_sense(){
     sprintf(dmsg,"X:%d,Y:%d,Z:%d,Res=%f,MotCnts=%d,ImmotCnts=%d,Mot=%d\r\n", OUT_X_H_A, OUT_Y_H_A, OUT_Z_H_A,OUT_N, motion_counts, immotion_counts, motion);     
     send_string_to_uart1(dmsg);
 }
+motion = 1; 
 return 0;
 }
 
@@ -313,8 +314,12 @@ int main(void)
 		SYS_Init();
 		GPIO_SetMode(PC, BIT1, GPIO_PMD_OUTPUT);
 		GPIO_SetMode(PC, BIT0, GPIO_PMD_OUTPUT);
+		GPIO_SetMode(PA, BIT14, GPIO_PMD_OUTPUT);
 		GPIO_SetMode(PA, BIT15, GPIO_PMD_OUTPUT);
-    PA15=0;
+		GPIO_SetMode(PA, BIT13, GPIO_PMD_OUTPUT);
+    PA13=0;     /*  RESET  */
+    PA14=0;     /*  SYS OFF/Enable  */
+    PA15=0;    /* CHARGER OFF */
     PC0=1;
 		PC1=1;  
 		GPIO_SetMode(PA, BIT3, GPIO_PMD_OUTPUT);
@@ -362,8 +367,9 @@ int main(void)
       mainla = 1;
       th1la = 0;
       th2la = 0;  
-      motion_sense();
-      osDelay(10);
+      motion=1;
+//      motion_sense();
+//      osDelay(10);
 
 		}
 }
@@ -383,11 +389,11 @@ void UART1_IRQHandler(void)
 
 void UART0_IRQHandler(void)
 {		
-					while(!UART_GET_RX_EMPTY(UART0)) 
-					{
-						g_u8RecData[g_u8RecDataptr] = UART_READ(UART0);
-						g_u8RecDataptr++;
-					}
+    while(!UART_GET_RX_EMPTY(UART0)) 
+    {
+      g_u8RecData[g_u8RecDataptr] = UART_READ(UART0);
+      g_u8RecDataptr++;
+    }
 
 }
 
@@ -699,8 +705,10 @@ void SendAT(char * command, char * response1, char * response2, char * response3
    {
      if(!(r1 || r2 || r3))
       {
+        PA13=1;
         printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
         manualdelay(100);
+        PA13=0;
       }
    }
   
@@ -734,8 +742,10 @@ void SendAT_FS(char * command, char * response1, char * response2, char * respon
    {
      if(!(r1 || r2 || r3))
       {
+        PA13=1;
         printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
         manualdelay(100);
+        PA13=0;
       }
    }
   
@@ -1006,6 +1016,8 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 
 	osMutexWait(uart_mutex_id, osWaitForever);
 	PB2=0;
+	printf("\r\nAT+QGNSSRD=\"NMEA/GGA\"\r\n");
+  
 	osDelay(500);
 	tmr0sec=0;
 	r1=0;
@@ -1079,11 +1091,8 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 	osDelay(1);
 }
 
-
-
 void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
-
 //	osMutexWait(uart_mutex_id, osWaitForever);
 	PB2=0;
 	osDelay(500);
@@ -1144,7 +1153,6 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 		memset(temp,0,100);
 		sprintf(temp,",F=%.1f\n",u32ADC0Result);
 		strcat(g_u8SendData,temp);
-		
   }
   if((strlen(g_u8SendData) > 2900))
   {
@@ -1152,7 +1160,6 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
     strcat(g_u8SendData,imei);
     strcat(g_u8SendData,"error:RAMfull\n");
   }
-  
 	PB2=1;
 
 //	osMutexRelease(uart_mutex_id);
@@ -1182,21 +1189,15 @@ __inline int8_t checkallnumsinstring(char* checkstring)
 
 void Send_FS(void)
 {
-
-		TCP_Send_ch("\r\nAT+QISEND\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
-
- 
+  TCP_Send_ch("\r\nAT+QISEND\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
 }
 
 
 void I2C1_IRQHandler(void)
 {
-
-    // clear interrupt flag
-    I2C1->INTSTS = I2C_INTSTS_INTSTS_Msk;
-
-    u32Status = I2C1->STATUS;
-
+  // clear interrupt flag
+  I2C1->INTSTS = I2C_INTSTS_INTSTS_Msk;
+  u32Status = I2C1->STATUS;
 }
 
 void I2C_Write(uint16_t u16Address, uint8_t u8Data)
@@ -1214,7 +1215,6 @@ void I2C_Write(uint16_t u16Address, uint8_t u8Data)
   I2C_SET_CONTROL_REG(I2C1, I2C_SI);  
   while(u32Status != 0x28);  
   I2C_SET_CONTROL_REG(I2C1, I2C_STO | I2C_SI);  
-  
 }
 
 /**
@@ -1225,7 +1225,6 @@ void I2C_Write(uint16_t u16Address, uint8_t u8Data)
  * @return      The data be read out.
  */
 uint8_t I2C_Read(uint16_t u16Address){
-
   I2C_SET_CONTROL_REG(I2C1, I2C_STA );
   while(u32Status != 0x08);
   I2C_SET_DATA(I2C1, ((g_u8DeviceAddr << 1)));   
@@ -1243,7 +1242,7 @@ uint8_t I2C_Read(uint16_t u16Address){
   while(u32Status != 0x58);
   g_u8RxData = I2C_GET_DATA(I2C1);
   I2C_SET_CONTROL_REG(I2C1, I2C_STO | I2C_SI);  
-    return g_u8RxData;
+  return g_u8RxData;
 }
 
 

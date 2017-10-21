@@ -19782,7 +19782,7 @@ extern float u32ADC0Result1;
 extern osMutexId	(uart_mutex_id); 
 __inline void batteryind (void);
 int8_t time;
- 
+int32_t life=0;
 
  
 static void Timer1_Callback (void const *arg);                  
@@ -19808,13 +19808,10 @@ static uint32_t os_timer_cb_Timer2[6]; const osTimerDef_t os_timer_def_Timer2 = 
 static void Timer2_Callback (void const *arg) 
 {
 	tmr0sec++;
-
-
-
 	batteryind();
 
 
-
+	life++;
 
 }
 

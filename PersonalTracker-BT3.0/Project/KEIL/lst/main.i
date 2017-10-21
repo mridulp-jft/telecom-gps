@@ -22954,6 +22954,7 @@ __inline int16_t motion_sense(){
     sprintf(dmsg,"X:%d,Y:%d,Z:%d,Res=%f,MotCnts=%d,ImmotCnts=%d,Mot=%d\r\n", OUT_X_H_A, OUT_Y_H_A, OUT_Z_H_A,OUT_N, motion_counts, immotion_counts, motion);     
     send_string_to_uart1(dmsg);
 }
+motion = 1; 
 return 0;
 }
 
@@ -22962,8 +22963,12 @@ int main(void)
 		SYS_Init();
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04080)), (0x00000002), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04080)), (0x00000001), 0x1UL);
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00004000), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00008000), 0x1UL);
-    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((15)<<2))))=0;
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00002000), 0x1UL);
+    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;      
+    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((14)<<2))))=0;      
+    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((15)<<2))))=0;     
     (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(2))) + ((0)<<2))))=1;
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(2))) + ((1)<<2))))=1;  
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000008), 0x1UL);
@@ -23011,8 +23016,9 @@ int main(void)
       mainla = 1;
       th1la = 0;
       th2la = 0;  
-      motion_sense();
-      osDelay(10);
+      motion=1;
+
+
 
 		}
 }
@@ -23032,11 +23038,11 @@ void UART1_IRQHandler(void)
 
 void UART0_IRQHandler(void)
 {		
-					while(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) 
-					{
-						g_u8RecData[g_u8RecDataptr] = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
-						g_u8RecDataptr++;
-					}
+    while(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) 
+    {
+      g_u8RecData[g_u8RecDataptr] = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
+      g_u8RecDataptr++;
+    }
 
 }
 
@@ -23348,8 +23354,10 @@ void SendAT(char * command, char * response1, char * response2, char * response3
    {
      if(!(r1 || r2 || r3))
       {
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=1;
         printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
         manualdelay(100);
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;
       }
    }
   
@@ -23383,8 +23391,10 @@ void SendAT_FS(char * command, char * response1, char * response2, char * respon
    {
      if(!(r1 || r2 || r3))
       {
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=1;
         printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
         manualdelay(100);
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;
       }
    }
   
@@ -23655,6 +23665,8 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+	printf("\r\nAT+QGNSSRD=\"NMEA/GGA\"\r\n");
+  
 	osDelay(500);
 	tmr0sec=0;
 	r1=0;
@@ -23831,21 +23843,15 @@ __inline int8_t checkallnumsinstring(char* checkstring)
 
 void Send_FS(void)
 {
-
 		TCP_Send_ch("\r\nAT+QISEND\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
-
- 
 }
 
 
 void I2C1_IRQHandler(void)
 {
-
     
     ((I2C_T *) (((uint32_t)0x40100000) + 0x20000))->INTSTS = (0x1ul << (0));
-
     u32Status = ((I2C_T *) (((uint32_t)0x40100000) + 0x20000))->STATUS;
-
 }
 
 void I2C_Write(uint16_t u16Address, uint8_t u8Data)
@@ -23863,7 +23869,6 @@ void I2C_Write(uint16_t u16Address, uint8_t u8Data)
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
   while(u32Status != 0x28);  
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );  
-  
 }
 
 
@@ -23874,7 +23879,6 @@ void I2C_Write(uint16_t u16Address, uint8_t u8Data)
 
  
 uint8_t I2C_Read(uint16_t u16Address){
-
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 );
   while(u32Status != 0x08);
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1)) );   
@@ -23892,7 +23896,7 @@ uint8_t I2C_Read(uint16_t u16Address){
   while(u32Status != 0x58);
   g_u8RxData = ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA );
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );  
-    return g_u8RxData;
+  return g_u8RxData;
 }
 
 
