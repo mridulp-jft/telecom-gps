@@ -316,10 +316,10 @@ void SendChar_ToUART(int ch)
 #ifndef DISABLE_UART
     while(DEBUG_PORT->FSR & UART_FSR_TX_FULL_F_Msk);
     DEBUG_PORT->THR = ch;
-    if(ch == '\n') {
-        while(DEBUG_PORT->FSR & UART_FSR_TX_FULL_F_Msk);
-        DEBUG_PORT->THR = '\r';
-    }
+//    if(ch == '\n') {
+//        while(DEBUG_PORT->FSR & UART_FSR_TX_FULL_F_Msk);
+//        DEBUG_PORT->THR = '\r';
+//    }
 #endif
 }
 
@@ -485,17 +485,17 @@ label:
 #endif
 /*** (C) COPYRIGHT 2013 Nuvoton Technology Corp. ***/
 
-void SendChar_To_UART1(int ch)
+__inline void SendChar_To_UART1(int ch)
 {
     while(UART1->FSR & UART_FSR_TX_FULL_F_Msk);
     UART1->THR = ch;
-    if(ch == '\n') {
-        while(UART1->FSR & UART_FSR_TX_FULL_F_Msk);
-        UART1->THR = '\r';
-    }
+//    if(ch == '\n') {
+//        while(UART1->FSR & UART_FSR_TX_FULL_F_Msk);
+//        UART1->THR = '\r';
+//    }
 }
 
-void send_string_to_uart1(char* string){
+ void send_string_to_uart1(char* string){
   int ptr=0;
   while(*string != '\0'){
     SendChar_To_UART1(*string);
