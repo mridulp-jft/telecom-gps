@@ -22689,6 +22689,7 @@ extern char fileinstance[20];
 
 void clear(void);
 extern	int32_t life;
+extern int8_t i2ctimeout;
 
 void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 __inline void Save_FS(void);
@@ -22699,39 +22700,30 @@ __inline void parse_g(char* str, int first, int sec, char f, char s , char *stri
 
 __inline int8_t checkallnumsinstring(char* checkstring);
 extern void fileclose(void);
-extern void SendChar_To_UART1(int ch);
-extern void send_string_to_uart1(char* string);
-
 __inline void fileopen(void);
 
-
+uint8_t g_u8DeviceAddr = 0x1D;
+uint32_t u32Status;
+uint8_t g_au8TxData[1];
+uint8_t g_u8RxData;
+uint8_t g_u8DataLen = 0;
+uint8_t sendfs=0;
+volatile uint8_t g_u8EndFlag = 0;
+extern void send_string_to_uart1(char* string);
+extern void SendChar_To_UART1(int ch);
 extern void remove_all_chars(char* str, char c, char d);
 void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
 void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 void Save_FS(void);
 void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, char * response3, int32_t timeout);
-void I2C_Write(uint16_t u16Address, uint8_t u8Data);
-uint8_t I2C_Read(uint16_t u16Address);
-void I2C_MasterTx(uint32_t u32Status);
-void I2C_MasterRx(uint32_t u32Status);
+__inline uint8_t I2C_Write(uint16_t u16Address, uint8_t u8Data);
+__inline uint8_t I2C_Read(uint16_t u16Address);
  
  
  
- 
- 
- 
-uint8_t g_u8DeviceAddr = 0x1D;
-uint32_t u32Status;
-
-uint8_t g_au8TxData[1];
-uint8_t g_u8RxData;
-uint8_t g_u8DataLen = 0;
-volatile uint8_t g_u8EndFlag = 0;
-typedef void (*I2C_FUNC)(uint32_t u32Status);
-static I2C_FUNC s_I2CHandlerFn = 0;
-char g_u8SendData[3500] = {0};
-char g_u8RecData[500]	= {0};
+char g_u8SendData[3000] = {0};
+char g_u8RecData[1000]	= {0};
 int32_t	inc=0;
 uint8_t u8InChar=0xFF;
 int32_t g_u8RecDataptr=0;
@@ -22740,6 +22732,8 @@ int32_t tmr0sec=0;
 float	u32ADC0Result;
 float u32ADC0Result1;
 int8_t charging, cpinready, cregready;
+int motion_counts,immotion_counts;
+
 int seeker = 0;
 int breaker=0;
  
@@ -22758,15 +22752,16 @@ volatile uint8_t u8ADF;
 uint8_t mainla = 0;
 uint8_t th1la = 0;
 uint8_t th2la = 0;
-  uint16_t OUT_P ,OUT_N;
-int motion = 0;
+uint8_t freq;
 volatile int32_t g_i32pointer = 0;
 char temp[100];
 int network=0;
 char imei[25];
 int imeiptr0=0;
+double OUT_P ,OUT_N;
+int motion = 0;
 int imeiptr=0;
-char dmsg[50];
+char dmsg[100];
  
  
  
@@ -22785,100 +22780,73 @@ void Send_FS(void);
 
 void Thread1 (void const *argument);
 
-void WDT_IRQHandler(void){
+void WDT_IRQHandler(void)
+{
     
     (((WWDT_T *) (((uint32_t)0x40000000) + 0x04100))->RLD = (0x00005AA5));
     (((WWDT_T *) (((uint32_t)0x40000000) + 0x04100))->STS = (0x1ul << (0)));
-    send_string_to_uart1("WWDT counter reload\n");
+
+    
 
 }
 
 
-__inline int count_char(char ch,char* string){
+__inline int count_char(char ch,char* string)
+{
 int32_t	count=0;
 int32_t ass=0;
-	for(ass=0;ass<strlen(string);ass++){
+
+	for(ass=0;ass<strlen(string);ass++)
+	{
 		if(string[ass] == ch)
 		{count++;}
+		
 	}
 return count;
 }
 
-__inline void manualdelay(int delayms){
+__inline void manualdelay(int delayms)
+{
 
 	int d1,d2;
-	for(d1 = 0; d1 < delayms ; d1++){
-		for(d2=0; d2 < 65535; d2++){
+	for(d1 = 0; d1 < delayms ; d1++)
+	{
+		for(d2=0; d2 < 65535; d2++)
+		{
 		}
 	}
 }
 
 
-__inline int16_t motion_sense(){
-  static int motion_counts,immotion_counts;
-  uint8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A;
-  I2C_Write(0x20, 0x67);  
- 
-
-  OUT_X_H_A = I2C_Read(0x29);
-  OUT_Y_H_A = I2C_Read(0x2B);
-  OUT_Z_H_A = I2C_Read(0x2D);
-  OUT_N = sqrt((OUT_X_H_A*OUT_X_H_A) + (OUT_Y_H_A*OUT_Y_H_A) + (OUT_Z_H_A*OUT_Z_H_A));
-  if( ((OUT_N - OUT_P) >= 2) || ((OUT_N - OUT_P) <= -2) ){
-    motion_counts++;
-  }
-  else{
-    immotion_counts++;
-  }
-  OUT_P = OUT_N;
-  if(motion_counts >= 10){
-    motion_counts=0;
-    immotion_counts=0;
-    motion=1;
-  }
-  if(immotion_counts >= 30){
-    motion=0;
-    immotion_counts=0;
-    motion_counts=0;
-
-  }
-
-
-
-return 0;
-}
-
-__inline void SYS_Init(void){
+__inline void SYS_Init(void)
+{
 		 
 		 
 		 
 		 
 		SYS_UnlockReg();
 
-
-		   
-
 		 
 		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->PWRCTL |= (0x1 << (0)); 
-  
+
 		 
 		CLK_WaitClockReady( (0x1ul << (0)));
+
 		   
 		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL0 &= ~(0x7ul << (0));
 		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL0 |= (0UL<<(0));
 
+		 
 		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(16)); 
 		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(17)); 
+
 		CLK_EnableModuleClock(((1UL<<31)|(1<<29)|(3<<25) |( 2<<20)|(0<<18)|(0xFF<<10) |(16<<5)|(28) ));
     CLK_EnableModuleClock(((1UL<<31)|(3<<29)|(0x0<<25)|( 0<<20)|(0<<18)|(0x0<<10)|( 0<<5)|(0) ));
 
-    CLK_EnableModuleClock(((1UL<<31)|(0<<29)|(0x0<<25)|( 0<<20)|(0<<18)|(0x0<<10)|( 0<<5)|(9) ));
-    
+	
 		 
-
-
-    CLK_SetModuleClock(((1UL<<31)|(1<<29)|(3<<25) |( 0<<20)|(0<<18)|(0xF<<10) |( 8<<5)|(16) ), (0x0UL<<(0)), (((1-1)<< (8)) & (0xful << (8))));
-    CLK_SetModuleClock(((1UL<<31)|(1<<29)|(3<<25) |( 0<<20)|(0<<18)|(0xF<<10) |( 8<<5)|(17) ), (0x0UL<<(0)), (((1-1)<< (8)) & (0xful << (8))));
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL1 &= ~(0x3ul << (0));
+		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->CLKSEL1 |= (0x0 << (0));
 
 
 
@@ -22895,17 +22863,20 @@ __inline void SYS_Init(void){
 		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP &= ~((0x7ul << (0)) | (0x7ul << (4)));
 		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP |= ((1UL<<(0)) | (1UL<<(4)));
 
+		 
 		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP &= ~((0x7ul << (16)) | (0x7ul << (20)) );
-
-		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP |= ((1UL<<(16)) | (1UL<<(20))); 
-
 											
+		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PB_L_MFP |= ((1UL<<(16)) | (1UL<<(20))); 
+											
+
+
     ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_H_MFP |= ((1UL<<(12)) | (1UL<<(8)));
     ((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(9));
-
      
     ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->IPRST_CTL2 |=  (0x1ul << (9));
-    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->IPRST_CTL2 &= ~(0x1ul << (9));											
+    ((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->IPRST_CTL2 &= ~(0x1ul << (9));				
+
+
 		 
 		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP &= ~((0x7ul << (0)));
 		((SYS_T *) (((uint32_t)0x50000000) + 0x00000))->PA_L_MFP |= (1UL<<(0));
@@ -22919,7 +22890,8 @@ __inline void SYS_Init(void){
 
 }
 
-__inline void UART0_Init(){
+__inline void UART0_Init()
+{
 		 
 		 
 		 
@@ -22927,61 +22899,121 @@ __inline void UART0_Init(){
 		(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->IER |= (((0x1ul << (0)) )));
 		NVIC_EnableIRQ(UART0_IRQn);
 }
-__inline void UART1_Init(){
-		 
-		 
-		 
-		UART_Open(((UART_T *) (((uint32_t)0x40100000) + 0x50000)), 115200);
 
-
-}
-
-__inline void ADC0_Init(){
+__inline void ADC0_Init()
+{
 		
 		ADC_Open(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000)), (0UL << (10)), (3UL << (2)), ((1UL << 0)));
+
+		
 		(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR = (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR & ~(0x3ul << (16))) | (2UL << (16)));
+
+		
 		do { ((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR |= (0x1ul << (0)); while ((!(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->SR & (0x1ul << (16)))) || (!(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->PWRCTL & (0x1ul << (0))))); } while(0);
+
 		(((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR |= (0x1ul << (11)));
 }
 
-__inline void delay(int32_t ms){
+__inline void delay(int32_t ms)
+{
 	int32_t us;
-	for(;ms>0;ms--){
+	for(;ms>0;ms--)
+	{
 		for(us=0;us<100000;us++){}
+		
 	}
 }
 
-int main(void){
-int freq;int32_t u32Data;
-    SYS_Init();
+__inline int16_t motion_sense(){
+  int16_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A, STATUS_REG_A, CTRL_REG4_A;
+ 
+  I2C_Write(0x20, 0x67);  
+
+
+
+
+
+ 
+  STATUS_REG_A = I2C_Read(0x27);
+
+
+
+
+
+
+
+  
+
+  if(STATUS_REG_A == 0xFF)
+  {
+    OUT_X_H_A = I2C_Read(0x29);
+    OUT_X_L_A = I2C_Read(0x28); 
+    OUT_Y_H_A = I2C_Read(0x2B);
+    OUT_Y_L_A = I2C_Read(0x2A); 
+    OUT_Z_H_A = I2C_Read(0x2D);
+    OUT_Z_L_A = I2C_Read(0x2C); 
+   
+    OUT_N = sqrt((OUT_X_H_A*OUT_X_H_A) + (OUT_Y_H_A*OUT_Y_H_A) + (OUT_Z_H_A*OUT_Z_H_A));
+    if(OUT_N == 0){
+      return 0;
+    }
+    if( ((OUT_N - OUT_P) >= 3) || ((OUT_N - OUT_P) <= -3) ){
+      motion_counts++; immotion_counts=0;
+    }
+    else{
+      immotion_counts++;motion_counts=0;
+    }
+    OUT_P = OUT_N;
+    if(motion_counts >= 2){
+      motion_counts=0;
+      immotion_counts=0;
+      motion=1;
+    }
+    if(immotion_counts >= 1500){
+      motion=0;
+      immotion_counts=0;
+      motion_counts=0;
+
+    }
+    memset(dmsg,0,100);
+    sprintf(dmsg,"%d,%d,%d,Res=%f,MCnts=%d,ImCnts=%d,M=%d,l=%d\r\n", OUT_X_H_A, OUT_Y_H_A, OUT_Z_H_A,OUT_N, motion_counts, immotion_counts, motion,life);     
+    send_string_to_uart1(dmsg);
+}
+
+
+return 0;
+}
+
+int main(void)
+{
+		SYS_Init();
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04080)), (0x00000002), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04080)), (0x00000001), 0x1UL);
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00004000), 0x1UL);
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00008000), 0x1UL);
+		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00002000), 0x1UL);
+    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;        
+    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((14)<<2))))=0;        
+    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((15)<<2))))=0;        
     (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(2))) + ((0)<<2))))=1;
-		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(2))) + ((1)<<2))))=1;
+		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(2))) + ((1)<<2))))=1;  
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000008), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000010), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000020), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000040), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04040)), (0x00000004), 0x1UL);
 		UART0_Init();
-		UART1_Init();
+    UART_Open(((UART_T *) (((uint32_t)0x40100000) + 0x50000)), 115200);  
     memset(dmsg,0,50);
-
     I2C_Open(((I2C_T *) (((uint32_t)0x40100000) + 0x20000)), 100000);  
     I2C_EnableInt(((I2C_T *) (((uint32_t)0x40100000) + 0x20000)));
     NVIC_EnableIRQ(I2C1_IRQn); 
-    freq = I2C_GetBusClockFreq(((I2C_T *) (((uint32_t)0x40100000) + 0x20000)));
-    sprintf(dmsg,"\r\nI2C1 clock :%d \r\n", freq);
 
 
 
 
 
-
-
-
-
-    Init_Timers();
+		Init_Timers();
 		osKernelInitialize ();										
 		ADC0_Init();
     
@@ -22998,22 +23030,25 @@ int freq;int32_t u32Data;
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((4)<<2))))=0;
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((5)<<2))))=0;
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((6)<<2))))=0;
-    Init_Thread();
+		Init_Thread();
 		osKernelStart ();												 
     (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
 		SendAT("\r\nAT+QSCLK=1\r\n", "Ready", "OK" , "ERROR",5);
     SendAT("\r\nAT+SYSTEMSTARTS\r\n\r\n", "Ready", "OK" , "ERROR",10);	
     fileopen();
-    SendAT("\r\nAT+QGNSSC=1\r\n", "Ready", "OK" , "ERROR",10);	    
-    while(1){
+    SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "Ready", "OK" , "ERROR",10);	    
+    while(1)
+		{
       mainla = 1;
-      th1la = 0;
-      th2la = 0; 
- 
- 
-      
+      th1la = 0;  
+      th2la = 0;  
+
+      motion_sense();
+      osDelay(10);
 		}
 }
+
+  
  
  
  
@@ -23021,20 +23056,23 @@ void UART1_IRQHandler(void)
 {
 	
 }
+
  
  
  
 
 void UART0_IRQHandler(void)
 {		
-					while(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) 
-					{
-						g_u8RecData[g_u8RecDataptr] = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
-						g_u8RecDataptr++;
-					}
-   
+    while(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) 
+    {
+      g_u8RecData[g_u8RecDataptr] = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
+      g_u8RecDataptr++;
+    }
 
 }
+
+
+
 __inline void parse_g(char* str, int first, int sec, char f, char s , char *string)
 {int sz1,sz2,i11,temp11,j11,l;
 
@@ -23044,7 +23082,10 @@ __inline void parse_g(char* str, int first, int sec, char f, char s , char *stri
 		for(i11=0,temp11=0;i11<sz1;i11++)
 		{
 		if(str[i11]==s)
-			{temp11++;j11=i11;}
+			{
+        temp11++;
+        j11=i11;
+      }
 		else{}
 			
 		if(temp11>=sec){i11=9900;}
@@ -23055,16 +23096,21 @@ __inline void parse_g(char* str, int first, int sec, char f, char s , char *stri
 		for(i11=0,temp11=0;i11<sz1;i11++)
 		{
 		if(str[i11]==f)
-			{temp11++;l=i11;}										
+			{
+        temp11++;l=i11;
+      }										
 		else{}
 		if(temp11>=first){i11=9900;}else{}
 		}	
 		for(i11=0;i11<(j11-l-1);i11++)
 		{
-		string[i11] = str[l+i11+1];
+      string[i11] = str[l+i11+1];
 		}
 	
 }
+
+
+
 void SavePinSetting()
 {
 		 
@@ -23088,6 +23134,8 @@ void SavePinSetting()
 		_PullUp_Setting[4] =	((GPIO_T *) (((uint32_t)0x50000000) + 0x04100))->PUEN;
 		_PullUp_Setting[5] =	((GPIO_T *) (((uint32_t)0x50000000) + 0x04140))->PUEN;
 }
+
+
 
 
 
@@ -23120,7 +23168,10 @@ void RestorePinSetting()
 
 
 
+
+
  
+
 void Enter_PowerDown()
 {
 		 
@@ -23158,6 +23209,8 @@ void Enter_PowerDown()
 
 
 
+
+
  
 void Leave_PowerDown()
 {
@@ -23173,15 +23226,22 @@ void Leave_PowerDown()
 		((CLK_T *) (((uint32_t)0x50000000) + 0x00200))->APBCLK |= (0x1UL<<(26));  
 
 }
+
+
+
 void clear()
 {
-					if(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) 
-					{
-						g_u8RecData[g_u8RecDataptr] = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
-						g_u8RecDataptr++;
-					}
-	
+  char dump;
+    while(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) 
+    {
+      dump = (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
+    }
 }
+
+
+
+
+
 
 void SendAT1(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
@@ -23196,7 +23256,7 @@ void SendAT1(char * command, char * response1, char * response2, char * response
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
 	printf(command);
@@ -23206,28 +23266,34 @@ void SendAT1(char * command, char * response1, char * response2, char * response
 		r3 = strstr(g_u8RecData, response3);
 			
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
+clear();
 
-
-  send_string_to_uart1(g_u8RecData);  
   
+
 osDelay(5);
 }
+
+
+
+
+
+
  void cpinquerry()
 {
   int timeout;
+  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+	osDelay(100);  
   osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	tmr0sec=0;
 	timeout =5;
-  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-	osDelay(100);
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
-	printf("\r\nAT+CPIN?\r\n");
+	printf("\r\nAT+CPIN?\r\n\r\n");
 	do{
 		r1 = strstr(g_u8RecData, "CPIN: READY");
 		r2 = strstr(g_u8RecData, "OK");
@@ -23235,7 +23301,8 @@ osDelay(5);
 			
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
-  
+ clear();
+ 
   if(r1)
   {
     cpinready=1;
@@ -23246,32 +23313,33 @@ osDelay(5);
   }
 
 osMutexRelease(uart_mutex_id);
-osDelay(5);  
+
 }
 
  void cregquerry()
 {
   int timeout;
   char cregresp[10];
+  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+	osDelay(100); 
   osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	tmr0sec=0;
 	timeout =5;
-    (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-	osDelay(100);
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
-	printf("\r\nAT+CREG?\r\n");
+	printf("\r\nAT+CREG?\r\n\r\n");
 	do{
 		r1 = strstr(g_u8RecData, "CPIN: READY");
 		r2 = strstr(g_u8RecData, "OK");
 		r3 = strstr(g_u8RecData, "ERROR");
 			
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
+clear();
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
   memset(cregresp,0,10);
   parse_g(g_u8RecData, 1, 2, ',', '\n' , cregresp);
@@ -23285,10 +23353,9 @@ osDelay(5);
   }
   
   
-	osMutexRelease(uart_mutex_id);
-osDelay(5);
-  
-  
+  osMutexRelease(uart_mutex_id);
+  osDelay(5);
+ 
 }
 
 
@@ -23296,38 +23363,48 @@ osDelay(5);
 
 void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
+  static int attry;
+  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
+	osDelay(100);
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	tmr0sec=0;
 
-  (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-	osDelay(10);
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
 	printf(command);
+
 	do{
 		r1 = strstr(g_u8RecData, response1);
 		r2 = strstr(g_u8RecData, response2);
 		r3 = strstr(g_u8RecData, response3);
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
 
-   if(!strstr(command, "QILOCIP"))
+   if(!(strstr(command, "QILOCIP") || strstr(command, "QGNSSC")))
    {
      if(!(r1 || r2 || r3))
       {
-
-
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=1;
+        attry++;
+        if(attry > 3){
+          printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
+          manualdelay(100);
+          fileclose();
+          fileopen();
+          SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR", "7103", 10);
+        }
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;
       }
+      else{attry=0;}
    }
-
-
+  
   (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
   osMutexRelease(uart_mutex_id);
-
+osDelay(10);
 }
 
 void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
@@ -23336,12 +23413,12 @@ void SendAT_FS(char * command, char * response1, char * response2, char * respon
 	tmr0sec=0;
 
   (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-	osDelay(10);
+	osDelay(100);
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 
 	clear();
 	printf(command);
@@ -23350,18 +23427,25 @@ void SendAT_FS(char * command, char * response1, char * response2, char * respon
 		r2 = strstr(g_u8RecData, response2);
 		r3 = strstr(g_u8RecData, response3);
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
-
+clear();
    if(!strstr(command, "QILOCIP"))
    {
      if(!(r1 || r2 || r3))
       {
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=1;
+        printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
+        manualdelay(100);
+        fileclose();
+        fileopen();
+        SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR", "7103", 10);
 
-
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;
       }
    }
+  
   (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
   osMutexRelease(uart_mutex_id);
-osDelay(2);
+osDelay(10);
 }
 
 void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout)
@@ -23379,7 +23463,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	osMutexWait(tcp_mutex_id, 0xFFFFFFFFU);
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
- 
+ 	osDelay(500);
 	printf("%c",0x1A);
 	tmr0sec=0;
 	tcptimeout =5;
@@ -23414,20 +23498,30 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
       clear();
       SendAT_GPS_WO_MUTEX("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
       memset(temp,0,100);
-      sprintf(temp,"\r\nAT+QFSEEK=%s,%d\r\n",fileinstance,seeker);
+      sprintf(temp,"\r\nAT+QFSEEK=%s,%d\r\n\r\n",fileinstance,seeker);
       SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
       if(seeker > tcpdatalength)
       {
         seeker = 0;
+        fileclose();
         SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);
         breaker = 1;
         break;
       }
       if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
       memset(temp,0,100);
-      sprintf(temp,"\r\nAT+QFREAD=%s,600\r\n",fileinstance);
+      clear();
+      sprintf(temp,"\r\nAT+QFREAD=%s,600\r\n\r\n",fileinstance);
       SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
+      clear();
       if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
+      if(strlen(g_u8RecData) < 100){
+        fileclose();
+        SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);
+        breaker = 1;
+        break;
+      }
+      
       memset(tcpdata,0,600);
       remove_all_chars(g_u8RecData, '\r', 0x1A);	
       cc=count_char('\n',g_u8RecData)-1;      
@@ -23435,7 +23529,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
       memset(temp,0,100);
 			g_u8RecDataptr=0;
 			tmr0sec=0;
-			memset(g_u8RecData,0,500);
+			memset(g_u8RecData,0,1000);
 			printf(tcpcommand);
 			do{
 				r1 = strstr(g_u8RecData, tcpresponse1);
@@ -23443,7 +23537,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 				r3 = strstr(g_u8RecData, tcpresponse3);
 					
 			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
-
+clear();
 				tmr0sec=0;
 				if(r1)
 					{
@@ -23453,7 +23547,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 						r2=0;
 						r3=0;
 						g_u8RecDataptr=0;
-						memset(g_u8RecData,0,500);
+						memset(g_u8RecData,0,1000);
 						clear();
 
 
@@ -23500,6 +23594,8 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
   
   if(network == 0 && (timesptr>= times))
   {
+  fileclose();
+    
   seeker = 0;
   SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);    
 
@@ -23511,7 +23607,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 	osMutexRelease(tcp_mutex_id);
 	osMutexRelease(uart_mutex_id);
 
-
+osDelay(10);
 
 }
 
@@ -23526,7 +23622,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	osMutexWait(tcp_mutex_id, 0xFFFFFFFFU);
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
- 
+ 	osDelay(100);
 
 	tmr0sec=0;
 	tcptimeout =5;
@@ -23554,7 +23650,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 			{
 			g_u8RecDataptr=0;
 			tmr0sec=0;
-			memset(g_u8RecData,0,500);
+			memset(g_u8RecData,0,1000);
 			printf(tcpcommand);
 			do{
 				r1 = strstr(g_u8RecData, tcpresponse1);
@@ -23562,6 +23658,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 				r3 = strstr(g_u8RecData, tcpresponse3);
 					
 			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
+clear();
 
 				tmr0sec=0;
 				if(r1)
@@ -23572,7 +23669,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 						r2=0;
 						r3=0;
 						g_u8RecDataptr=0;
-						memset(g_u8RecData,0,500);
+						memset(g_u8RecData,0,1000);
 						clear();
 
 						if(timesptr == (times-1))
@@ -23589,6 +23686,9 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 							r2 = strstr(g_u8RecData, tcpresponse2);
 							r3 = strstr(g_u8RecData, tcpresponse3);
 						}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));
+
+           clear();
+            
           }
 
 			if(!(r3))
@@ -23605,17 +23705,22 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
    
 	if(network == 0 && timesptr>=times)
 	{
-		memset(g_u8SendData,0,3500);
+		memset(g_u8SendData,0,3000);
     Send_FS();
+      sendfs=1;
  	}
+  else{
+    sendfs=0;
+  }
 		
 	}
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
 
-	osMutexRelease(tcp_mutex_id);
-	osMutexRelease(uart_mutex_id);
 
+osMutexRelease(tcp_mutex_id);
+osMutexRelease(uart_mutex_id);    
 
+osDelay(5);
 
 }
 
@@ -23624,20 +23729,23 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
 
-	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+  SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "OK" , "ERROR",5);	
+
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-	osDelay(500);
+	osDelay(100);
+	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+  
 	tmr0sec=0;
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
-	printf("%c",0x1A);
+	memset(g_u8RecData,0,1000);
+
 	clear();
 	if(checkallnumsinstring(imei) ||  (strlen(imei) < 5))
 	{
-		printf("\r\nAT+GSN\r\n");
+		printf("\r\n\r\nAT+GSN\r\n\r\n");
 		do{
 			r1 = strstr(g_u8RecData, response1);
 			r2 = strstr(g_u8RecData, response2);
@@ -23660,15 +23768,17 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
-	clear();
-	printf("%c",0x1A);
+	memset(g_u8RecData,0,1000);
+
+  clear();
+
 	printf(command);
 	do{
 		r1 = strstr(g_u8RecData, response1);
 		r2 = strstr(g_u8RecData, response2);
 		r3 = strstr(g_u8RecData, response3);
 	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+  clear();
 	if(strstr(g_u8RecData,"GNRMC"))
 	{
     u32ADC0Result = 3;
@@ -23682,13 +23792,15 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		strcat(g_u8SendData,",");
 		strcat(g_u8SendData,temp);
 		memset(temp,0,100);
-		sprintf(temp,",F=%.1f\n",u32ADC0Result);
+		sprintf(temp,",F=%.1f",u32ADC0Result);
 		strcat(g_u8SendData,temp);
-		
+				memset(temp,0,100);
+		sprintf(temp,",LIFE=%d\n",life);
+		strcat(g_u8SendData,temp);
   }
   if((strlen(g_u8SendData) > 2900))
   {
-    memset(g_u8SendData,0,3500);
+    memset(g_u8SendData,0,3000);
     strcat(g_u8SendData,imei);
     strcat(g_u8SendData,"error:RAMfull\n");
   }
@@ -23696,14 +23808,11 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
 
 	osMutexRelease(uart_mutex_id);
-	osDelay(1);
+	osDelay(5);
 }
-
-
 
 void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
-
 
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
 	osDelay(500);
@@ -23712,7 +23821,7 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
 	if(checkallnumsinstring(imei) ||  (strlen(imei) < 5))
@@ -23740,7 +23849,7 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	clear();
 	printf("%c",0x1A);
 	printf(command);
@@ -23762,13 +23871,15 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 		strcat(g_u8SendData,",");
 		strcat(g_u8SendData,temp);
 		memset(temp,0,100);
-		sprintf(temp,",F=%.1f\n",u32ADC0Result);
+		sprintf(temp,",F=%.1f",u32ADC0Result);
 		strcat(g_u8SendData,temp);
-		
+		memset(temp,0,100);
+		sprintf(temp,",LIFE=%d\n",life);
+		strcat(g_u8SendData,temp);
   }
   if((strlen(g_u8SendData) > 2900))
   {
-    memset(g_u8SendData,0,3500);
+    memset(g_u8SendData,0,3000);
     strcat(g_u8SendData,imei);
     strcat(g_u8SendData,"error:RAMfull\n");
   }
@@ -23801,155 +23912,35 @@ __inline int8_t checkallnumsinstring(char* checkstring)
 
 void Send_FS(void)
 {
-
-		TCP_Send_ch("\r\nAT+QISEND\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
-
- 
+  if(sendfs==1){
+  TCP_Send_ch("\r\nAT+QISEND\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
+  }
 }
-
-
-
-
-
 
 void I2C1_IRQHandler(void)
 {
-
-    
-    ((I2C_T *) (((uint32_t)0x40100000) + 0x20000))->INTSTS = (0x1ul << (0));
-
-    u32Status = ((I2C_T *) (((uint32_t)0x40100000) + 0x20000))->STATUS;
-
+  
+  ((I2C_T *) (((uint32_t)0x40100000) + 0x20000))->INTSTS = (0x1ul << (0));
+  u32Status = ((I2C_T *) (((uint32_t)0x40100000) + 0x20000))->STATUS;
 }
 
-
-
-
-
-
-
-
-
-
-
- 
-
- 
- 
- 
-void I2C_MasterRx(uint32_t u32Status)
+__inline uint8_t I2C_Write(uint16_t u16Address, uint8_t u8Data)
 {
-    if (u32Status == 0x08) {                     
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = (g_u8DeviceAddr << 1) );  
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-    } else if (u32Status == 0x18) {              
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_au8TxData[g_u8DataLen++] );
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-    } else if (u32Status == 0x20) {              
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 | 0x04 | 0x10 );
-    } else if (u32Status == 0x28) {              
-        if (g_u8DataLen != 2) {
-            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_au8TxData[g_u8DataLen++] );
-            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-        } else {
-            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 | 0x10 );
-        }
-    } else if (u32Status == 0x10) {              
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = (g_u8DeviceAddr << 1) | 0x01 );   
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-    } else if (u32Status == 0x40) {              
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-    } else if (u32Status == 0x58) {              
-        g_u8RxData = ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA );
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );
-        g_u8EndFlag = 1;
-    } else {
-         
-        printf("Status 0x%x is NOT processed\n", u32Status);
-    }
-}
-
-
- 
- 
- 
-void I2C_MasterTx(uint32_t u32Status)
-{
-    if (u32Status == 0x08) {                     
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_u8DeviceAddr << 1 );   
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-    } else if (u32Status == 0x18) {              
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_au8TxData[g_u8DataLen++] );
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-    } else if (u32Status == 0x20) {              
-        ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 | 0x04 | 0x10 );
-    } else if (u32Status == 0x28) {              
-        if (g_u8DataLen != 3) {
-            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = g_au8TxData[g_u8DataLen++] );
-            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-        } else {
-            ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );
-            g_u8EndFlag = 1;
-        }
-    } else {
-         
-        printf("Status 0x%x is NOT processed\n", u32Status);
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
- 
-void I2C_Write(uint16_t u16Address, uint8_t u8Data)
-{
+  u32Status=0;
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 );
-  while(u32Status != 0x08);    
+  i2ctimeout = 0;while((u32Status != 0x08) && (i2ctimeout == 0));    
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1)) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-  while(u32Status != 0x18);   
+  i2ctimeout = 0;while((u32Status != 0x18) && (i2ctimeout == 0));  
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u16Address) ) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
-  while(u32Status != 0x28);   
+  i2ctimeout = 0;while((u32Status != 0x28) && (i2ctimeout == 0));   
   u32Status = 0;
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u8Data)) );  
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
-  while(u32Status != 0x28);  
-  
-  
-            
-            
-            
-            
-
-
-
-
+  i2ctimeout = 0;while((u32Status != 0x28) && (i2ctimeout == 0));  
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  return 0;
 }
 
 
@@ -23959,47 +23950,34 @@ void I2C_Write(uint16_t u16Address, uint8_t u8Data)
 
 
  
-uint8_t I2C_Read(uint16_t u16Address){
-  
+__inline uint8_t I2C_Read(uint16_t u16Address){
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 );
-  while(u32Status != 0x08);
+  i2ctimeout = 0;
+  while((u32Status != 0x08) && (i2ctimeout == 0));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1)) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-  while(u32Status != 0x18);
+  i2ctimeout = 0;
+  while((u32Status != 0x18) && (i2ctimeout == 0));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u16Address)) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
-  while(u32Status != 0x28);
+  i2ctimeout = 0;
+  while((u32Status != 0x28) && (i2ctimeout == 0));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 | 0x10 );
-  while(u32Status != 0x10);   
+  i2ctimeout = 0;
+  while((u32Status != 0x10) && (i2ctimeout == 0));   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1) | (0x01) ) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-  while(u32Status != 0x40);
+  i2ctimeout = 0;
+  while((u32Status != 0x40) && (i2ctimeout == 0));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
-  while(u32Status != 0x58);
+  i2ctimeout = 0;
+  while((u32Status != 0x58) && (i2ctimeout == 0));
   g_u8RxData = ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA );
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    return g_u8RxData;
+  return g_u8RxData;
 }
 
 
-
-    
 
 
 

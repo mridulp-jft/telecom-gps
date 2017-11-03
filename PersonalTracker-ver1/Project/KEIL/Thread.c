@@ -1,4 +1,4 @@
-
+#include "Nano100Series.h"
 #include "cmsis_os.h"                                           // CMSIS RTOS header file
 #include "string.h"
 #include "stdio.h"
@@ -11,7 +11,7 @@ void Thread (void const *argument);                             // thread functi
 void Thread1 (void const *argument);                             // thread function
 void actgprs(void);
 void remove_all_chars(char* str, char c, char d);
-
+extern void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
 extern void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
 extern void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
@@ -33,7 +33,7 @@ extern osMutexId	(uart_mutex_id); // Mutex ID
 
 osThreadId tid_Thread;                                          // thread id
 osThreadId tid_Thread1;                                          // thread id
-osThreadDef (Thread, osPriorityNormal, 1, 2024);                   // thread object
+osThreadDef (Thread, osPriorityHigh, 1, 2050);                   // thread object
 osThreadDef (Thread1, osPriorityNormal, 1, 4048);                   // thread object
 //extern typedef struct os_mutex_cb fs_mutex_id;
 
@@ -44,14 +44,15 @@ extern __inline void manualdelay(int delayms);
 extern __inline void Send_FS(void);
 extern __inline int count_char(char ch,char* string);
 extern  int qfread(char* fi);
-extern int motion;
+extern uint8_t sendfs;
+
 extern uint8_t mainla;
 extern uint8_t th1la;
 extern uint8_t th2la;
 extern char * r1;
 extern char * r2;
 extern char * r3;
-
+extern int motion;
 void Save_FS(void)
 {
   int len=0;
@@ -99,13 +100,13 @@ void Thread (void const *argument)
     mainla = 0;
     th1la = 1;
     th2la = 0;  
+ //   motion = 1;
+    if(motion!=0){
+    SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
+    osDelay(4900);
+   }      // suspend thread
+    osDelay(10);
 
-      SendAT("\r\nAT+QGNSSC=1\r\n", "OK", "ERROR", "7103", 5);
- //   if(motion != 0){    
-      SendAT_GPS("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
-//    }
-    osDelay(5000);                                           // suspend thread
-    
   }
 }
 
@@ -116,40 +117,43 @@ void Thread1 (void const *argument)
     mainla = 0;
     th1la = 0;
     th2la = 1;  
+		SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",1);	
     cpinquerry();
     if(cpinready==1)
     {
       cregquerry();
       if(cregready == 1)
       {
-        SendAT("\r\nAT+CGREG?\r\n", "Ready", "OK" , "ERROR",50);	
-        if(strstr(g_u8RecData,",1"))
-        {
-          SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n", "Ready", "OK" , "ERROR",5);	
-          SendAT("\r\nAT+QIREGAPP\r\n", "Ready", "OK" , "ERROR",2);	
-          SendAT("\r\nAT+QIACT\r\n", "Ready", "OK" , "ERROR",5);	
-          SendAT("\r\nAT+QILOCIP\r\n", "Ready", "OK" , "ERROR",2);	
-        }
+        SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QILOCIP\r\n\r\n", "Ready", "OK" , "ERROR",2);	
       }
     }
-		SendAT("\r\nAT+QSCLK=1\r\n", "Ready", "OK" , "ERROR",5);
-		SendAT("\r\nAT+QISTAT\r\n", "Ready", "OK" , "ERROR",10);	
-		SendAT("\r\nAT+CSQ\r\n", "Ready", "OK" , "ERROR",10);	
-		SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n","CONNECT OK\r\n","ERROR","FAIL",10);	
+		SendAT("\r\nAT+QSCLK=1\r\n\r\n", "Ready", "OK" , "ERROR",5);
+//		SendAT("\r\nAT+QISTAT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+		SendAT("\r\nAT+CSQ\r\n\r\n", "Ready", "OK" , "ERROR",4);	
+		SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n\r\n","CONNECT","ERROR","FAIL",10);	
 		network=0;
-		TCP_Send("\r\nAT+QISEND\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
+		TCP_Send("\r\nAT+QISEND\r\n\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
+
 		if(network == 1)
 		{
       Save_FS();
   //    Send_FS();
-			SendAT("\r\nAT+QICLOSE\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
-			SendAT("\r\nAT+CFUN=0\r\n", "OK", "NOT INSERTED" , "ERROR",10);
-			SendAT("\r\nAT+CFUN=1\r\n", "Ready", "NOT INSERTED" , "ERROR",10);	
+			SendAT("\r\nAT+QICLOSE\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
+			SendAT("\r\nAT+CFUN=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
+			SendAT("\r\nAT+CFUN=1\r\n\r\n", "Ready", "NOT INSERTED" , "ERROR",10);	
  
       manualdelay(200);
     }
 		else
 		{
+//      if(life > 1500){
+//        SYS_UnlockReg();
+//        SYS->IPRST_CTL1 |= SYS_IPRST_CTL1_CHIP_RST_Msk; 
+//      }
 			osDelay(32000);                                         // suspend thread
 		}
   }
@@ -206,17 +210,6 @@ __inline void manualdelay(int delayms)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 //SendAT("\r\nAT+CPIN?\r\n", "CPIN: READY", "OK" , "ERROR",2);	
 
 
@@ -228,11 +221,11 @@ void actgprs()
    		cregquerry();
       if(cregready == 1)
       {
-        SendAT("\r\nAT+CGREG?\r\n", "Ready", "OK" , "ERROR",50);	
-        SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIREGAPP\r\n", "Ready", "OK" , "ERROR",2);	
-        SendAT("\r\nAT+QIACT\r\n", "Ready", "OK" , "ERROR",50);	
-        SendAT("\r\nAT+QILOCIP\r\n", "Ready", "OK" , "ERROR",2);	
+        SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP\r\n\r\n", "Ready", "OK" , "ERROR",2);	
+        SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QILOCIP\r\n\r\n", "Ready", "OK" , "ERROR",2);	
       }
     }
  }
@@ -240,34 +233,33 @@ void actgprs()
 void fileclose(void)
 {
     memset(temp,0,100);
-    sprintf(temp,"\r\nAT+QFCLOSE=%s\r\n",fileinstance);
+    sprintf(temp,"\r\nAT+QFCLOSE=%s\r\n\r\n",fileinstance);
     SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
+    memset(fileinstance,0,20);
 }
  
 __inline void fileopen(void)
 {
+  if(strlen(fileinstance) == 0)
+  {
     SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
     if(strstr(g_u8RecData,"CME ERROR"))
     {
-        SendAT("\r\nAT+CFUN=1,1\r\n", "Ready", "OK" , "ERROR",10);	
+        PA13=1;
+        printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
         manualdelay(100);
+        PA13=0;
         memset(fileinstance,0,20);
-        SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
+    SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
     }
     parse_g(g_u8RecData, 1, 2, ' ', '\n' , fileinstance);
     remove_all_chars(fileinstance, '\r', '\n');   
-    SendAT("\r\nAT+QGNSSC=1\r\n", "OK", "ERROR", "7103", 5);
-  
+    SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR", "7103", 5);
+  }
 }
 
 
 
- 
- 
- 
- 
- 
- 
  
  
  

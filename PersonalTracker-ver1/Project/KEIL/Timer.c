@@ -12,7 +12,8 @@ extern float u32ADC0Result1;
 extern osMutexId	(uart_mutex_id); // Mutex ID
 __inline void batteryind (void);
 int8_t time;
- //int32_t life=0;
+int32_t life=0;
+int8_t i2ctimeout=0;
 
 /*----- One-Shoot Timer Example -----*/
 static void Timer1_Callback (void const *arg);                  // prototype for timer callback function
@@ -38,13 +39,10 @@ static osTimerDef (Timer2, Timer2_Callback);
 static void Timer2_Callback (void const *arg) 
 {
 	tmr0sec++;
-
-
-
 	batteryind();
-
+  i2ctimeout++;
 //	PA3^=1;
-//	life++;
+	life++;
 // add user code here
 }
 
@@ -84,7 +82,6 @@ static void Timer2_Callback (void const *arg)
 
 __inline void batteryind (void)
 {
-//  motion_sense();
   time++;
   if(time == 1)
   {  

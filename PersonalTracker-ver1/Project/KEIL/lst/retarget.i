@@ -20016,7 +20016,7 @@ static __inline void LCD_DisableDisplay(void)
 
 
 
-void send_string_to_uart1(char* string);
+
  
  
  
@@ -20045,7 +20045,7 @@ void stackDump(uint32_t stack[])
 
 void Hard_Fault_Handler(void)
 {     
-      send_string_to_uart1("In Hard Fault Handler\r\n");
+    printf("In Hard Fault Handler\n");
 
     
 		SYS_UnlockReg();
@@ -20101,10 +20101,10 @@ void SendChar_ToUART(int ch)
 
     while(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (10)));
     ((UART_T *) (((uint32_t)0x40000000) + 0x50000))->THR = ch;
-    if(ch == '\n') {
-        while(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (10)));
-        ((UART_T *) (((uint32_t)0x40000000) + 0x50000))->THR = '\r';
-    }
+
+
+
+
 
 }
 
@@ -20207,51 +20207,17 @@ int ferror(FILE *f)
 #line 486 "..\\..\\Library\\StdDriver\\src\\retarget.c"
  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
- 
-
-void SendChar_To_UART1(int ch)
+__inline void SendChar_To_UART1(int ch)
 {
     while(((UART_T *) (((uint32_t)0x40100000) + 0x50000))->FSR & (0x1ul << (10)));
     ((UART_T *) (((uint32_t)0x40100000) + 0x50000))->THR = ch;
-    if(ch == '\n') {
-        while(((UART_T *) (((uint32_t)0x40100000) + 0x50000))->FSR & (0x1ul << (10)));
-        ((UART_T *) (((uint32_t)0x40100000) + 0x50000))->THR = '\r';
-    }
+
+
+
+
 }
 
-void send_string_to_uart1(char* string){
+ void send_string_to_uart1(char* string){
   int ptr=0;
   while(*string != '\0'){
     SendChar_To_UART1(*string);
@@ -20259,5 +20225,7 @@ void send_string_to_uart1(char* string){
   }
 }
   
+
+
 
 
