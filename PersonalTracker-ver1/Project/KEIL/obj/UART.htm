@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\obj\UART.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\obj\UART.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Thu Nov 02 16:46:15 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Wed Dec 06 12:03:11 2017
 <BR><P>
-<H3>Maximum Stack Usage =        952 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        968 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 Thread1 &rArr; TCP_Send &rArr; TCP_Send_ch &rArr; SendAT_GPS_WO_MUTEX &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
 <P>
@@ -346,8 +346,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> thread.o(.constdata)
 </UL>
-<P><STRONG><a name="[3b]"></a>Thread1</STRONG> (Thumb, 290 bytes, Stack size 16 bytes, thread.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 952<LI>Call Chain = Thread1 &rArr; TCP_Send &rArr; TCP_Send_ch &rArr; SendAT_GPS_WO_MUTEX &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
+<P><STRONG><a name="[3b]"></a>Thread1</STRONG> (Thumb, 296 bytes, Stack size 16 bytes, thread.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 968<LI>Call Chain = Thread1 &rArr; TCP_Send &rArr; TCP_Send_ch &rArr; SendAT_GPS_WO_MUTEX &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cregquerry
@@ -389,7 +389,7 @@ Global Symbols
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendAT
 </UL>
 
-<P><STRONG><a name="[5d]"></a>SendAT</STRONG> (Thumb, 306 bytes, Stack size 40 bytes, main.o(.text))
+<P><STRONG><a name="[5d]"></a>SendAT</STRONG> (Thumb, 304 bytes, Stack size 40 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104 + In Cycle
 <LI>Call Chain = SendAT &rArr;  SendAT (Cycle)
 </UL>
@@ -417,7 +417,7 @@ Global Symbols
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fileclose
 </UL>
 
-<P><STRONG><a name="[3f]"></a>main</STRONG> (Thumb, 500 bytes, Stack size 8 bytes, main.o(.text))
+<P><STRONG><a name="[3f]"></a>main</STRONG> (Thumb, 512 bytes, Stack size 8 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = main &rArr; motion_sense &rArr; __aeabi_dsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexCreate
@@ -448,15 +448,15 @@ Global Symbols
 <P><STRONG><a name="[12]"></a>UART0_IRQHandler</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, main.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_nano100series.o(RESET)
 </UL>
-<P><STRONG><a name="[82]"></a>SavePinSetting</STRONG> (Thumb, 388 bytes, Stack size 0 bytes, main.o(.text), UNUSED)
+<P><STRONG><a name="[82]"></a>SavePinSetting</STRONG> (Thumb, 394 bytes, Stack size 0 bytes, main.o(.text), UNUSED)
 <BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Enter_PowerDown
 </UL>
 
-<P><STRONG><a name="[85]"></a>RestorePinSetting</STRONG> (Thumb, 130 bytes, Stack size 0 bytes, main.o(.text), UNUSED)
+<P><STRONG><a name="[85]"></a>RestorePinSetting</STRONG> (Thumb, 132 bytes, Stack size 0 bytes, main.o(.text), UNUSED)
 <BR><BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Leave_PowerDown
 </UL>
 
-<P><STRONG><a name="[81]"></a>Enter_PowerDown</STRONG> (Thumb, 108 bytes, Stack size 8 bytes, main.o(.text), UNUSED)
+<P><STRONG><a name="[81]"></a>Enter_PowerDown</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, main.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CLK_PowerDown
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SavePinSetting
 </UL>
@@ -465,7 +465,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RestorePinSetting
 </UL>
 
-<P><STRONG><a name="[86]"></a>SendAT1</STRONG> (Thumb, 160 bytes, Stack size 40 bytes, main.o(.text), UNUSED)
+<P><STRONG><a name="[86]"></a>SendAT1</STRONG> (Thumb, 158 bytes, Stack size 40 bytes, main.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
@@ -473,7 +473,7 @@ Global Symbols
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[6a]"></a>cpinquerry</STRONG> (Thumb, 190 bytes, Stack size 8 bytes, main.o(.text))
+<P><STRONG><a name="[6a]"></a>cpinquerry</STRONG> (Thumb, 188 bytes, Stack size 8 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = cpinquerry &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear
@@ -488,7 +488,7 @@ Global Symbols
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Thread1
 </UL>
 
-<P><STRONG><a name="[6b]"></a>cregquerry</STRONG> (Thumb, 244 bytes, Stack size 32 bytes, main.o(.text))
+<P><STRONG><a name="[6b]"></a>cregquerry</STRONG> (Thumb, 242 bytes, Stack size 32 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = cregquerry &rArr; parse_g
 </UL>
 <BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear
@@ -504,7 +504,7 @@ Global Symbols
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Thread1
 </UL>
 
-<P><STRONG><a name="[64]"></a>SendAT_FS</STRONG> (Thumb, 404 bytes, Stack size 40 bytes, main.o(.text))
+<P><STRONG><a name="[64]"></a>SendAT_FS</STRONG> (Thumb, 402 bytes, Stack size 40 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = SendAT_FS &rArr; SendAT &rArr;  SendAT (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear
@@ -522,7 +522,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Save_FS
 </UL>
 
-<P><STRONG><a name="[88]"></a>SendAT_GPS_WO_MUTEX</STRONG> (Thumb, 668 bytes, Stack size 72 bytes, main.o(.text))
+<P><STRONG><a name="[88]"></a>SendAT_GPS_WO_MUTEX</STRONG> (Thumb, 662 bytes, Stack size 72 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = SendAT_GPS_WO_MUTEX &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2f
@@ -545,8 +545,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCP_Send_ch
 </UL>
 
-<P><STRONG><a name="[8f]"></a>TCP_Send_ch</STRONG> (Thumb, 1210 bytes, Stack size 672 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 872<LI>Call Chain = TCP_Send_ch &rArr; SendAT_GPS_WO_MUTEX &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
+<P><STRONG><a name="[8f]"></a>TCP_Send_ch</STRONG> (Thumb, 1230 bytes, Stack size 688 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 888<LI>Call Chain = TCP_Send_ch &rArr; SendAT_GPS_WO_MUTEX &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendChar
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendAT_GPS_WO_MUTEX
@@ -570,8 +570,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCP_Send
 </UL>
 
-<P><STRONG><a name="[6c]"></a>TCP_Send</STRONG> (Thumb, 766 bytes, Stack size 64 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 936<LI>Call Chain = TCP_Send &rArr; TCP_Send_ch &rArr; SendAT_GPS_WO_MUTEX &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
+<P><STRONG><a name="[6c]"></a>TCP_Send</STRONG> (Thumb, 770 bytes, Stack size 64 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 952<LI>Call Chain = TCP_Send &rArr; TCP_Send_ch &rArr; SendAT_GPS_WO_MUTEX &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendChar
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TCP_Send_ch
@@ -1423,7 +1423,7 @@ Global Symbols
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Thread1
 </UL>
 
-<P><STRONG><a name="[80]"></a>motion_sense</STRONG> (Thumb, 334 bytes, Stack size 64 bytes, main.o(i.motion_sense))
+<P><STRONG><a name="[80]"></a>motion_sense</STRONG> (Thumb, 344 bytes, Stack size 64 bytes, main.o(i.motion_sense))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = motion_sense &rArr; __aeabi_dsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_string_to_uart1
@@ -2153,7 +2153,7 @@ Local Symbols
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_sys_init
 </UL>
 
-<P><STRONG><a name="[bb]"></a>_fp_digits</STRONG> (Thumb, 316 bytes, Stack size 56 bytes, printfa.o(i._fp_digits), UNUSED)
+<P><STRONG><a name="[bb]"></a>_fp_digits</STRONG> (Thumb, 344 bytes, Stack size 64 bytes, printfa.o(i._fp_digits), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple

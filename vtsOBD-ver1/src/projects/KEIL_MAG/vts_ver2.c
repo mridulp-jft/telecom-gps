@@ -27,7 +27,7 @@ char fuelstr[5]="";
   float rez = 0, fact = 1;
   int d,point_seen,sent;
   char * cond201;char * cond200;
-   static char* cond1=0;
+  static char* cond1=0;
 	static char* cond2=0;
 	static char* cond3=0;
 	static char* cond4=0;
@@ -303,7 +303,7 @@ memset(data,0,1500);
 		stateCount++; 
 		if(stateCount>5){stateCount =0;}
 		LED_state2();			
-GPS_Collect();
+    GPS_Collect();
 		delay(500);
 				
 		send_GSM("\n\nAT+CFUN=1\r\n","SMS Ready","ERROR\r\n","DEACT",10);  

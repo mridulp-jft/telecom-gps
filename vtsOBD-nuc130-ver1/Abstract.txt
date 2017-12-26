@@ -1,0 +1,1 @@
+Demonstrate how UART transmit and receive data from PC terminal through RS232 interface.

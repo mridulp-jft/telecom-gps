@@ -27,6 +27,6 @@
 ".\uv4build\serial.o"
 ".\uv4build\retarget.o"
 --strict --scatter ".\UV4Build\KEIL_MAG_Flash.sct"
---summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\UV4Build\KEIL_MAG_Flash.map" -o .\UV4Build\KEIL_MAG_Flash.axf

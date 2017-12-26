@@ -597,12 +597,12 @@ ARM Macro Assembler    Page 10
               00000998 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
-work --depend=.\uv4build\startup_mkl26z4.d -o.\uv4build\startup_mkl26z4.o -IE:\
-bitbuck\gps-trackr\Software\vtsOBD-ver1\build\keil\vts_ver3_rev1\RTE -IC:\Keil_
-v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\Kinetis_KL
-xx_DFP\1.12.0\Device\Include --predefine="__UVISION_VERSION SETA 518" --predefi
-ne="_RTE_ SETA 1" --predefine="MKL26Z256xxx4 SETA 1" --list=.\uv4build\startup_
-mkl26z4.lst ..\..\..\src\cpu\CMSIS\Source\arm\startup_MKL26Z4.s
+work --depend=.\uv4build\startup_mkl26z4.d -o.\uv4build\startup_mkl26z4.o -I.\R
+TE\_KL26Z128_-_Flash -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include -IC:\K
+eil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.13.0\Device\Include --predefine="__UVIS
+ION_VERSION SETA 524" --predefine="_RTE_ SETA 1" --predefine="MKL26Z256xxx4 SET
+A 1" --list=.\uv4build\startup_mkl26z4.lst ..\..\..\src\cpu\CMSIS\Source\arm\st
+artup_MKL26Z4.s
 
 
 

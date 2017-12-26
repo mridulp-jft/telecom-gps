@@ -1,0 +1,23 @@
+--cpu Cortex-M0
+".\objects\main.o"
+".\objects\thread.o"
+".\objects\timer.o"
+".\objects\winboundflash.o"
+"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib"
+".\objects\rtx_conf_cm.o"
+".\objects\adc.o"
+".\objects\clk.o"
+".\objects\gpio.o"
+".\objects\i2c.o"
+".\objects\spi.o"
+".\objects\sys.o"
+".\objects\timer_1.o"
+".\objects\uart.o"
+".\objects\wwdt.o"
+".\objects\retarget.o"
+".\objects\startup_nuc200series.o"
+".\objects\system_nuc200series.o"
+--strict --scatter ".\Objects\vts2.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\vts2.map" -o .\Objects\vts2.axf

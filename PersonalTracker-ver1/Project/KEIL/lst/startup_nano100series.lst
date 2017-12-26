@@ -368,13 +368,13 @@ ARM Macro Assembler    Page 6
               00000000 
 Command Line: --16 --debug --xref --diag_suppress=9931 --cpu=Cortex-M0 --apcs=i
 nterwork --depend=.\obj\startup_nano100series.d -o.\obj\startup_nano100series.o
- -IE:\BITBUCK_JFT\gpstrackr\PersonalTracker-BT3.0\Project\KEIL\RTE -IC:\Keil_v5
-\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\C
-MSIS\RTOS\RTX\INC -IC:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO10
-0BN\Include --predefine="__RTX SETA 1" --predefine="__MICROLIB SETA 1" --predef
-ine="__UVISION_VERSION SETA 518" --predefine="_RTE_ SETA 1" --predefine="DEBUG_
-ENABLE_SEMIHOST SETA 1" --list=.\lst\startup_nano100series.lst ..\..\Library\De
-vice\Nuvoton\Nano100Series\Source\ARM\startup_Nano100Series.s
+ -I.\RTE\_PersonalTracker_MC60_Nano110LE3BN -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0
+.1\CMSIS\Include -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC -IC:\
+Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include --predefine
+="__RTX SETA 1" --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION 
+SETA 524" --predefine="_RTE_ SETA 1" --predefine="DEBUG_ENABLE_SEMIHOST SETA 1"
+ --list=.\lst\startup_nano100series.lst ..\..\Library\Device\Nuvoton\Nano100Ser
+ies\Source\ARM\startup_Nano100Series.s
 
 
 

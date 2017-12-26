@@ -21,7 +21,7 @@
 #include "osObjects.h"											// RTOS object definitions
 #include "uart.h"
 #include "cmsis_os.h"							 // CMSIS RTOS header file
-
+#include "gpio.h"
 
 osMutexDef (uart_mutex);		// Declare mutex
 osMutexId	(uart_mutex_id); // Mutex ID
@@ -276,8 +276,9 @@ __inline void delay(int32_t ms)
 }
 
 __inline int16_t motion_sense(){
-  int16_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A, STATUS_REG_A, CTRL_REG4_A;
- 
+  int8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A;
+  uint16_t STATUS_REG_A, CTRL_REG4_A;
+
   I2C_Write(0x20, 0x67);  
 /*
     Let’s use FS ±2 g as an example sensitivity level.  As the range is -2 to +2, this would be a total of 4g.  Or 4,000 Milli-Gs.
@@ -303,7 +304,6 @@ __inline int16_t motion_sense(){
     OUT_Y_L_A = I2C_Read(0x2A); 
     OUT_Z_H_A = I2C_Read(0x2D);
     OUT_Z_L_A = I2C_Read(0x2C); 
-   
     OUT_N = sqrt((OUT_X_H_A*OUT_X_H_A) + (OUT_Y_H_A*OUT_Y_H_A) + (OUT_Z_H_A*OUT_Z_H_A));
     if(OUT_N == 0){
       return 0;
@@ -327,7 +327,7 @@ __inline int16_t motion_sense(){
 
     }
     memset(dmsg,0,100);
-    sprintf(dmsg,"%d,%d,%d,Res=%f,MCnts=%d,ImCnts=%d,M=%d,l=%d\r\n", OUT_X_H_A, OUT_Y_H_A, OUT_Z_H_A,OUT_N, motion_counts, immotion_counts, motion,life);     
+    sprintf(dmsg,"%d,%d,%d,Res=%f,MC=%d,ImC=%d,M=%d,l=%d\r\n", OUT_X_H_A, OUT_Y_H_A, OUT_Z_H_A,OUT_N, motion_counts, immotion_counts, motion,life);     
     send_string_to_uart1(dmsg);
 }
 
@@ -342,7 +342,8 @@ int main(void)
 		GPIO_SetMode(PC, BIT0, GPIO_PMD_OUTPUT);
 		GPIO_SetMode(PA, BIT14, GPIO_PMD_OUTPUT);
 		GPIO_SetMode(PA, BIT15, GPIO_PMD_OUTPUT);
-		GPIO_SetMode(PA, BIT13, GPIO_PMD_OUTPUT);
+		GPIO_SetMode(PA, BIT0, GPIO_PMD_INPUT);
+    GPIO_SetMode(PA, BIT13, GPIO_PMD_OUTPUT);
     PA13=0;       /*  RESET  */
     PA14=0;       /*  SYS OFF/Enable  */
     PA15=0;       /* CHARGER OFF */
@@ -393,7 +394,7 @@ int main(void)
       mainla = 1;
       th1la = 0;  
       th2la = 0;  
-//      motion=1;
+//     motion=1;
       motion_sense();
       osDelay(10);
 		}
@@ -807,8 +808,8 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 	int timesptr=0;
 	int tdp=0;
 	int tdpend=600;
-  char chdatalength[5];
-  char tcpdata[600];
+  char chdatalength[10];
+  char tcpdata[610];
   int  cc =0;
   breaker = 0;
 	osMutexWait(uart_mutex_id, osWaitForever);
@@ -823,7 +824,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 	r3=0;
   SendAT("\r\nAT+QFLDs=\"UFS\"\r\n", "Ready", "OK" , "ERROR",50);
   
-  memset(chdatalength,0,5);
+  memset(chdatalength,0,10);
   SendAT("\r\nAT+QFLST=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",50);
   parse_g(g_u8RecData, 1, 2, ',', '\n' , chdatalength);
 	remove_all_chars(chdatalength, '\r', 0x1A);		
@@ -847,7 +848,9 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 		if(tcpdatalength>15)
 		{
       clear();
+      if(life%5 == 0){
       SendAT_GPS_WO_MUTEX("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
+      }
       memset(temp,0,100);
       sprintf(temp,"\r\nAT+QFSEEK=%s,%d\r\n\r\n",fileinstance,seeker);
       SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
@@ -865,6 +868,8 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
       sprintf(temp,"\r\nAT+QFREAD=%s,600\r\n\r\n",fileinstance);
       SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
       clear();
+
+      
       if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
       if(strlen(g_u8RecData) < 100){
         fileclose();
@@ -872,11 +877,11 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
         breaker = 1;
         break;
       }
-      
-      memset(tcpdata,0,600);
+      memset(tcpdata,0,610);
       remove_all_chars(g_u8RecData, '\r', 0x1A);	
       cc=count_char('\n',g_u8RecData)-1;      
-      parse_g(g_u8RecData, 2,cc, '\n', '\n' , tcpdata);  
+      parse_g(g_u8RecData, 2,cc, '\n', '\n' , tcpdata);       
+
       memset(temp,0,100);
 			g_u8RecDataptr=0;
 			tmr0sec=0;
@@ -1132,10 +1137,11 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
   clear();
 	if(strstr(g_u8RecData,"GNRMC"))
 	{
+    
     u32ADC0Result = 3;
     ADC_START_CONV(ADC);
     u32ADC0Result = ADC_GET_CONVERSION_DATA(ADC, 0);
-    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
+    u32ADC0Result = (4.164/2.053)*((u32ADC0Result*3.296) /4096);
     
 		memset(temp,0,100);
 		parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
@@ -1145,7 +1151,7 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		memset(temp,0,100);
 		sprintf(temp,",F=%.1f",u32ADC0Result);
 		strcat(g_u8SendData,temp);
-				memset(temp,0,100);
+		memset(temp,0,100);
 		sprintf(temp,",LIFE=%d\n",life);
 		strcat(g_u8SendData,temp);
   }
@@ -1214,7 +1220,7 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
     u32ADC0Result = 3;
     ADC_START_CONV(ADC);
     u32ADC0Result = ADC_GET_CONVERSION_DATA(ADC, 0);
-    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
+    u32ADC0Result = (4.164/2.053)*((u32ADC0Result*3.296) /4096);
     
 		memset(temp,0,100);
 		parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
@@ -1239,10 +1245,6 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 //	osMutexRelease(uart_mutex_id);
 //	osDelay(1);
 }
-
-
-
-
 
 
 

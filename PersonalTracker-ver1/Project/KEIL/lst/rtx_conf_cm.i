@@ -20164,7 +20164,7 @@ uint32_t const mp_stk_size = sizeof(mp_stk);
  
 extern
 uint64_t       os_stack_mem[];
-uint64_t       os_stack_mem[2+(2 + 2)+((4*(1550+450+124))/8)];
+uint64_t       os_stack_mem[2+(2 + 2)+((4*(1600+450+124))/8)];
 extern
 uint32_t const os_stack_sz;
 uint32_t const os_stack_sz = sizeof(os_stack_mem);

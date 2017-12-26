@@ -21112,8 +21112,8 @@ extern void cregquerry(void);
 extern void Send_FS(void);
 void fileclose(void);
 __inline void fileopen(void);
-extern char g_u8RecData[1000];
-extern char g_u8SendData[3000];
+extern char g_u8RecData[550];
+extern char g_u8SendData[3500];
 extern uint32_t life;
 extern int network;
 char temp_fs[100] = {0};
@@ -21166,7 +21166,7 @@ void Save_FS(void)
   SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",20);	
   if(strstr(g_u8RecData,"+QFWRITE"))
   {
-    memset(g_u8SendData,0,3000);
+    memset(g_u8SendData,0,3500);
   }
  
   fileclose();
@@ -21191,7 +21191,7 @@ void Thread (void const *argument)
     mainla = 0;
     th1la = 1;
     th2la = 0;  
- 
+
     if(motion!=0){
     SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
     osDelay(4900);
@@ -21209,6 +21209,8 @@ void Thread1 (void const *argument)
     th1la = 0;
     th2la = 1;  
 		SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",1);	
+    osDelay(100);
+    
     cpinquerry();
     if(cpinready==1)
     {

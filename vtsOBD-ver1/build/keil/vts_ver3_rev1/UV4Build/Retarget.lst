@@ -21,8 +21,8 @@ N/* Copyright (C) Codemist Ltd., 1988-1993                       */
 N/* Copyright 1991-1998 ARM Limited. All rights reserved.        */
 N
 N/*
-N * RCS $Revision: 192842 $
-N * Checkin $Date: 2015-04-28 10:58:32 +0100 (Tue, 28 Apr 2015) $
+N * RCS $Revision$
+N * Checkin $Date$
 N * Revising $Author: sdouglas $
 N */
 N
@@ -35,7 +35,7 @@ N */
 N
 N#ifndef __stdio_h
 N#define __stdio_h
-N#define __ARMCLIB_VERSION 5060002
+N#define __ARMCLIB_VERSION 5060034
 N
 N/*
 N * Depending on compiler version __int64 or __INT64_TYPE__ should be defined.
@@ -1133,14 +1133,14 @@ N/* rt_misc.h: definitions for miscellaneous retargetable functions
 N *
 N * Copyright 1999,2013-2014 ARM Limited. All rights reserved.
 N *
-N * RCS $Revision: 185914 $
-N * Checkin $Date: 2014-06-24 07:41:38 +0100 (Tue, 24 Jun 2014) $
-N * Revising $Author: petpav01 $
+N * RCS $Revision$
+N * Checkin $Date$
+N * Revising $Author$
 N */
 N
 N#ifndef __RT_MISC_H
 N#define __RT_MISC_H
-N#define __ARMCLIB_VERSION 5060002
+N#define __ARMCLIB_VERSION 5060034
 N
 N#ifdef __cplusplus
 Sextern "C" {
@@ -1152,8 +1152,8 @@ N/* stddef.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.1.4 */
 N
 N/* Copyright (C) ARM Ltd., 1999
 N * All rights reserved
-N * RCS $Revision: 190986 $
-N * Checkin $Date: 2015-02-04 14:26:49 +0000 (Wed, 04 Feb 2015) $
+N * RCS $Revision$
+N * Checkin $Date$
 N * Revising $Author: agrant $
 N */
 N
@@ -1169,7 +1169,7 @@ N */
 N
 N#ifndef __stddef_h
 N#define __stddef_h
-N#define __ARMCLIB_VERSION 5060002
+N#define __ARMCLIB_VERSION 5060034
 N
 N  #ifndef __STDDEF_DECLS
 N  #define __STDDEF_DECLS
@@ -1279,14 +1279,14 @@ N/* Copyright (C) ARM Ltd., 1999,2014 */
 N/* All rights reserved */
 N
 N/*
-N * RCS $Revision: 185525 $
-N * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+N * RCS $Revision$
+N * Checkin $Date$
 N * Revising $Author: agrant $
 N */
 N
 N#ifndef __stdint_h
 N#define __stdint_h
-N#define __ARMCLIB_VERSION 5060002
+N#define __ARMCLIB_VERSION 5060034
 N
 N  #ifdef __INT64_TYPE__
 S    /* armclang predefines '__INT64_TYPE__' and '__INT64_C_SUFFIX__' */
@@ -1478,9 +1478,9 @@ N
 N    /* maximum value of pointer-holding unsigned integer type */
 N#if __sizeof_ptr == 8
 X#if 4 == 8
-S#define UINTPTR_MAX INT64_MAX
+S#define UINTPTR_MAX UINT64_MAX
 N#else
-N#define UINTPTR_MAX INT32_MAX
+N#define UINTPTR_MAX UINT32_MAX
 N#endif
 N
 N    /* 7.18.2.5 */

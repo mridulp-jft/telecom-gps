@@ -100,7 +100,7 @@ void Thread (void const *argument)
     mainla = 0;
     th1la = 1;
     th2la = 0;  
- //   motion = 1;
+//    motion = 1;
     if(motion!=0){
     SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
     osDelay(4900);
@@ -118,6 +118,8 @@ void Thread1 (void const *argument)
     th1la = 0;
     th2la = 1;  
 		SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",1);	
+    osDelay(100);
+    
     cpinquerry();
     if(cpinready==1)
     {
