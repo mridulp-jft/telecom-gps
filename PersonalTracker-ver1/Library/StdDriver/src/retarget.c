@@ -60,7 +60,8 @@ void stackDump(uint32_t stack[])
 
 void Hard_Fault_Handler(void)
 {     
-    printf("In Hard Fault Handler\n");
+
+  printf("In Hard Fault Handler\n");
 //    stackDump(stack);
     //Chip Reset
 		SYS_UnlockReg();

@@ -21933,16 +21933,7 @@ __declspec(__nothrow) long double rintl(long double );
 
 
 
-#line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
+#line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -21997,7 +21988,7 @@ __declspec(__nothrow) long double rintl(long double );
 
 
 
-#line 72 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 63 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -22005,9 +21996,9 @@ __declspec(__nothrow) long double rintl(long double );
 
 
 
-#line 90 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 81 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
-#line 92 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 83 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stddef.h"
  
 
@@ -22085,7 +22076,7 @@ __declspec(__nothrow) long double rintl(long double );
 
  
 
-#line 93 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 84 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -22274,7 +22265,7 @@ uint32_t osKernelSysTick (void);
 
 
 
-#line 289 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 280 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -22320,14 +22311,14 @@ osPriority osThreadGetPriority (osThreadId thread_id);
 
 osStatus osDelay (uint32_t millisec);
 
-#line 342 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 333 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
 
 
 
-#line 357 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 348 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -22388,7 +22379,7 @@ __value_in_regs osEvent osSignalWait (int32_t signals, uint32_t millisec);
 
 
 
-#line 425 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 416 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -22423,7 +22414,7 @@ osStatus osMutexDelete (osMutexId mutex_id);
 
 
 
-#line 467 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 458 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -22463,7 +22454,7 @@ osStatus osSemaphoreDelete (osSemaphoreId semaphore_id);
 
 
 
-#line 515 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 506 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -22502,7 +22493,7 @@ osStatus osPoolFree (osPoolId pool_id, void *block);
 
 
 
-#line 562 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 553 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -22544,7 +22535,7 @@ __value_in_regs osEvent osMessageGet (osMessageQId queue_id, uint32_t millisec);
 
 
 
-#line 614 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 605 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -22672,6 +22663,10 @@ __declspec(noreturn) void os_error (uint32_t error_code);
 #line 24 "main.c"
 #line 25 "main.c"
 
+
+
+
+
 uint32_t os_mutex_cb_uart_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_uart_mutex = { (os_mutex_cb_uart_mutex) };		
 osMutexId	(uart_mutex_id); 
 		
@@ -22740,6 +22735,7 @@ int breaker=0;
 volatile int32_t	 _Wakeup_Flag = 0;		 
 volatile uint32_t	_Pin_Setting[11];		 
 volatile uint32_t	_PullUp_Setting[6];	 
+char  RI = 0;
 
 char * r1;
 char * r2;
@@ -22975,9 +22971,9 @@ __inline int16_t motion_sense(){
       motion_counts=0;
 
     }
-    memset(dmsg,0,100);
-    sprintf(dmsg,"%d,%d,%d,Res=%f,MC=%d,ImC=%d,M=%d,l=%d\r\n", OUT_X_H_A, OUT_Y_H_A, OUT_Z_H_A,OUT_N, motion_counts, immotion_counts, motion,life);     
-    send_string_to_uart1(dmsg);
+
+
+
 }
 
 
@@ -22987,6 +22983,10 @@ return 0;
 int main(void)
 {
 		SYS_Init();
+		osKernelInitialize ();										
+    GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04040)), (0x00000008), 0x0UL);
+    GPIO_EnableInt(((GPIO_T *) (((uint32_t)0x50000000) + 0x04040)), 3, 0x00010000UL);
+    NVIC_EnableIRQ(GPABC_IRQn);   
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04080)), (0x00000002), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04080)), (0x00000001), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00004000), 0x1UL);
@@ -23004,47 +23004,44 @@ int main(void)
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04000)), (0x00000040), 0x1UL);
 		GPIO_SetMode(((GPIO_T *) (((uint32_t)0x50000000) + 0x04040)), (0x00000004), 0x1UL);
 		UART0_Init();
-    UART_Open(((UART_T *) (((uint32_t)0x40100000) + 0x50000)), 115200);  
+    UART_Open(((UART_T *) (((uint32_t)0x40100000) + 0x50000)), 9600);  
     memset(dmsg,0,50);
     I2C_Open(((I2C_T *) (((uint32_t)0x40100000) + 0x20000)), 100000);  
     I2C_EnableInt(((I2C_T *) (((uint32_t)0x40100000) + 0x20000)));
     NVIC_EnableIRQ(I2C1_IRQn); 
 
-
-
-
-
 		Init_Timers();
-		osKernelInitialize ();										
 		ADC0_Init();
     
     SYS_UnlockReg();
     
-    WWDT_Open((0xCUL << (8)), 0x20, (1));
     
-    WDT_EnableInt();
-    NVIC_EnableIRQ(WDT_IRQn);
+    
+    
+    
 		uart_mutex_id = osMutexCreate(&os_mutex_def_uart_mutex);
-		tcp_mutex_id = osMutexCreate(&os_mutex_def_tcp_mutex);
-		fs_mutex_id = osMutexCreate(&os_mutex_def_fs_mutex);
+		
+		
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((3)<<2))))=0;  
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((4)<<2))))=0;
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((5)<<2))))=0;
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((6)<<2))))=0;
 		Init_Thread();
 		osKernelStart ();												 
+
     (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
 		SendAT("\r\nAT+QSCLK=1\r\n", "Ready", "OK" , "ERROR",5);
     SendAT("\r\nAT+SYSTEMSTARTS\r\n\r\n", "Ready", "OK" , "ERROR",10);	
     fileopen();
     SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "Ready", "OK" , "ERROR",10);	    
+    
     while(1)
 		{
       mainla = 1;
       th1la = 0;  
       th2la = 0;  
-
-      motion_sense();
+      motion=1;
+ 
       osDelay(10);
 		}
 }
@@ -23074,8 +23071,20 @@ void UART0_IRQHandler(void)
 
 
 
-__inline void parse_g(char* str, int first, int sec, char f, char s , char *string)
+char mystrstr(char* str1, char character)
+{int sz,cn;
+  sz=strlen(str1);
+	for(cn=0;cn<=sz;cn++)
+	{if(str1[cn] == character)
+		{return 1;}
+	}
+	return 0;
+}
+
+void parse_g(char* str, int first, int sec, char f, char s , char *string)
 {int sz1,sz2,i11,temp11,j11,l;
+    if(mystrstr(str,f) && mystrstr(str,s))
+    {  
 
 		sz1=	strlen(str);
 		sz2=	strlen(string);
@@ -23108,7 +23117,11 @@ __inline void parse_g(char* str, int first, int sec, char f, char s , char *stri
       string[i11] = str[l+i11+1];
 		}
 	
-}
+
+    }
+  }
+
+
 
 
 
@@ -23244,40 +23257,23 @@ void clear()
 
 
 
-void SendAT1(char * command, char * response1, char * response2, char * response3, int32_t timeout)
+
+void GPABC_IRQHandler(void)
 {
-	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
- 	osDelay(500);
+     
+    if(((((GPIO_T *) (((uint32_t)0x50000000) + 0x04040)))->ISRC & (0x00000008)))
+    {
+        ((((GPIO_T *) (((uint32_t)0x50000000) + 0x04040)))->ISRC = (0x00000008));
+        RI=1;
+    }
+    else
+    {
+         
+        ((GPIO_T *) (((uint32_t)0x50000000) + 0x04000))->ISRC = ((GPIO_T *) (((uint32_t)0x50000000) + 0x04000))->ISRC;
+        ((GPIO_T *) (((uint32_t)0x50000000) + 0x04040))->ISRC = ((GPIO_T *) (((uint32_t)0x50000000) + 0x04040))->ISRC;
+    }
 
-
-	tmr0sec=0;
-
-
-	r1=0;
-	r2=0;
-	r3=0;
-	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,550);
-	printf("%c",0x1A);
-	clear();
-	printf(command);
-	do{
-		r1 = strstr(g_u8RecData, response1);
-		r2 = strstr(g_u8RecData, response2);
-		r3 = strstr(g_u8RecData, response3);
-			
-	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
-clear();
-
-  
-
-osDelay(5);
 }
-
-
-
-
-
 
  void cpinquerry()
 {
@@ -23368,6 +23364,7 @@ void SendAT(char * command, char * response1, char * response2, char * response3
   (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
 	osDelay(100);
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+
 	tmr0sec=0;
 
 	r1=0;
@@ -23392,29 +23389,30 @@ void SendAT(char * command, char * response1, char * response2, char * response3
         (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=1;
         attry++;
         if(attry > 3){
-          printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
-          manualdelay(100);
-          fileclose();
-          fileopen();
-          SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR", "7103", 10);
+
+            printf("\r\nAT+CFUN=1,1\r\n");	
+
+
+
         }
         (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;
       }
       else{attry=0;}
    }
-  
   (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
-  osMutexRelease(uart_mutex_id);
-osDelay(10);
+osMutexRelease(uart_mutex_id);
+
+   
+osDelay(100);
 }
 
 void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
-{
+{	osDelay(100);
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	tmr0sec=0;
 
   (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-	osDelay(100);
+
 	r1=0;
 	r2=0;
 	r3=0;
@@ -23434,11 +23432,12 @@ clear();
      if(!(r1 || r2 || r3))
       {
         (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=1;
-        printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
+        printf("\r\nAT+CFUN=1,1\r\n");	
+        clear();
         manualdelay(100);
-        fileclose();
-        fileopen();
-        SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR", "7103", 10);
+
+
+
 
         (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;
       }
@@ -23457,12 +23456,11 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 	int timesptr=0;
 	int tdp=0;
 	int tdpend=600;
-  char chdatalength[10];
-  char tcpdata[610];
+  char chdatalength[5];
+  char tcpdata[600];
   int  cc =0;
   breaker = 0;
-	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
-	osMutexWait(tcp_mutex_id, 0xFFFFFFFFU);
+
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
  	osDelay(500);
 	printf("%c",0x1A);
@@ -23473,13 +23471,14 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 	r3=0;
   SendAT("\r\nAT+QFLDs=\"UFS\"\r\n", "Ready", "OK" , "ERROR",50);
   
-  memset(chdatalength,0,10);
+  memset(chdatalength,0,5);
   SendAT("\r\nAT+QFLST=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",50);
   parse_g(g_u8RecData, 1, 2, ',', '\n' , chdatalength);
 	remove_all_chars(chdatalength, '\r', 0x1A);		
   tcpdatalength =  atoi(chdatalength);
 
   fileopen();
+	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 
   if(tcpdatalength%600 == 0)
   {
@@ -23497,9 +23496,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 		if(tcpdatalength>15)
 		{
       clear();
-      if(life%5 == 0){
       SendAT_GPS_WO_MUTEX("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
-      }
       memset(temp,0,100);
       sprintf(temp,"\r\nAT+QFSEEK=%s,%d\r\n\r\n",fileinstance,seeker);
       SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
@@ -23517,8 +23514,6 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
       sprintf(temp,"\r\nAT+QFREAD=%s,600\r\n\r\n",fileinstance);
       SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
       clear();
-
-      
       if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
       if(strlen(g_u8RecData) < 100){
         fileclose();
@@ -23526,11 +23521,11 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
         breaker = 1;
         break;
       }
-      memset(tcpdata,0,610);
+      
+      memset(tcpdata,0,600);
       remove_all_chars(g_u8RecData, '\r', 0x1A);	
       cc=count_char('\n',g_u8RecData)-1;      
-      parse_g(g_u8RecData, 2,cc, '\n', '\n' , tcpdata);       
-
+      parse_g(g_u8RecData, 2,cc, '\n', '\n' , tcpdata);  
       memset(temp,0,100);
 			g_u8RecDataptr=0;
 			tmr0sec=0;
@@ -23542,7 +23537,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 				r3 = strstr(g_u8RecData, tcpresponse3);
 					
 			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
-clear();
+      clear();
 				tmr0sec=0;
 				if(r1)
 					{
@@ -23594,23 +23589,21 @@ clear();
 		
 	}
   
-  fileclose();
-  
-  
   if(network == 0 && (timesptr>= times))
   {
   fileclose();
-    
+
   seeker = 0;
   SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);    
-
   }
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
 	r1=0;
 	r2=0;
 	r3=0;
-	osMutexRelease(tcp_mutex_id);
-	osMutexRelease(uart_mutex_id);
+  osMutexRelease(uart_mutex_id); 
+  
+
+	
 
 osDelay(10);
 
@@ -23625,7 +23618,9 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 	int tdp=0;
 	int tdpend=600;
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
-	osMutexWait(tcp_mutex_id, 0xFFFFFFFFU);
+
+  
+  
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
  	osDelay(100);
 
@@ -23634,7 +23629,6 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 	r1=0;
 	r2=0;
 	r3=0;
-
  
 
 	g_u8RecDataptr=0;
@@ -23718,16 +23712,18 @@ clear();
     sendfs=0;
   }
 		
-	}
+	}else{network = 1;}
 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
 
 
-osMutexRelease(tcp_mutex_id);
+
 osMutexRelease(uart_mutex_id);    
 
 osDelay(5);
 
 }
+
+
 
 
 
@@ -23786,12 +23782,10 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
   clear();
 	if(strstr(g_u8RecData,"GNRMC"))
 	{
-    
     u32ADC0Result = 3;
     (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR |= (0x1ul << (11)));
     u32ADC0Result = (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->RESULT[0] & (0xffful << (0)));
-    u32ADC0Result = (4.164/2.053)*((u32ADC0Result*3.296) /4096);
-    
+    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
 		memset(temp,0,100);
 		parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
 		strcat(g_u8SendData,imei);
@@ -23801,7 +23795,7 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		sprintf(temp,",F=%.1f",u32ADC0Result);
 		strcat(g_u8SendData,temp);
 		memset(temp,0,100);
-		sprintf(temp,",LIFE=%d\n",life);
+		sprintf(temp,",~`,LIFE=%d\n",life);
 		strcat(g_u8SendData,temp);
   }
   if((strlen(g_u8SendData) > 2900))
@@ -23810,9 +23804,7 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
     strcat(g_u8SendData,imei);
     strcat(g_u8SendData,"error:RAMfull\n");
   }
-  
-	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
-
+ 	(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=1;
 	osMutexRelease(uart_mutex_id);
 	osDelay(5);
 }
@@ -23869,7 +23861,7 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
     u32ADC0Result = 3;
     (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->CR |= (0x1ul << (11)));
     u32ADC0Result = (((ADC_T *) (((uint32_t)0x40000000) + 0xE0000))->RESULT[0] & (0xffful << (0)));
-    u32ADC0Result = (4.164/2.053)*((u32ADC0Result*3.296) /4096);
+    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
     
 		memset(temp,0,100);
 		parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
@@ -23897,7 +23889,11 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 
 
 
-__inline int8_t checkallnumsinstring(char* checkstring)
+
+
+
+
+int8_t checkallnumsinstring(char* checkstring)
 {
   int returnval, checkstringptr, lencheckstring=0;
   lencheckstring  = strlen(checkstring);

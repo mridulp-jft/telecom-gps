@@ -16,12 +16,21 @@
  *
  ******************************************************************************/
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "NUC100Series.h"
 
 
 #define PLL_CLOCK           12000000
 
 
+
+/*---------------------------------------------------------------------------------------------------------*/
+/* Extern variables                                                                                        */
+/*---------------------------------------------------------------------------------------------------------*/
+
+extern char suppportedpid[100][7];
+extern int pidcounter;
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -51,8 +60,17 @@ extern int Init_Thread (void);
 extern void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void Init_Timers (void);
 extern void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+extern void supportedpid(char command[5]);
 
 
+osMutexDef (uart_mutex);		// Declare mutex
+osMutexId	(uart_mutex_id); // Mutex ID
+		
+osMutexDef (tcp_mutex);		// Declare mutex
+osMutexId	(tcp_mutex_id); // Mutex ID
+
+osMutexDef (fs_mutex);		// Declare mutex
+osMutexId	(fs_mutex_id); // Mutex ID		
 
 void SYS_Init(void)
 {
@@ -82,19 +100,19 @@ void SYS_Init(void)
     CLK_EnableModuleClock(UART0_MODULE);
 
     /* Select UART module clock source */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART_S_HXT, CLK_CLKDIV_UART(1));
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART_S_HIRC, CLK_CLKDIV_UART(1));
     
     /* Enable UART module clock */
     CLK_EnableModuleClock(UART1_MODULE);
 
     /* Select UART module clock source */
-    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART_S_HXT, CLK_CLKDIV_UART(1));
+    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART_S_HIRC, CLK_CLKDIV_UART(1));
     
     /* Enable UART module clock */
     CLK_EnableModuleClock(UART2_MODULE);
 
     /* Select UART module clock source */
-    CLK_SetModuleClock(UART2_MODULE, CLK_CLKSEL1_UART_S_HXT, CLK_CLKDIV_UART(1));
+    CLK_SetModuleClock(UART2_MODULE, CLK_CLKSEL1_UART_S_HIRC, CLK_CLKDIV_UART(1));
 
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init I/O Multi-function                                                                                 */
@@ -120,14 +138,14 @@ void UARTs_Init()
     /* Init UART                                                                                               */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Reset UART0 */
-//    SYS_ResetModule(UART0_RST);
-//    SYS_ResetModule(UART1_RST);
-//    SYS_ResetModule(UART2_RST);
+    SYS_ResetModule(UART0_RST);
+    SYS_ResetModule(UART1_RST);
+    SYS_ResetModule(UART2_RST);
 
     /* Configure UART0 and set UART0 Baudrate */
     UART_Open(UART0, 115200);
     UART_Open(UART1, 115200);
-    UART_Open(UART2, 115200);
+    UART_Open(UART2, 9600);
 		UART_ENABLE_INT(UART1, (UART_IER_RDA_IEN_Msk ));
 		NVIC_EnableIRQ(UART1_IRQn);  
 		UART_ENABLE_INT(UART2, (UART_IER_RDA_IEN_Msk ));
@@ -166,24 +184,73 @@ int main (void) {
     SYS_UnlockReg();
     /* Init System, peripheral clock and multi-function I/O */
     SYS_Init();
-    /* Init UART0 for printf and testing */
-    UARTs_Init();
-    /* Lock protected registers */
+
     SYS_LockReg();
-    GPIO_SetMode(PB, BIT7, GPIO_PMD_OUTPUT);
-    Init_Thread();
   
-		Init_Timers();
+    /* Init UART0 for printf and testing */
+    /* Lock protected registers */
 
+  //  Init_Thread();
+		uart_mutex_id = osMutexCreate(osMutex(uart_mutex));
+		tcp_mutex_id = osMutexCreate(osMutex(tcp_mutex));
+		fs_mutex_id = osMutexCreate(osMutex(fs_mutex));  
+    Init_Timers();
     osKernelInitialize ();                    // initialize CMSIS-RTOS
-
+    UARTs_Init();
+    PA5=0;
     osKernelStart ();                         // start thread execution 
-    
-    while(1){
- //     printf("\n\nUART Sample Program\r\n");
-//      send_OBD("\r\nHelloWorld\r\n", ">" , ">", ">", 100);
-//      UART_WRITE(UART2, 'A');    
- //     SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR", "7103", 10);
 
-    }
+  while(1){
+
+    send_OBD("ATZ\r","HELLO","NODATA",">",5);
+    send_OBD("ATE1\r","HELLO","NODATA",">",5);
+    send_OBD("ATL1\r","HELLO","NODATA",">",5);
+    send_OBD("ATSP0\r","HELLO","NODATA",">",5);
+//    send_OBD("ATSP1\r","HELLO","NODATA","WORLD",5);
+//    send_OBD("ATSP2\r","HELLO","NODATA","WORLD",5);
+//    send_OBD("ATSP3\r","HELLO","NODATA","WORLD",5);
+//    send_OBD("ATSP4\r","HELLO","NODATA","WORLD",5);
+//    send_OBD("ATSP5\r","HELLO","NODATA","WORLD",5);
+
+//    send_OBD("IAT1\r","HELLO","NODATA",">",5);
+    send_OBD("ATDPN\r","HELLO","NODATA",">",5);
+    send_OBD("ATRV\r","HELLO","NODATA",">",5);
+//    send_OBD("ATIB10\r","HELLO","NODATA",">",5);
+    
+    
+    
+   // send_OBD("ATTP0\r","HELLO","NODATA",">",5);
+//    send_OBD("ATIB10\r","HELLO","NODATA",">",5);
+
+    send_OBD("0100\r","HELLO","NODATA",">",5);
+    send_OBD("0101\r","HELLO","NODATA",">",5);
+    send_OBD("010C\r","HELLO","NODATA",">",5);
+    send_OBD("010D\r","HELLO","NODATA",">",5);
+    send_OBD("0120\r","HELLO","NODATA",">",5);
+     }
+    memset(suppportedpid, 0, sizeof(char)*200*7);
+//   if(!(strstr(g_u8OBDRecData,"UNABLE") || strstr(g_u8OBDRecData,"NO DATA"))){	
+      pidcounter=0;
+      //supportedpid("0100");
+      supportedpid("0100\r\n");
+      supportedpid("0120\r\n");
+      //supportedpid("0120");
+      supportedpid("0140\r\n");
+      //supportedpid("0140");
+      supportedpid("0160\r\n");
+      //supportedpid("0160");
+      supportedpid("0180\r\n");
+      //supportedpid("0180");
+      supportedpid("01A0\r\n");
+      //supportedpid("01A0");
+      supportedpid("01C0\r\n");
+      //supportedpid("01C0");
+      supportedpid("050100\r\n");
+      //supportedpid("050100");
+      supportedpid("0900\r\n");	
+
+    Init_Thread ();
+
+while(1){
+}
 }

@@ -41,7 +41,7 @@ static void Timer2_Callback (void const *arg)
 	tmr0sec++;
   tmr1sec++;
 
-	batteryind();
+//	batteryind();
   i2ctimeout++;
   PB13 ^= 1;
 	life++;
@@ -87,22 +87,22 @@ __inline void batteryind (void)
   time++;
   if(time == 1)
   {  
-		PA3=0;
-		PA4=0;
-		PA5=0;
-		PA6=0;
+//		PA3=0;
+//		PA4=0;
+//		PA5=0;
+//		PA6=0;
   }
   else
   {
 		if( u32ADC0Result > 4.600 )
 		{      
  //     PA3=PA4=PA5=PA6^=1;
-      PA3=PA4=PA5=PA6^=1;
+      //PA3=PA4=PA5=PA6^=1;
 		}
 		else if( u32ADC0Result < 3.25)
 		{
 //			PA3^=1;
-			PA3^=1;
+		//	PA3^=1;
 			charging = 0;
 
 			// battery lowest
@@ -110,7 +110,7 @@ __inline void batteryind (void)
 		else if( u32ADC0Result < 3.50 )
 		{
 //			PA3^=1;PA4^=1;
-			PA3^=1;PA4^=1;
+		//	PA3^=1;PA4^=1;
 			charging = 0;
 
 			//battery lesser
@@ -118,7 +118,7 @@ __inline void batteryind (void)
 		else if( u32ADC0Result < 3.75)
 		{
 //			PA3^=1;PA4^=1;PA5^=1;
-			PA3^=1;PA4^=1;PA5^=1;
+		//	PA3^=1;PA4^=1;PA5^=1;
 			charging = 0;
 
 			//battery less
@@ -126,7 +126,7 @@ __inline void batteryind (void)
 		else
 		{
 //			PA3^=1;PA4^=1;PA5^=1;PA6^=1;
-			PA3^=1;PA4^=1;PA5^=1;PA6^=1;
+		//	PA3^=1;PA4^=1;PA5^=1;PA6^=1;
 			charging = 0;
 			//battery full
 		}

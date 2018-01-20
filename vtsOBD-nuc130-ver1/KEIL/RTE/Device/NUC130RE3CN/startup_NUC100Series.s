@@ -265,6 +265,7 @@ Reset_Handler   PROC
                 ; Unlock Register                
                 LDR     R1, =0x59
                 STR     R1, [R0]
+                
                 LDR     R1, =0x16
                 STR     R1, [R0]
                 LDR     R1, =0x88

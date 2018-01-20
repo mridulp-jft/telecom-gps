@@ -119,6 +119,10 @@ uint8_t mainla = 0;
 uint8_t idla = 0;
 uint8_t th1la = 0;
 uint8_t th2la = 0;
+int readpt = 0;
+extern int once;
+extern int pt;
+
 uint32_t freq;
 volatile int32_t g_i32pointer = 0;
 volatile uint32_t g_u32WWDTINTCount = 0;
@@ -432,18 +436,13 @@ int main(void)
     MidDid = SpiFlash_ReadMidDid();
     MidDid = SpiFlash_ReadStatusReg1();
     MidDid = SpiFlash_ReadStatusReg2();
-//    SpiFlash_ChipErase();
+ //   SpiFlash_ChipErase();
     
-
-    
-
-
-
     ign_sense();
-		SendAT("\r\nAT+QSCLK=1\r\n", "Ready", "OK" , "ERROR",5);
-    SendAT("\r\nAT+SYSTEMSTARTS\r\n\r\n", "Ready", "OK" , "ERROR",10);	
-    fileopen();
-    SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "Ready", "OK" , "ERROR",10);	
+//		SendAT("\r\nAT+QSCLK=1\r\n", "Ready", "OK" , "ERROR",5);
+//    SendAT("\r\nAT+SYSTEMSTARTS\r\n\r\n", "Ready", "OK" , "ERROR",10);	
+//    fileopen();
+//    SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "Ready", "OK" , "ERROR",10);	
     
     while(1)
 		{
@@ -750,78 +749,44 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 	int times = 0;
 	int timesptr=0;
 	int tdp=0;
-	int tdpend=600;
+	int tdpend=300;
   char chdatalength[5];
-  char tcpdata[600];
+  char tcpdata[300];
   int  cc =0;
   breaker = 0;
+ 	osMutexWait(uart_mutex_id, osWaitForever);
 
 	PB2=0;
  	osDelay(500);
 	printf("%c",0x1A);
-	tmr0sec=0;
-	tcptimeout =5;
-	r1=0;
-	r2=0;
-	r3=0;
-  SendAT("\r\nAT+QFLDs=\"UFS\"\r\n", "Ready", "OK" , "ERROR",50);
-  
-  memset(chdatalength,0,5);
-  SendAT("\r\nAT+QFLST=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",50);
-  parse_g(g_u8RecData, 1, 2, ',', '\n' , chdatalength);
-	remove_all_chars(chdatalength, '\r', 0x1A);		
-  tcpdatalength =  atoi(chdatalength);
 
-  fileopen();
-	osMutexWait(uart_mutex_id, osWaitForever);
-//	osMutexWait(tcp_mutex_id, osWaitForever);
-  if(tcpdatalength%600 == 0)
-  {
-    times = (tcpdatalength/600);
+//  SendAT("\r\nAT+QFLDs=\"UFS\"\r\n", "Ready", "OK" , "ERROR",50);
+//  
+//  memset(chdatalength,0,5);
+do{
+  memset(tcpdata,0,300);
+  SpiFlash_WaitReady();
+  SpiFlash_ReadData(tcpdata, readpt, 256);
+  if(tcpdata[0] != 0xFF)
+    times = 1;
+  else{
+    times = 0;
+    pt = 0;
+//    readpt = 0;
+    once = 1;
+//    SpiFlash_ChipErase();
+//    manualdelay(500);
   }
-  else
-  {
-    times = (tcpdatalength/600)+1;
-  }  
-
-  for(timesptr=0; timesptr<times ;timesptr++)
-  {
-	g_u8RecDataptr=0;
-
-		if(tcpdatalength>15)
-		{
+  if(times == 1){
       clear();
-      SendAT_GPS_WO_MUTEX("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
+//      SendAT_GPS_WO_MUTEX("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
+   
       memset(temp,0,100);
-      sprintf(temp,"\r\nAT+QFSEEK=%s,%d\r\n\r\n",fileinstance,seeker);
-      SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
-      if(seeker > tcpdatalength)
-      {
-        seeker = 0;
-        fileclose();
-        SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);
-        breaker = 1;
-        break;
-      }
-      if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
-      memset(temp,0,100);
-      clear();
-      sprintf(temp,"\r\nAT+QFREAD=%s,600\r\n\r\n",fileinstance);
-      SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
-      clear();
-      if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
-      if(strlen(g_u8RecData) < 100){
-        fileclose();
-        SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);
-        breaker = 1;
-        break;
-      }
-      
-      memset(tcpdata,0,600);
-      remove_all_chars(g_u8RecData, '\r', 0x1A);	
-      cc=count_char('\n',g_u8RecData)-1;      
-      parse_g(g_u8RecData, 2,cc, '\n', '\n' , tcpdata);  
-      memset(temp,0,100);
+      tmr0sec=0;
+      tcptimeout =5;
+      r1=0;
+      r2=0;
+      r3=0;
 			g_u8RecDataptr=0;
 			tmr0sec=0;
 			memset(g_u8RecData,0,RXBUFSIZE);
@@ -867,39 +832,17 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 				network=1;
         breaker = 1;        
 				break;
-
 			}
 			else
 			{
+        readpt+=256;
 				network=0;
 			}
 
     }
    
-	if(network == 0 && timesptr>=times)
-	{
-//		memset(tcpdata,0,TXBUFSIZE);
-	}
-  seeker+=600;
-		
-	}
+  }while(times == 1);
   
-  fileclose();
-  
-  
-  if(network == 0 && (timesptr>= times))
-  {
-  fileclose();
-   
-  seeker = 0;
-  SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);    
-
-  }
-	PB2=1;
-	r1=0;
-	r2=0;
-	r3=0;
-//	osMutexRelease(tcp_mutex_id);
 	osMutexRelease(uart_mutex_id); 
 
 osDelay(10);
@@ -931,19 +874,9 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 	g_u8RecDataptr=0;
 	printf("%c",0x1A);
 	tcpdatalength = strlen(tcpdata);
-	if(tcpdatalength%600 == 0)
-	{
-		times = (tcpdatalength/600);
-	}
-	else
-		{
-			times = (tcpdatalength/600)+1;
-		}
 		if(tcpdatalength>15)
 		{
 			clear();
-			for(timesptr = 0; timesptr < times ; timesptr++)
-			{
 			g_u8RecDataptr=0;
 			tmr0sec=0;
 			memset(g_u8RecData,0,RXBUFSIZE);
@@ -954,7 +887,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 				r3 = strstr(g_u8RecData, tcpresponse3);
 					
 			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 //!(r1 || r2 || r3 ||
-clear();
+    clear();
 
 				tmr0sec=0;
 				if(r1)
@@ -968,14 +901,11 @@ clear();
 						memset(g_u8RecData,0,RXBUFSIZE);
 						clear();
 //						printf(tcpdata);
-						if(timesptr == (times-1))
-						{
-							tdpend = tcpdatalength%600;
-						}
-						for(tdp=0;tdp<tdpend;tdp++)
-						{
+
+						for(tdp=0;tdp<tcpdatalength;tdp++){
 						SendChar(tcpdata[tcpdataptr]);
-						tcpdataptr++;}
+						tcpdataptr++;
+            }
 						printf("%c",0x1A);
 						do{
 							r1 = strstr(g_u8RecData, tcpresponse1);
@@ -990,13 +920,12 @@ clear();
 			if(!(r3))
 			{
 				network=1;
-				break;
 			}
 			else
 			{
 				network=0;
 			}
-		}
+		
 
    
 	if(network == 0 && timesptr>=times)
@@ -1027,12 +956,12 @@ osDelay(5);
 void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
 
+
+	osMutexWait(uart_mutex_id, osWaitForever);
   SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "OK" , "ERROR",5);	
 
 	PB2=0;
-	osDelay(100);
-	osMutexWait(uart_mutex_id, osWaitForever);
-  
+	osDelay(100);  
 	tmr0sec=0;
 	r1=0;
 	r2=0;
@@ -1089,10 +1018,10 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		strcat(g_u8SendData,",");
 		strcat(g_u8SendData,temp);
 		memset(temp,0,100);
-		sprintf(temp,",F=%.1f",u32ADC0Result);
+		sprintf(temp,",F=%.1f,I=%d,AC=%d",u32ADC0Result,motion,motion);
 		strcat(g_u8SendData,temp);
 		memset(temp,0,100);
-		sprintf(temp,",~`,LIFE=%d\n",life);
+		sprintf(temp,",~`,%d\n",life);
 		strcat(g_u8SendData,temp);
   }
   if((strlen(g_u8SendData) > 2900))
@@ -1169,7 +1098,7 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 		sprintf(temp,",F=%.1f",u32ADC0Result);
 		strcat(g_u8SendData,temp);
 		memset(temp,0,100);
-		sprintf(temp,",LIFE=%d\n",life);
+		sprintf(temp,",%d\n",life);
 		strcat(g_u8SendData,temp);
   }
   if((strlen(g_u8SendData) > 2900))

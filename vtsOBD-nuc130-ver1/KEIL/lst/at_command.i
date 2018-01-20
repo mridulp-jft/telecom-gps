@@ -24251,12 +24251,21 @@ extern char g_u8SendData[3500];
 extern char g_u8RecData[500];
 extern	int32_t life;
 extern void SendChar(int ch);
+extern void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+
  
+extern char obdresp[20];
+extern char tempobdresp[20];
+extern char obdrespbinary[33];
+extern char suppportedpid[100][7];
+extern int pidcounter;
+extern char g_u8OBDRecData[100];
 
 
 
  
 int32_t	inc=0;
+int stlen;
 uint8_t u8InChar=0xFF;
 int32_t g_u8RecDataptr=0;
 float	u32ADC0Result;
@@ -24276,19 +24285,22 @@ int seeker = 0;
 int imeiptr0=0;
 char imei[25];
 int imeiptr=0;
-
+	int tcpdatalength=0;
+	int32_t tcpdataptr=0;
+	int times = 0;
+	int timesptr=0;
+	int tdp=0;
+  int read_obd = 0 ;
+	int tdpend=300;
  
 
-
-
-uint32_t os_mutex_cb_uart_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_uart_mutex = { (os_mutex_cb_uart_mutex) };		
-osMutexId	(uart_mutex_id); 
+extern osMutexId	(uart_mutex_id); 
 		
-uint32_t os_mutex_cb_tcp_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_tcp_mutex = { (os_mutex_cb_tcp_mutex) };		
-osMutexId	(tcp_mutex_id); 
 
-uint32_t os_mutex_cb_fs_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_fs_mutex = { (os_mutex_cb_fs_mutex) };		
-osMutexId	(fs_mutex_id); 
+extern osMutexId	(tcp_mutex_id); 
+
+
+extern osMutexId	(fs_mutex_id); 
 
 
 
@@ -24317,11 +24329,14 @@ void Send_FS(void);
 
  
 
+
+
 void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
-	static int attry;
-	osDelay(100);
-	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+  static int attry;
+  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
+	
+
 	tmr0sec=0;
 
 	r1=0;
@@ -24339,26 +24354,27 @@ void SendAT(char * command, char * response1, char * response2, char * response3
 		r3 = strstr(g_u8RecData, response3);
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
 
-	 if(!(strstr(command, "QILOCIP") || strstr(command, "QGNSSC")))
-	 {
-		 if(!(r1 || r2 || r3))
-			{
-				(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((13)<<2))))=1;
-				attry++;
-				if(attry > 3){
-					printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
-					manualdelay(100);
-					fileclose();
-					fileopen();
-					SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR", "7103", 10);
-				}
-				(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((13)<<2))))=0;
-			}
-			else{attry=0;}
-	 }
-	
-	osMutexRelease(uart_mutex_id);
-osDelay(10);
+   if(!(strstr(command, "QILOCIP") || strstr(command, "QGNSSC")))
+   {
+     if(!(r1 || r2 || r3))
+      {
+        (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((13)<<2))))=1;
+        attry++;
+        if(attry > 3){
+
+            printf("\r\nAT+CFUN=1,1\r\n");	
+
+
+
+        }
+        (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((13)<<2))))=0;
+      }
+      else{attry=0;}
+   }
+  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
+
+   
+
 }
 
 __inline void manualdelay(int delayms)
@@ -24372,7 +24388,15 @@ __inline void manualdelay(int delayms)
 		}
 	}
 }
-
+char mystrstr(char* str1, char character)
+{int sz,cn;
+  sz=strlen(str1);
+	for(cn=0;cn<=sz;cn++)
+	{if(str1[cn] == character)
+		{return 1;}
+	}
+	return 0;
+}
 __inline void fileopen(void)
 {
   if(strlen(fileinstance) == 0)
@@ -24403,9 +24427,10 @@ __inline void remove_all_chars(char* str, char c, char d) {
 }
 
 
-
-__inline void parse_g(char* str, int first, int sec, char f, char s , char *string)
+void parse_g(char* str, int first, int sec, char f, char s , char *string)
 {int sz1,sz2,i11,temp11,j11,l;
+    if(mystrstr(str,f) && mystrstr(str,s))
+    {  
 
 		sz1=	strlen(str);
 		sz2=	strlen(string);
@@ -24438,7 +24463,9 @@ __inline void parse_g(char* str, int first, int sec, char f, char s , char *stri
       string[i11] = str[l+i11+1];
 		}
 	
-}
+
+    }
+  }
 
 
 __inline void fileclose(void)
@@ -24469,9 +24496,9 @@ void Send_FS(void)
 void Save_FS(void)
 {
   int len=0;
- 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+ 	
   fileopen();
-  SendAT("\r\nAT+QFLDS=\"UFS\"\r\n", "Ready", "OK" , "ERROR",50);
+  SendAT("\r\nAT+QFLDS=\"UFS\"\r\n", "Ready", "OK" , "ERROR",3);
 	memset(temp,0,100);
 	sprintf(temp,"\r\nAT+QFSEEK=%s,0,2\r\n",fileinstance);
 	SendAT(temp, "CONNECT", "OK" , "ERROR",10);	  
@@ -24482,7 +24509,7 @@ void Save_FS(void)
   strreplace(g_u8SendData, 0x1A, '\n');  
 	memset(temp,0,100);
 	sprintf(temp,"\r\nAT+QFWRITE=%s,%d,3\r\n",fileinstance,(len));
-	SendAT(temp, "CONNECT", "OK" , "ERROR",10);	
+	SendAT(temp, "CONNECT", "OK" , "ERROR",3);	
   len = strlen(g_u8SendData);
   remove_all_chars(g_u8SendData,'\r',0x1A);
   SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",20);	
@@ -24492,14 +24519,15 @@ void Save_FS(void)
   }
  
   fileclose();
-	osMutexRelease(uart_mutex_id);
+	
 }
 
  void cpinquerry()
 {
   int timeout;
-	osDelay(100);  
-  osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
+	
+  
 	tmr0sec=0;
 	timeout =5;
 	r1=0;
@@ -24516,6 +24544,7 @@ void Save_FS(void)
 		r3 = strstr(g_u8RecData, "ERROR");
 			
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
  clear();
  
   if(r1)
@@ -24527,7 +24556,7 @@ void Save_FS(void)
     cpinready=0;
   }
 
-osMutexRelease(uart_mutex_id);
+
 
 }
 
@@ -24535,8 +24564,9 @@ void cregquerry()
 {
   int timeout;
   char cregresp[10];
-	osDelay(100); 
-  osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
+	
+  
 	tmr0sec=0;
 	timeout =5;
 	r1=0;
@@ -24554,6 +24584,7 @@ void cregquerry()
 			
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
 clear();
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
   memset(cregresp,0,10);
   parse_g(g_u8RecData, 1, 2, ',', '\n' , cregresp);
   if(strstr(cregresp,"1") || strstr(cregresp, "5"))
@@ -24566,8 +24597,8 @@ clear();
   }
   
   
-  osMutexRelease(uart_mutex_id);
-  osDelay(5);
+  
+  
  
 }
 
@@ -24576,10 +24607,10 @@ clear();
 
 void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
-	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	tmr0sec=0;
 
-	osDelay(100);
+  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
+	
 	r1=0;
 	r2=0;
 	r3=0;
@@ -24609,8 +24640,8 @@ clear();
       }
    }
   
-  osMutexRelease(uart_mutex_id);
-osDelay(10);
+  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
+
 }
 
 __inline void strreplace(char s[], char chr, char repl_chr)
@@ -24667,9 +24698,10 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
   char tcpdata[600];
   int  cc =0;
   breaker = 0;
-	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
-
- 	osDelay(500);
+	
+	
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
+ 	
 	printf("%c",0x1A);
 	tmr0sec=0;
 	tcptimeout =5;
@@ -24743,7 +24775,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 				r3 = strstr(g_u8RecData, tcpresponse3);
 					
 			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
-    clear();
+clear();
 				tmr0sec=0;
 				if(r1)
 					{
@@ -24806,51 +24838,47 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
   SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);    
 
   }
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
 	r1=0;
 	r2=0;
 	r3=0;
+	
+	
 
-	osMutexRelease(uart_mutex_id);
 
-osDelay(10);
 
 }
 
 void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout)
 {
-	int tcpdatalength=0;
-	int tcpdataptr=0;
-	int times = 0;
-	int timesptr=0;
-	int tdp=0;
-	int tdpend=600;
-	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 
- 	osDelay(100);
+	
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
+ 	
 
 	tmr0sec=0;
 	tcptimeout =5;
 	r1=0;
 	r2=0;
 	r3=0;
-
- 
+  tcpdataptr = 0;
+  
 
 	g_u8RecDataptr=0;
 	printf("%c",0x1A);
-	tcpdatalength = strlen(tcpdata);
-	if(tcpdatalength%600 == 0)
+	tcpdatalength = strlen(g_u8SendData);
+	if(tcpdatalength%300 == 0)
 	{
-		times = (tcpdatalength/600);
+		times = (tcpdatalength/300);
 	}
 	else
 		{
-			times = (tcpdatalength/600)+1;
+			times = (tcpdatalength/300)+1;
 		}
 		if(tcpdatalength>15)
 		{
 			clear();
-			for(timesptr = 0; timesptr < times ; timesptr++)
+			for(timesptr = 0; timesptr <times  ; timesptr++)
 			{
 			g_u8RecDataptr=0;
 			tmr0sec=0;
@@ -24862,7 +24890,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 				r3 = strstr(g_u8RecData, tcpresponse3);
 					
 			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
-clear();
+      clear();
 
 				tmr0sec=0;
 				if(r1)
@@ -24876,17 +24904,20 @@ clear();
 						memset(g_u8RecData,0,500);
 						clear();
 
+            
 						if(timesptr == (times-1))
 						{
-							tdpend = tcpdatalength%600;
-						}
+							tdpend = tcpdatalength%300;
+						}else{
+              tdpend = 300;
+            }
 						for(tdp=0;tdp<tdpend;tdp++)
 						{
-						SendChar(tcpdata[tcpdataptr]);
+						SendChar(g_u8SendData[tcpdataptr]);
 						tcpdataptr++;}
 						printf("%c",0x1A);
 						do{
-							r1 = strstr(g_u8RecData, tcpresponse1);
+							r1 = strstr(g_u8RecData, tcpresponse2);
 							r2 = strstr(g_u8RecData, tcpresponse2);
 							r3 = strstr(g_u8RecData, tcpresponse3);
 						}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));
@@ -24911,19 +24942,20 @@ clear();
 	{
 		memset(g_u8SendData,0,3500);
     Send_FS();
-      sendfs=1;
+    sendfs=1;
  	}
   else{
+		memset(g_u8SendData,0,3500);
     sendfs=0;
   }
 		
 	}
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
 
 
 
-osMutexRelease(uart_mutex_id);    
 
-osDelay(5);
+
 
 }
 
@@ -24931,12 +24963,11 @@ osDelay(5);
 
 void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
-
+ 	
   SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "OK" , "ERROR",5);	
 
-	osDelay(100);
-	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
-  
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
+	
 	tmr0sec=0;
 	r1=0;
 	r2=0;
@@ -24945,7 +24976,7 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 	memset(g_u8RecData,0,500);
 
 	clear();
-	if(checkallnumsinstring(imei) ||  (strlen(imei) < 5))
+	if(checkallnumsinstring(imei) ||  (strlen(imei) < 5)||  (strlen(imei) > 16))
 	{
 		printf("\r\n\r\nAT+GSN\r\n\r\n");
 		do{
@@ -24983,11 +25014,11 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
   clear();
 	if(strstr(g_u8RecData,"GNRMC"))
 	{
+    memset(g_u8SendData,0,3500);
     u32ADC0Result = 3;
     ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADCR |= (1ul << 11));
     u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(0)] & (0xFFFFul << 0));
     u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
-    
 		memset(temp,0,100);
 		parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
 		strcat(g_u8SendData,imei);
@@ -24996,26 +25027,30 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		memset(temp,0,100);
 		sprintf(temp,",F=%.1f",u32ADC0Result);
 		strcat(g_u8SendData,temp);
-				memset(temp,0,100);
-		sprintf(temp,",LIFE=%d\n",life);
-		strcat(g_u8SendData,temp);
   }
+  stlen = strlen(g_u8SendData);
   if((strlen(g_u8SendData) > 2900))
   {
     memset(g_u8SendData,0,3500);
     strcat(g_u8SendData,imei);
     strcat(g_u8SendData,"error:RAMfull\n");
   }
-  
 
-	osMutexRelease(uart_mutex_id);
-	osDelay(5);
+	  
+  
+  
+  
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
+
+	
+	
 }
 
 void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
 
-	osDelay(500);
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
+	
 	tmr0sec=0;
 	r1=0;
 	r2=0;
@@ -25083,6 +25118,7 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
     strcat(g_u8SendData,imei);
     strcat(g_u8SendData,"error:RAMfull\n");
   }
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
 
 
 

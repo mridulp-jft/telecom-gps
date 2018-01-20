@@ -33,5 +33,5 @@
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\obj\main.o: osObjects.h
-.\obj\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC\cmsis_os.h
+.\obj\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

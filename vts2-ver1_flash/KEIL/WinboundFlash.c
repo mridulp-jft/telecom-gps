@@ -319,6 +319,9 @@ void SpiFlash_PageProgram(unsigned char *DataBuffer, unsigned int StartAddress, 
     // configure transaction length as 8 bits
     SPI_FLASH_PORT->CNTRL = (SPI_FLASH_PORT->CNTRL & ~SPI_CNTRL_TX_BIT_LEN_Msk) | (0x08 << SPI_CNTRL_TX_BIT_LEN_Pos);
 
+    // /CS: de-active
+    SPI_FLASH_PORT->SSR = (SPI_FLASH_PORT->SSR & ~SPI_SSR_SSR_Msk); 
+  
     // /CS: active
     SPI_FLASH_PORT->SSR = (SPI_FLASH_PORT->SSR & ~SPI_SSR_SSR_Msk) | 0x1;
 

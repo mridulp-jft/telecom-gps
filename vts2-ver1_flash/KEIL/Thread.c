@@ -45,12 +45,16 @@ osThreadDef (Thread, osPriorityNormal, 1, 2050);                  // thread obje
 osThreadDef (Thread1, osPriorityNormal, 1, 4048);               // thread object
 //extern typedef struct os_mutex_cb fs_mutex_id;
 extern char imei[25];
+ int once = 1;
+ int pt = 0;
+
 int t1=0;
 int t2=0;
 //uint_8t ignstat = 0;
 __inline void strreplace(char s[], char chr, char repl_chr);
 extern char temp[100];
 void Save_FS(void);
+extern int readpt;
 extern __inline void manualdelay(int delayms);
 extern __inline void Send_FS(void);
 extern __inline int count_char(char ch,char* string);
@@ -68,7 +72,6 @@ extern int motion;
 extern char RI;
 extern int imeiptr;
 extern int imeiptr0;
-static int pt=0;
 extern char SrcArray[256];
 extern char DestArray[256];
 void smsrequest(int _case, char* arg1, char* arg2){
@@ -470,32 +473,27 @@ void Save_FS(void)
 {
   int len=0;
  	osMutexWait(uart_mutex_id, osWaitForever);
-  fileopen();
-  SendAT("\r\nAT+QFLDS=\"UFS\"\r\n", "Ready", "OK" , "ERROR",50);
-	memset(temp,0,100);
-	sprintf(temp,"\r\nAT+QFSEEK=%s,0,2\r\n",fileinstance);
-	SendAT(temp, "CONNECT", "OK" , "ERROR",10);	  
-  len = strlen(g_u8SendData);
-  strcat(g_u8SendData,"\n\n\n\n\n");  
-  len = strlen(g_u8SendData);
-//~`
+  if(once){
+    SpiFlash_ChipErase();
+    readpt = 0;
+    manualdelay(500);
+  }once = 0;
+ 
+  strcat(g_u8SendData,"\n");  
   strreplace(g_u8SendData, '~', 'C');  
   strreplace(g_u8SendData, '`', 'H');  
-  strreplace(g_u8SendData, 0x1A, '\n');  
-	memset(temp,0,100);
-	sprintf(temp,"\r\nAT+QFWRITE=%s,%d,3\r\n",fileinstance,(len));
-	SendAT(temp, "CONNECT", "OK" , "ERROR",2);	
-  len = strlen(g_u8SendData);
+  strreplace(g_u8SendData, 0x1A, '\n'); 
   remove_all_chars(g_u8SendData,'\r',0x1A);
-  SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",20);	
-//////////////////////////////////////  
-
-//////////////////////////////  
-   if(strstr(g_u8RecData,"+QFWRITE"))
-  {
-    memset(g_u8SendData,0,TXBUFSIZE);
-  } 
-  fileclose();
+  SpiFlash_WaitReady();
+  memset(SrcArray,0,256);
+  strcat(SrcArray, g_u8SendData);
+  len = strlen(g_u8SendData);  
+  SpiFlash_PageProgram(SrcArray, pt, 256);  
+  memset(g_u8SendData,0,TXBUFSIZE);
+  memset(DestArray,0,256);
+  SpiFlash_WaitReady();
+  SpiFlash_ReadData(DestArray, pt, 256);
+  pt+=256;
 	osMutexRelease(uart_mutex_id);
 }
 
@@ -505,8 +503,8 @@ int Init_Thread (void) {
 
 	tid_Thread = osThreadCreate (osThread(Thread), NULL);
   if (!tid_Thread) return(-1);
-//  tid_Thread1 = osThreadCreate (osThread(Thread1), NULL);
-//  if (!tid_Thread) return(-1);
+  tid_Thread1 = osThreadCreate (osThread(Thread1), NULL);
+  if (!tid_Thread) return(-1);
   
   return(0);
 }
@@ -525,15 +523,18 @@ void Thread (void const *argument)
     if(motion!=0){
 //    SendAT("\r\n\r\nAT+QGNSSRD=\"NMEA/GGA\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
     SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
-    SpiFlash_WaitReady();
-    memset(SrcArray,0,256);
-    strcat(SrcArray, g_u8SendData);
-    SpiFlash_PageProgram(SrcArray, pt, 256);
-    memset(DestArray,256,0);
-    SpiFlash_WaitReady();
+//    SpiFlash_PageProgram(0xFF, pt, 256);
+//    SpiFlash_WaitReady();
+//    memset(SrcArray,0,256);
+//    strcat(SrcArray, g_u8SendData);
+//    SpiFlash_PageProgram(SrcArray, pt, 256);
+//    memset(DestArray,0,256);
+//    SpiFlash_WaitReady();
 
-    SpiFlash_ReadData(DestArray, pt, 256);
-    pt+=256;
+//    SpiFlash_ReadData(DestArray, pt, 256);
+//    pt+=256;
+// 		memset(g_u8SendData,0,TXBUFSIZE);
+  
    }
     else{
     imei_fun();
@@ -541,7 +542,7 @@ void Thread (void const *argument)
 		strcat(g_u8SendData,",");
 		strcat(g_u8SendData,"ALIVE");
 		memset(temp,0,100);
-		sprintf(temp,",F=%.1f",u32ADC0Result);
+		sprintf(temp,",F=%.1f,I=%d,AC=%d",u32ADC0Result,motion,motion);
 		strcat(g_u8SendData,temp);
 		memset(temp,0,100);
 		sprintf(temp,",~`,LIFE=%d\n",life);
@@ -604,13 +605,14 @@ void Thread1 (void const *argument)
     }
 		else
 		{
-      if(life > 1800){
-        printf("\r\nAT+CFUN=1,1\r\n\r\n");
-        SYS_UnlockReg();
-        SYS->IPRSTC1 = SYS_IPRSTC1_CHIP_RST_Msk;
-      }
-      osDelay(32000);                                         // suspend thread
+//      if(life > 1800){
+//        printf("\r\nAT+CFUN=1,1\r\n\r\n");
+//        SYS_UnlockReg();
+//        SYS->IPRSTC1 = SYS_IPRSTC1_CHIP_RST_Msk;
+//      }
+                                       // suspend thread
 		}
+  osDelay(500);  
   }
 }
 

@@ -500,202 +500,203 @@ ARM Macro Assembler    Page 8
   265 00000002         ; Unlock Register                
   266 00000002 490E            LDR              R1, =0x59
   267 00000004 6001            STR              R1, [R0]
-  268 00000006 490E            LDR              R1, =0x16
-  269 00000008 6001            STR              R1, [R0]
-  270 0000000A 490E            LDR              R1, =0x88
-  271 0000000C 6001            STR              R1, [R0]
-  272 0000000E         
-  273 0000000E         ; Init POR
-  274 0000000E 4A0E            LDR              R2, =0x50000024
-  275 00000010 490E            LDR              R1, =0x00005AA5
-  276 00000012 6011            STR              R1, [R2]
-  277 00000014         
-  278 00000014         ; Lock register
-  279 00000014 2100            MOVS             R1, #0
-  280 00000016 6001            STR              R1, [R0]
-  281 00000018         
-  282 00000018 480D            LDR              R0, =SystemInit
-  283 0000001A 4780            BLX              R0
-  284 0000001C 480D            LDR              R0, =__main
-  285 0000001E 4700            BX               R0
+  268 00000006         
+  269 00000006 490E            LDR              R1, =0x16
+  270 00000008 6001            STR              R1, [R0]
+  271 0000000A 490E            LDR              R1, =0x88
+  272 0000000C 6001            STR              R1, [R0]
+  273 0000000E         
+  274 0000000E         ; Init POR
+  275 0000000E 4A0E            LDR              R2, =0x50000024
+  276 00000010 490E            LDR              R1, =0x00005AA5
+  277 00000012 6011            STR              R1, [R2]
+  278 00000014         
+  279 00000014         ; Lock register
+  280 00000014 2100            MOVS             R1, #0
+  281 00000016 6001            STR              R1, [R0]
+  282 00000018         
+  283 00000018 480D            LDR              R0, =SystemInit
+  284 0000001A 4780            BLX              R0
+  285 0000001C 480D            LDR              R0, =__main
 
 
 
 ARM Macro Assembler    Page 9 
 
 
-  286 00000020                 ENDP
-  287 00000020         
+  286 0000001E 4700            BX               R0
+  287 00000020                 ENDP
   288 00000020         
-  289 00000020         ; Dummy Exception Handlers (infinite loops which can be 
+  289 00000020         
+  290 00000020         ; Dummy Exception Handlers (infinite loops which can be 
                        modified)                
-  290 00000020         
-  291 00000020         NMI_Handler
+  291 00000020         
+  292 00000020         NMI_Handler
                                PROC
-  292 00000020                 EXPORT           NMI_Handler               [WEAK
+  293 00000020                 EXPORT           NMI_Handler               [WEAK
 ]
-  293 00000020 E7FE            B                .
-  294 00000022                 ENDP
-  296 00000022         HardFault_Handler
+  294 00000020 E7FE            B                .
+  295 00000022                 ENDP
+  297 00000022         HardFault_Handler
                                PROC
-  297 00000022                 EXPORT           HardFault_Handler         [WEAK
+  298 00000022                 EXPORT           HardFault_Handler         [WEAK
 ]
-  298 00000022 E7FE            B                .
-  299 00000024                 ENDP
-  300 00000024         SVC_Handler
+  299 00000022 E7FE            B                .
+  300 00000024                 ENDP
+  301 00000024         SVC_Handler
                                PROC
-  301 00000024                 EXPORT           SVC_Handler               [WEAK
+  302 00000024                 EXPORT           SVC_Handler               [WEAK
 ]
-  302 00000024 E7FE            B                .
-  303 00000026                 ENDP
-  304 00000026         PendSV_Handler
+  303 00000024 E7FE            B                .
+  304 00000026                 ENDP
+  305 00000026         PendSV_Handler
                                PROC
-  305 00000026                 EXPORT           PendSV_Handler            [WEAK
+  306 00000026                 EXPORT           PendSV_Handler            [WEAK
 ]
-  306 00000026 E7FE            B                .
-  307 00000028                 ENDP
-  308 00000028         SysTick_Handler
+  307 00000026 E7FE            B                .
+  308 00000028                 ENDP
+  309 00000028         SysTick_Handler
                                PROC
-  309 00000028                 EXPORT           SysTick_Handler           [WEAK
+  310 00000028                 EXPORT           SysTick_Handler           [WEAK
 ]
-  310 00000028 E7FE            B                .
-  311 0000002A                 ENDP
-  312 0000002A         
-  313 0000002A         Default_Handler
+  311 00000028 E7FE            B                .
+  312 0000002A                 ENDP
+  313 0000002A         
+  314 0000002A         Default_Handler
                                PROC
-  314 0000002A         
-  315 0000002A                 EXPORT           BOD_IRQHandler            [WEAK
+  315 0000002A         
+  316 0000002A                 EXPORT           BOD_IRQHandler            [WEAK
 ]
-  316 0000002A                 EXPORT           WDT_IRQHandler            [WEAK
+  317 0000002A                 EXPORT           WDT_IRQHandler            [WEAK
 ]
-  317 0000002A                 EXPORT           EINT0_IRQHandler          [WEAK
+  318 0000002A                 EXPORT           EINT0_IRQHandler          [WEAK
 ]
-  318 0000002A                 EXPORT           EINT1_IRQHandler          [WEAK
+  319 0000002A                 EXPORT           EINT1_IRQHandler          [WEAK
 ]
-  319 0000002A                 EXPORT           GPAB_IRQHandler           [WEAK
+  320 0000002A                 EXPORT           GPAB_IRQHandler           [WEAK
 ]
-  320 0000002A                 EXPORT           GPCDEF_IRQHandler         [WEAK
+  321 0000002A                 EXPORT           GPCDEF_IRQHandler         [WEAK
 ]
-  321 0000002A                 EXPORT           PWMA_IRQHandler           [WEAK
+  322 0000002A                 EXPORT           PWMA_IRQHandler           [WEAK
 ]
-  322 0000002A                 EXPORT           PWMB_IRQHandler           [WEAK
+  323 0000002A                 EXPORT           PWMB_IRQHandler           [WEAK
 ]
-  323 0000002A                 EXPORT           TMR0_IRQHandler           [WEAK
+  324 0000002A                 EXPORT           TMR0_IRQHandler           [WEAK
 ]
-  324 0000002A                 EXPORT           TMR1_IRQHandler           [WEAK
 
 
 
 ARM Macro Assembler    Page 10 
 
 
+  325 0000002A                 EXPORT           TMR1_IRQHandler           [WEAK
 ]
-  325 0000002A                 EXPORT           TMR2_IRQHandler           [WEAK
+  326 0000002A                 EXPORT           TMR2_IRQHandler           [WEAK
 ]
-  326 0000002A                 EXPORT           TMR3_IRQHandler           [WEAK
+  327 0000002A                 EXPORT           TMR3_IRQHandler           [WEAK
 ]
-  327 0000002A                 EXPORT           UART02_IRQHandler         [WEAK
+  328 0000002A                 EXPORT           UART02_IRQHandler         [WEAK
 ]
-  328 0000002A                 EXPORT           UART1_IRQHandler          [WEAK
+  329 0000002A                 EXPORT           UART1_IRQHandler          [WEAK
 ]
-  329 0000002A                 EXPORT           SPI0_IRQHandler           [WEAK
+  330 0000002A                 EXPORT           SPI0_IRQHandler           [WEAK
 ]
-  330 0000002A                 EXPORT           SPI1_IRQHandler           [WEAK
+  331 0000002A                 EXPORT           SPI1_IRQHandler           [WEAK
 ]
-  331 0000002A                 EXPORT           SPI2_IRQHandler           [WEAK
+  332 0000002A                 EXPORT           SPI2_IRQHandler           [WEAK
 ]
-  332 0000002A                 EXPORT           SPI3_IRQHandler           [WEAK
+  333 0000002A                 EXPORT           SPI3_IRQHandler           [WEAK
 ]
-  333 0000002A                 EXPORT           I2C0_IRQHandler           [WEAK
+  334 0000002A                 EXPORT           I2C0_IRQHandler           [WEAK
 ]
-  334 0000002A                 EXPORT           I2C1_IRQHandler           [WEAK
+  335 0000002A                 EXPORT           I2C1_IRQHandler           [WEAK
 ]
-  335 0000002A                 EXPORT           CAN0_IRQHandler           [WEAK
+  336 0000002A                 EXPORT           CAN0_IRQHandler           [WEAK
 ]
-  336 0000002A                 EXPORT           CAN1_IRQHandler           [WEAK
+  337 0000002A                 EXPORT           CAN1_IRQHandler           [WEAK
 ]
-  337 0000002A                 EXPORT           SC012_IRQHandler          [WEAK
+  338 0000002A                 EXPORT           SC012_IRQHandler          [WEAK
 ]
-  338 0000002A                 EXPORT           USBD_IRQHandler           [WEAK
+  339 0000002A                 EXPORT           USBD_IRQHandler           [WEAK
 ]
-  339 0000002A                 EXPORT           PS2_IRQHandler            [WEAK
+  340 0000002A                 EXPORT           PS2_IRQHandler            [WEAK
 ]
-  340 0000002A                 EXPORT           ACMP_IRQHandler           [WEAK
+  341 0000002A                 EXPORT           ACMP_IRQHandler           [WEAK
 ]
-  341 0000002A                 EXPORT           PDMA_IRQHandler           [WEAK
+  342 0000002A                 EXPORT           PDMA_IRQHandler           [WEAK
 ]
-  342 0000002A                 EXPORT           I2S_IRQHandler            [WEAK
+  343 0000002A                 EXPORT           I2S_IRQHandler            [WEAK
 ]
-  343 0000002A                 EXPORT           PWRWU_IRQHandler          [WEAK
+  344 0000002A                 EXPORT           PWRWU_IRQHandler          [WEAK
 ]
-  344 0000002A                 EXPORT           ADC_IRQHandler            [WEAK
+  345 0000002A                 EXPORT           ADC_IRQHandler            [WEAK
 ]
-  345 0000002A                 EXPORT           RTC_IRQHandler            [WEAK
+  346 0000002A                 EXPORT           RTC_IRQHandler            [WEAK
 ]
-  346 0000002A         
-  347 0000002A         BOD_IRQHandler
-  348 0000002A         WDT_IRQHandler
-  349 0000002A         EINT0_IRQHandler
-  350 0000002A         EINT1_IRQHandler
-  351 0000002A         GPAB_IRQHandler
-  352 0000002A         GPCDEF_IRQHandler
-  353 0000002A         PWMA_IRQHandler
-  354 0000002A         PWMB_IRQHandler
-  355 0000002A         TMR0_IRQHandler
-  356 0000002A         TMR1_IRQHandler
-  357 0000002A         TMR2_IRQHandler
-  358 0000002A         TMR3_IRQHandler
-  359 0000002A         UART02_IRQHandler
-  360 0000002A         UART1_IRQHandler
-  361 0000002A         SPI0_IRQHandler
+  347 0000002A         
+  348 0000002A         BOD_IRQHandler
+  349 0000002A         WDT_IRQHandler
+  350 0000002A         EINT0_IRQHandler
+  351 0000002A         EINT1_IRQHandler
+  352 0000002A         GPAB_IRQHandler
+  353 0000002A         GPCDEF_IRQHandler
+  354 0000002A         PWMA_IRQHandler
+  355 0000002A         PWMB_IRQHandler
+  356 0000002A         TMR0_IRQHandler
+  357 0000002A         TMR1_IRQHandler
+  358 0000002A         TMR2_IRQHandler
+  359 0000002A         TMR3_IRQHandler
+  360 0000002A         UART02_IRQHandler
+  361 0000002A         UART1_IRQHandler
 
 
 
 ARM Macro Assembler    Page 11 
 
 
-  362 0000002A         SPI1_IRQHandler
-  363 0000002A         SPI2_IRQHandler
-  364 0000002A         SPI3_IRQHandler
-  365 0000002A         I2C0_IRQHandler
-  366 0000002A         I2C1_IRQHandler
-  367 0000002A         CAN0_IRQHandler
-  368 0000002A         CAN1_IRQHandler
-  369 0000002A         SC012_IRQHandler
-  370 0000002A         USBD_IRQHandler
-  371 0000002A         PS2_IRQHandler
-  372 0000002A         ACMP_IRQHandler
-  373 0000002A         PDMA_IRQHandler
-  374 0000002A         I2S_IRQHandler
-  375 0000002A         PWRWU_IRQHandler
-  376 0000002A         ADC_IRQHandler
-  377 0000002A         RTC_IRQHandler
-  378 0000002A E7FE            B                .
-  379 0000002C                 ENDP
-  380 0000002C         
+  362 0000002A         SPI0_IRQHandler
+  363 0000002A         SPI1_IRQHandler
+  364 0000002A         SPI2_IRQHandler
+  365 0000002A         SPI3_IRQHandler
+  366 0000002A         I2C0_IRQHandler
+  367 0000002A         I2C1_IRQHandler
+  368 0000002A         CAN0_IRQHandler
+  369 0000002A         CAN1_IRQHandler
+  370 0000002A         SC012_IRQHandler
+  371 0000002A         USBD_IRQHandler
+  372 0000002A         PS2_IRQHandler
+  373 0000002A         ACMP_IRQHandler
+  374 0000002A         PDMA_IRQHandler
+  375 0000002A         I2S_IRQHandler
+  376 0000002A         PWRWU_IRQHandler
+  377 0000002A         ADC_IRQHandler
+  378 0000002A         RTC_IRQHandler
+  379 0000002A E7FE            B                .
+  380 0000002C                 ENDP
   381 0000002C         
-  382 0000002C                 ALIGN
-  383 0000002C         
+  382 0000002C         
+  383 0000002C                 ALIGN
   384 0000002C         
-  385 0000002C         ; User Initial Stack & Heap
-  386 0000002C         
-  387 0000002C                 IF               :DEF:__MICROLIB
-  394 0000002C         
-  395 0000002C                 IMPORT           __use_two_region_memory
-  396 0000002C                 EXPORT           __user_initial_stackheap
-  397 0000002C         __user_initial_stackheap
-  398 0000002C         
-  399 0000002C 480A            LDR              R0, =  Heap_Mem
-  400 0000002E 490B            LDR              R1, = (Stack_Mem + Stack_Size)
-  401 00000030 4A09            LDR              R2, = (Heap_Mem +  Heap_Size)
-  402 00000032 4B0B            LDR              R3, = Stack_Mem
-  403 00000034 4770            BX               LR
-  404 00000036         
-  405 00000036 00 00           ALIGN
-  406 00000038         
-  407 00000038                 ENDIF
-  408 00000038         
-  409 00000038                 END
+  385 0000002C         
+  386 0000002C         ; User Initial Stack & Heap
+  387 0000002C         
+  388 0000002C                 IF               :DEF:__MICROLIB
+  395 0000002C         
+  396 0000002C                 IMPORT           __use_two_region_memory
+  397 0000002C                 EXPORT           __user_initial_stackheap
+  398 0000002C         __user_initial_stackheap
+  399 0000002C         
+  400 0000002C 480A            LDR              R0, =  Heap_Mem
+  401 0000002E 490B            LDR              R1, = (Stack_Mem + Stack_Size)
+  402 00000030 4A09            LDR              R2, = (Heap_Mem +  Heap_Size)
+  403 00000032 4B0B            LDR              R3, = Stack_Mem
+  404 00000034 4770            BX               LR
+  405 00000036         
+  406 00000036 00 00           ALIGN
+  407 00000038         
+  408 00000038                 ENDIF
+  409 00000038         
+  410 00000038                 END
               50000100 
               00000059 
               00000016 
@@ -712,13 +713,13 @@ nterwork --depend=.\obj\startup_nuc100series.d -o.\obj\startup_nuc100series.o -
 I.\RTE\_UART_TxRx_Function -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include 
 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\INC -IC:\Keil_v5\ARM\PACK\
 Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver -IC:\Keil_v5\ARM\PACK\Nuvoton\Nu
-Micro_DFP\1.1.0\Device\NUC100\Include --predefine="__RTX SETA 1" --predefine="_
 
 
 
 ARM Macro Assembler    Page 12 
 
 
+Micro_DFP\1.1.0\Device\NUC100\Include --predefine="__RTX SETA 1" --predefine="_
 _UVISION_VERSION SETA 524" --predefine="_RTE_ SETA 1" --list=.\lst\startup_nuc1
 00series.lst RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
@@ -741,8 +742,8 @@ Symbol: Stack_Mem
    Definitions
       At line 167 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
-      At line 400 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 402 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 401 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 403 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 __initial_sp 00000400
 
@@ -773,8 +774,8 @@ Symbol: Heap_Mem
    Definitions
       At line 181 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
-      At line 399 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 401 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 400 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 402 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 __heap_base 00000000
 
@@ -834,52 +835,52 @@ ACMP_IRQHandler 0000002A
 
 Symbol: ACMP_IRQHandler
    Definitions
-      At line 372 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 373 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 237 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 340 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 341 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 ADC_IRQHandler 0000002A
 
 Symbol: ADC_IRQHandler
    Definitions
-      At line 376 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 377 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 241 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 344 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 345 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 BOD_IRQHandler 0000002A
 
 Symbol: BOD_IRQHandler
    Definitions
-      At line 347 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 348 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 212 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 315 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 316 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 CAN0_IRQHandler 0000002A
 
 Symbol: CAN0_IRQHandler
    Definitions
-      At line 367 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 368 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 232 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 335 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 336 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 CAN1_IRQHandler 0000002A
 
 Symbol: CAN1_IRQHandler
    Definitions
-      At line 368 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 369 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 233 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 336 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 337 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 Default_Handler 0000002A
 
 Symbol: Default_Handler
    Definitions
-      At line 313 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 314 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
 
 
@@ -893,55 +894,55 @@ EINT0_IRQHandler 0000002A
 
 Symbol: EINT0_IRQHandler
    Definitions
-      At line 349 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 350 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 214 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 317 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 318 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 EINT1_IRQHandler 0000002A
 
 Symbol: EINT1_IRQHandler
    Definitions
-      At line 350 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 351 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 215 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 318 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 319 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 GPAB_IRQHandler 0000002A
 
 Symbol: GPAB_IRQHandler
    Definitions
-      At line 351 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 352 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 216 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 319 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 320 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 GPCDEF_IRQHandler 0000002A
 
 Symbol: GPCDEF_IRQHandler
    Definitions
-      At line 352 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 353 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 217 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 320 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 321 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 HardFault_Handler 00000022
 
 Symbol: HardFault_Handler
    Definitions
-      At line 296 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 297 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 196 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 297 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 298 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 I2C0_IRQHandler 0000002A
 
 Symbol: I2C0_IRQHandler
    Definitions
-      At line 365 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 366 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 230 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 333 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 334 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 I2C1_IRQHandler 0000002A
 
@@ -953,64 +954,64 @@ ARM Macro Assembler    Page 3 Alphabetic symbol ordering
 Relocatable symbols
 
    Definitions
-      At line 366 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 367 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 231 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 334 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 335 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 I2S_IRQHandler 0000002A
 
 Symbol: I2S_IRQHandler
    Definitions
-      At line 374 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 375 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 239 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 342 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 343 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 NMI_Handler 00000020
 
 Symbol: NMI_Handler
    Definitions
-      At line 291 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 292 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 195 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 292 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 293 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 PDMA_IRQHandler 0000002A
 
 Symbol: PDMA_IRQHandler
    Definitions
-      At line 373 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 374 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 238 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 341 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 342 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 PS2_IRQHandler 0000002A
 
 Symbol: PS2_IRQHandler
    Definitions
-      At line 371 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 372 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 236 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 339 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 340 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 PWMA_IRQHandler 0000002A
 
 Symbol: PWMA_IRQHandler
    Definitions
-      At line 353 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 354 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 218 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 321 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 322 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 PWMB_IRQHandler 0000002A
 
 Symbol: PWMB_IRQHandler
    Definitions
-      At line 354 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 355 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 219 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 322 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 323 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 
 
@@ -1022,28 +1023,28 @@ PWRWU_IRQHandler 0000002A
 
 Symbol: PWRWU_IRQHandler
    Definitions
-      At line 375 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 376 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 240 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 343 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 344 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 PendSV_Handler 00000026
 
 Symbol: PendSV_Handler
    Definitions
-      At line 304 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 305 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 207 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 305 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 306 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 RTC_IRQHandler 0000002A
 
 Symbol: RTC_IRQHandler
    Definitions
-      At line 377 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 378 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 243 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 345 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 346 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 Reset_Handler 00000000
 
@@ -1058,19 +1059,19 @@ SC012_IRQHandler 0000002A
 
 Symbol: SC012_IRQHandler
    Definitions
-      At line 369 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 370 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 234 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 337 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 338 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 SPI0_IRQHandler 0000002A
 
 Symbol: SPI0_IRQHandler
    Definitions
-      At line 361 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 362 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 226 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 329 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 330 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 SPI1_IRQHandler 0000002A
 
@@ -1082,64 +1083,64 @@ Symbol: SPI1_IRQHandler
 ARM Macro Assembler    Page 5 Alphabetic symbol ordering
 Relocatable symbols
 
-      At line 362 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 363 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 227 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 330 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 331 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 SPI2_IRQHandler 0000002A
 
 Symbol: SPI2_IRQHandler
    Definitions
-      At line 363 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 364 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 228 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 331 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 332 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 SPI3_IRQHandler 0000002A
 
 Symbol: SPI3_IRQHandler
    Definitions
-      At line 364 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 365 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 229 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 332 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 333 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 SVC_Handler 00000024
 
 Symbol: SVC_Handler
    Definitions
-      At line 300 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 301 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 204 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 301 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 302 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 SysTick_Handler 00000028
 
 Symbol: SysTick_Handler
    Definitions
-      At line 308 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 309 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 208 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 309 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 310 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 TMR0_IRQHandler 0000002A
 
 Symbol: TMR0_IRQHandler
    Definitions
-      At line 355 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 356 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 220 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 323 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 324 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 TMR1_IRQHandler 0000002A
 
 Symbol: TMR1_IRQHandler
    Definitions
-      At line 356 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 357 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 221 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 324 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 325 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 
 
@@ -1151,61 +1152,61 @@ TMR2_IRQHandler 0000002A
 
 Symbol: TMR2_IRQHandler
    Definitions
-      At line 357 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 358 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 222 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 325 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 326 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 TMR3_IRQHandler 0000002A
 
 Symbol: TMR3_IRQHandler
    Definitions
-      At line 358 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 359 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 223 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 326 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 327 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 UART02_IRQHandler 0000002A
 
 Symbol: UART02_IRQHandler
    Definitions
-      At line 359 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 360 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 224 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 327 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 328 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 UART1_IRQHandler 0000002A
 
 Symbol: UART1_IRQHandler
    Definitions
-      At line 360 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 361 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 225 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 328 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 329 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 USBD_IRQHandler 0000002A
 
 Symbol: USBD_IRQHandler
    Definitions
-      At line 370 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 371 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 235 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 338 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 339 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 WDT_IRQHandler 0000002A
 
 Symbol: WDT_IRQHandler
    Definitions
-      At line 348 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 349 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 213 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 316 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 317 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 __user_initial_stackheap 0000002C
 
 Symbol: __user_initial_stackheap
    Definitions
-      At line 397 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 398 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 
 
@@ -1213,7 +1214,7 @@ ARM Macro Assembler    Page 7 Alphabetic symbol ordering
 Relocatable symbols
 
    Uses
-      At line 396 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 397 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 Comment: __user_initial_stackheap used once
 40 symbols
 
@@ -1641,7 +1642,7 @@ Symbol: Heap_Size
       At line 176 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 181 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 401 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 402 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 INT_BA_base 50000300
 
@@ -1968,7 +1969,7 @@ Symbol: Stack_Size
       At line 163 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 167 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 400 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 401 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 TEST_S 00000030
 
@@ -2131,7 +2132,7 @@ Symbol: SystemInit
    Definitions
       At line 261 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
-      At line 282 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 283 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 Comment: SystemInit used once
 __main 00000000
 
@@ -2139,13 +2140,13 @@ Symbol: __main
    Definitions
       At line 262 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
-      At line 284 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 285 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 Comment: __main used once
 __use_two_region_memory 00000000
 
 Symbol: __use_two_region_memory
    Definitions
-      At line 395 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 396 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       None
 Comment: __use_two_region_memory unused

@@ -1,5 +1,5 @@
 .\obj\rtx_conf_cm.o: RTE\CMSIS\RTX_Conf_CM.c
-.\obj\rtx_conf_cm.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC\cmsis_os.h
+.\obj\rtx_conf_cm.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\obj\rtx_conf_cm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\rtx_conf_cm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\rtx_conf_cm.o: ..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h
@@ -30,4 +30,4 @@
 .\obj\rtx_conf_cm.o: ..\..\Library\StdDriver\inc\wwdt.h
 .\obj\rtx_conf_cm.o: ..\..\Library\StdDriver\inc\i2s.h
 .\obj\rtx_conf_cm.o: ..\..\Library\StdDriver\inc\lcd.h
-.\obj\rtx_conf_cm.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC\RTX_CM_lib.h
+.\obj\rtx_conf_cm.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\INC\RTX_CM_lib.h

@@ -20045,7 +20045,8 @@ void stackDump(uint32_t stack[])
 
 void Hard_Fault_Handler(void)
 {     
-    printf("In Hard Fault Handler\n");
+
+  printf("In Hard Fault Handler\n");
 
     
 		SYS_UnlockReg();
@@ -20055,9 +20056,9 @@ void Hard_Fault_Handler(void)
 }
 
 
-#line 244 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 245 "..\\..\\Library\\StdDriver\\src\\retarget.c"
 
-#line 276 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 277 "..\\..\\Library\\StdDriver\\src\\retarget.c"
 
 
 
@@ -20117,7 +20118,7 @@ void SendChar_ToUART(int ch)
 
 void SendChar(int ch)
 {
-#line 354 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 355 "..\\..\\Library\\StdDriver\\src\\retarget.c"
     SendChar_ToUART(ch);
 
 }
@@ -20132,7 +20133,7 @@ void SendChar(int ch)
 
 char GetChar(void)
 {
-#line 386 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 387 "..\\..\\Library\\StdDriver\\src\\retarget.c"
     while (1) {
         if(!(((UART_T *) (((uint32_t)0x40000000) + 0x50000))->FSR & (0x1ul << (1)))) {
             return (((UART_T *) (((uint32_t)0x40000000) + 0x50000))->RBR);
@@ -20204,7 +20205,7 @@ int ferror(FILE *f)
     return (-1);
 }
 
-#line 486 "..\\..\\Library\\StdDriver\\src\\retarget.c"
+#line 487 "..\\..\\Library\\StdDriver\\src\\retarget.c"
  
 
 __inline void SendChar_To_UART1(int ch)

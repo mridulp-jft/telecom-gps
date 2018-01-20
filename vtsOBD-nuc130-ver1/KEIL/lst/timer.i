@@ -22152,7 +22152,7 @@ static void Timer2_Callback (void const *arg)
 	tmr0sec++;
   tmr1sec++;
 
-	batteryind();
+
   i2ctimeout++;
   (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((13)<<2)))) ^= 1;
 	life++;
@@ -22198,22 +22198,22 @@ __inline void batteryind (void)
   time++;
   if(time == 1)
   {  
-		(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((3)<<2))))=0;
-		(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((4)<<2))))=0;
-		(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((5)<<2))))=0;
-		(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((6)<<2))))=0;
+
+
+
+
   }
   else
   {
 		if( u32ADC0Result > 4.600 )
 		{      
  
-      (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((3)<<2))))=(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((4)<<2))))=(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((5)<<2))))=(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((6)<<2))))^=1;
+      
 		}
 		else if( u32ADC0Result < 3.25)
 		{
 
-			(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((3)<<2))))^=1;
+		
 			charging = 0;
 
 			
@@ -22221,7 +22221,7 @@ __inline void batteryind (void)
 		else if( u32ADC0Result < 3.50 )
 		{
 
-			(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((3)<<2))))^=1;(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((4)<<2))))^=1;
+		
 			charging = 0;
 
 			
@@ -22229,7 +22229,7 @@ __inline void batteryind (void)
 		else if( u32ADC0Result < 3.75)
 		{
 
-			(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((3)<<2))))^=1;(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((4)<<2))))^=1;(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((5)<<2))))^=1;
+		
 			charging = 0;
 
 			
@@ -22237,7 +22237,7 @@ __inline void batteryind (void)
 		else
 		{
 
-			(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((3)<<2))))^=1;(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((4)<<2))))^=1;(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((5)<<2))))^=1;(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((6)<<2))))^=1;
+		
 			charging = 0;
 			
 		}

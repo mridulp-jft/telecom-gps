@@ -33,16 +33,7 @@
 
  
  
-#line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
+#line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -97,7 +88,7 @@
 
 
 
-#line 72 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 63 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -105,7 +96,7 @@
 
 
 
-#line 90 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 81 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdint.h"
  
@@ -363,7 +354,7 @@ typedef unsigned     long long uintmax_t;
 
 
  
-#line 92 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 83 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stddef.h"
  
 
@@ -441,7 +432,7 @@ typedef unsigned     long long uintmax_t;
 
  
 
-#line 93 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 84 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -630,7 +621,7 @@ uint32_t osKernelSysTick (void);
 
 
 
-#line 289 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 280 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -676,14 +667,14 @@ osPriority osThreadGetPriority (osThreadId thread_id);
 
 osStatus osDelay (uint32_t millisec);
 
-#line 342 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 333 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
 
 
 
-#line 357 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 348 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -744,7 +735,7 @@ __value_in_regs osEvent osSignalWait (int32_t signals, uint32_t millisec);
 
 
 
-#line 425 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 416 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -779,7 +770,7 @@ osStatus osMutexDelete (osMutexId mutex_id);
 
 
 
-#line 467 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 458 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -819,7 +810,7 @@ osStatus osSemaphoreDelete (osSemaphoreId semaphore_id);
 
 
 
-#line 515 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 506 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -858,7 +849,7 @@ osStatus osPoolFree (osPoolId pool_id, void *block);
 
 
 
-#line 562 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 553 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -900,7 +891,7 @@ __value_in_regs osEvent osMessageGet (osMessageQId queue_id, uint32_t millisec);
 
 
 
-#line 614 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+#line 605 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
 
@@ -20049,15 +20040,7 @@ void os_error (uint32_t error_code) {
 
  
  
-#line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
-
-
-
-
-
-
-
-
+#line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
 
 
@@ -20086,7 +20069,7 @@ void os_error (uint32_t error_code) {
 
 
 #pragma O3
-#line 46 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 38 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
 
 
@@ -20099,7 +20082,7 @@ void os_error (uint32_t error_code) {
 
 
 
-#line 119 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 111 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
 
 
@@ -20114,7 +20097,7 @@ void os_error (uint32_t error_code) {
 
 
 
-#line 142 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 134 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
 
 
@@ -20126,7 +20109,7 @@ extern uint32_t const os_rrobin;
 extern uint32_t const os_trv;
 extern uint8_t  const os_flags;
 
-uint16_t const os_maxtaskrun = (4 + 1);
+uint16_t const os_maxtaskrun = (3 + 1);
 uint32_t const os_stackinfo  = (0<<28) | (1<<24) | ((2 + 2)<<16) | (100*4);
 uint32_t const os_rrobin     = (1 << 16) | 5;
 uint32_t const os_tickfreq   = 12000000;
@@ -20148,7 +20131,7 @@ __attribute__((used)) uint32_t const os_timernum  = 0U;
  
 extern
 uint32_t       mp_tcb[];
-uint32_t mp_tcb[(((52)+3)/4)*((4 + 1)) + 3];
+uint32_t mp_tcb[(((52)+3)/4)*((3 + 1)) + 3];
 extern
 uint16_t const mp_tcb_size;
 uint16_t const mp_tcb_size = sizeof(mp_tcb);
@@ -20156,7 +20139,7 @@ uint16_t const mp_tcb_size = sizeof(mp_tcb);
  
 extern
 uint64_t       mp_stk[];
-uint64_t mp_stk[(((100*4)+7)/8)*((4 + 1)-(2 + 2)+1) + 2];
+uint64_t mp_stk[(((100*4)+7)/8)*((3 + 1)-(2 + 2)+1) + 2];
 extern
 uint32_t const mp_stk_size;
 uint32_t const mp_stk_size = sizeof(mp_stk);
@@ -20164,7 +20147,7 @@ uint32_t const mp_stk_size = sizeof(mp_stk);
  
 extern
 uint64_t       os_stack_mem[];
-uint64_t       os_stack_mem[2+(2 + 2)+((4*(1600+450+124))/8)];
+uint64_t       os_stack_mem[2+(2 + 2)+((4*(1650+450+124))/8)];
 extern
 uint32_t const os_stack_sz;
 uint32_t const os_stack_sz = sizeof(os_stack_mem);
@@ -20184,7 +20167,7 @@ uint8_t  const os_fifo_size = 16;
  
 extern
 void *os_active_TCB[];
-void *os_active_TCB[(4 + 1)];
+void *os_active_TCB[(3 + 1)];
 
  
 
@@ -20200,7 +20183,7 @@ uint32_t os_messageQ_q_osTimerMessageQ[4+(4)] = { 0 }; const osMessageQDef_t os_
 extern
 osMessageQId osMessageQId_osTimerMessageQ;
 osMessageQId osMessageQId_osTimerMessageQ;
-#line 241 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 233 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
  
 extern
@@ -20213,14 +20196,14 @@ extern
 uint16_t const mp_tmr_size;
 uint16_t const mp_tmr_size = 0U;
 
-#line 262 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 254 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
 
 
 
  
 
-#line 276 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 268 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
 
 
@@ -20233,14 +20216,14 @@ uint16_t const mp_tmr_size = 0U;
 
  
 
-#line 349 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 341 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
 
 
 
  
 
-#line 408 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 400 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
 
 
@@ -20264,9 +20247,9 @@ void _main_init (void) {
   osKernelStart();
   for (;;);
 }
-#line 451 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 443 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
-#line 568 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.0.1\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
+#line 560 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
 
 
 

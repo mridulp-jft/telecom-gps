@@ -6,7 +6,6 @@
 #include "osObjects.h"											// RTOS object definitions
 #include "uart.h"
 #include "cmsis_os.h"							 // CMSIS RTOS header file
-#include "math.h"
 
 /*	Extern Variables
 *****************************************************************/
@@ -24,10 +23,67 @@ char *obdr3;
 
 /*	Function Declarations
 *****************************************************************/
+__inline void parse_g(char* str, int first, int sec, char f, char s , char *string);
+__inline void remove_all_chars(char* str, char c, char d);
+__inline void hextobinary(char* hex, char* bin);
+__inline int hextodecimal(char *hex);
 void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 void clearuart2(void);
 void obdcommand(char* cmd);
 /****************************************************************/
+
+char obdresp[20];
+char tempobdresp[20];
+char obdrespbinary[33];char suppportedpid[200][7];
+int pidcounter;
+
+
+
+
+void supportedpid(char command[5]){
+	char* lenghtchecker;
+	char commandtemp[3];
+	int supportedfori;int cmd;
+	int  i99, j99, len99,dec99;
+	int dec999 = 0;
+  int c0,c1,c2;
+  char c[2] = 0;
+	//delay(100);
+    send_OBD(command,">","NODATA",">",5);
+		memset(obdresp,0,20);
+		memset(tempobdresp,0,20);
+		memset(commandtemp,0,3);
+		parse_g(g_u8OBDRecData, 1, 2, '\r', '\r' ,tempobdresp);
+		remove_all_chars(tempobdresp,' ','\r');	
+		strcpy(obdresp, &tempobdresp[4]);
+		strcpy(commandtemp, &command[2]);
+		memset(obdrespbinary,0,32);
+		hextobinary( obdresp,  obdrespbinary);
+		strcpy(obdresp, &tempobdresp[4]);	
+    c[0] = command[0];
+    c0 = atoi(c);
+    c[0] = command[1];
+    c1 = atoi(c);
+    c[0] = command[2];
+    c2 = atoi(c);
+  
+		dec999=hextodecimal(commandtemp);					
+		for(supportedfori=0;supportedfori<32;supportedfori++){
+			if(obdrespbinary[supportedfori]=='1' && !strstr(tempobdresp,"NODATA") && !strstr(tempobdresp,"SEARCHING")){
+        if(dec999+supportedfori+1<0x10){
+            sprintf(suppportedpid[pidcounter],"%d%d%d%x\r",c0,c1,c2,dec999+supportedfori+1);
+            pidcounter++;
+        }else{
+              sprintf(suppportedpid[pidcounter],"%d%d%x\r",c0,c1,((c2 * 0x10) + dec999+supportedfori+1));
+              pidcounter++;
+				}
+			}
+	}
+}
+
+
+
+
 
 
 void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout){
@@ -48,7 +104,6 @@ void send_OBD(char * command, char * response1, char * response2, char * respons
 		obdr3 = strstr(g_u8OBDRecData, response3);
 	}while(!(obdr1 || obdr2 || obdr3 ||((tmr1sec >= timeout))));	 //!(r1 || r2 || r3 ||
 
-osDelay(10);
 }
    
 void clearuart2(void){
@@ -65,11 +120,7 @@ void obdcommand(char* cmd)
 
     while(UART2->FSR & UART_FSR_TX_FULL_Msk);
     UART2->DATA = *cmd;
-    if(*cmd == '\n')
-    {
-        while(UART2->FSR & UART_FSR_TX_FULL_Msk);
-        UART2->DATA = '\r';
-    }
+
   *cmd++;
   }
 }
@@ -81,7 +132,7 @@ void obdcommand(char* cmd)
 __inline int hextodecimal(char *hex){
 	
 	 double decimal, place;
-   double val, lentt;
+    double val, lentt;
 
 	int hex2deci;
 	 
@@ -168,8 +219,12 @@ return decimal;
 
 	
 
+
+
+
 __inline void hextobinary(char* hex, char* bin){
-	int cou=0;
+	int cou;
+			cou=0;
 		while(hex[cou]){
          switch(hex[cou]){
              case '0': strcat(bin,"0000"); break;
@@ -194,11 +249,10 @@ __inline void hextobinary(char* hex, char* bin){
              case 'd': strcat(bin,"1101"); break;
              case 'e': strcat(bin,"1110"); break;
              case 'f': strcat(bin,"1111"); break;
-             default:  printf("\nInvalid hexadecimal digit %c ",hex[cou]); 
+             default: ; 
          }
          cou++;
     }
 
+
 }
-
-

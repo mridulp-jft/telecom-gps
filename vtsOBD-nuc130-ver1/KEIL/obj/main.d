@@ -4,6 +4,8 @@
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\main.o: C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Include\NUC100Series.h
 .\obj\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm0.h
 .\obj\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h

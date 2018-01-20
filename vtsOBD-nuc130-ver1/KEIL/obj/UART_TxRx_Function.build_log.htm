@@ -22,49 +22,34 @@ Dialog DLL:      TARMCM1.DLL V1.13.0.0
  
 <h2>Project:</h2>
 E:\BITBUCK_JFT\gpstrackr\vtsOBD-nuc130-ver1\KEIL\UART_TxRx_Function.uvprojx
-Project File Date:  12/14/2017
+Project File Date:  12/19/2017
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'UART_TxRx_Function'
+Build target 'UART_TxRx_Function'
 creating preprocessor file for main.c...
 creating preprocessor file for Thread.c...
 creating preprocessor file for at_command.c...
 compiling main.c...
-compiling Thread.c...
+main.c(231): warning:  #111-D: statement is unreachable
+      memset(suppportedpid, 0, sizeof(char)*200*7);
+main.c(256): warning:  #1-D: last line of file ends without a newline
+  }
+main.c: 2 warnings, 0 errors
 creating preprocessor file for Timer.c...
-compiling at_command.c...
-at_command.c(216): warning:  #550-D: variable "dump"  was set but never used
-  {char dump = 0;
-at_command.c: 1 warning, 0 errors
 creating preprocessor file for obdcommand.c...
 creating preprocessor file for RTX_Conf_CM.c...
-compiling Timer.c...
 creating preprocessor file for clk.c...
-compiling RTX_Conf_CM.c...
-compiling obdcommand.c...
-obdcommand.c(55): warning:  #550-D: variable "dump"  was set but never used
-    char dump;
-obdcommand.c(83): warning:  #550-D: variable "place"  was set but never used
-  	 double decimal, place;
-obdcommand.c: 2 warnings, 0 errors
 creating preprocessor file for gpio.c...
-compiling clk.c...
 creating preprocessor file for retarget.c...
 creating preprocessor file for sys.c...
-compiling gpio.c...
 creating preprocessor file for uart.c...
-compiling retarget.c...
-compiling sys.c...
-assembling startup_NUC100Series.s...
 creating preprocessor file for system_NUC100Series.c...
-compiling uart.c...
-compiling system_NUC100Series.c...
 linking...
-Program Size: Code=20264 RO-data=1092 RW-data=208 ZI-data=12128  
+Program Size: Code=9924 RO-data=492 RW-data=232 ZI-data=10184  
 After Build - User command #1: fromelf --bin ".\obj\UART_TxRx_Function.axf" --output ".\obj\UART_TxRx_Function.bin"
 After Build - User command #2: fromelf --text -c ".\obj\UART_TxRx_Function.axf" --output ".\obj\UART_TxRx_Function.txt"
-".\obj\UART_TxRx_Function.axf" - 0 Error(s), 3 Warning(s).
+".\obj\UART_TxRx_Function.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -97,9 +82,9 @@ Package Vendor: Nuvoton
 
    * Component: Nuvoton::Device:Startup:3.00.002
       Source file:   Device\NUC100\Source\ARM\startup_NUC100Series.s
-      Source file:   Device\NUC100\Source\system_NUC100Series.c
-      Source file:   Device\NUC100\Driver\retarget.c
       Include file:  Device\NUC100\Include\NUC100Series.h
+      Source file:   Device\NUC100\Driver\retarget.c
+      Source file:   Device\NUC100\Source\system_NUC100Series.c
 
    * Component: Nuvoton::Device:Driver:UART:3.00.002
       Include file:  Device\NUC100\Driver\uart.h
@@ -118,24 +103,24 @@ Package Vendor: Nuvoton
       Source file:   Device\NUC100\Driver\clk.c
 
    * Component: ARM::CMSIS:RTOS:Keil RTX:4.81.1
-      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
-      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
-      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
       Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
+      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
       Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
+      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
+      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
 
    * Component: ARM::CMSIS:CORE:5.0.2
 
    * Component: ::CMSIS:RTOS:1.0.0 (API)
-Build Time Elapsed:  00:00:11
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

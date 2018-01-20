@@ -24244,759 +24244,6 @@ __declspec(noreturn) void os_error (uint32_t error_code);
 #line 7 "obdcommand.c"
 #line 8 "obdcommand.c"
 #line 9 "obdcommand.c"
-#line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-
-
-
- 
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-#line 61 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-#line 75 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-
-
-
-
-
-
-   
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-#line 112 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-extern __attribute__((__pcs__("aapcs"))) unsigned __ARM_dcmp4(double  , double  );
-extern __attribute__((__pcs__("aapcs"))) unsigned __ARM_fcmp4(float  , float  );
-    
-
-
-
-
- 
-
-extern __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_fpclassifyf(float  );
-extern __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_fpclassify(double  );
-     
-     
-
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isfinitef(float __x)
-{
-    return (((*(unsigned *)&(__x)) >> 23) & 0xff) != 0xff;
-}
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isfinite(double __x)
-{
-    return (((*(1 + (unsigned *)&(__x))) >> 20) & 0x7ff) != 0x7ff;
-}
-     
-     
-
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isinff(float __x)
-{
-    return ((*(unsigned *)&(__x)) << 1) == 0xff000000;
-}
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isinf(double __x)
-{
-    return (((*(1 + (unsigned *)&(__x))) << 1) == 0xffe00000) && ((*(unsigned *)&(__x)) == 0);
-}
-     
-     
-
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_islessgreaterf(float __x, float __y)
-{
-    unsigned __f = __ARM_fcmp4(__x, __y) >> 28;
-    return (__f == 8) || (__f == 2);  
-}
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_islessgreater(double __x, double __y)
-{
-    unsigned __f = __ARM_dcmp4(__x, __y) >> 28;
-    return (__f == 8) || (__f == 2);  
-}
-    
-
-
- 
-
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnanf(float __x)
-{
-    return (0x7f800000 - ((*(unsigned *)&(__x)) & 0x7fffffff)) >> 31;
-}
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnan(double __x)
-{
-    unsigned __xf = (*(1 + (unsigned *)&(__x))) | (((*(unsigned *)&(__x)) == 0) ? 0 : 1);
-    return (0x7ff00000 - (__xf & 0x7fffffff)) >> 31;
-}
-     
-     
-
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnormalf(float __x)
-{
-    unsigned __xe = ((*(unsigned *)&(__x)) >> 23) & 0xff;
-    return (__xe != 0xff) && (__xe != 0);
-}
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnormal(double __x)
-{
-    unsigned __xe = ((*(1 + (unsigned *)&(__x))) >> 20) & 0x7ff;
-    return (__xe != 0x7ff) && (__xe != 0);
-}
-     
-     
-
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_signbitf(float __x)
-{
-    return (*(unsigned *)&(__x)) >> 31;
-}
-__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_signbit(double __x)
-{
-    return (*(1 + (unsigned *)&(__x))) >> 31;
-}
-     
-     
-
-
-
-
-
-
-
-
-#line 230 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-
-
-
-
-
-
-   
-  typedef float float_t;
-  typedef double double_t;
-#line 251 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-
-
-extern const int math_errhandling;
-#line 261 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-extern __declspec(__nothrow) double acos(double  );
-    
-    
-    
-extern __declspec(__nothrow) double asin(double  );
-    
-    
-    
-    
-
-extern __declspec(__nothrow) __attribute__((const)) double atan(double  );
-    
-    
-
-extern __declspec(__nothrow) double atan2(double  , double  );
-    
-    
-    
-    
-
-extern __declspec(__nothrow) double cos(double  );
-    
-    
-    
-    
-extern __declspec(__nothrow) double sin(double  );
-    
-    
-    
-    
-
-extern void __use_accurate_range_reduction(void);
-    
-    
-
-extern __declspec(__nothrow) double tan(double  );
-    
-    
-    
-    
-
-extern __declspec(__nothrow) double cosh(double  );
-    
-    
-    
-    
-extern __declspec(__nothrow) double sinh(double  );
-    
-    
-    
-    
-    
-
-extern __declspec(__nothrow) __attribute__((const)) double tanh(double  );
-    
-    
-
-extern __declspec(__nothrow) double exp(double  );
-    
-    
-    
-    
-    
-
-extern __declspec(__nothrow) double frexp(double  , int *  ) __attribute__((__nonnull__(2)));
-    
-    
-    
-    
-    
-    
-
-extern __declspec(__nothrow) double ldexp(double  , int  );
-    
-    
-    
-    
-extern __declspec(__nothrow) double log(double  );
-    
-    
-    
-    
-    
-extern __declspec(__nothrow) double log10(double  );
-    
-    
-    
-extern __declspec(__nothrow) double modf(double  , double *  ) __attribute__((__nonnull__(2)));
-    
-    
-    
-    
-
-extern __declspec(__nothrow) double pow(double  , double  );
-    
-    
-    
-    
-    
-    
-extern __declspec(__nothrow) double sqrt(double  );
-    
-    
-    
-
-
-
-
-    __inline double _sqrt(double __x) { return sqrt(__x); }
-
-
-
-
-    __inline float _sqrtf(float __x) { return (float)sqrt(__x); }
-
-    
-
-
-
- 
-
-extern __declspec(__nothrow) __attribute__((const)) double ceil(double  );
-    
-    
-extern __declspec(__nothrow) __attribute__((const)) double fabs(double  );
-    
-    
-
-extern __declspec(__nothrow) __attribute__((const)) double floor(double  );
-    
-    
-
-extern __declspec(__nothrow) double fmod(double  , double  );
-    
-    
-    
-    
-    
-
-    
-
-
-
-
-
-
-
-
-
- 
-
-
-
-extern __declspec(__nothrow) double acosh(double  );
-    
-
- 
-extern __declspec(__nothrow) double asinh(double  );
-    
-
- 
-extern __declspec(__nothrow) double atanh(double  );
-    
-
- 
-extern __declspec(__nothrow) double cbrt(double  );
-    
-
- 
-__inline __declspec(__nothrow) __attribute__((const)) double copysign(double __x, double __y)
-    
-
- 
-{
-    (*(1 + (unsigned *)&(__x))) = ((*(1 + (unsigned *)&(__x))) & 0x7fffffff) | ((*(1 + (unsigned *)&(__y))) & 0x80000000);
-    return __x;
-}
-__inline __declspec(__nothrow) __attribute__((const)) float copysignf(float __x, float __y)
-    
-
- 
-{
-    (*(unsigned *)&(__x)) = ((*(unsigned *)&(__x)) & 0x7fffffff) | ((*(unsigned *)&(__y)) & 0x80000000);
-    return __x;
-}
-extern __declspec(__nothrow) double erf(double  );
-    
-
- 
-extern __declspec(__nothrow) double erfc(double  );
-    
-
- 
-extern __declspec(__nothrow) double expm1(double  );
-    
-
- 
-
-
-
-    
-
- 
-
-
-
-
-
-
-#line 479 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-
-extern __declspec(__nothrow) double hypot(double  , double  );
-    
-
-
-
-
- 
-extern __declspec(__nothrow) int ilogb(double  );
-    
-
- 
-extern __declspec(__nothrow) int ilogbf(float  );
-    
-
- 
-extern __declspec(__nothrow) int ilogbl(long double  );
-    
-
- 
-
-
-
-
-
-
-
-    
-
- 
-
-
-
-
-
-    
-
-
-
- 
-
-
-
-
-
-    
-
-
-
- 
-
-
-
-
-
-    
-
- 
-
-
-
-
-
-    
-
-
-
- 
-
-
-
-
-
-    
-
-
-
- 
-
-
-
-
-
-    
-
-
-
- 
-
-
-
-
-
-    
-
- 
-
-
-
-
-
-    
-
- 
-
-
-
-
-
-    
-
-
- 
-
-extern __declspec(__nothrow) double lgamma (double  );
-    
-
-
- 
-extern __declspec(__nothrow) double log1p(double  );
-    
-
- 
-extern __declspec(__nothrow) double logb(double  );
-    
-
- 
-extern __declspec(__nothrow) float logbf(float  );
-    
-
- 
-extern __declspec(__nothrow) long double logbl(long double  );
-    
-
- 
-extern __declspec(__nothrow) double nextafter(double  , double  );
-    
-
-
- 
-extern __declspec(__nothrow) float nextafterf(float  , float  );
-    
-
-
- 
-extern __declspec(__nothrow) long double nextafterl(long double  , long double  );
-    
-
-
- 
-extern __declspec(__nothrow) double nexttoward(double  , long double  );
-    
-
-
- 
-extern __declspec(__nothrow) float nexttowardf(float  , long double  );
-    
-
-
- 
-extern __declspec(__nothrow) long double nexttowardl(long double  , long double  );
-    
-
-
- 
-extern __declspec(__nothrow) double remainder(double  , double  );
-    
-
- 
-extern __declspec(__nothrow) __attribute__((const)) double rint(double  );
-    
-
- 
-extern __declspec(__nothrow) double scalbln(double  , long int  );
-    
-
- 
-extern __declspec(__nothrow) float scalblnf(float  , long int  );
-    
-
- 
-extern __declspec(__nothrow) long double scalblnl(long double  , long int  );
-    
-
- 
-extern __declspec(__nothrow) double scalbn(double  , int  );
-    
-
- 
-extern __declspec(__nothrow) float scalbnf(float  , int  );
-    
-
- 
-extern __declspec(__nothrow) long double scalbnl(long double  , int  );
-    
-
- 
-
-
-
-
-    
-
- 
-
-
-
- 
-extern __declspec(__nothrow) __attribute__((const)) float _fabsf(float);  
-__inline __declspec(__nothrow) __attribute__((const)) float fabsf(float __f) { return _fabsf(__f); }
-extern __declspec(__nothrow) float sinf(float  );
-extern __declspec(__nothrow) float cosf(float  );
-extern __declspec(__nothrow) float tanf(float  );
-extern __declspec(__nothrow) float acosf(float  );
-extern __declspec(__nothrow) float asinf(float  );
-extern __declspec(__nothrow) float atanf(float  );
-extern __declspec(__nothrow) float atan2f(float  , float  );
-extern __declspec(__nothrow) float sinhf(float  );
-extern __declspec(__nothrow) float coshf(float  );
-extern __declspec(__nothrow) float tanhf(float  );
-extern __declspec(__nothrow) float expf(float  );
-extern __declspec(__nothrow) float logf(float  );
-extern __declspec(__nothrow) float log10f(float  );
-extern __declspec(__nothrow) float powf(float  , float  );
-extern __declspec(__nothrow) float sqrtf(float  );
-extern __declspec(__nothrow) float ldexpf(float  , int  );
-extern __declspec(__nothrow) float frexpf(float  , int *  ) __attribute__((__nonnull__(2)));
-extern __declspec(__nothrow) __attribute__((const)) float ceilf(float  );
-extern __declspec(__nothrow) __attribute__((const)) float floorf(float  );
-extern __declspec(__nothrow) float fmodf(float  , float  );
-extern __declspec(__nothrow) float modff(float  , float *  ) __attribute__((__nonnull__(2)));
-
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-__declspec(__nothrow) long double acosl(long double );
-__declspec(__nothrow) long double asinl(long double );
-__declspec(__nothrow) long double atanl(long double );
-__declspec(__nothrow) long double atan2l(long double , long double );
-__declspec(__nothrow) long double ceill(long double );
-__declspec(__nothrow) long double cosl(long double );
-__declspec(__nothrow) long double coshl(long double );
-__declspec(__nothrow) long double expl(long double );
-__declspec(__nothrow) long double fabsl(long double );
-__declspec(__nothrow) long double floorl(long double );
-__declspec(__nothrow) long double fmodl(long double , long double );
-__declspec(__nothrow) long double frexpl(long double , int* ) __attribute__((__nonnull__(2)));
-__declspec(__nothrow) long double ldexpl(long double , int );
-__declspec(__nothrow) long double logl(long double );
-__declspec(__nothrow) long double log10l(long double );
-__declspec(__nothrow) long double modfl(long double  , long double *  ) __attribute__((__nonnull__(2)));
-__declspec(__nothrow) long double powl(long double , long double );
-__declspec(__nothrow) long double sinl(long double );
-__declspec(__nothrow) long double sinhl(long double );
-__declspec(__nothrow) long double sqrtl(long double );
-__declspec(__nothrow) long double tanl(long double );
-__declspec(__nothrow) long double tanhl(long double );
-
-
-
-
-
- 
-extern __declspec(__nothrow) float acoshf(float  );
-__declspec(__nothrow) long double acoshl(long double );
-extern __declspec(__nothrow) float asinhf(float  );
-__declspec(__nothrow) long double asinhl(long double );
-extern __declspec(__nothrow) float atanhf(float  );
-__declspec(__nothrow) long double atanhl(long double );
-__declspec(__nothrow) long double copysignl(long double , long double );
-extern __declspec(__nothrow) float cbrtf(float  );
-__declspec(__nothrow) long double cbrtl(long double );
-extern __declspec(__nothrow) float erff(float  );
-__declspec(__nothrow) long double erfl(long double );
-extern __declspec(__nothrow) float erfcf(float  );
-__declspec(__nothrow) long double erfcl(long double );
-extern __declspec(__nothrow) float expm1f(float  );
-__declspec(__nothrow) long double expm1l(long double );
-extern __declspec(__nothrow) float log1pf(float  );
-__declspec(__nothrow) long double log1pl(long double );
-extern __declspec(__nothrow) float hypotf(float  , float  );
-__declspec(__nothrow) long double hypotl(long double , long double );
-extern __declspec(__nothrow) float lgammaf(float  );
-__declspec(__nothrow) long double lgammal(long double );
-extern __declspec(__nothrow) float remainderf(float  , float  );
-__declspec(__nothrow) long double remainderl(long double , long double );
-extern __declspec(__nothrow) float rintf(float  );
-__declspec(__nothrow) long double rintl(long double );
-
-
-
-#line 875 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-
-
-
-
-#line 896 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-#line 1087 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-
-
-
-
-
-
-
-
-
-
-#line 1317 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
-
-
-
-
-
- 
-#line 10 "obdcommand.c"
 
 
  
@@ -25014,10 +24261,67 @@ char *obdr3;
 
 
  
+__inline void parse_g(char* str, int first, int sec, char f, char s , char *string);
+__inline void remove_all_chars(char* str, char c, char d);
+__inline void hextobinary(char* hex, char* bin);
+__inline int hextodecimal(char *hex);
 void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 void clearuart2(void);
 void obdcommand(char* cmd);
  
+
+char obdresp[20];
+char tempobdresp[20];
+char obdrespbinary[33];char suppportedpid[200][7];
+int pidcounter;
+
+
+
+
+void supportedpid(char command[5]){
+	char* lenghtchecker;
+	char commandtemp[3];
+	int supportedfori;int cmd;
+	int  i99, j99, len99,dec99;
+	int dec999 = 0;
+  int c0,c1,c2;
+  char c[2] = 0;
+	
+    send_OBD(command,">","NODATA",">",5);
+		memset(obdresp,0,20);
+		memset(tempobdresp,0,20);
+		memset(commandtemp,0,3);
+		parse_g(g_u8OBDRecData, 1, 2, '\r', '\r' ,tempobdresp);
+		remove_all_chars(tempobdresp,' ','\r');	
+		strcpy(obdresp, &tempobdresp[4]);
+		strcpy(commandtemp, &command[2]);
+		memset(obdrespbinary,0,32);
+		hextobinary( obdresp,  obdrespbinary);
+		strcpy(obdresp, &tempobdresp[4]);	
+    c[0] = command[0];
+    c0 = atoi(c);
+    c[0] = command[1];
+    c1 = atoi(c);
+    c[0] = command[2];
+    c2 = atoi(c);
+  
+		dec999=hextodecimal(commandtemp);					
+		for(supportedfori=0;supportedfori<32;supportedfori++){
+			if(obdrespbinary[supportedfori]=='1' && !strstr(tempobdresp,"NODATA") && !strstr(tempobdresp,"SEARCHING")){
+        if(dec999+supportedfori+1<0x10){
+            sprintf(suppportedpid[pidcounter],"%d%d%d%x\r",c0,c1,c2,dec999+supportedfori+1);
+            pidcounter++;
+        }else{
+              sprintf(suppportedpid[pidcounter],"%d%d%x\r",c0,c1,((c2 * 0x10) + dec999+supportedfori+1));
+              pidcounter++;
+				}
+			}
+	}
+}
+
+
+
+
 
 
 void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout){
@@ -25038,7 +24342,6 @@ void send_OBD(char * command, char * response1, char * response2, char * respons
 		obdr3 = strstr(g_u8OBDRecData, response3);
 	}while(!(obdr1 || obdr2 || obdr3 ||((tmr1sec >= timeout))));	 
 
-osDelay(10);
 }
    
 void clearuart2(void){
@@ -25055,11 +24358,7 @@ void obdcommand(char* cmd)
 
     while(((UART_T *) ((( uint32_t)0x40100000) + 0x54000))->FSR & (1ul << 23));
     ((UART_T *) ((( uint32_t)0x40100000) + 0x54000))->DATA = *cmd;
-    if(*cmd == '\n')
-    {
-        while(((UART_T *) ((( uint32_t)0x40100000) + 0x54000))->FSR & (1ul << 23));
-        ((UART_T *) ((( uint32_t)0x40100000) + 0x54000))->DATA = '\r';
-    }
+
   *cmd++;
   }
 }
@@ -25071,7 +24370,7 @@ void obdcommand(char* cmd)
 __inline int hextodecimal(char *hex){
 	
 	 double decimal, place;
-   double val, lentt;
+    double val, lentt;
 
 	int hex2deci;
 	 
@@ -25158,8 +24457,12 @@ return decimal;
 
 	
 
+
+
+
 __inline void hextobinary(char* hex, char* bin){
-	int cou=0;
+	int cou;
+			cou=0;
 		while(hex[cou]){
          switch(hex[cou]){
              case '0': strcat(bin,"0000"); break;
@@ -25184,11 +24487,10 @@ __inline void hextobinary(char* hex, char* bin){
              case 'd': strcat(bin,"1101"); break;
              case 'e': strcat(bin,"1110"); break;
              case 'f': strcat(bin,"1111"); break;
-             default:  printf("\nInvalid hexadecimal digit %c ",hex[cou]); 
+             default: ; 
          }
          cou++;
     }
 
+
 }
-
-

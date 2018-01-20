@@ -29,3 +29,5 @@
 .\obj\thread.o: C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver\PS2.h
 .\obj\thread.o: C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver\CLK.h
 .\obj\thread.o: C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver\ACMP.h
+.\obj\thread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\thread.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
