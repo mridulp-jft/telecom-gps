@@ -1,226 +1,0 @@
-Dependencies for Project 'vts_ver3', Target 'KL25Z128 - Flash': (DO NOT MODIFY !)
-F (..\..\..\src\projects\vts_ver3\vts_ver3.c)(0x00000000)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\vts_ver3.o --omf_browse .\uv4build\vts_ver3.crf --depend .\uv4build\vts_ver3.d)
-F (..\..\..\src\common\uif.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\uif.o --omf_browse .\uv4build\uif.crf --depend .\uv4build\uif.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\common\alloc.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\alloc.o --omf_browse .\uv4build\alloc.crf --depend .\uv4build\alloc.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\common\assert.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\assert.o --omf_browse .\uv4build\assert.crf --depend .\uv4build\assert.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\common\io.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\io.o --omf_browse .\uv4build\io.crf --depend .\uv4build\io.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\common\memtest.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\memtest.o --omf_browse .\uv4build\memtest.crf --depend .\uv4build\memtest.d)
-I (..\..\..\src\common\memtest.h)(0x5731745C)
-F (..\..\..\src\common\queue.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\queue.o --omf_browse .\uv4build\queue.crf --depend .\uv4build\queue.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\common\stdlib.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\stdlib.o --omf_browse .\uv4build\stdlib.crf --depend .\uv4build\stdlib.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\cpu\nmi_isr_handler.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\nmi_isr_handler.o --omf_browse .\uv4build\nmi_isr_handler.crf --depend .\uv4build\nmi_isr_handler.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\cpu\start.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\start.o --omf_browse .\uv4build\start.crf --depend .\uv4build\start.d)
-I (..\..\..\src\cpu\start.h)(0x5731745C)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\cpu\sysinit.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\sysinit.o --omf_browse .\uv4build\sysinit.crf --depend .\uv4build\sysinit.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\cpu\system_MKL25Z4.c)(0x00000000)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\system_mkl25z4.o --omf_browse .\uv4build\system_mkl25z4.crf --depend .\uv4build\system_mkl25z4.d)
-F (..\..\..\src\cpu\startup_MKL25Z4.s)(0x00000000)(--cpu Cortex-M0+ -g --apcs=interwork --pd "__MICROLIB SETA 1"-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include--pd "__UVISION_VERSION SETA 518" --pd "_RTE_ SETA 1" --pd "MKL25Z128xxx4 SETA 1"--list .\uv4build\startup_mkl25z4.lst --xref -o .\uv4build\startup_mkl25z4.o --depend .\uv4build\startup_mkl25z4.d)
-F (..\..\..\src\cpu\arm_cm0.c)(0x5731745C)()
-F (..\..\..\src\drivers\cmp\cmp.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\cmp.o --omf_browse .\uv4build\cmp.crf --depend .\uv4build\cmp.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\llwu\llwu.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\llwu.o --omf_browse .\uv4build\llwu.crf --depend .\uv4build\llwu.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\lptmr\lptmr.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\lptmr.o --omf_browse .\uv4build\lptmr.crf --depend .\uv4build\lptmr.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\mcg\mcg.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\mcg.o --omf_browse .\uv4build\mcg.crf --depend .\uv4build\mcg.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\pmc\pmc.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\pmc.o --omf_browse .\uv4build\pmc.crf --depend .\uv4build\pmc.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\rcm\rcm.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\rcm.o --omf_browse .\uv4build\rcm.crf --depend .\uv4build\rcm.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\rtc\rtc.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\rtc.o --omf_browse .\uv4build\rtc.crf --depend .\uv4build\rtc.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\smc\smc.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\smc.o --omf_browse .\uv4build\smc.crf --depend .\uv4build\smc.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\uart\uart.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\uart.o --omf_browse .\uv4build\uart.crf --depend .\uv4build\uart.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\uart\Serial.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\serial.o --omf_browse .\uv4build\serial.crf --depend .\uv4build\serial.d)
-I (..\..\..\src\common\common.h)(0x5731745C)
-I (..\..\..\src\platforms\freedom.h)(0x5731745C)
-I (..\..\..\src\drivers\mcg\mcg.h)(0x5731745C)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\MKL26Z4.h)(0x55FB8BA0)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cm0plus.h)(0x5735B8C6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cminstr.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\cmsis_armcc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include\core_cmfunc.h)(0x573551CE)
-I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include\system_MKL26Z4.h)(0x55FB8BA0)
-F (..\..\..\src\drivers\uart\Retarget.c)(0x5731745C)(-c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\..\src\projects\vts_ver3 -I ..\..\..\src\common -I ..\..\..\src\cpu -I ..\..\..\src\cpu\headers\CMSIS\MKL25Z4\Include -I ..\..\..\src\drivers\llwu -I ..\..\..\src\drivers\lptmr -I ..\..\..\src\drivers\mcg -I ..\..\..\src\drivers\pmc -I ..\..\..\src\drivers\rcm -I ..\..\..\src\drivers\rtc -I ..\..\..\src\drivers\smc -I ..\..\..\src\drivers\uart -I ..\..\..\src\drivers\cmp -I ..\..\..\src\platforms -I ..\.. -I ..\..\..\src\cpu\headers\CMSIS-I "E:\bitbuck\gps-trackr\Software\vts-ver14 - testing code\build\keil\vts_ver3_rev1\RTE"-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0-Beta4\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.11.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4 -DKEIL -DFREEDOM -DCMSIS-o .\uv4build\retarget.o --omf_browse .\uv4build\retarget.crf --depend .\uv4build\retarget.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB4E9E)
-I (C:\Keil_v5\ARM\ARMCC\include\rt_misc.h)(0x55DB4EA0)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x55DB4EA6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (..\..\..\src\drivers\uart\serial.h)(0x5731745C)
-F (..\..\..\src\platforms\tower.h)(0x5731745C)()
-F (..\..\..\src\cpu\headers\MKL25Z4.h)(0x00000000)()
-F (..\..\..\src\cpu\headers\MemMapPtr_KL25Z4.h)(0x00000000)()

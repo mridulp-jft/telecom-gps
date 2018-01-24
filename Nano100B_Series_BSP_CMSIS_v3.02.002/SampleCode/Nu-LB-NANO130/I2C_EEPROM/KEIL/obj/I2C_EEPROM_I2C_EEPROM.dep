@@ -1,215 +1,0 @@
-Dependencies for Project 'I2C_EEPROM', Target 'I2C_EEPROM': (DO NOT MODIFY !)
-F (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Source\system_Nano100Series.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__MICROLIB -g -O2 --apcs=interwork -I ..\..\..\..\Library\CMSIS\Include -I ..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\..\..\Library\StdDriver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Nuvoton\M051Series-D__UVISION_VERSION="518"-o .\obj\system_nano100series.o --omf_browse .\obj\system_nano100series.crf --depend .\obj\system_nano100series.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\adc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\uart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
-F (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Source\ARM\startup_Nano100Series.s)(0x5993F294)(--cpu Cortex-M0 -g --16 --apcs=interwork --pd "__MICROLIB SETA 1"-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Nuvoton\M051Series--pd "__UVISION_VERSION SETA 518"--list .\lst\startup_nano100series.lst --xref -o .\obj\startup_nano100series.o --depend .\obj\startup_nano100series.d)
-F (..\main.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__MICROLIB -g -O2 --apcs=interwork -I ..\..\..\..\Library\CMSIS\Include -I ..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\..\..\Library\StdDriver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Nuvoton\M051Series-D__UVISION_VERSION="518"-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB4E9E)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (..\..\..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\adc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\uart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
-F (..\..\..\..\Library\StdDriver\src\i2c.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__MICROLIB -g -O2 --apcs=interwork -I ..\..\..\..\Library\CMSIS\Include -I ..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\..\..\Library\StdDriver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Nuvoton\M051Series-D__UVISION_VERSION="518"-o .\obj\i2c.o --omf_browse .\obj\i2c.crf --depend .\obj\i2c.d)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\nano100series.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (..\..\..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\adc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\uart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
-F (..\..\..\..\Library\StdDriver\src\sys.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__MICROLIB -g -O2 --apcs=interwork -I ..\..\..\..\Library\CMSIS\Include -I ..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\..\..\Library\StdDriver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Nuvoton\M051Series-D__UVISION_VERSION="518"-o .\obj\sys.o --omf_browse .\obj\sys.crf --depend .\obj\sys.d)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (..\..\..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\adc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\uart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
-F (..\..\..\..\Library\StdDriver\src\clk.c)(0x58EF0E22)(-c --cpu Cortex-M0 -D__MICROLIB -g -O2 --apcs=interwork -I ..\..\..\..\Library\CMSIS\Include -I ..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\..\..\Library\StdDriver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Nuvoton\M051Series-D__UVISION_VERSION="518"-o .\obj\clk.o --omf_browse .\obj\clk.crf --depend .\obj\clk.d)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (..\..\..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\adc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\uart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
-F (..\..\..\..\Library\StdDriver\src\retarget.c)(0x598D7F5E)(-c --cpu Cortex-M0 -D__MICROLIB -g -O2 --apcs=interwork -I ..\..\..\..\Library\CMSIS\Include -I ..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\..\..\Library\StdDriver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Nuvoton\M051Series-D__UVISION_VERSION="518"-o .\obj\retarget.o --omf_browse .\obj\retarget.crf --depend .\obj\retarget.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB4E9E)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (..\..\..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\adc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\uart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
-F (..\..\..\..\Library\StdDriver\src\uart.c)(0x598B0879)(-c --cpu Cortex-M0 -D__MICROLIB -g -O2 --apcs=interwork -I ..\..\..\..\Library\CMSIS\Include -I ..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\..\..\Library\StdDriver\inc-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Nuvoton\M051Series-D__UVISION_VERSION="518"-o .\obj\uart.o --omf_browse .\obj\uart.crf --depend .\obj\uart.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x55DB4E9E)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cm0.h)(0x58EF0E22)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x55DB4EA8)
-I (..\..\..\..\Library\CMSIS\Include\core_cmInstr.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\cmsis_armcc.h)(0x58EF0E22)
-I (..\..\..\..\Library\CMSIS\Include\core_cmFunc.h)(0x58EF0E22)
-I (..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include\system_Nano100Series.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sys.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\clk.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\adc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\dac.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\fmc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\ebi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\gpio.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2c.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\crc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pdma.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\pwm.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\rtc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\sc.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\scuart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\spi.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\timer.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\uart.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\usbd.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
-I (..\..\..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)

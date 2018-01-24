@@ -1,5 +1,0 @@
--c --cpu Cortex-M0 -g -O2 --apcs=interwork --asm --interleave --asm_dir ".\\lst\\" -I ..\..\..\..\Library\CMSIS\Include -I ..\..\..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\..\..\Library\StdDriver\inc -I ..\..\..\..\Library\NuEdu\inc
--I C:\Keil_v5\ARM\RV31\INC
--I C:\Keil_v5\ARM\CMSIS\Include
--D__UVISION_VERSION="518" -DDEBUG_PORT="UART1"
--o .\obj\main.o --list_dir ".\\lst\\" --list --omf_browse .\obj\main.crf --depend .\obj\main.d --feedback ".\obj\Smpl_Basic01_I2C_EEPROM.fed" "..\main.c"
