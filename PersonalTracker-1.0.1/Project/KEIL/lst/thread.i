@@ -21118,11 +21118,17 @@ extern int32_t g_u8RecDataptr;
 int send_on = 1;
 extern int loop();
 extern osMutexId	(uart_mutex_id); 
+char signalquality[5] = {0};
+
+int start_thead = 0;
+
+int32_t signal;
+int32_t signal2;
 
 osThreadId tid_Thread;                                          
-osThreadId tid_Thread1;                                          
+
 const osThreadDef_t os_thread_def_Thread = { (Thread), (osPriorityNormal), (1), (2250) };                   
-const osThreadDef_t os_thread_def_Thread1 = { (Thread1), (osPriorityNormal), (1), (4048) };                   
+
 
 
 __inline void strreplace(char s[], char chr, char repl_chr);
@@ -21142,7 +21148,7 @@ extern char * r2;
 extern char * r3;
 extern int motion;
 extern char RI;
-
+void csq(void);
 void smsrequest(int _case, char* arg1, char* arg2){
   char *sn = sender_num+3;
   int go = 0;
@@ -21523,31 +21529,64 @@ void Save_FS(void)
 }
 
 
+
+
 int Init_Thread (void) {
 
 	tid_Thread = osThreadCreate (&os_thread_def_Thread, 0);
   if (!tid_Thread) return(-1);
 
-
-  
   return(0);
 }
+
+
+
 
 void Thread (void const *argument) 
 {
   while (1) 
 	{
-    mainla = 0;
-    th1la = 1;
-    th2la = 0;  
-    sms_mc60();
+    SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",1);	
+    cpinquerry();
+    if(cpinready==1)
+    {
+      cregquerry();
+      if(cregready == 1)
+      {
+        SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QILOCIP\r\n\r\n", "z", "OK" , "ERROR",2);	
+      }
+    }
+    SendAT("\r\nAT+QSCLK=1\r\n\r\n", "Ready", "OK" , "ERROR",5);
+    
+    SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n\r\n","CONNECT","ERROR","FAIL",10);	
+    network=0;
+    if (start_thead != 0){
+    osSignalWait (0x0001, 0xFFFFFFFFU); 
+    osSignalClear (tid_Thread, 0x0001);
+		}start_thead = 1;    
+    TCP_Send("\r\nAT+QISEND\r\n\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
 
-    motion = 1;
-    if(motion!=0){
-    SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
+    if(network == 1)
+    {
+      Save_FS();
+      SendAT("\r\nAT+QICLOSE\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
+      SendAT("\r\nAT+CFUN=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
+      SendAT("\r\nAT+CFUN=1\r\n\r\n", "Ready", "NOT INSERTED" , "ERROR",10);
 
-   }      
-    osDelay(4900);
+      osDelay(500);
+    }
+    else
+    {
+  
+  
+  
+  
+  
+    }  
 
   }
 }
@@ -21658,6 +21697,51 @@ __inline void manualdelay(int delayms)
 
 
 
+void csq(){
+ 
+  static int attry;
+
+	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+
+	tmr0sec=0;
+
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,550);
+	printf("%c",0x1A);
+	clear();
+	printf("\r\nAT+CSQ\r\n\r\n");
+
+	do{
+		r1 = strstr(g_u8RecData, "Ready");
+		r2 = strstr(g_u8RecData, "OK");
+		r3 = strstr(g_u8RecData, "ERROR");
+	}while(!(r1 || r2 || r3 ||((tmr0sec >= 4))));	 
+     if(!(r1 || r2 || r3))
+      {
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=1;
+        attry++;
+        if(attry > 3){
+
+            printf("\r\nAT+CFUN=1,1\r\n");	
+            manualdelay(100);
+
+
+
+        }
+        (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;
+      }
+      else{attry=0;}
+      memset(signalquality, 0, 5);
+      parse_g(g_u8RecData, 1, 1, ':', ',', signalquality);
+      remove_all_chars(signalquality, ' ', '\r');
+osMutexRelease(uart_mutex_id);
+
+   
+
+}
 
 void actgprs()
 {
@@ -21693,7 +21777,7 @@ __inline void fileopen(void)
     {
         (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=1;
         printf("\r\n\r\nAT+CFUN=1,1\r\n\r\n");
-        manualdelay(100);
+            manualdelay(100);
         (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=0;
         memset(fileinstance,0,20);
     SendAT("\r\nAT+QFOPEN=\"LOG.TXT\",0\r\n", "Ready", "OK" , "ERROR",10);	
@@ -21707,46 +21791,21 @@ __inline void fileopen(void)
 
 
 int loop(){
-  SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",1);	
-  cpinquerry();
-  if(cpinready==1)
-  {
-    cregquerry();
-    if(cregready == 1)
-    {
-      SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-      SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-      SendAT("\r\nAT+QIREGAPP\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-      SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-      SendAT("\r\nAT+QILOCIP\r\n\r\n", "z", "OK" , "ERROR",2);	
-    }
-  }
-  SendAT("\r\nAT+QSCLK=1\r\n\r\n", "Ready", "OK" , "ERROR",5);
+  
+    mainla = 0;
+    th1la = 1;
+    th2la = 0;  
+    sms_mc60();
 
-  SendAT("\r\nAT+CSQ\r\n\r\n", "Ready", "OK" , "ERROR",4);	
-  SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n\r\n","CONNECT","ERROR","FAIL",10);	
-  network=0;
-  TCP_Send("\r\nAT+QISEND\r\n\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
+    motion = 1;
+    if(motion!=0){
+    csq();      
+    SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
+    signal = osSignalSet (tid_Thread, 0x0001);
 
-  if(network == 1)
-  {
-    Save_FS();
+   }      
+    osDelay(4900);  
 
-    SendAT("\r\nAT+QICLOSE\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
-    SendAT("\r\nAT+CFUN=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
-    SendAT("\r\nAT+CFUN=1\r\n\r\n", "Ready", "NOT INSERTED" , "ERROR",10);
-
-    manualdelay(500);
-  }
-  else
-  {
-
-
-
-
-
-    osDelay(5000);                                         
-  }  
 
 }
   

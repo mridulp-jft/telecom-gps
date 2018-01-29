@@ -22684,7 +22684,7 @@ extern int Init_Thread (void);
 extern void Init_Timers (void);
 extern void SendChar(int ch);
 extern char fileinstance[20];
-
+extern char signalquality[5];
 void clear(void);
 extern	int32_t life;
 extern int8_t i2ctimeout;
@@ -23015,16 +23015,8 @@ int main(void)
 
 		Init_Timers();
 		ADC0_Init();
-    
     SYS_UnlockReg();
-    
-    
-    
-    
-    
 		uart_mutex_id = osMutexCreate(&os_mutex_def_uart_mutex);
-		
-		
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((3)<<2))))=0;  
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((4)<<2))))=0;
 		(*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((5)<<2))))=0;
@@ -23040,11 +23032,6 @@ int main(void)
     
     while(1)
 		{
-      mainla = 1;
-      th1la = 0;  
-      th2la = 0;  
-      motion=1;
- 
       loop();
 		}
 }
@@ -23365,7 +23352,7 @@ void SendAT(char * command, char * response1, char * response2, char * response3
 {
   static int attry;
   (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-	osDelay(100);
+	osDelay(10);
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 
 	tmr0sec=0;
@@ -23394,6 +23381,7 @@ void SendAT(char * command, char * response1, char * response2, char * response3
         if(attry > 3){
 
             printf("\r\nAT+CFUN=1,1\r\n");	
+            manualdelay(100);
 
 
 
@@ -23406,7 +23394,7 @@ void SendAT(char * command, char * response1, char * response2, char * response3
 osMutexRelease(uart_mutex_id);
 
    
-osDelay(100);
+osDelay(10);
 }
 
 void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
@@ -23437,7 +23425,7 @@ clear();
         (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(0))) + ((13)<<2))))=1;
         printf("\r\nAT+CFUN=1,1\r\n");	
         clear();
-        manualdelay(100);
+            manualdelay(100);
 
 
 
@@ -23481,7 +23469,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
   tcpdatalength =  atoi(chdatalength);
 
   fileopen();
-	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
+	
 
   if(tcpdatalength%600 == 0)
   {
@@ -23603,7 +23591,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 	r1=0;
 	r2=0;
 	r3=0;
-  osMutexRelease(uart_mutex_id); 
+  
   
 
 	
@@ -23632,7 +23620,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 	r1=0;
 	r2=0;
 	r3=0;
- 
+
 
 	g_u8RecDataptr=0;
 	printf("%c",0x1A);
@@ -23797,6 +23785,10 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		strcat(g_u8SendData,imei);
 		strcat(g_u8SendData,",");
 		strcat(g_u8SendData,temp);
+		strcat(g_u8SendData,",");
+		strcat(g_u8SendData,signalquality);
+		strcat(g_u8SendData,",");
+    
 		memset(temp,0,100);
 		sprintf(temp,",F=%.1f",u32ADC0Result);
 		strcat(g_u8SendData,temp);

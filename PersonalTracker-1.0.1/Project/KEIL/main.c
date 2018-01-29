@@ -20,7 +20,7 @@
 #define osObjectsPublic										 // define objects in main module
 #include "osObjects.h"											// RTOS object definitions
 #include "uart.h"
-#include "cmsis_os.h"							 // CMSIS RTOS header file
+#include "cmsis_os.h"				  			 // CMSIS RTOS header file
 #include "gpio.h"
 
 
@@ -44,7 +44,7 @@ extern int Init_Thread (void);									 // thread object
 extern void Init_Timers (void);
 extern void SendChar(int ch);
 extern char fileinstance[20];
-
+extern char signalquality[5];
 void clear(void);
 extern	int32_t life;
 extern int8_t i2ctimeout;
@@ -375,16 +375,8 @@ int main(void)
 
 		Init_Timers();
 		ADC0_Init();
-    // WDT register is locked, so it is necessary to unlock protect register before configure WDT
     SYS_UnlockReg();
-    // WDT timeout every 2^14 WDT clock, enable system reset, disable wake up system
-    //WWDT_Open(WWDT_PRESCALER_768, 0x20, TRUE);
-    // Enable WDT timeout interrupt
-    //WDT_EnableInt();
-    //NVIC_EnableIRQ(WDT_IRQn);
 		uart_mutex_id = osMutexCreate(osMutex(uart_mutex));
-		//tcp_mutex_id = osMutexCreate(osMutex(tcp_mutex));
-		//fs_mutex_id = osMutexCreate(osMutex(fs_mutex));
 		PA3=0;  
 		PA4=0;
 		PA5=0;
@@ -400,11 +392,6 @@ int main(void)
     
     while(1)
 		{
-      mainla = 1;
-      th1la = 0;  
-      th2la = 0;  
-      motion=1;
- //     motion_sense();
       loop();
 		}
 }
@@ -725,7 +712,7 @@ void SendAT(char * command, char * response1, char * response2, char * response3
 {
   static int attry;
   PB2=0;
-	osDelay(100);
+	osDelay(10);
 	osMutexWait(uart_mutex_id, osWaitForever);
 //	osMutexWait(tcp_mutex_id, osWaitForever);
 	tmr0sec=0;
@@ -754,6 +741,7 @@ void SendAT(char * command, char * response1, char * response2, char * response3
         if(attry > 3){
 //          osMutexRelease(uart_mutex_id);
             printf("\r\nAT+CFUN=1,1\r\n");	
+            manualdelay(100);
 //          fileclose();
 //          fileopen();
 //          SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR", "7103", 10);
@@ -766,7 +754,7 @@ void SendAT(char * command, char * response1, char * response2, char * response3
 osMutexRelease(uart_mutex_id);
 //osMutexRelease(tcp_mutex_id);
    
-osDelay(100);
+osDelay(10);
 }
 
 void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
@@ -797,7 +785,7 @@ clear();
         PA13=1;
         printf("\r\nAT+CFUN=1,1\r\n");	
         clear();
-        manualdelay(100);
+            manualdelay(100);
 //        fileclose();
 //        fileopen();
 //        SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR", "7103", 10);
@@ -841,7 +829,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
   tcpdatalength =  atoi(chdatalength);
 
   fileopen();
-	osMutexWait(uart_mutex_id, osWaitForever);
+	//osMutexWait(uart_mutex_id, osWaitForever);
 //	osMutexWait(tcp_mutex_id, osWaitForever);
   if(tcpdatalength%600 == 0)
   {
@@ -963,7 +951,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 	r1=0;
 	r2=0;
 	r3=0;
-  osMutexRelease(uart_mutex_id); 
+  //osMutexRelease(uart_mutex_id); 
   
 //	osMutexRelease(tcp_mutex_id);
 	
@@ -992,7 +980,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 	r1=0;
 	r2=0;
 	r3=0;
- 
+
 //	memset(g_u8RecData,0,RXBUFSIZE);
 	g_u8RecDataptr=0;
 	printf("%c",0x1A);
@@ -1157,6 +1145,10 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		strcat(g_u8SendData,imei);
 		strcat(g_u8SendData,",");
 		strcat(g_u8SendData,temp);
+		strcat(g_u8SendData,",");
+		strcat(g_u8SendData,signalquality);
+		strcat(g_u8SendData,",");
+    
 		memset(temp,0,100);
 		sprintf(temp,",F=%.1f",u32ADC0Result);
 		strcat(g_u8SendData,temp);

@@ -21,7 +21,7 @@ Target DLL:      Segger\JL2CM3.dll V2.99.26.0
 Dialog DLL:      TARMCM1.DLL V1.13.0.0
  
 <h2>Project:</h2>
-E:\BITBUCK_JFT\gpstrackr\PersonalTracker-ver1\Project\KEIL\PersonalTracker_MC60_Nano110LE3BN.uvprojx
+E:\BITBUCK_JFT\gpstrackr\PersonalTracker-1.0.1\Project\KEIL\PersonalTracker_MC60_Nano110LE3BN.uvprojx
 Project File Date:  12/07/2017
 
 <h2>Output:</h2>
@@ -38,13 +38,13 @@ Thread.c(14): warning:  #1295-D: Deprecated declaration clear - give arg types
   extern void clear();
 Thread.c(37): warning:  #1295-D: Deprecated declaration loop - give arg types
   extern int loop();
-Thread.c(65): warning:  #177-D: variable "sn"  was declared but never referenced
+Thread.c(71): warning:  #177-D: variable "sn"  was declared but never referenced
     char *sn = sender_num+3;
-Thread.c(431): warning:  #223-D: function "SendAT_FS" declared implicitly
+Thread.c(437): warning:  #223-D: function "SendAT_FS" declared implicitly
     SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",5);	
-Thread.c(669): warning:  #940-D: missing return statement at end of non-void function "loop" 
+Thread.c(728): warning:  #940-D: missing return statement at end of non-void function "loop" 
   }
-Thread.c(674): warning:  #1-D: last line of file ends without a newline
+Thread.c(733): warning:  #1-D: last line of file ends without a newline
    
 Thread.c: 6 warnings, 0 errors
 creating preprocessor file for sys.c...
@@ -61,27 +61,27 @@ main.c(287): warning:  #550-D: variable "OUT_Z_L_A"  was set but never used
     int8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A;
 main.c(288): warning:  #177-D: variable "CTRL_REG4_A"  was declared but never referenced
     uint16_t STATUS_REG_A, CTRL_REG4_A;
-main.c(611): warning:  #550-D: variable "dump"  was set but never used
+main.c(598): warning:  #550-D: variable "dump"  was set but never used
     char dump;
-main.c(1095): warning:  #177-D: variable "ext_bat"  was declared but never referenced
+main.c(1083): warning:  #177-D: variable "ext_bat"  was declared but never referenced
     float ext_bat, int_bat, lati, longi, speed;
-main.c(1095): warning:  #177-D: variable "int_bat"  was declared but never referenced
+main.c(1083): warning:  #177-D: variable "int_bat"  was declared but never referenced
     float ext_bat, int_bat, lati, longi, speed;
-main.c(1095): warning:  #177-D: variable "lati"  was declared but never referenced
+main.c(1083): warning:  #177-D: variable "lati"  was declared but never referenced
     float ext_bat, int_bat, lati, longi, speed;
-main.c(1095): warning:  #177-D: variable "longi"  was declared but never referenced
+main.c(1083): warning:  #177-D: variable "longi"  was declared but never referenced
     float ext_bat, int_bat, lati, longi, speed;
-main.c(1095): warning:  #177-D: variable "speed"  was declared but never referenced
+main.c(1083): warning:  #177-D: variable "speed"  was declared but never referenced
     float ext_bat, int_bat, lati, longi, speed;
 main.c: 11 warnings, 0 errors
-creating preprocessor file for gpio.c...
 compiling sys.c...
+creating preprocessor file for gpio.c...
 creating preprocessor file for uart.c...
 compiling clk.c...
 compiling gpio.c...
 creating preprocessor file for retarget.c...
-compiling uart.c...
 creating preprocessor file for adc.c...
+compiling uart.c...
 creating preprocessor file for wdt.c...
 compiling retarget.c...
 ..\..\Library\StdDriver\src\retarget.c(500): warning:  #177-D: variable "ptr"  was declared but never referenced
@@ -89,14 +89,14 @@ compiling retarget.c...
 ..\..\Library\StdDriver\src\retarget.c: 1 warning, 0 errors
 compiling adc.c...
 creating preprocessor file for wwdt.c...
-compiling wdt.c...
 creating preprocessor file for i2c.c...
-creating preprocessor file for RTX_Conf_CM.c...
+compiling wdt.c...
 compiling wwdt.c...
+creating preprocessor file for RTX_Conf_CM.c...
 compiling i2c.c...
 compiling RTX_Conf_CM.c...
 linking...
-Program Size: Code=25740 RO-data=716 RW-data=276 ZI-data=14188  
+Program Size: Code=26560 RO-data=700 RW-data=300 ZI-data=14188  
 After Build - User command #1: fromelf --bin ".\obj\UART.axf" --output ".\obj\UART.bin"
 After Build - User command #2: fromelf --text -c ".\obj\UART.axf" --output ".\obj\UART.txt"
 ".\obj\UART.axf" - 0 Error(s), 18 Warning(s).
@@ -125,24 +125,24 @@ Package Vendor: Nuvoton
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:RTOS:Keil RTX:4.81.1
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
-      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
-      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
-      Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
       Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
+      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
-      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
+      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
+      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
+      Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib
 
    * Component: ARM::CMSIS:CORE:5.0.2
 
    * Component: ::CMSIS:RTOS:1.0.0 (API)
-Build Time Elapsed:  00:00:12
+Build Time Elapsed:  00:00:10
 </pre>
 </body>
 </html>
