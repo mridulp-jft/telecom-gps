@@ -19803,7 +19803,7 @@ static void Timer2_Callback (void const *arg)
 	batteryind();
   i2ctimeout++;
 
-	life++;
+  life++;
 
 }
 
@@ -19834,12 +19834,6 @@ static void Timer2_Callback (void const *arg)
     }
   }
 }
- 
-
-
-
-
-
 
 __inline void batteryind (void)
 {

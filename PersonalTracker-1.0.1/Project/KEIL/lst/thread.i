@@ -21118,8 +21118,11 @@ extern int32_t g_u8RecDataptr;
 int send_on = 1;
 extern int loop();
 extern osMutexId	(uart_mutex_id); 
-char signalquality[5] = {0};
+extern char vehicleregnum[15];
 
+char signalquality[5] = {0};
+char IP[50] = "104.236.203.4";
+char PORT[6] = "5556";
 int start_thead = 0;
 
 int32_t signal;
@@ -21330,7 +21333,6 @@ void smsrequest(int _case, char* arg1, char* arg2){
         }while(!(r1 || r2 || r3 ||((tmr0sec >= 5))));	 
 
         if(strstr(g_u8RecData, ">")){
-        
           tmr0sec = 0;
           g_u8RecDataptr=0;
           memset(g_u8RecData,0,550);
@@ -21347,13 +21349,12 @@ void smsrequest(int _case, char* arg1, char* arg2){
           }while(!(r1 || r2 || r3 ||((tmr0sec >= 5))));	 
         }
         osMutexRelease(uart_mutex_id);
-
       break;
     case 7:
-
-
-
-
+        memset(IP,0,50);
+        parse_g(g_u8RecData, 1, 1, '(', ')' , IP);
+        memset(PORT,0,6);
+        parse_g(g_u8RecData, 2, 2, '(', ')' , PORT);    
       break;
     case 8:
         (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(4))) + ((5)<<2)))) = 0; 
@@ -21377,17 +21378,15 @@ void sms_mc60(void){
   int delmsg = 0;
   
 
+      
+ 
+  
   if(RI == 1)
   {
-	
-
-
-
+ 
   (*((volatile uint32_t *)(((((uint32_t)0x50000000) + 0x04200)+(0x40*(1))) + ((2)<<2))))=0;
-
 	osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
 	tmr0sec=0;
-
 	r1=0;
 	r2=0;
 	r3=0;
@@ -21422,15 +21421,7 @@ void sms_mc60(void){
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= 5))));	 
    if((r1 || r2 || r3))
     {
-
-
-
-
-
-
-
-
-      delmsg = 1;
+     delmsg = 1;
     }
     r1=r2=r3=0;   
 
@@ -21479,8 +21470,16 @@ void sms_mc60(void){
       strcat(debug_at,"\r\n\r\n");
       memset(ph_num,0,15);
       parse_g(g_u8RecData,3,4,'"','"',ph_num); 
+    }   
+    else if(strstr(g_u8RecData,"LIC")){
+      smsreq = 10;
       
-    }           
+      memset(vehicleregnum, 0, 15);
+      parse_g(g_u8RecData,1,1,'(',')',vehicleregnum); 
+    }       
+
+  smsrequest(smsreq, ph_num, debug_at);
+   
   
   if(delmsg == 1)
   {
@@ -21490,7 +21489,6 @@ void sms_mc60(void){
     
   osMutexRelease(uart_mutex_id);
 
-  smsrequest(smsreq, ph_num, debug_at);
   osDelay(10);
   }
 }
@@ -21561,8 +21559,9 @@ void Thread (void const *argument)
       }
     }
     SendAT("\r\nAT+QSCLK=1\r\n\r\n", "Ready", "OK" , "ERROR",5);
-    
-    SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n\r\n","CONNECT","ERROR","FAIL",10);	
+    memset(temp, 0, 100);
+    sprintf(temp,"\r\nAT+QIOPEN=\"TCP\",\"%s\",\"%s\"\r\n\r\n",IP,PORT);
+    SendAT(temp,"CONNECT","ERROR","FAIL",10);	
     network=0;
     if (start_thead != 0){
     osSignalWait (0x0001, 0xFFFFFFFFU); 
@@ -21591,58 +21590,6 @@ void Thread (void const *argument)
   }
 }
 
-
-void Thread1 (void const *argument)
-{
-	while (1) 
-	{
-    mainla = 0;
-    th1la = 0;
-    th2la = 1;  
-		SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",1);	
-    osDelay(100);
-    
-    cpinquerry();
-    if(cpinready==1)
-    {
-      cregquerry();
-      if(cregready == 1)
-      {
-        SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIREGAPP\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QILOCIP\r\n\r\n", "z", "OK" , "ERROR",2);	
-      }
-    }
-		SendAT("\r\nAT+QSCLK=1\r\n\r\n", "Ready", "OK" , "ERROR",5);
-
-		SendAT("\r\nAT+CSQ\r\n\r\n", "Ready", "OK" , "ERROR",4);	
-		SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n\r\n","CONNECT","ERROR","FAIL",10);	
-		network=0;
-		TCP_Send("\r\nAT+QISEND\r\n\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
-
-		if(network == 1)
-		{
-      Save_FS();
-  
-			SendAT("\r\nAT+QICLOSE\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
-			SendAT("\r\nAT+CFUN=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
-			SendAT("\r\nAT+CFUN=1\r\n\r\n", "Ready", "NOT INSERTED" , "ERROR",10);
- 
-      manualdelay(500);
-    }
-		else
-		{
-
-
-
-
-
-      osDelay(28000);                                         
-		}
-  }
-}
 
 
 __inline void strreplace(char s[], char chr, char repl_chr)
@@ -21800,7 +21747,7 @@ int loop(){
     motion = 1;
     if(motion!=0){
     csq();      
-    SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
+    SendAT_GPS("\r\n\r\nAT+QGNSSRD = \"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
     signal = osSignalSet (tid_Thread, 0x0001);
 
    }      
