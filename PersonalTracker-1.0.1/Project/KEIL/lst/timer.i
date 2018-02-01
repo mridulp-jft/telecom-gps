@@ -19800,7 +19800,7 @@ static uint32_t os_timer_cb_Timer2[6]; const osTimerDef_t os_timer_def_Timer2 = 
 static void Timer2_Callback (void const *arg) 
 {
 	tmr0sec++;
-	batteryind();
+	
   i2ctimeout++;
 
   life++;

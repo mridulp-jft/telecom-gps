@@ -39,7 +39,7 @@ static osTimerDef (Timer2, Timer2_Callback);
 static void Timer2_Callback (void const *arg) 
 {
 	tmr0sec++;
-	batteryind();
+	//batteryind();
   i2ctimeout++;
 //	PA3^=1;
   life++;

@@ -26,112 +26,26 @@ Project File Date:  12/07/2017
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'PersonalTracker_MC60_Nano110LE3BN'
+Build target 'PersonalTracker_MC60_Nano110LE3BN'
 creating preprocessor file for system_Nano100Series.c...
-assembling startup_Nano100Series.s...
 creating preprocessor file for Thread.c...
 creating preprocessor file for Timer.c...
-compiling system_Nano100Series.c...
 creating preprocessor file for main.c...
-compiling Thread.c...
-Thread.c(14): warning:  #1295-D: Deprecated declaration clear - give arg types
-  extern void clear();
-Thread.c(37): warning:  #1295-D: Deprecated declaration loop - give arg types
-  extern int loop();
-Thread.c(74): warning:  #177-D: variable "sn"  was declared but never referenced
-    char *sn = sender_num+3;
-Thread.c(435): warning:  #223-D: function "SendAT_FS" declared implicitly
-    SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",5);	
-Thread.c(675): warning:  #940-D: missing return statement at end of non-void function "loop" 
-  }
-Thread.c(680): warning:  #1-D: last line of file ends without a newline
-   
-Thread.c: 6 warnings, 0 errors
-compiling Timer.c...
 creating preprocessor file for sys.c...
-compiling main.c...
-main.c(95): warning:  #1295-D: Deprecated declaration loop - give arg types
-  int loop();
-main.c(306): warning:  #550-D: variable "OUT_X_L_A"  was set but never used
-    int8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A;
-main.c(306): warning:  #550-D: variable "OUT_Y_L_A"  was set but never used
-    int8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A;
-main.c(306): warning:  #550-D: variable "OUT_Z_L_A"  was set but never used
-    int8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A;
-main.c(307): warning:  #177-D: variable "CTRL_REG4_A"  was declared but never referenced
-    uint16_t STATUS_REG_A, CTRL_REG4_A;
-main.c(617): warning:  #550-D: variable "dump"  was set but never used
-    char dump;
-main.c(1103): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char latitude[12] = 0;
-main.c(1104): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char longitude[12] = 0;
-main.c(1105): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char date[7] = 0;
-main.c(1106): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char time[7] = 0;
-main.c(1107): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char knots[5] = 0;
-main.c(1108): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char head[7] = 0;
-main.c(1109): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char alt[6] = 0;
-main.c(1102): warning:  #177-D: variable "ext_bat"  was declared but never referenced
-    float ext_bat, int_bat, lati, longi, speed;
-main.c(1102): warning:  #177-D: variable "int_bat"  was declared but never referenced
-    float ext_bat, int_bat, lati, longi, speed;
-main.c(1102): warning:  #177-D: variable "lati"  was declared but never referenced
-    float ext_bat, int_bat, lati, longi, speed;
-main.c(1102): warning:  #177-D: variable "longi"  was declared but never referenced
-    float ext_bat, int_bat, lati, longi, speed;
-main.c(1102): warning:  #177-D: variable "speed"  was declared but never referenced
-    float ext_bat, int_bat, lati, longi, speed;
-main.c(1103): warning:  #177-D: variable "latitude"  was declared but never referenced
-    char latitude[12] = 0;
-main.c(1104): warning:  #177-D: variable "longitude"  was declared but never referenced
-    char longitude[12] = 0;
-main.c(1105): warning:  #177-D: variable "date"  was declared but never referenced
-    char date[7] = 0;
-main.c(1107): warning:  #177-D: variable "knots"  was declared but never referenced
-    char knots[5] = 0;
-main.c(1108): warning:  #177-D: variable "head"  was declared but never referenced
-    char head[7] = 0;
-main.c(1109): warning:  #177-D: variable "alt"  was declared but never referenced
-    char alt[6] = 0;
-main.c(1110): warning:  #177-D: variable "sat"  was declared but never referenced
-    char* sat = 0;
-main.c(1112): warning:  #177-D: variable "latdir"  was declared but never referenced
-    char* latdir = 0;
-main.c(1113): warning:  #177-D: variable "longdir"  was declared but never referenced
-    char* longdir = 0;
-main.c: 27 warnings, 0 errors
 creating preprocessor file for clk.c...
-compiling sys.c...
 creating preprocessor file for gpio.c...
 creating preprocessor file for uart.c...
-compiling clk.c...
 creating preprocessor file for retarget.c...
-compiling gpio.c...
 creating preprocessor file for adc.c...
-compiling uart.c...
 creating preprocessor file for wdt.c...
-compiling retarget.c...
-..\..\Library\StdDriver\src\retarget.c(500): warning:  #177-D: variable "ptr"  was declared but never referenced
-    int ptr=0;
-..\..\Library\StdDriver\src\retarget.c: 1 warning, 0 errors
-compiling adc.c...
 creating preprocessor file for wwdt.c...
-compiling wdt.c...
 creating preprocessor file for i2c.c...
 creating preprocessor file for RTX_Conf_CM.c...
-compiling wwdt.c...
-compiling i2c.c...
-compiling RTX_Conf_CM.c...
 linking...
-Program Size: Code=26728 RO-data=700 RW-data=356 ZI-data=14204  
+Program Size: Code=27524 RO-data=1152 RW-data=372 ZI-data=15188  
 After Build - User command #1: fromelf --bin ".\obj\UART.axf" --output ".\obj\UART.bin"
 After Build - User command #2: fromelf --text -c ".\obj\UART.axf" --output ".\obj\UART.txt"
-".\obj\UART.axf" - 0 Error(s), 34 Warning(s).
+".\obj\UART.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -157,24 +71,24 @@ Package Vendor: Nuvoton
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:RTOS:Keil RTX:4.81.1
-      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
-      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
-      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
+      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
-      Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
+      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
+      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
       Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
+      Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
 
    * Component: ARM::CMSIS:CORE:5.0.2
 
    * Component: ::CMSIS:RTOS:1.0.0 (API)
-Build Time Elapsed:  00:00:10
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

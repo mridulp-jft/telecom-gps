@@ -21151,7 +21151,7 @@ extern char * r2;
 extern char * r3;
 extern int motion;
 extern char RI;
-void csq(void);
+ void csq(void);
 void smsrequest(int _case, char* arg1, char* arg2){
   char *sn = sender_num+3;
   int go = 0;
@@ -21552,7 +21552,7 @@ void Thread (void const *argument)
       if(cregready == 1)
       {
         SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIREGAPP=\"isafe\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP=\"iot.com\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
         SendAT("\r\nAT+QIREGAPP\r\n\r\n", "Ready", "OK" , "ERROR",5);	
         SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
         SendAT("\r\nAT+QILOCIP\r\n\r\n", "z", "OK" , "ERROR",2);	
@@ -21644,7 +21644,7 @@ __inline void manualdelay(int delayms)
 
 
 
-void csq(){
+extern void csq(){
  
   static int attry;
 
@@ -21737,25 +21737,7 @@ __inline void fileopen(void)
 
 
 
-int loop(){
-  
-    mainla = 0;
-    th1la = 1;
-    th2la = 0;  
-    sms_mc60();
 
-    motion = 1;
-    if(motion!=0){
-    csq();      
-    SendAT_GPS("\r\n\r\nAT+QGNSSRD = \"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	
-    signal = osSignalSet (tid_Thread, 0x0001);
-
-   }      
-    osDelay(4900);  
-
-
-}
-  
 
  
  

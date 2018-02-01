@@ -45,6 +45,8 @@ extern void Init_Timers (void);
 extern void SendChar(int ch);
 extern char fileinstance[20];
 extern char signalquality[5];
+extern void csq(void);
+extern void sms_mc60(void);
 void clear(void);
 extern	int32_t life;
 extern int8_t i2ctimeout;
@@ -72,7 +74,7 @@ extern void SendChar_To_UART1(int ch);
 extern void remove_all_chars(char* str, char c, char d);
 void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
-void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+__inline void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 void Save_FS(void);
 void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 __inline uint8_t I2C_Write(uint16_t u16Address, uint8_t u8Data);
@@ -88,11 +90,13 @@ uint8_t u8InChar=0xFF;
 int32_t g_u8RecDataptr=0;
 int32_t timer0ticks=0;
 int32_t tmr0sec=0;
+extern int32_t signal;
+extern osThreadId tid_Thread;                                          // thread id
 float	u32ADC0Result;
 float u32ADC0Result1;
 int8_t charging, cpinready, cregready;
 int motion_counts,immotion_counts;
-int loop();
+__inline void loop();
 int seeker = 0;
 int breaker=0;
 /* Global variables */
@@ -122,7 +126,7 @@ double OUT_P ,OUT_N;
 int motion = 0;
 int imeiptr=0;
 char dmsg[100];
-char vehicleregnum[15];
+char vehicleregnum[15] = "DL15AN1234";
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define functions prototype																																							*/
 /*---------------------------------------------------------------------------------------------------------*/
@@ -419,6 +423,26 @@ int main(void)
 /*---------------------------------------------------------------------------------------------------------*/
 /* ISR to handle UART Channel 0 interrupt event																														*/
 /*---------------------------------------------------------------------------------------------------------*/
+__inline void loop(){
+  
+    mainla = 0;
+    th1la = 1;
+    th2la = 0;  
+    sms_mc60();
+
+    motion = 1;
+    if(motion!=0){
+      csq();      
+      SendAT_GPS("\r\n\r\nAT+QGNSSRD = \"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",10);	//\"NMEA/RMC\"\"NMEA/GGA\"
+      signal = osSignalSet (tid_Thread, 0x0001);
+
+   }      // suspend thread
+    osDelay(4900);  
+
+
+}
+  
+
 void UART1_IRQHandler(void)
 {
 	//	UART1_TEST_HANDLE();
@@ -705,11 +729,11 @@ osMutexRelease(uart_mutex_id);
 		r3 = strstr(g_u8RecData, "ERROR");
 			
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
-clear();
+  clear();
 	PB2=1;
   memset(cregresp,0,10);
   parse_g(g_u8RecData, 1, 2, ',', '\n' , cregresp);
-  if(strstr(cregresp,"1") || strstr(cregresp, "5"))
+  if(strstr(cregresp,"1") || strstr(cregresp, "5") || strstr(cregresp, "3") || strstr(cregresp, "2"))
   {
     cregready=1;
   }
@@ -720,6 +744,9 @@ clear();
   
   
   osMutexRelease(uart_mutex_id);
+//  if (!cregready){
+//      SendAT("\r\nAT+COPS=?\r\n\r\n", "Ready", "OK" , "ERROR",10);	    
+//  }
   osDelay(5);
  
 }
@@ -777,7 +804,7 @@ osDelay(10);
 }
 
 void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
-{	osDelay(100);
+{	//osDelay(100);
 	osMutexWait(uart_mutex_id, osWaitForever);
 	tmr0sec=0;
 //	timeout =5;
@@ -815,7 +842,7 @@ clear();
   
   PB2=1;
   osMutexRelease(uart_mutex_id);
-osDelay(10);
+//osDelay(10);
 }
 
 void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout)
@@ -1097,26 +1124,37 @@ osDelay(5);
 
 
 
-void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
+__inline void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
+  int powerstatus;
+  int ignition;
+  int fix;
+  int emergencystatus;
+  char tamperalert;
   float ext_bat, int_bat, lati, longi, speed;
+  float batteryvoltage, inputvoltage;
   char latitude[12] = 0;
   char longitude[12] = 0;
-  char date[7] = 0;
-  char time[7] = 0;
-  char knots[5] = 0;
-  char head[7] = 0;
-  char alt[6] = 0;
-  char* sat = 0;
-  char* fix = 0;
-  char* latdir = 0;
-  char* longdir = 0;
-  
+  char gpsdate[7] = 0;
+  char gpstime[7] = 0;
+  char kmph[6] = 0;
+  char heading[8] = 0;
+  char alt[8] = 0;
+  char sat[2] = 0;
+  char latdir[2] = 0;
+  char longdir[2] = 0;
+  char hdop[6] = 0;
+  char pdop[5] = 0;
+  char networkoperator[30] = 0;
+  char mcc[5] = 0;
+  char mnc[5] = 0;
+  char lac[5] = 0;
+  char cellid[10] = 0;
   
   
   SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "OK" , "ERROR",5);	
 	PB2=0;
-	osDelay(100);
+	//osDelay(100);
 	osMutexWait(uart_mutex_id, osWaitForever);
   
 	tmr0sec=0;
@@ -1152,8 +1190,8 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,RXBUFSIZE);
 //	printf("%c",0x1A);
+	memset(g_u8RecData,0,RXBUFSIZE);
   clear();
 
 	printf("\r\n\r\nAT+QGNSSRD =\"NMEA/RMC\"\r\n\r\n\r\n");
@@ -1163,22 +1201,21 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		r3 = strstr(g_u8RecData, response3);
 	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
   clear();
-  parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
-  parse_g(temp, 1, 1, ',', '.' , time);
-  feild_response(temp, 2, fix);
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+	if(strstr(g_u8RecData,"GNRMC"))
+  {  
+    memset(temp, 0, 100);
+    parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
+    parse_g(temp, 1, 1, ',', '.' , gpstime);
+    parse_g(temp, 3, 4, ',', ',' , latitude);
+    parse_g(temp, 4, 5, ',', ',' , latdir);
+    parse_g(temp, 5, 6, ',', ',' , longitude);
+    parse_g(temp, 6, 7, ',', ',' , longdir);
+   // parse_g(temp, 7, 8, ',', ',' , knots);
+    parse_g(temp, 8, 9, ',', ',' , heading);
+    parse_g(temp, 9, 10, ',', ',' , gpsdate);
+    if(latitude != '\0')
+      fix = 1;
+    
 	tmr0sec=0;
 	r1=0;
 	r2=0;
@@ -1195,30 +1232,159 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		r3 = strstr(g_u8RecData, response3);
 	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
   clear();  
+
+  memset(temp, 0, 100);
   parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
+  parse_g(temp, 7, 8, ',', ',' , sat);
+  parse_g(temp, 8, 9, ',', ',' , hdop);
+  parse_g(temp, 9, 10, ',', ',' , alt);
+  
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,RXBUFSIZE);
+//	printf("%c",0x1A);
+  clear();
+
+	printf("\r\n\r\nAT+QGNSSRD=\"NMEA/VTG\"\r\n\r\n\r\n");
+	do{
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
+  clear();  
+
+  memset(temp, 0, 100);
+  parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
+  parse_g(temp, 7, 8, ',', ',' , kmph);
+  
+ 
+  
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,RXBUFSIZE);
+//	printf("%c",0x1A);
+  clear();
+
+	printf("\r\n\r\nAT+QGNSSRD=\"NMEA/GSA\"\r\n\r\n\r\n");
+	do{
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
+  clear();  
+
+  memset(temp, 0, 100);
+  parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
+  parse_g(temp, 15, 16, ',', ',' , pdop);  
+  
+ 
+  
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,RXBUFSIZE);
+//	printf("%c",0x1A);
+  clear();
+
+	printf("\r\n\r\nAT+COPS?\r\n\r\n\r\n");
+	do{
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
+  clear();  
+
+  parse_g(g_u8RecData, 1,2, '"', '"' , networkoperator);  
 
 
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,RXBUFSIZE);
+//	printf("%c",0x1A);
+  clear();
 
+	printf("\r\n\r\nAT+QENG = 2\r\n\r\n\r\n");
+	do{
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
+  clear();  
+  
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,RXBUFSIZE);
+//	printf("%c",0x1A);
+  clear();
 
+	printf("\r\n\r\nAT+QENG?\r\n\r\n\r\n");
+	do{
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
+  clear();  
 
+  parse_g(g_u8RecData, 2,3, ',', ',' , mcc);    
+  parse_g(g_u8RecData, 3,4, ',', ',' , mnc);    
+  parse_g(g_u8RecData, 4,5, ',', ',' , lac);
+  parse_g(g_u8RecData, 5,6, ',', ',' , cellid);    
+  
 
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,RXBUFSIZE);
+//	printf("%c",0x1A);
+  clear();
+
+	printf("\r\n\r\nAT+QENG = 0\r\n\r\n\r\n");
+	do{
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
+  clear();  
+  
+  
 
   
-	if(strstr(g_u8RecData,"GNRMC"))
-	{
-    packethistory = 'L';
-    u32ADC0Result = 3;
-    ADC_START_CONV(ADC);
-    u32ADC0Result = ADC_GET_CONVERSION_DATA(ADC, 0);
-    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
-		memset(temp,0,100);
-    feild_response(g_u8RecData, 5, temp);    
-		parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
-    sprintf(g_u8SendData, "$%s,%s,%s,NR,%c,%s,%s,",header, vendorID, firmwareversion, packethistory, imei,vehicleregnum);
-		strcat(g_u8SendData,temp);
-		strcat(g_u8SendData,",");
-		strcat(g_u8SendData,signalquality);
-		strcat(g_u8SendData,",");
+  
+  packethistory = 'L';
+  u32ADC0Result = 3;
+  ADC_START_CONV(ADC);
+  u32ADC0Result = ADC_GET_CONVERSION_DATA(ADC, 0);
+  u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
+  batteryvoltage = u32ADC0Result;
+  //memset(temp,0,100);
+  //feild_response(g_u8RecData, 5, temp);    
+  //parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
+  sprintf(g_u8SendData, "$%s,%s,%s,NR,%c,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,\
+  %s,%s,%d,%d,%f,%f,%d,%c,%s,%s,%s,%s,%s"\
+  ,header, vendorID, firmwareversion, packethistory, imei,vehicleregnum,fix,gpsdate,\
+  gpstime,latitude,latdir,longitude,longdir,kmph,heading,sat,alt,pdop,hdop,networkoperator,\
+  ignition,powerstatus,inputvoltage,batteryvoltage,emergencystatus,tamperalert,signalquality,\
+  mcc, mnc, lac, cellid);
+  //strcat(g_u8SendData,temp);
+  //strcat(g_u8SendData,",");
+  //strcat(g_u8SendData,signalquality);
+  //strcat(g_u8SendData,",,,,,");
     
 		memset(temp,0,100);
 		sprintf(temp,",F=%.1f",u32ADC0Result);
@@ -1227,7 +1393,7 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 		sprintf(temp,",~`,LIFE=%d\n",life);
 		strcat(g_u8SendData,temp);
   
-  
+
   
   }
   if((strlen(g_u8SendData) > 2900))
