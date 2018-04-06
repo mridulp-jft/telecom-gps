@@ -32,3 +32,4 @@
 .\obj\main.o: C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver\PS2.h
 .\obj\main.o: C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver\CLK.h
 .\obj\main.o: C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver\ACMP.h
+.\obj\main.o: WinboundFlash.h

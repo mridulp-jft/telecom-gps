@@ -21104,7 +21104,7 @@ extern void cregquerry(void);
 extern void Send_FS(void);
 void fileclose(void);
 __inline void fileopen(void);
-extern char g_u8RecData[550];
+extern char g_u8RecData[1000];
 extern char g_u8SendData[3500];
 char ph_num[15] = {0};
 char sender_num[15] = {0};
@@ -21161,7 +21161,7 @@ void smsrequest(int _case, char* arg1, char* arg2){
       osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
       tmr0sec = 0;
       g_u8RecDataptr=0;
-      memset(g_u8RecData,0,550);
+      memset(g_u8RecData,0,1000);
       r1=0;
       r2=0;
       r3=0;
@@ -21195,7 +21195,7 @@ void smsrequest(int _case, char* arg1, char* arg2){
       osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
       tmr0sec = 0;
       g_u8RecDataptr=0;
-      memset(g_u8RecData,0,550);
+      memset(g_u8RecData,0,1000);
       r1=0;
       r2=0;
       r3=0;
@@ -21229,7 +21229,7 @@ void smsrequest(int _case, char* arg1, char* arg2){
       osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
       tmr0sec = 0;
       g_u8RecDataptr=0;
-      memset(g_u8RecData,0,550);
+      memset(g_u8RecData,0,1000);
       r1=0;
       r2=0;
       r3=0;
@@ -21277,7 +21277,7 @@ void smsrequest(int _case, char* arg1, char* arg2){
         osMutexWait(uart_mutex_id, 0xFFFFFFFFU);
         tmr0sec = 0;
         g_u8RecDataptr=0;
-        memset(g_u8RecData,0,550);
+        memset(g_u8RecData,0,1000);
         printf("%c",0x1A);
         clear();
         printf(arg2);
@@ -21290,7 +21290,7 @@ void smsrequest(int _case, char* arg1, char* arg2){
 
         tmr0sec = 0;
         g_u8RecDataptr=0;
-        memset(g_u8RecData,0,550);
+        memset(g_u8RecData,0,1000);
         r1=0;
         r2=0;
         r3=0;
@@ -21305,7 +21305,7 @@ void smsrequest(int _case, char* arg1, char* arg2){
 
         tmr0sec = 0;
         g_u8RecDataptr=0;
-        memset(g_u8RecData,0,550);
+        memset(g_u8RecData,0,1000);
         r1=0;
         r2=0;
         r3=0;
@@ -21320,7 +21320,7 @@ void smsrequest(int _case, char* arg1, char* arg2){
        
         tmr0sec = 0;
         g_u8RecDataptr=0;
-        memset(g_u8RecData,0,550);
+        memset(g_u8RecData,0,1000);
         r1=0;
         r2=0;
         r3=0;
@@ -21335,7 +21335,7 @@ void smsrequest(int _case, char* arg1, char* arg2){
         if(strstr(g_u8RecData, ">")){
           tmr0sec = 0;
           g_u8RecDataptr=0;
-          memset(g_u8RecData,0,550);
+          memset(g_u8RecData,0,1000);
           r1=0;
           r2=0;
           r3=0;
@@ -21391,7 +21391,7 @@ void sms_mc60(void){
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,550);
+	memset(g_u8RecData,0,1000);
 
 
 	printf("\r\nAT+CMGF=1\r\n\r\n");
@@ -21409,7 +21409,7 @@ void sms_mc60(void){
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,550);
+	memset(g_u8RecData,0,1000);
 
 
 	printf("\r\nAT+CMGR=1\r\n\r\n");
@@ -21656,7 +21656,7 @@ extern void csq(){
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,550);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
 	printf("\r\nAT+CSQ\r\n\r\n");

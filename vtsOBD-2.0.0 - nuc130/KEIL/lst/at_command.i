@@ -24245,13 +24245,82 @@ __declspec(noreturn) void os_error (uint32_t error_code);
 #line 8 "at_command.c"
 #line 9 "at_command.c"
 
+#line 1 "WinboundFlash.h"
+ 
+
+
+
+
+
+
+
 
  
-extern char g_u8SendData[3500];
-extern char g_u8RecData[500];
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+ 
+ 
+ 
+extern void Open_SPI_Flash(void);
+extern unsigned int SpiFlash_ReadMidDid(void);
+extern void SpiFlash_ChipErase(void);
+extern unsigned int SpiFlash_ReadStatusReg1(void);
+extern unsigned int SpiFlash_ReadStatusReg2(void);
+extern void SpiFlash_WaitReady(void);
+extern void SpiFlash_PageProgram(unsigned char *DataBuffer, unsigned int StartAddress, unsigned int ByteCount);
+extern void SpiFlash_ReadData(unsigned char *DataBuffer, unsigned int StartAddress, unsigned int ByteCount);
+
+
+   
+
+   
+
+   
+
+ 
+#line 11 "at_command.c"
+
+
+
+
+
+
+ 
+extern char g_u8SendData[2500];
+extern char g_u8RecData[1000];
 extern	int32_t life;
 extern void SendChar(int ch);
 extern void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+
+
+char SrcArray[257];char DestArray[257];
+
+uint8_t g_u8DeviceAddr = 0x1E;
+uint32_t u32Status;
+uint8_t g_au8TxData[1];
+uint8_t g_u8RxData;
+uint8_t g_u8DataLen = 0;
+uint8_t sendfs=0;
+volatile uint8_t g_u8EndFlag = 0;
+extern void Open_SPI_Flash(void);
+extern unsigned int SpiFlash_ReadMidDid(void);
+uint32_t readpt = 256;
+extern int once;
+extern uint32_t pt;
+
+
 
  
 extern char obdresp[20];
@@ -24260,6 +24329,42 @@ extern char obdrespbinary[33];
 extern char suppportedpid[100][7];
 extern int pidcounter;
 extern char g_u8OBDRecData[100];
+
+extern char vehicleregnum[15];
+char signalquality[5] = {0};
+
+
+ 
+  int tcpsendchtimer;
+  int powerstatus = 0;
+  int ignition = 0;
+  int fix = 0;
+  int emergencystatus = 0;
+  char tamperalert = 'C';
+  float ext_bat, int_bat, lati, longi, speed;
+  float batteryvoltage = 0;
+  float inputvoltage = 0;
+  char latitude[12] = 0;
+  char longitude[12] = 0;
+  char gpsdate[7] = 0;
+  char gpstime[7] = 0;
+  char kmph[6] = 0;
+  char heading[8] = 0;
+  char alt[8] = 0;
+  char sat[2] = 0;
+  char latdir[2] = 0;
+  char longdir[2] = 0;
+  char hdop[6] = 0;
+  char pdop[5] = 0;
+  char networkoperator[30] = 0;
+  char mcc[5] = 0;
+  char mnc[5] = 0;
+  char lac[5] = 0;
+  char cellid[10] = 0;
+  char packetstatus = 'L';
+  char nmr[200] = 0;
+  
+
 
 
 
@@ -24279,7 +24384,7 @@ char * r2;
 char * r3;
 char temp[100];
 char fileinstance[20] = {0};
-int8_t  network;uint8_t sendfs=0;
+int8_t  network;
 int breaker=0;
 int seeker = 0;
 int imeiptr0=0;
@@ -24324,18 +24429,20 @@ __inline void strreplace(char s[], char chr, char repl_chr);
 void cregquerry(void);
 void cpinquerry(void);
 void Save_FS(void);
-void Send_FS(void);
-
+char *response1;
+char *response2;
+char *response3;
 
  
 
 
 
-void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout)
+void SendAT(char * command, char * res1, char * res2, char * res3, int32_t timeout)
 {
   static int attry;
-  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
-	
+  response1 = res1;
+  response2 = res2;
+  response3 = res3;
 
 	tmr0sec=0;
 
@@ -24343,15 +24450,16 @@ void SendAT(char * command, char * response1, char * response2, char * response3
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
 	printf(command);
-
 	do{
+    g_u8RecData[0] = '\r';
 		r1 = strstr(g_u8RecData, response1);
 		r2 = strstr(g_u8RecData, response2);
 		r3 = strstr(g_u8RecData, response3);
+    
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
 
    if(!(strstr(command, "QILOCIP") || strstr(command, "QGNSSC")))
@@ -24361,19 +24469,12 @@ void SendAT(char * command, char * response1, char * response2, char * response3
         (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((13)<<2))))=1;
         attry++;
         if(attry > 3){
-
             printf("\r\nAT+CFUN=1,1\r\n");	
-
-
-
         }
         (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((13)<<2))))=0;
       }
       else{attry=0;}
    }
-  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
-
-   
 
 }
 
@@ -24485,106 +24586,107 @@ void clear()
     }
 }
 
-void Send_FS(void)
+__inline void Send_FS(void)
 {
   if(sendfs==1){
-  TCP_Send_ch("\r\nAT+QISEND\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
+  TCP_Send_ch("\r\nAT+QISEND\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",5);	
   }
 }
 
 
 void Save_FS(void)
-{
+{ char * pch = 0;
+  int i,j;
   int len=0;
- 	
-  fileopen();
-  SendAT("\r\nAT+QFLDS=\"UFS\"\r\n", "Ready", "OK" , "ERROR",3);
-	memset(temp,0,100);
-	sprintf(temp,"\r\nAT+QFSEEK=%s,0,2\r\n",fileinstance);
-	SendAT(temp, "CONNECT", "OK" , "ERROR",10);	  
-  len = strlen(g_u8SendData);
-  strcat(g_u8SendData,"\n\n\n\n\n");  
-  len = strlen(g_u8SendData);
-
-  strreplace(g_u8SendData, 0x1A, '\n');  
-	memset(temp,0,100);
-	sprintf(temp,"\r\nAT+QFWRITE=%s,%d,3\r\n",fileinstance,(len));
-	SendAT(temp, "CONNECT", "OK" , "ERROR",3);	
-  len = strlen(g_u8SendData);
-  remove_all_chars(g_u8SendData,'\r',0x1A);
-  SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",20);	
-  if(strstr(g_u8RecData,"+QFWRITE"))
-  {
-    memset(g_u8SendData,0,3500);
+  strcat(g_u8SendData,"\n");
+  pch = strstr (g_u8SendData,",L,");
+  if (pch){
+    strncpy(pch,",H,",3);
   }
- 
-  fileclose();
-	
+  strreplace(g_u8SendData, 0x1A, '\n'); 
+  remove_all_chars(g_u8SendData,'\r',0x1A);
+  SpiFlash_WaitReady();
+  
+
+  remove_all_chars(g_u8SendData,'\n','\n'); 
+  strcat(g_u8SendData, "S**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************E\n");
+  life = strlen(g_u8SendData); 
+  times = life/256 + 1;
+  j = 0;
+  while(times > 0){
+    
+    memset(SrcArray,0,257);
+    for(i=0;i<256;i++){
+      SrcArray[i] = g_u8SendData[j];
+      j++;
+    }
+    manualdelay(25);
+    SpiFlash_PageProgram(SrcArray, pt, 256);
+    
+    memset(DestArray,0,257);
+    
+    SpiFlash_ReadData(DestArray, pt, 256);
+    times--; 
+    pt+=256;
+  }
+  memset(g_u8SendData,0,2500);
 }
 
  void cpinquerry()
 {
   int timeout;
-  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
 	
   
 	tmr0sec=0;
-	timeout =5;
+	timeout =10;
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
 	printf("\r\nAT+CPIN?\r\n\r\n");
 	do{
-		r1 = strstr(g_u8RecData, "CPIN: READY");
+    g_u8RecData[0] = '\r';
+		r1 = strstr(g_u8RecData, "NOT READY");
 		r2 = strstr(g_u8RecData, "OK");
 		r3 = strstr(g_u8RecData, "ERROR");
 			
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
- clear();
+  clear();
  
-  if(r1)
+  if(!strstr(g_u8RecData, "NOT READY"))
   {
     cpinready=1;
   }
   else
   {
     cpinready=0;
-  }
-
-
-
+  } 
 }
 
 void cregquerry()
 {
   int timeout;
   char cregresp[10];
-  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
 	
   
 	tmr0sec=0;
-	timeout =5;
-	r1=0;
-	r2=0;
-	r3=0;
+	timeout =10;
+	r1=0;r2=0;r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
 	printf("\r\nAT+CREG?\r\n\r\n");
 	do{
+    g_u8RecData[0] = '\r';
 		r1 = strstr(g_u8RecData, "CPIN: READY");
 		r2 = strstr(g_u8RecData, "OK");
 		r3 = strstr(g_u8RecData, "ERROR");
-			
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
-clear();
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
+  clear();
   memset(cregresp,0,10);
   parse_g(g_u8RecData, 1, 2, ',', '\n' , cregresp);
   if(strstr(cregresp,"1") || strstr(cregresp, "5"))
@@ -24595,10 +24697,6 @@ clear();
   {
     cregready=0;
   }
-  
-  
-  
-  
  
 }
 
@@ -24609,13 +24707,12 @@ void SendAT_FS(char * command, char * response1, char * response2, char * respon
 {
 	tmr0sec=0;
 
-  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
 	
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 
 	clear();
 	printf(command);
@@ -24640,7 +24737,6 @@ clear();
       }
    }
   
-  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
 
 }
 
@@ -24688,94 +24784,56 @@ __inline int8_t checkallnumsinstring(char* checkstring)
 
 void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout)
 {
+  int outfromloop = 0;
   int tcpdatalength=0;
 	int tcpdataptr=0;
 	int times = 0;
 	int timesptr=0;
 	int tdp=0;
-	int tdpend=600;
+	int tdpend=300;
   char chdatalength[5];
-  char tcpdata[600];
+  char tcpdata[300];
   int  cc =0;
   breaker = 0;
-	
-	
 	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
- 	
 	printf("%c",0x1A);
-	tmr0sec=0;
-	tcptimeout =5;
-	r1=0;
-	r2=0;
-	r3=0;
-  SendAT("\r\nAT+QFLDs=\"UFS\"\r\n", "Ready", "OK" , "ERROR",50);
+  tcpsendchtimer = 0;
+
+do{
+  memset(tcpdata,0,300);
   
-  memset(chdatalength,0,5);
-  SendAT("\r\nAT+QFLST=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",50);
-  parse_g(g_u8RecData, 1, 2, ',', '\n' , chdatalength);
-	remove_all_chars(chdatalength, '\r', 0x1A);		
-  tcpdatalength =  atoi(chdatalength);
-
-  fileopen();
-
-  if(tcpdatalength%600 == 0)
-  {
-    times = (tcpdatalength/600);
+  SpiFlash_ReadData(tcpdata, readpt, 256);
+  if(tcpdata[0] != 0xFF && tcpdata[0] != '\0')
+    times = 1;
+  else{
+    SpiFlash_ChipErase();
+    times = 0;
+    pt = 0;
+    readpt = 0;
+    readpt = 0;
+    pt = 0;    
+    
   }
-  else
-  {
-    times = (tcpdatalength/600)+1;
-  }  
-
-  for(timesptr=0; timesptr<times ;timesptr++)
-  {
-	g_u8RecDataptr=0;
-
-		if(tcpdatalength>15)
-		{
+  if(times == 1){
       clear();
-      SendAT_GPS_WO_MUTEX("\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n", "+MGPSSTATUS", "OK" , "ERROR",10);	
-      memset(temp,0,100);
-      sprintf(temp,"\r\nAT+QFSEEK=%s,%d\r\n\r\n",fileinstance,seeker);
-      SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
-      if(seeker > tcpdatalength)
-      {
-        seeker = 0;
-        fileclose();
-        SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);
-        breaker = 1;
-        break;
-      }
-      if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
-      memset(temp,0,100);
-      clear();
-      sprintf(temp,"\r\nAT+QFREAD=%s,600\r\n\r\n",fileinstance);
-      SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
-      clear();
-      if(strstr(g_u8RecData, "+CME ERROR")){breaker = 1;break;}
-      if(strlen(g_u8RecData) < 100){
-        fileclose();
-        SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);
-        breaker = 1;
-        break;
-      }
       
-      memset(tcpdata,0,600);
-      remove_all_chars(g_u8RecData, '\r', 0x1A);	
-      cc=count_char('\n',g_u8RecData)-1;      
-      parse_g(g_u8RecData, 2,cc, '\n', '\n' , tcpdata);  
-      memset(temp,0,100);
+      tmr0sec=0;
+      tcptimeout =5;
+      r1=0;
+      r2=0;
+      r3=0;
 			g_u8RecDataptr=0;
 			tmr0sec=0;
-			memset(g_u8RecData,0,500);
-			printf(tcpcommand);
+			memset(g_u8RecData,0,1000);
+			printf("\r\nAT+QISEND=0\r\n\r\n\r\n");
 			do{
+        g_u8RecData[0] = '\r';
 				r1 = strstr(g_u8RecData, tcpresponse1);
 				r2 = strstr(g_u8RecData, tcpresponse2);
 				r3 = strstr(g_u8RecData, tcpresponse3);
 					
 			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
-clear();
+      clear();
 				tmr0sec=0;
 				if(r1)
 					{
@@ -24785,113 +24843,136 @@ clear();
 						r2=0;
 						r3=0;
 						g_u8RecDataptr=0;
-						memset(g_u8RecData,0,500);
+						memset(g_u8RecData,0,1000);
 						clear();
-
-
  						tcpdataptr=0;
             tdpend=strlen(tcpdata);
-           
+   
 						for(tdp=0;tdp<tdpend;tdp++)
 						{
-						SendChar(tcpdata[tdp]);
-						tcpdataptr++;
+              SendChar(tcpdata[tdp]);
+              tcpdataptr++;
             }
 						printf("%c",0x1A);
 						do{
+              g_u8RecData[0] = '\r';
 							r1 = strstr(g_u8RecData, tcpresponse1);
 							r2 = strstr(g_u8RecData, tcpresponse2);
 							r3 = strstr(g_u8RecData, tcpresponse3);
 						}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));
           }
 
-			if(!(r3))
-			{
+			if(!(r3)){
 				network=1;
         breaker = 1;        
 				break;
-
-			}
-			else
-			{
+			}else{
+        breaker = 0;
 				network=0;
 			}
+      
+      if(network == 0){    
+        
+        clear();
+        tmr0sec=0;
+        tcptimeout =5;
+        r1=0;
+        r2=0;
+        r3=0;
+        g_u8RecDataptr=0;
+        tmr0sec=0;
+        memset(g_u8RecData,0,1000);
+        printf("\r\nAT+QISEND=1\r\n\r\n\r\n");
+        do{
+          g_u8RecData[0] = '\r';
+          r1 = strstr(g_u8RecData, tcpresponse1);
+          r2 = strstr(g_u8RecData, tcpresponse2);
+          r3 = strstr(g_u8RecData, tcpresponse3);
+            
+        }while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
+        clear();
+          tmr0sec=0;
+          if(r1)
+            {
+              tmr0sec=0;
+              tcptimeout =5;
+              r1=0;
+              r2=0;
+              r3=0;
+              g_u8RecDataptr=0;
+              memset(g_u8RecData,0,1000);
+              clear();
+              tcpdataptr=0;
+              tdpend=strlen(tcpdata);
+     
+              for(tdp=0;tdp<tdpend;tdp++)
+              {
+                SendChar(tcpdata[tdp]);
+                tcpdataptr++;
+              }
+              printf("%c",0x1A);
+              do{
+                g_u8RecData[0] = '\r';
+                r1 = strstr(g_u8RecData, tcpresponse1);
+                r2 = strstr(g_u8RecData, tcpresponse2);
+                r3 = strstr(g_u8RecData, tcpresponse3);
+              }while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));
+            }
 
-    }
-   
-	if(network == 0 && timesptr>=times)
-	{
-
-	}
-  seeker+=600;
-		
-	}
-  
-  fileclose();
-  
-  
-  if(network == 0 && (timesptr>= times))
-  {
-  fileclose();
+        if(!(r3)){
+          network=1;
+          breaker = 1;        
+          break;
+        }else{
+          breaker = 0;
+          readpt+=256;
+          network=0;
+        }
+      }
+      if(tcpsendchtimer > 4){
+        breaker = 1;
+        break;
+      }else breaker = 0;
     
-  seeker = 0;
-  SendAT("\r\nAT+QFDEL=\"LOG.TXT\"\r\n", "Ready", "OK" , "ERROR",10);    
-
-  }
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
-	r1=0;
-	r2=0;
-	r3=0;
-	
-	
-
-
+    }
+  outfromloop = 1;
+  }while(times == 1);
 
 }
 
+
+
 void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout)
 {
-
-	
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
- 	
+	int tcpdatalength=0;
+	int tcpdataptr=0;
+	int times = 0;
+	int timesptr=0;
+	int tdp=0;
+	int tdpend=600;
 
 	tmr0sec=0;
 	tcptimeout =5;
 	r1=0;
 	r2=0;
 	r3=0;
-  tcpdataptr = 0;
-  
-
 	g_u8RecDataptr=0;
 	printf("%c",0x1A);
-	tcpdatalength = strlen(g_u8SendData);
-	if(tcpdatalength%300 == 0)
-	{
-		times = (tcpdatalength/300);
-	}
-	else
-		{
-			times = (tcpdatalength/300)+1;
-		}
+	tcpdatalength = strlen(tcpdata);
 		if(tcpdatalength>15)
 		{
 			clear();
-			for(timesptr = 0; timesptr <times  ; timesptr++)
-			{
 			g_u8RecDataptr=0;
 			tmr0sec=0;
-			memset(g_u8RecData,0,500);
-			printf(tcpcommand);
+			memset(g_u8RecData,0,1000);
+			printf("\r\nAT+QISEND=0\r\n\r\n\r\n");
 			do{
+        g_u8RecData[0] = '\r';
 				r1 = strstr(g_u8RecData, tcpresponse1);
 				r2 = strstr(g_u8RecData, tcpresponse2);
-				r3 = strstr(g_u8RecData, tcpresponse3);
-					
+				r3 = strstr(g_u8RecData, tcpresponse3);					
 			}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
       clear();
-
 				tmr0sec=0;
 				if(r1)
 					{
@@ -24901,162 +24982,129 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 						r2=0;
 						r3=0;
 						g_u8RecDataptr=0;
-						memset(g_u8RecData,0,500);
+						memset(g_u8RecData,0,1000);
 						clear();
-
-            
-						if(timesptr == (times-1))
-						{
-							tdpend = tcpdatalength%300;
-						}else{
-              tdpend = 300;
+						for(tdp=0;tdp<tcpdatalength;tdp++){
+						SendChar(tcpdata[tcpdataptr]);
+						tcpdataptr++;
             }
-						for(tdp=0;tdp<tdpend;tdp++)
-						{
-						SendChar(g_u8SendData[tcpdataptr]);
-						tcpdataptr++;}
 						printf("%c",0x1A);
 						do{
-							r1 = strstr(g_u8RecData, tcpresponse2);
+              g_u8RecData[0] = '\r';
+							r1 = strstr(g_u8RecData, tcpresponse1);
 							r2 = strstr(g_u8RecData, tcpresponse2);
 							r3 = strstr(g_u8RecData, tcpresponse3);
 						}while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));
-
-           clear();
-            
+           clear();            
           }
-
-			if(!(r3))
-			{
+			if(!(r3)){
 				network=1;
-				break;
+        sendfs = 0;
 			}
-			else
-			{
+			else{
 				network=0;
+        sendfs = 1;        
 			}
-		}
-
+	}else{network = 1;sendfs = 0;} 
    
-	if(network == 0 && timesptr>=times)
-	{
-		memset(g_u8SendData,0,3500);
-    Send_FS();
-    sendfs=1;
- 	}
-  else{
-		memset(g_u8SendData,0,3500);
-    sendfs=0;
+  tcpdatalength=0;
+  tcpdataptr=0;
+  times = 0;
+  timesptr=0;
+  tdp=0;
+  tdpend=600;  
+   
+  if(network == 0){  
+    tmr0sec=0;
+    tcptimeout =5;
+    r1=0;
+    r2=0;
+    r3=0;
+    g_u8RecDataptr=0;
+    printf("%c",0x1A);
+    tcpdatalength = strlen(tcpdata);
+      if(tcpdatalength>15)
+      {
+        clear();
+        g_u8RecDataptr=0;
+        tmr0sec=0;
+        memset(g_u8RecData,0,1000);
+        printf("\r\nAT+QISEND=1\r\n\r\n\r\n");
+        do{
+          g_u8RecData[0] = '\r';
+          r1 = strstr(g_u8RecData, tcpresponse1);
+          r2 = strstr(g_u8RecData, tcpresponse2);
+          r3 = strstr(g_u8RecData, tcpresponse3);            
+        }while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));	 
+        clear();
+          tmr0sec=0;
+          if(r1)
+            {
+              tmr0sec=0;
+              tcptimeout =5;
+              r1=0;
+              r2=0;
+              r3=0;
+              g_u8RecDataptr=0;
+              memset(g_u8RecData,0,1000);
+              clear();
+              for(tdp=0;tdp<tcpdatalength;tdp++){
+              SendChar(tcpdata[tcpdataptr]);
+              tcpdataptr++;
+              }
+              printf("%c",0x1A);
+              do{
+                g_u8RecData[0] = '\r';
+                r1 = strstr(g_u8RecData, tcpresponse1);
+                r2 = strstr(g_u8RecData, tcpresponse2);
+                r3 = strstr(g_u8RecData, tcpresponse3);
+              }while(!(r1 || r2 || r3 ||((tmr0sec >= tcptimeout))));
+             clear();           
+            }
+        if(!(r3)){
+          network=1;
+          sendfs = 0;
+        }
+        else{
+          network=0;
+          sendfs = 1;
+        }
+    if(network == 0 && timesptr>=times){
+      memset(g_u8SendData,0,2500);
+      sendfs=1;
+    }
+    else{
+      sendfs=0;
+    }
+    }else{network = 1; sendfs = 1;}
   }
-		
-	}
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
-
-
-
-
-
+  
+  if(sendfs == 1){
+    memset(tcpdata,0,300);
+    
+    SpiFlash_ReadData(tcpdata, readpt, 256);
+    if(tcpdata[0] != 0xFF)
+      sendfs = 1;
+    else
+      sendfs = 0;
+  }
 
 }
 
 
 
-void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
-{
- 	
-  SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "OK" , "ERROR",5);	
 
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
-	
-	tmr0sec=0;
-	r1=0;
-	r2=0;
-	r3=0;
-	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
-
-	clear();
-	if(checkallnumsinstring(imei) ||  (strlen(imei) < 5)||  (strlen(imei) > 16))
-	{
-		printf("\r\n\r\nAT+GSN\r\n\r\n");
-		do{
-			r1 = strstr(g_u8RecData, response1);
-			r2 = strstr(g_u8RecData, response2);
-			r3 = strstr(g_u8RecData, response3);
-		}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
-		memset(imei,0,25);
-		imeiptr0=0;
-		for(imeiptr=0;imeiptr<strlen(g_u8RecData);imeiptr++)
-		{
-			if((g_u8RecData[imeiptr]>47)	&& (g_u8RecData[imeiptr]<58))
-			{
-				imei[imeiptr0] = g_u8RecData[imeiptr];
-				imeiptr0++;
-      }
-		}
-	remove_all_chars(imei, '\r', 0x1a);		
-	}
-	tmr0sec=0;
-	r1=0;
-	r2=0;
-	r3=0;
-	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
-
-  clear();
-
-	printf(command);
-	do{
-		r1 = strstr(g_u8RecData, response1);
-		r2 = strstr(g_u8RecData, response2);
-		r3 = strstr(g_u8RecData, response3);
-	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
-  clear();
-	if(strstr(g_u8RecData,"GNRMC"))
-	{
-    memset(g_u8SendData,0,3500);
-    u32ADC0Result = 3;
-    ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADCR |= (1ul << 11));
-    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(0)] & (0xFFFFul << 0));
-    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
-		memset(temp,0,100);
-		parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
-		strcat(g_u8SendData,imei);
-		strcat(g_u8SendData,",");
-		strcat(g_u8SendData,temp);
-		memset(temp,0,100);
-		sprintf(temp,",F=%.1f",u32ADC0Result);
-		strcat(g_u8SendData,temp);
-  }
-  stlen = strlen(g_u8SendData);
-  if((strlen(g_u8SendData) > 2900))
-  {
-    memset(g_u8SendData,0,3500);
-    strcat(g_u8SendData,imei);
-    strcat(g_u8SendData,"error:RAMfull\n");
-  }
-
-	  
-  
-  
-  
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
-
-	
-	
-}
 
 void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
 
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=0;
 	
 	tmr0sec=0;
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
 	if(checkallnumsinstring(imei) ||  (strlen(imei) < 5))
@@ -25084,7 +25132,7 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-	memset(g_u8RecData,0,500);
+	memset(g_u8RecData,0,1000);
 	clear();
 	printf("%c",0x1A);
 	printf(command);
@@ -25114,13 +25162,10 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
   }
   if((strlen(g_u8SendData) > 2900))
   {
-    memset(g_u8SendData,0,3500);
+    memset(g_u8SendData,0,2500);
     strcat(g_u8SendData,imei);
     strcat(g_u8SendData,"error:RAMfull\n");
   }
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((2)<<2))))=1;
-
-
 
 }
 
@@ -25131,3 +25176,282 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 
 
 
+
+
+
+
+
+
+
+
+
+
+void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
+{
+  powerstatus = 0;
+  ignition = 0;
+  fix = 0;
+  emergencystatus = 0;
+  tamperalert = 'C';
+  ext_bat, int_bat, lati, longi, speed;
+  batteryvoltage = 0;
+  inputvoltage = 0;
+  latitude[12] = 0;
+  longitude[12] = 0;
+  gpsdate[7] = 0;
+  gpstime[7] = 0;
+  kmph[6] = 0;
+  heading[8] = 0;
+  alt[8] = 0;
+  sat[2] = 0;
+  latdir[2] = 0;
+  longdir[2] = 0;
+  hdop[6] = 0;
+  pdop[5] = 0;
+  networkoperator[30] = 0;
+  mcc[5] = 0;
+  mnc[5] = 0;
+  lac[5] = 0;
+  cellid[10] = 0;
+  packetstatus = 'L';
+  nmr[200] = 0;  
+
+
+
+
+	
+  SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR: 7103" , "OK",5);
+  clear();
+  
+
+  SendAT("\r\nAT+CSQ\r\n\r\n", "Ready", "OK" , "ERROR",4);	
+  parse_g(g_u8RecData, 1, 1, ' ', ',' , signalquality);	
+
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+ 	clear();
+	memset(g_u8RecData,0,1000);
+  printf("\r\n\r\nAT+GSN\r\n\r\n");
+  do{
+    g_u8RecData[0] = '\r';
+    r1 = strstr(g_u8RecData, response1);
+    r2 = strstr(g_u8RecData, response2);
+    r3 = strstr(g_u8RecData, response3);
+  }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+  memset(imei,0,25);
+  imeiptr0=0;
+  for(imeiptr=0;imeiptr<strlen(g_u8RecData);imeiptr++)
+  {
+    if((g_u8RecData[imeiptr]>47)	&& (g_u8RecData[imeiptr]<58))
+    {
+      imei[imeiptr0] = g_u8RecData[imeiptr];
+      imeiptr0++;
+    }
+  }
+	remove_all_chars(imei, '\r', 0x1a);		
+	
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,1000);
+  clear();
+
+	printf("\r\n\r\nAT+QGNSSRD =\"NMEA/RMC\"\r\n\r\n\r\n");
+	do{
+    g_u8RecData[0] = '\r';
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+  clear();
+	if(strstr(g_u8RecData,"GNRMC"))
+  {  
+    memset(temp, 0, 100);
+    parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
+    parse_g(temp, 1, 1, ',', '.' , gpstime);
+    parse_g(temp, 3, 4, ',', ',' , latitude);
+    parse_g(temp, 4, 5, ',', ',' , latdir);
+    parse_g(temp, 5, 6, ',', ',' , longitude);
+    parse_g(temp, 6, 7, ',', ',' , longdir);
+    parse_g(temp, 8, 9, ',', ',' , heading);
+    parse_g(temp, 9, 10, ',', ',' , gpsdate);
+    if(latitude != '\0')
+      fix = 1;
+    else
+      fix = 0;
+      
+    tmr0sec=0;
+    r1=0;
+    r2=0;
+    r3=0;
+    g_u8RecDataptr=0;
+    memset(g_u8RecData,0,1000);
+    clear();
+    printf("\r\n\r\nAT+QGNSSRD=\"NMEA/GGA\"\r\n\r\n\r\n");
+    do{
+      g_u8RecData[0] = '\r';
+      r1 = strstr(g_u8RecData, response1);
+      r2 = strstr(g_u8RecData, response2);
+      r3 = strstr(g_u8RecData, response3);
+    }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+    clear();  
+
+    memset(temp, 0, 100);
+    parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
+    parse_g(temp, 7, 8, ',', ',' , sat);
+    parse_g(temp, 8, 9, ',', ',' , hdop);
+    parse_g(temp, 9, 10, ',', ',' , alt);
+    
+    tmr0sec=0;
+    r1=0;
+    r2=0;
+    r3=0;
+    g_u8RecDataptr=0;
+    memset(g_u8RecData,0,1000);
+    clear();
+
+    printf("\r\n\r\nAT+QGNSSRD=\"NMEA/VTG\"\r\n\r\n\r\n");
+    do{
+      g_u8RecData[0] = '\r';
+      r1 = strstr(g_u8RecData, response1);
+      r2 = strstr(g_u8RecData, response2);
+      r3 = strstr(g_u8RecData, response3);
+    }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+    clear();  
+
+    memset(temp, 0, 100);
+    parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
+    parse_g(temp, 7, 8, ',', ',' , kmph);
+ 
+    tmr0sec=0;
+    r1=0;
+    r2=0;
+    r3=0;
+    g_u8RecDataptr=0;
+    memset(g_u8RecData,0,1000);
+    clear();
+
+    printf("\r\n\r\nAT+QGNSSRD=\"NMEA/GSA\"\r\n\r\n\r\n");
+    do{
+      g_u8RecData[0] = '\r';
+      r1 = strstr(g_u8RecData, response1);
+      r2 = strstr(g_u8RecData, response2);
+      r3 = strstr(g_u8RecData, response3);
+    }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+    clear();  
+
+    memset(temp, 0, 100);
+    parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
+    parse_g(temp, 15, 16, ',', ',' , pdop);  
+
+    tmr0sec=0;
+    r1=0;
+    r2=0;
+    r3=0;
+    g_u8RecDataptr=0;
+    memset(g_u8RecData,0,1000);
+    clear();
+    printf("\r\n\r\nAT+COPS=0,1,0\r\n\r\n\r\n");
+    do{
+      g_u8RecData[0] = '\r';
+      r1 = strstr(g_u8RecData, response1);
+      r2 = strstr(g_u8RecData, response2);
+      r3 = strstr(g_u8RecData, response3);
+    }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+    clear();  
+   
+    tmr0sec=0;
+    r1=0;
+    r2=0;
+    r3=0;
+    g_u8RecDataptr=0;
+    memset(g_u8RecData,0,1000);
+    clear();
+    printf("\r\n\r\nAT+COPS?\r\n\r\n\r\n");
+    do{
+      g_u8RecData[0] = '\r';
+      r1 = strstr(g_u8RecData, response1);
+      r2 = strstr(g_u8RecData, response2);
+      r3 = strstr(g_u8RecData, response3);
+    }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+    clear();  
+
+    parse_g(g_u8RecData, 1,2, '"', '"' , networkoperator);  
+    tmr0sec=0;
+    r1=0;
+    r2=0;
+    r3=0;
+    g_u8RecDataptr=0;
+    memset(g_u8RecData,0,1000);
+    clear();
+
+    printf("\r\n\r\nAT+QENG = 2,3\r\n\r\n\r\n");
+    do{
+      g_u8RecData[0] = '\r';
+      r1 = strstr(g_u8RecData, "NULL");
+      r2 = strstr(g_u8RecData, "NULL");
+      r3 = strstr(g_u8RecData, "+QENG: 2");
+    }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+    clear();  
+    
+    memset(mcc,0,strlen(mcc));
+    memset(mnc,0,strlen(mnc));
+    memset(lac,0,strlen(lac));
+    memset(cellid,0,strlen(cellid));
+    memset(nmr,0,200);
+    parse_g(g_u8RecData, 2, 3, ',', ',' , mcc);
+    parse_g(g_u8RecData, 3, 4, ',', ',' , mnc);
+    parse_g(g_u8RecData, 4, 5, ',', ',' , lac);
+    parse_g(g_u8RecData, 5, 6, ',', ',' , cellid);
+    parse_g(g_u8RecData, 20, 60, ',', ',' , nmr);
+   
+    
+
+ 
+
+    tmr0sec=0;
+    r1=0;
+    r2=0;
+    r3=0;
+    g_u8RecDataptr=0;
+    memset(g_u8RecData,0,1000);
+    clear();    
+    printf("\r\n\r\nAT+QENG = 0\r\n\r\n\r\n");
+    do{
+      g_u8RecData[0] = '\r';
+      r1 = strstr(g_u8RecData, "OK");
+      r2 = strstr(g_u8RecData, "ERROR");
+      r3 = strstr(g_u8RecData, "ËRROR");
+    }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
+    clear();  
+        
+    packetstatus = 'L';
+    u32ADC0Result = 3;
+    ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADCR |= (1ul << 11));
+    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(0)] & (0xFFFFul << 0));
+    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
+    batteryvoltage = u32ADC0Result;
+
+    
+    
+    sprintf(g_u8SendData, "$%s,%s,%s,NR,%c,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%.1f,%.1f,%d,%c,%s,%s,%s,%s,%s,%s\n"    ,"HEADER", "JFT", "2.1.0", packetstatus, imei,vehicleregnum,fix,gpsdate,    gpstime,latitude,latdir,longitude,longdir,kmph,heading,sat,alt,pdop,hdop,networkoperator,    ignition,powerstatus,inputvoltage,batteryvoltage,emergencystatus,tamperalert,signalquality,    mcc, mnc, lac, cellid, nmr);
+
+
+
+
+  
+    }
+    if((strlen(g_u8SendData) > 2900))
+    {
+      memset(g_u8SendData,0,2500);
+      strcat(g_u8SendData,imei);
+      strcat(g_u8SendData,"error:RAMfull\n");
+    }
+    osDelay(5);
+#line 1248 "at_command.c"
+}

@@ -335,7 +335,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>RXBUFSIZE=500 TXBUFSIZE=3500 OBDRXBUFSIZE=100 OBDTXBUFSIZE=100</Define>
+              <Define>RXBUFSIZE=1000 TXBUFSIZE=2500 OBDRXBUFSIZE=100 OBDTXBUFSIZE=100</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\..\..\Library\CMSIS\Include;..\..\..\..\Library\Device\Nuvoton\NUC100Series\Include;..\..\..\..\Library\StdDriver\inc</IncludePath>
             </VariousControls>
@@ -406,6 +406,11 @@
               <FileType>1</FileType>
               <FilePath>.\obdcommand.c</FilePath>
             </File>
+            <File>
+              <FileName>WinboundFlash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WinboundFlash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -428,14 +433,14 @@
       </api>
     </apis>
     <components>
-      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.0.1" condition="ARMv6_7_8-M Device">
-        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.0.1"/>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.0.2" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.2.0"/>
         <targetInfos>
           <targetInfo name="UART_TxRx_Function"/>
         </targetInfos>
       </component>
-      <component Capiversion="1.0.0" Cclass="CMSIS" Cgroup="RTOS" Csub="Keil RTX" Cvendor="ARM" Cversion="4.81.0" condition="RTOS RTX">
-        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.0.1"/>
+      <component Capiversion="1.0.0" Cclass="CMSIS" Cgroup="RTOS" Csub="Keil RTX" Cvendor="ARM" Cversion="4.81.1" condition="RTOS RTX">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.2.0"/>
         <targetInfos>
           <targetInfo name="UART_TxRx_Function"/>
         </targetInfos>
@@ -452,6 +457,12 @@
           <targetInfo name="UART_TxRx_Function"/>
         </targetInfos>
       </component>
+      <component Cclass="Device" Cgroup="Driver" Csub="SPI" Cvendor="Nuvoton" Cversion="3.00.002" condition="M0NuMicro NUC100 Device">
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos>
+          <targetInfo name="UART_TxRx_Function"/>
+        </targetInfos>
+      </component>
       <component Cclass="Device" Cgroup="Driver" Csub="SYS" Cvendor="Nuvoton" Cversion="3.00.002" condition="M0NuMicro NUC100 Device">
         <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
         <targetInfos>
@@ -459,6 +470,18 @@
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="Driver" Csub="UART" Cvendor="Nuvoton" Cversion="3.00.002" condition="M0NuMicro NUC100 Device">
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos>
+          <targetInfo name="UART_TxRx_Function"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="Driver" Csub="WDT" Cvendor="Nuvoton" Cversion="3.00.002" condition="M0NuMicro NUC100 Device">
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos>
+          <targetInfo name="UART_TxRx_Function"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="Driver" Csub="WWDT" Cvendor="Nuvoton" Cversion="3.00.002" condition="M0NuMicro NUC100 Device">
         <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
         <targetInfos>
           <targetInfo name="UART_TxRx_Function"/>

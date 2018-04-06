@@ -21,8 +21,8 @@ Target DLL:      Segger\JL2CM3.dll V2.99.26.0
 Dialog DLL:      TARMCM1.DLL V1.13.0.0
  
 <h2>Project:</h2>
-E:\BITBUCK_JFT\gpstrackr\vts2-ver1\KEIL\vts2.uvprojx
-Project File Date:  12/26/2017
+E:\GIT_JFT_2\telecom-gps\vts-2.0.0\KEIL\vts2.uvprojx
+Project File Date:  04/02/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
@@ -39,9 +39,9 @@ Thread.c(347): warning:  #223-D: function "clear" declared implicitly
     clear();
 Thread.c(392): warning:  #223-D: function "clear" declared implicitly
   	clear();
-Thread.c(490): warning:  #223-D: function "SendAT_FS" declared implicitly
+Thread.c(489): warning:  #223-D: function "SendAT_FS" declared implicitly
     SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",20);	
-Thread.c(716): warning:  #1-D: last line of file ends without a newline
+Thread.c(715): warning:  #1-D: last line of file ends without a newline
    
 Thread.c(71): warning:  #177-D: variable "pt"  was declared but never referenced
   static int pt=0;
@@ -65,17 +65,17 @@ main.c(434): warning:  #223-D: function "SpiFlash_ReadStatusReg2" declared impli
 main.c(530): warning:  #550-D: variable "dump"  was set but never used
     char dump;
 main.c: 8 warnings, 0 errors
-compiling RTX_Conf_CM.c...
 compiling WinboundFlash.c...
+compiling RTX_Conf_CM.c...
 compiling adc.c...
 compiling clk.c...
 compiling gpio.c...
+compiling spi.c...
 compiling i2c.c...
 compiling sys.c...
-compiling spi.c...
 compiling timer.c...
-compiling wwdt.c...
 compiling uart.c...
+compiling wwdt.c...
 assembling startup_NUC200Series.s...
 compiling retarget.c...
 compiling system_NUC200Series.c...
@@ -122,8 +122,8 @@ Package Vendor: Nuvoton
 
    * Component: Nuvoton::Device:Startup:3.00.002
       Source file:   Device\NUC200\Source\ARM\startup_NUC200Series.s
-      Include file:  Device\NUC200\Include\NUC200Series.h
       Source file:   Device\NUC200\Source\system_NUC200Series.c
+      Include file:  Device\NUC200\Include\NUC200Series.h
       Source file:   Device\NUC200\Driver\retarget.c
 
    * Component: Nuvoton::Device:Driver:WWDT:3.00.002
@@ -135,8 +135,8 @@ Package Vendor: Nuvoton
       Source file:   Device\NUC200\Driver\uart.c
 
    * Component: Nuvoton::Device:Driver:Timer:3.00.002
-      Source file:   Device\NUC200\Driver\timer.c
       Include file:  Device\NUC200\Driver\timer.h
+      Source file:   Device\NUC200\Driver\timer.c
 
    * Component: Nuvoton::Device:Driver:SYS:3.00.002
       Source file:   Device\NUC200\Driver\sys.c
@@ -163,24 +163,24 @@ Package Vendor: Nuvoton
       Source file:   Device\NUC200\Driver\adc.c
 
    * Component: ARM::CMSIS:RTOS:Keil RTX:4.81.1
-      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
-      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
       Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
+      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
       Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
+      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
       Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib
 
    * Component: ARM::CMSIS:CORE:5.0.2
 
    * Component: ::CMSIS:RTOS:1.0.0 (API)
-Build Time Elapsed:  00:00:07
+Build Time Elapsed:  00:00:15
 </pre>
 </body>
 </html>

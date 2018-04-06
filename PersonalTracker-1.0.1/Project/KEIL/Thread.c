@@ -39,7 +39,7 @@ extern osMutexId	(uart_mutex_id); // Mutex ID
 extern char vehicleregnum[15];
 
 char signalquality[5] = {0};
-char IP[50] = "104.236.203.4";
+char IP[50] = "104.236.203.4";//"165.227.98.104";// "104.236.203.4";
 char PORT[6] = "5556";
 int start_thead = 0;
 

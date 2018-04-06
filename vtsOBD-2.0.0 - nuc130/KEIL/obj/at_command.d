@@ -32,3 +32,4 @@
 .\obj\at_command.o: osObjects.h
 .\obj\at_command.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\obj\at_command.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\at_command.o: WinboundFlash.h

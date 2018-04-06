@@ -66,14 +66,15 @@ void Open_SPI_Flash(void)
  * @brief       Read back the Manufacturer ID and Device ID from SPI Flash device.
  *
  * @return      Manufacturer ID and Device ID of SPI Flash device.
- *          For W25Q16BV, Manufacturer ID: 0xEF; Device ID: 0x14
- *      For W26X16, Manufacturer ID: 0xEF; Device ID: 0x14
+ *              For W25Q16BV, Manufacturer ID: 0xEF; Device ID: 0x14
+ *              For W26X16, Manufacturer ID: 0xEF; Device ID: 0x14
 */
 unsigned int SpiFlash_ReadMidDid(void)
 {
     unsigned int au32SourceData;
     unsigned int au32DestinationData;
-
+PB9 = 1;
+ PB10 = 1;
     // configure transaction length as 8 bits
     SPI_FLASH_PORT->CNTRL = (SPI_FLASH_PORT->CNTRL & ~SPI_CNTRL_TX_BIT_LEN_Msk) | (0x08 << SPI_CNTRL_TX_BIT_LEN_Pos);
 

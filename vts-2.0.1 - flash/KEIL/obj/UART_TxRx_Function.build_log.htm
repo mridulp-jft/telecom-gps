@@ -3,176 +3,34 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: µVision V5.18a
-Copyright (C) 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+IDE-Version: µVision V5.24.2.0
+Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
 License Information: mridul pandey, jft, LIC=W96WF-63AUC-EXNUX-H8FAP-A3NT4-94MS0
  
 Tool Versions:
-Toolchain:       MDK-ARM Professional  Version: 5.18a
-Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.06 update 1 (build 61)
-Assembler:       Armasm.exe V5.06 update 1 (build 61)
-Linker/Locator:  ArmLink.exe V5.06 update 1 (build 61)
-Library Manager: ArmAr.exe V5.06 update 1 (build 61)
-Hex Converter:   FromElf.exe V5.06 update 1 (build 61)
-CPU DLL:         SARMCM3.DLL V5.18a
-Dialog DLL:      DARMCM1.DLL V1.12.0.0
-Target DLL:      Segger\JL2CM3.dll V2.99.19.0
-Dialog DLL:      TARMCM1.DLL V1.9.0.0
+Toolchain:       MDK-ARM Professional  Version: 5.24.1
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\bin\
+C Compiler:      Armcc.exe V5.06 update 5 (build 528)
+Assembler:       Armasm.exe V5.06 update 5 (build 528)
+Linker/Locator:  ArmLink.exe V5.06 update 5 (build 528)
+Library Manager: ArmAr.exe V5.06 update 5 (build 528)
+Hex Converter:   FromElf.exe V5.06 update 5 (build 528)
+CPU DLL:         SARMCM3.DLL V5.24.1
+Dialog DLL:      DARMCM1.DLL V1.18.0.0
+Target DLL:      Segger\JL2CM3.dll V2.99.26.0
+Dialog DLL:      TARMCM1.DLL V1.13.0.0
  
 <h2>Project:</h2>
-E:\BITBUCK_JFT\gpstrackr\vts2-ver1\KEIL\UART_TxRx_Function.uvprojx
-Project File Date:  12/01/2017
+E:\GIT_JFT_2\telecom-gps\vts-2.0.1 - flash\KEIL\UART_TxRx_Function.uvprojx
+Project File Date:  04/03/2018
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'UART_TxRx_Function'
-creating preprocessor file for main.c...
-creating preprocessor file for Thread.c...
-Thread.c(430): warning:  #1-D: last line of file ends without a newline
-   
-Thread.c: 1 warning, 0 errors
-creating preprocessor file for Timer.c...
-compiling main.c...
-main.c(381): warning:  #174-D: expression has no effect
-      
-_NOP;
-main.c(330): warning:  #550-D: variable "OUT_X_L_A" was set but never used
-    int8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A;
-main.c(330): warning:  #550-D: variable "OUT_Y_L_A" was set but never used
-    int8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A;
-main.c(330): warning:  #550-D: variable "OUT_Z_L_A" was set but never used
-    int8_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A;
-main.c(331): warning:  #177-D: variable "CTRL_REG4_A" was declared but never referenced
-    uint16_t STATUS_REG_A, CTRL_REG4_A;
-main.c(514): warning:  #550-D: variable "dump" was set but never used
-    char dump;
-main.c: 6 warnings, 0 errors
-compiling Thread.c...
-Thread.c(89): warning:  #223-D: function "SendAT_FS" declared implicitly
-    SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",20);	
-Thread.c(119): warning:  #223-D: function "clear" declared implicitly
-    clear();
-Thread.c(162): warning:  #223-D: function "clear" declared implicitly
-  	clear();
-Thread.c(228): warning:  #223-D: function "SendAT_FS" declared implicitly
-    SendAT_FS(g_u8SendData, "QWRITE", "OK" , "ERROR",20);	
-Thread.c(430): warning:  #1-D: last line of file ends without a newline
-   
-Thread.c: 5 warnings, 0 errors
-compiling Timer.c...
-creating preprocessor file for RTX_Conf_CM.c...
-creating preprocessor file for adc.c...
-creating preprocessor file for clk.c...
-compiling RTX_Conf_CM.c...
-compiling adc.c...
-creating preprocessor file for gpio.c...
-creating preprocessor file for i2c.c...
-compiling clk.c...
-creating preprocessor file for sys.c...
-compiling i2c.c...
-compiling gpio.c...
-creating preprocessor file for uart.c...
-creating preprocessor file for wwdt.c...
-compiling sys.c...
-compiling uart.c...
-creating preprocessor file for retarget.c...
-compiling wwdt.c...
-assembling startup_NUC200Series.s...
-creating preprocessor file for system_NUC200Series.c...
-compiling retarget.c...
-compiling system_NUC200Series.c...
-linking...
-Program Size: Code=21920 RO-data=880 RW-data=336 ZI-data=15128  
-After Build - User command #1: fromelf --bin ".\obj\UART_TxRx_Function.axf" --output ".\obj\UART_TxRx_Function.bin"
-After Build - User command #2: fromelf --text -c ".\obj\UART_TxRx_Function.axf" --output ".\obj\UART_TxRx_Function.txt"
-".\obj\UART_TxRx_Function.axf" - 0 Error(s), 12 Warning(s).
-
-<h2>Software Packages used:</h2>
-
-Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.0.1.pack
-                ::CMSIS:RTOS:1.0.0 (API)
-                CMSIS (Cortex Microcontroller Software Interface Standard)
-   * Component: RTOS Version: 1.0.0
-   * Component: Keil RTX Version: 4.81.0
-   * Component: CORE Version: 5.0.1
-
-Package Vendor: Nuvoton
-                http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack/Nuvoton.NuMicro_DFP.1.1.0.pack
-                Nuvoton::Device:Startup:3.00.002
-                Nuvoton ARM Cortex-M NuMicro Family Device Support
-   * Component: Startup Version: 3.00.002
-   * Component: ADC Version: 3.00.002
-   * Component: CLK Version: 3.00.002
-   * Component: GPIO Version: 3.00.002
-   * Component: I2C Version: 3.00.002
-   * Component: SYS Version: 3.00.002
-   * Component: UART Version: 3.00.002
-   * Component: WWDT Version: 3.00.002
-
-<h2>Collection of Component include folders:</h2>
-  E:\BITBUCK_JFT\gpstrackr\vts2-ver1\KEIL\RTE
-  C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include
-  C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\INC
-  C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC200\Driver
-  C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC200\Include
-
-<h2>Collection of Component Files used:</h2>
-
-   * Component: ::CMSIS:RTOS:1.0.0 (API)
-
-   * Component: ARM::CMSIS:RTOS:Keil RTX:4.81.0
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
-      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
-      Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
-      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
-      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
-      Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
-
-   * Component: ARM::CMSIS:CORE:5.0.1
-
-   * Component: Nuvoton::Device:Startup:3.00.002
-      Source file:   Device\NUC200\Driver\retarget.c
-      Include file:  Device\NUC200\Include\NUC200Series.h
-      Source file:   Device\NUC200\Source\ARM\startup_NUC200Series.s
-      Source file:   Device\NUC200\Source\system_NUC200Series.c
-
-   * Component: Nuvoton::Device:Driver:ADC:3.00.002
-      Include file:  Device\NUC200\Driver\adc.h
-      Source file:   Device\NUC200\Driver\adc.c
-
-   * Component: Nuvoton::Device:Driver:CLK:3.00.002
-      Source file:   Device\NUC200\Driver\clk.c
-      Include file:  Device\NUC200\Driver\clk.h
-
-   * Component: Nuvoton::Device:Driver:GPIO:3.00.002
-      Source file:   Device\NUC200\Driver\gpio.c
-      Include file:  Device\NUC200\Driver\gpio.h
-
-   * Component: Nuvoton::Device:Driver:I2C:3.00.002
-      Include file:  Device\NUC200\Driver\i2c.h
-      Source file:   Device\NUC200\Driver\i2c.c
-
-   * Component: Nuvoton::Device:Driver:SYS:3.00.002
-      Include file:  Device\NUC200\Driver\sys.h
-      Source file:   Device\NUC200\Driver\sys.c
-
-   * Component: Nuvoton::Device:Driver:UART:3.00.002
-      Source file:   Device\NUC200\Driver\uart.c
-      Include file:  Device\NUC200\Driver\uart.h
-
-   * Component: Nuvoton::Device:Driver:WWDT:3.00.002
-      Include file:  Device\NUC200\Driver\wwdt.h
-      Source file:   Device\NUC200\Driver\wwdt.c
-Build Time Elapsed:  00:00:05
+*** Target 'UART_TxRx_Function' uses ARM-Compiler 'V5.06 update 1 (build 61)' which is not available.
+*** Please review the installed ARM Compiler Versions:
+   'Manage Project Items - Folders/Extensions' to manage ARM Compiler Versions.
+   'Options for Target - Target' to select an ARM Compiler Version for the target.
+*** Build aborted.
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

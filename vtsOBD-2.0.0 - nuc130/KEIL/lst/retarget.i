@@ -22400,6 +22400,8 @@ void Hard_Fault_Handler(uint32_t stack[])
     printf("In Hard Fault Handler\n");
 
     stackDump(stack);
+    SYS_UnlockReg();                          
+    ((GCR_T *) ((( uint32_t)0x50000000) + 0x00000))->IPRSTC1 = 0x1;  
 
     
     while(1);
@@ -22410,9 +22412,9 @@ void Hard_Fault_Handler(uint32_t stack[])
  
  
 
-#line 312 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
+#line 314 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
 
-#line 353 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
+#line 355 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
 
 
 
@@ -22470,7 +22472,7 @@ void SendChar_ToUART(int ch)
     }
 }
 
-#line 466 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
+#line 468 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
 
 
 
@@ -22485,7 +22487,7 @@ void SendChar_ToUART(int ch)
  
 void SendChar(int ch)
 {
-#line 501 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
+#line 503 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
     SendChar_ToUART(ch);
 
 }
@@ -22501,7 +22503,7 @@ void SendChar(int ch)
  
 char GetChar(void)
 {
-#line 537 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
+#line 539 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
 
     while(1)
     {
@@ -22623,7 +22625,7 @@ int ferror(FILE *stream)
     return (-1);
 }
 
-#line 687 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
+#line 689 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\retarget.c"
 
 
 

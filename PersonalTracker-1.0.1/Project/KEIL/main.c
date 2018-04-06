@@ -1154,7 +1154,6 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
   
   SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "OK" , "ERROR",5);	
 	PB2=0;
-	//osDelay(100);
 	osMutexWait(uart_mutex_id, osWaitForever);
   
 	tmr0sec=0;
@@ -1163,7 +1162,6 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
 	r3=0;
 	g_u8RecDataptr=0;
 	memset(g_u8RecData,0,RXBUFSIZE);
-//	printf("%c",0x1A);
 	clear();
 	if(checkallnumsinstring(imei) ||  (strlen(imei) < 5))
 	{
@@ -1190,7 +1188,6 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
-//	printf("%c",0x1A);
 	memset(g_u8RecData,0,RXBUFSIZE);
   clear();
 
@@ -1210,7 +1207,6 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
     parse_g(temp, 4, 5, ',', ',' , latdir);
     parse_g(temp, 5, 6, ',', ',' , longitude);
     parse_g(temp, 6, 7, ',', ',' , longdir);
-   // parse_g(temp, 7, 8, ',', ',' , knots);
     parse_g(temp, 8, 9, ',', ',' , heading);
     parse_g(temp, 9, 10, ',', ',' , gpsdate);
     if(latitude != '\0')
@@ -1222,7 +1218,6 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
 	r3=0;
 	g_u8RecDataptr=0;
 	memset(g_u8RecData,0,RXBUFSIZE);
-//	printf("%c",0x1A);
   clear();
 
 	printf("\r\n\r\nAT+QGNSSRD=\"NMEA/GGA\"\r\n\r\n\r\n");
@@ -1245,7 +1240,6 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
 	r3=0;
 	g_u8RecDataptr=0;
 	memset(g_u8RecData,0,RXBUFSIZE);
-//	printf("%c",0x1A);
   clear();
 
 	printf("\r\n\r\nAT+QGNSSRD=\"NMEA/VTG\"\r\n\r\n\r\n");
@@ -1268,7 +1262,6 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
 	r3=0;
 	g_u8RecDataptr=0;
 	memset(g_u8RecData,0,RXBUFSIZE);
-//	printf("%c",0x1A);
   clear();
 
 	printf("\r\n\r\nAT+QGNSSRD=\"NMEA/GSA\"\r\n\r\n\r\n");
@@ -1282,8 +1275,24 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
   memset(temp, 0, 100);
   parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
   parse_g(temp, 15, 16, ',', ',' , pdop);  
+
+	tmr0sec=0;
+	r1=0;
+	r2=0;
+	r3=0;
+	g_u8RecDataptr=0;
+	memset(g_u8RecData,0,RXBUFSIZE);
+  clear();
+	printf("\r\n\r\nAT+COPS=0,1,0\r\n\r\n\r\n");
+	do{
+		r1 = strstr(g_u8RecData, response1);
+		r2 = strstr(g_u8RecData, response2);
+		r3 = strstr(g_u8RecData, response3);
+	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
+  clear();  
+
   
- 
+  
   
 	tmr0sec=0;
 	r1=0;
@@ -1291,9 +1300,7 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
 	r3=0;
 	g_u8RecDataptr=0;
 	memset(g_u8RecData,0,RXBUFSIZE);
-//	printf("%c",0x1A);
   clear();
-
 	printf("\r\n\r\nAT+COPS?\r\n\r\n\r\n");
 	do{
 		r1 = strstr(g_u8RecData, response1);
@@ -1311,10 +1318,9 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
 	r3=0;
 	g_u8RecDataptr=0;
 	memset(g_u8RecData,0,RXBUFSIZE);
-//	printf("%c",0x1A);
   clear();
 
-	printf("\r\n\r\nAT+QENG = 2\r\n\r\n\r\n");
+	printf("\r\n\r\nAT+QENG = 2,3\r\n\r\n\r\n");
 	do{
 		r1 = strstr(g_u8RecData, response1);
 		r2 = strstr(g_u8RecData, response2);
@@ -1322,13 +1328,12 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
 	}while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 //!(r1 || r2 || r3 ||
   clear();  
   
-	tmr0sec=0;
+	/*tmr0sec=0;
 	r1=0;
 	r2=0;
 	r3=0;
 	g_u8RecDataptr=0;
 	memset(g_u8RecData,0,RXBUFSIZE);
-//	printf("%c",0x1A);
   clear();
 
 	printf("\r\n\r\nAT+QENG?\r\n\r\n\r\n");
@@ -1351,8 +1356,7 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
 	r3=0;
 	g_u8RecDataptr=0;
 	memset(g_u8RecData,0,RXBUFSIZE);
-//	printf("%c",0x1A);
-  clear();
+  clear();*/
 
 	printf("\r\n\r\nAT+QENG = 0\r\n\r\n\r\n");
 	do{
@@ -1372,19 +1376,13 @@ __inline void SendAT_GPS(char * command, char * response1, char * response2, cha
   u32ADC0Result = ADC_GET_CONVERSION_DATA(ADC, 0);
   u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
   batteryvoltage = u32ADC0Result;
-  //memset(temp,0,100);
-  //feild_response(g_u8RecData, 5, temp);    
-  //parse_g(g_u8RecData, 2, 10, 'C', ',' , temp);
+
   sprintf(g_u8SendData, "$%s,%s,%s,NR,%c,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,\
-  %s,%s,%d,%d,%f,%f,%d,%c,%s,%s,%s,%s,%s"\
+%s,%s,%d,%d,%.1f,%.1f,%d,%c,%s,%s,%s,%s,%s"\
   ,header, vendorID, firmwareversion, packethistory, imei,vehicleregnum,fix,gpsdate,\
   gpstime,latitude,latdir,longitude,longdir,kmph,heading,sat,alt,pdop,hdop,networkoperator,\
   ignition,powerstatus,inputvoltage,batteryvoltage,emergencystatus,tamperalert,signalquality,\
   mcc, mnc, lac, cellid);
-  //strcat(g_u8SendData,temp);
-  //strcat(g_u8SendData,",");
-  //strcat(g_u8SendData,signalquality);
-  //strcat(g_u8SendData,",,,,,");
     
 		memset(temp,0,100);
 		sprintf(temp,",F=%.1f",u32ADC0Result);

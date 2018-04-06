@@ -22120,11 +22120,13 @@ extern int32_t tmr0sec, tmr1sec;
 extern int8_t charging;
 extern float	u32ADC0Result;
 extern float u32ADC0Result1;
+extern   int tcpsendchtimer;
 extern osMutexId	(uart_mutex_id); 
 __inline void batteryind (void);
 int8_t time;
 int32_t life=0;
 int8_t i2ctimeout=0;
+extern int interval_count;
 
  
 static void Timer1_Callback (void const *arg);                  
@@ -22145,18 +22147,18 @@ static void Timer2_Callback (void const *arg);
 static osTimerId id2;                                           
 static uint32_t  exec2;                                         
 static uint32_t os_timer_cb_Timer2[6]; const osTimerDef_t os_timer_def_Timer2 = { (Timer2_Callback), (os_timer_cb_Timer2) };
- 
+int tc = 0; 
 
 static void Timer2_Callback (void const *arg) 
 {
 	tmr0sec++;
   tmr1sec++;
-
-
+  tcpsendchtimer++;
+  tc++;
+ 
   i2ctimeout++;
-  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((13)<<2)))) ^= 1;
-	life++;
-
+  interval_count++;
+  if(tcpsendchtimer > 500)tcpsendchtimer = 0;
 }
 
 

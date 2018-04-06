@@ -24257,6 +24257,10 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 #line 22 "main.c"
+#line 1 "WinboundFlash.h"
+ 
+
+
 
 
 
@@ -24264,20 +24268,74 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
  
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+ 
+ 
+ 
+extern void Open_SPI_Flash(void);
+extern unsigned int SpiFlash_ReadMidDid(void);
+extern void SpiFlash_ChipErase(void);
+extern unsigned int SpiFlash_ReadStatusReg1(void);
+extern unsigned int SpiFlash_ReadStatusReg2(void);
+extern void SpiFlash_WaitReady(void);
+extern void SpiFlash_PageProgram(unsigned char *DataBuffer, unsigned int StartAddress, unsigned int ByteCount);
+extern void SpiFlash_ReadData(unsigned char *DataBuffer, unsigned int StartAddress, unsigned int ByteCount);
+
+
+   
+
+   
+
+   
+
+ 
+#line 23 "main.c"
+
+
+
+char IP1[50] = "104.236.203.4";
+char PORT1[7] = "5556";
+char IP2[50] = "159.89.254.53";
+char PORT2[7] = "5556";
+char vehicleregnum[15] = "DL15AN1234";
+int interval = 5;
+extern uint32_t pt;
+extern uint32_t readpt;
+extern int tc;
+
+int interval_count = 0;
+
+
+ 
  
  
 
-extern char suppportedpid[100][7];
+
+
+
 extern int pidcounter;
-
  
  
  
-char g_u8SendData[3500] = {0};
-char g_u8RecData[500]	= {0};
+char g_u8SendData[2500] = {0};
+char g_u8RecData[1000]	= {0};
 char g_u8OBDSendData[100] = {0};
 char g_u8OBDRecData[100]	= {0};
 uint8_t g_u8OBDRecDataptr=0;
+int MidDid;
 
 volatile uint32_t g_u32comRbytes = 0;
 volatile uint32_t g_u32comRhead  = 0;
@@ -24288,18 +24346,57 @@ volatile int32_t g_bWait         = 1;
  
  
 int32_t main(void);
-void UART_TEST_HANDLE(void);
-void UART_FunctionTest(void);
+
+__inline void SYS_Init(void);
+__inline void UARTs_Init();
+extern void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
+
+void UART1_IRQHandler(void);
+void UART02_IRQHandler(void);
+__inline void Init_IOs();
+__inline void OBD_GET_PID();
+int saveipconfigurations(void);
+void readipconfigurations(void);
  
  
  
+
+extern void cregquerry(void);
+extern void Save_FS(void);
 extern int32_t g_u8RecDataptr;
 extern int Init_Thread (void);
+extern void manualdelay(int delayms);
 extern void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout);
-extern void Init_Timers (void);
+extern void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+extern void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
+extern void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+extern void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
+extern void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);extern void Init_Timers (void);
 extern void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+extern void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
+extern void parse_g(char* str, int first, int sec, char f, char s , char *string);
+extern __inline void remove_all_chars(char* str, char c, char d);
 extern void supportedpid(char command[5]);
+extern  void cpinquerry();
+extern int8_t charging, cpinready, cregready;
+extern int8_t  network;
+extern uint32_t pt = 0;
+extern int start_thead;
+extern osThreadId tid_Thread_OBD_READ;                                          
 
+osThreadId mainThreadID;
+extern int32_t signal;
+extern int32_t signal2;
+extern char suppportedpid[200][7];
+extern char DestArray[257];
+extern uint8_t sendfs;
+extern int breaker;
+extern char fileinstance[20];
+char configdata[100];
+volatile uint32_t g_u8IsWDTTimeoutINT;
+volatile uint32_t g_u32WWDTINTCount = 0;
+
+extern char temp[100];
 
 uint32_t os_mutex_cb_uart_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_uart_mutex = { (os_mutex_cb_uart_mutex) };		
 osMutexId	(uart_mutex_id); 
@@ -24310,11 +24407,226 @@ osMutexId	(tcp_mutex_id);
 uint32_t os_mutex_cb_fs_mutex[4] = { 0 }; const osMutexDef_t os_mutex_def_fs_mutex = { (os_mutex_cb_fs_mutex) };		
 osMutexId	(fs_mutex_id); 
 
-void SYS_Init(void)
+
+ 
+int main (void) {
+  SYS_UnlockReg();                          
+  SYS_Init();                               
+  SYS_LockReg();                            
+  Open_SPI_Flash();                         
+  Init_Timers();                            
+  osKernelInitialize ();                    
+  
+ 
+  SYS_UnlockReg();
+   
+  g_u8IsWDTTimeoutINT = 0;
+  WWDT_Open((12 << 8), 0x20, 1);  
+  WDT_EnableInt();
+  __NVIC_EnableIRQ(WDT_IRQn);  
+  SYS_LockReg();                            
+
+  
+  UARTs_Init();                             
+  osKernelStart ();                         
+
+  MidDid = SpiFlash_ReadMidDid();
+  MidDid = SpiFlash_ReadMidDid();
+
+
+
+  mainThreadID = osThreadGetId();
+  
+  
+  while(1){
+    memset(DestArray,0,257);
+    
+    SpiFlash_ReadData(DestArray, pt, 256);    
+    if((DestArray[0]) == 0xFF)break;
+    manualdelay(10);
+    pt+=256;
+  }
+  
+
+  while (1) {
+    printf("\r\nHelloWorld1\r\n\r\n");
+    osDelay(2000);
+    
+  }{
+
+
+    SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
+    SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",5);	
+    
+    cpinquerry();
+    if(cpinready==1){
+      cregquerry();
+      if(cregready == 1){
+	        
+        SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP=\"isafe\",\"\",\"\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIREGAPP?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
+        SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",10);	
+        SendAT("\r\nAT+QILOCIP\r\n\r\n", "Ready", "OK" , "ERROR",0);
+        osDelay(100);
+      }
+    }
+
+    SendAT("\r\nAT+QSCLK=1\r\n\r\n", "Ready", "OK" , "ERROR",5);
+    SendAT("\r\nAT+QIOPEN=0,\"TCP\",\"104.236.203.4\",\"5556\"\r\n\r\n","CONNECT","ERROR","FAIL",10);	
+    SendAT("\r\nAT+QIOPEN=1,\"TCP\",\"159.89.254.53\",\"5556\"\r\n\r\n","CONNECT","ERROR","FAIL",10);	
+    network=0;
+#line 202 "main.c"
+    sendfs = 0;      
+    
+    interval_count = 0;
+    TCP_Send("\r\nAT+QISEND=0\r\n\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
+    breaker = 0;
+    if(sendfs==1){
+      TCP_Send_ch("\r\nAT+QISEND\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",5);	
+    }
+    if(network == 1){
+      if(breaker == 1)SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",5);	
+      SendAT("\r\nAT+QICLOSE=0\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
+      SendAT("\r\nAT+QICLOSE=1\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
+      SendAT("\r\nAT+CFUN=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
+      SendAT("\r\nAT+CFUN=1\r\n\r\n", "SMS Ready", "NOT INSERTED" , "ERROR",10);	
+      Save_FS();
+      SendAT("\r\nAT+QIDEACT\r\n\r\n", "OK", "DEACT OK" , "ERROR",10);
+      SendAT("\r\nAT+QIMODE=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
+      SendAT("\r\nAT+QIMUX?\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);	
+      SendAT("\r\nAT+QIMUX=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
+      
+    }
+    else{
+      
+    }
+  }
+}
+
+
+int saveipconfigurations(void){
+  int retry = 1;
+  int len;
+  while(retry == 1){
+    memset(fileinstance,0,20);
+    SendAT("\r\nAT+QFOPEN=\"IPCONFIG.TXT\",0\r\n", "ERROR", "OK" , "ERROR",10);
+    if(strstr(g_u8RecData,"ERROR")){
+      SendAT("\r\nAT+CFUN=1,1", "ERROR", "OK" , "ERROR",10);
+      manualdelay(300);
+      SendAT("\r\nAT+QFOPEN=\"IPCONFIG.TXT\",0\r\n", "ERROR", "OK" , "ERROR",10);
+    }      
+    parse_g(g_u8RecData, 1, 2, ' ', '\n' , fileinstance);
+    remove_all_chars(fileinstance, '\r', '\n'); 
+    
+    
+    memset(temp,0,100);
+    sprintf(temp, "AT+QFSEEK=%s,0,0\r\n\r\n", fileinstance);
+    SendAT(temp, "CONNECT", "OK" , "ERROR",10);	  
+
+    memset(configdata,0,100);
+    sprintf(configdata,"|IP1|%s|PORT1|%s|IP2|%s|PORT2|%s|FLASHREADPTR|%d|FLASHWRITEPTR|%d|INTERVAL|%d|LICENCEPLATE|%s|\n",IP1,PORT1,IP2,PORT2,pt,readpt,interval,vehicleregnum);
+    retry = 0;    
+    len = strlen(configdata);
+    
+    memset(temp,0,100);
+    sprintf(temp, "AT+QFWRITE=%s,%d\r\n\r\n", fileinstance,len);
+    SendAT(temp, "CONNECT", "OK" , "ERROR",10);	    
+    if(strstr(g_u8RecData, "CONNECT")){
+      SendAT(configdata, "QFWRITE", "OK" , "ERROR",10);	 
+      retry = 0;
+    }
+    memset(temp,0,100);
+    sprintf(temp,"\r\nAT+QFCLOSE=%s\r\n\r\n",fileinstance);
+    SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
+  }
+return 0;
+}
+__inline void readipconfigurations(void){
+  int retry = 1;
+  int len;
+  char pt_c[10] = 0;
+  char readpt_c[10] = 0;
+  char interval_c[10] = 0;
+  do{
+    
+    memset(fileinstance,0,20);
+    SendAT("\r\nAT+QFOPEN=\"IPCONFIG.TXT\",0\r\n", "ERROR", "OK" , "ERROR",10);	
+    if(strstr(g_u8RecData, "ERROR")){
+      SendAT("\r\nAT+CFUN=1,1", "ERROR", "OK" , "ERROR",10);
+      manualdelay(300);
+      SendAT("\r\nAT+QFOPEN=\"IPCONFIG.TXT\",0\r\n", "ERROR", "OK" , "ERROR",10);
+    }
+    parse_g(g_u8RecData, 1, 2, ' ', '\n' , fileinstance);
+    remove_all_chars(fileinstance, '\r', '\n'); 
+    if(strlen(fileinstance)<1)retry = 1;
+    else{
+      
+      memset(temp,0,100);
+      sprintf(temp, "AT+QFSEEK=%s,0,0\r\n\r\n", fileinstance);
+      SendAT(temp, "CONNECT", "OK" , "ERROR",10);	    
+      memset(temp,0,100);
+      sprintf(temp, "AT+QFREAD=%s\r\n\r\n", fileinstance);
+      SendAT(temp, "OK", "OK" , "ERROR",10);	    
+      memset(IP1,0,50);
+      memset(IP2,0,50);
+      memset(PORT1,0,7);
+      memset(PORT2,0,7);
+      memset(pt_c,0,10);
+      memset(readpt_c,0,10);
+      memset(interval_c,0,10);
+      
+      parse_g(g_u8RecData, 2,3,'|','|', IP1);
+      parse_g(g_u8RecData, 4,5,'|','|', PORT1);
+      parse_g(g_u8RecData, 6,7,'|','|', IP2);
+      parse_g(g_u8RecData, 8,9,'|','|', PORT2);
+      parse_g(g_u8RecData, 10,11,'|','|', readpt_c);
+      parse_g(g_u8RecData, 12,13,'|','|', pt_c);
+      parse_g(g_u8RecData, 14,15,'|','|', interval_c);
+      pt = atoi(pt_c);
+      readpt = atoi(readpt_c);
+      interval = atoi(interval_c);
+     
+      memset(temp,0,100);
+      sprintf(temp,"\r\nAT+QFCLOSE=%s\r\n\r\n",fileinstance);
+      SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
+      retry = 0;
+    }
+  }while(retry);
+}
+
+
+__inline void OBD_GET_PID(){
+  send_OBD("ATZ\r","HELLO","NODATA",">",5);
+  send_OBD("ATE1\r","HELLO","NODATA",">",5);
+  send_OBD("ATL1\r","HELLO","NODATA",">",5);
+  send_OBD("ATSP0\r","HELLO","NODATA",">",5);
+  send_OBD("ATDP\r","HELLO","NODATA",">",5);
+  send_OBD("ATRV\r","HELLO","NODATA",">",5);
+  send_OBD("0100\r","HELLO","NODATA",">",5);
+  send_OBD("0101\r","HELLO","NODATA",">",5);
+  send_OBD("010C\r","HELLO","NODATA",">",5);
+  send_OBD("010D\r","HELLO","NODATA",">",5);
+  send_OBD("0120\r","HELLO","NODATA",">",5);
+  memset(suppportedpid, 0, sizeof(char)*200*7);
+  
+  pidcounter=0;
+  supportedpid("0100\r\n");
+  supportedpid("0120\r\n");
+  supportedpid("0140\r\n");
+  supportedpid("0160\r\n");
+  supportedpid("0180\r\n");
+  supportedpid("01A0\r\n");
+  supportedpid("01C0\r\n");
+  supportedpid("050100\r\n");
+  supportedpid("0900\r\n");	
+}
+__inline void SYS_Init(void)
 {
      
      
      
+
 
      
     CLK_EnableXtalRC((1ul << 2));
@@ -24351,6 +24663,22 @@ void SYS_Init(void)
 
      
     CLK_SetModuleClock(((((1) & 0x03) << 30)|(((18) & 0x1f) << 0)| (((1) & 0x03) << 28)|(((3) & 0x07) << 25)|(((24) & 0x1f) << 20)| (((0) & 0x03) << 18)|(((0x0F) & 0xff) << 10)|(((8) & 0x1f) << 5)), (0x3UL<<24), (((1)-1) << 8));
+    
+    CLK_EnableModuleClock(((((1) & 0x03) << 30)|(((0) & 0x1f) << 0) | (((2) & 0x03) << 28)|(((3) & 0x07) << 25)|(((16) & 0x1f) << 20)| (((0x0) & 0x03) << 18)|(((0x0) & 0xff) << 10)|(((0x0) & 0x1f) << 5)));    
+        
+     
+    CLK_SetModuleClock(((((1) & 0x03) << 30)|(((0) & 0x1f) << 0) | (((2) & 0x03) << 28)|(((3) & 0x07) << 25)|(((16) & 0x1f) << 20)| (((0x0) & 0x03) << 18)|(((0x0) & 0xff) << 10)|(((0x0) & 0x1f) << 5)), (0x2UL<<16), 0);
+    
+     
+    CLK_SetModuleClock(((((1) & 0x03) << 30)|(((28) & 0x1f) << 0) | (((1) & 0x03) << 28)|(((3) & 0x07) << 25)|(((2) & 0x1f) << 20)| (((0) & 0x03) << 18)|(((0xFF) & 0xff) << 10)|(((16) & 0x1f) << 5)), (0x3UL<<2), (((7)-1) << 16));
+    
+
+
+
+
+
+
+
 
      
      
@@ -24368,9 +24696,20 @@ void SYS_Init(void)
     ((GCR_T *) ((( uint32_t)0x50000000) + 0x00000))->GPD_MFP &= ~((1UL<<14) | (1UL<<15));
     ((GCR_T *) ((( uint32_t)0x50000000) + 0x00000))->GPD_MFP |= (1UL<<14) | (1UL<<15);
 
+     
+    ((GCR_T *) ((( uint32_t)0x50000000) + 0x00000))->GPA_MFP &= ~((1UL<<0) | (1UL<<1) | (1UL<<2) | (1UL<<3) | (1UL<<4) | (1UL<<5) | (1UL<<6));
+    ((GCR_T *) ((( uint32_t)0x50000000) + 0x00000))->GPA_MFP |= (1UL<<0) | (1UL<<1) | (1UL<<2) | (1UL<<3) | (1UL<<4) | (1UL<<5) | (1UL<<6) ;
+    ((GCR_T *) ((( uint32_t)0x50000000) + 0x00000))->ALT_MFP1 = 0;
+    
+    
+
+
+
+    
+    
 }
 
-void UARTs_Init()
+__inline void UARTs_Init()
 {
      
      
@@ -24381,24 +24720,24 @@ void UARTs_Init()
     SYS_ResetModule(((0x4<<24) | 18 ));
 
      
-    UART_Open(((UART_T *) ((( uint32_t)0x40000000) + 0x50000)), 115200);
-    UART_Open(((UART_T *) ((( uint32_t)0x40100000) + 0x50000)), 115200);
-    UART_Open(((UART_T *) ((( uint32_t)0x40100000) + 0x54000)), 9600);
+    UART_Open(((UART_T *) ((( uint32_t)0x40000000) + 0x50000)), 9600);             
+    UART_Open(((UART_T *) ((( uint32_t)0x40100000) + 0x50000)), 115200);           
+    UART_Open(((UART_T *) ((( uint32_t)0x40100000) + 0x54000)), 9600);             
 		((((UART_T *) ((( uint32_t)0x40100000) + 0x50000)))->IER |= (((1ul << 0) )));
 		__NVIC_EnableIRQ(UART1_IRQn);  
 		((((UART_T *) ((( uint32_t)0x40100000) + 0x54000)))->IER |= (((1ul << 0) )));
 		__NVIC_EnableIRQ(UART02_IRQn);  
 }
 
- 
- 
- 
 void UART1_IRQHandler(void)
-{
+{char uart1data;
     while(!((((UART_T *) ((( uint32_t)0x40100000) + 0x50000)))->FSR & (1ul << 14))) 
     {
-      g_u8RecData[g_u8RecDataptr] = ((((UART_T *) ((( uint32_t)0x40100000) + 0x50000)))->RBR);
-      g_u8RecDataptr++;
+      uart1data = ((((UART_T *) ((( uint32_t)0x40100000) + 0x50000)))->RBR);
+      if(uart1data != 0){
+        g_u8RecData[g_u8RecDataptr] = uart1data;
+        g_u8RecDataptr++;
+      }
     }
 }
 void UART02_IRQHandler(void)
@@ -24412,83 +24751,109 @@ void UART02_IRQHandler(void)
 
 
 
- 
-int main (void) {
-
- 
- 
- 
-     
-    SYS_UnlockReg();
-     
-    SYS_Init();
-
-    SYS_LockReg();
+__inline void Init_IOs(){
   
-     
-     
+
+
+
+
+
+
+
+ 
+  
+  
+
+
+
+
+
+
+
+
+
+
+
 
   
-		uart_mutex_id = osMutexCreate(&os_mutex_def_uart_mutex);
-		tcp_mutex_id = osMutexCreate(&os_mutex_def_tcp_mutex);
-		fs_mutex_id = osMutexCreate(&os_mutex_def_fs_mutex);  
-    Init_Timers();
-    osKernelInitialize ();                    
-    UARTs_Init();
-    (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((5)<<2))))=0;
-    osKernelStart ();                         
+    GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0040)), 0x00000040, 0x0UL);      
+    GPIO_EnableInt(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0040)), 6, 0x00010000UL);
+    __NVIC_EnableIRQ(GPAB_IRQn);
 
-  while(1){
-
-    send_OBD("ATZ\r","HELLO","NODATA",">",5);
-    send_OBD("ATE1\r","HELLO","NODATA",">",5);
-    send_OBD("ATL1\r","HELLO","NODATA",">",5);
-    send_OBD("ATSP0\r","HELLO","NODATA",">",5);
-
-
-
-
-
-
-
-    send_OBD("ATDP\r","HELLO","NODATA",">",5);
-    send_OBD("ATRV\r","HELLO","NODATA",">",5);
-
+    GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) )), 0x00000400, 0x0UL);     
+    GPIO_EnableInt(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) )), 10, 0x00010000UL);
+    __NVIC_EnableIRQ(GPAB_IRQn); 
     
+    GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) )), 0x00000800, 0x0UL);     
+    GPIO_EnableInt(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) )), 11, 0x00010000UL);
+    __NVIC_EnableIRQ(GPAB_IRQn); 
     
+    GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0040)), 0x00000400, 0x0UL);     
+        
+    GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0040)), 0x00000200, 0x0UL);     
+    GPIO_EnableInt(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0040)), 9, 0x00010000UL);
+    __NVIC_EnableIRQ(GPAB_IRQn); 
+        
+    GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) )), 0x00001000, 0x0UL);      
+    GPIO_EnableInt(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0040)), 12, 0x00010000UL);
+    __NVIC_EnableIRQ(GPAB_IRQn);
+    GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) )), 0x00002000, 0x0UL);      
+    GPIO_EnableInt(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0040)), 13, 0x00010000UL);
+    __NVIC_EnableIRQ(GPAB_IRQn);
+    GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) )), 0x00004000, 0x0UL);      
+    GPIO_EnableInt(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0040)), 14, 0x00010000UL);
+    __NVIC_EnableIRQ(GPAB_IRQn);
+    GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) )), 0x00008000, 0x0UL);      
+    GPIO_EnableInt(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0040)), 15, 0x00010000UL);
+    __NVIC_EnableIRQ(GPAB_IRQn);  
     
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+}
+
+
+void waitfor123(){
+    osSignalWait (0x0123, 0xFFFFFFFFU); 
+    osSignalClear (mainThreadID, 0x0123);
+}
+
+void signal123(){
+    osSignalSet (tid_Thread_OBD_READ, 0x0123);
+}
+void waitfor321(){
+    osSignalWait (0x0321, 0xFFFFFFFFU); 
+    osSignalClear (tid_Thread_OBD_READ, 0x0321);
+}
+
+void signal321(){
+    osSignalSet (mainThreadID, 0x0321);
+}
+
+
+void GPAB_IRQHandler(void){
+  if ((*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((6)<<2)))) == 1){
+    printf("Message Received");
+  }
+}
+void WDT_IRQHandler(void)
+{
+    
+    (((WWDT_T *) ((( uint32_t)0x40000000) + 0x4100))->WWDTRLD = (0x00005AA5));
+    (((WWDT_T *) ((( uint32_t)0x40000000) + 0x4100))->WWDTSR = (1ul << 0));
    
 
-
-    send_OBD("0100\r","HELLO","NODATA",">",5);
-    send_OBD("0101\r","HELLO","NODATA",">",5);
-    send_OBD("010C\r","HELLO","NODATA",">",5);
-    send_OBD("010D\r","HELLO","NODATA",">",5);
-    send_OBD("0120\r","HELLO","NODATA",">",5);
-     
-    memset(suppportedpid, 0, sizeof(char)*200*7);
-
-      pidcounter=0;
-      
-      supportedpid("0100\r\n");
-      supportedpid("0120\r\n");
-      
-      supportedpid("0140\r\n");
-      
-      supportedpid("0160\r\n");
-      
-      supportedpid("0180\r\n");
-      
-      supportedpid("01A0\r\n");
-      
-      supportedpid("01C0\r\n");
-      
-      supportedpid("050100\r\n");
-      
-      supportedpid("0900\r\n");	
-    }
-    Init_Thread ();
-
-while(1){
-}
 }

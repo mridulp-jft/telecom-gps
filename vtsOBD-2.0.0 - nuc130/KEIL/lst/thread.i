@@ -1,5 +1,4 @@
 #line 1 "Thread.c"
-
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdio.h"
  
  
@@ -899,7 +898,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
  
 
-#line 3 "Thread.c"
+#line 2 "Thread.c"
 #line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
 
 
@@ -1831,7 +1830,7 @@ __declspec(noreturn) void os_error (uint32_t error_code);
 
 
 
-#line 4 "Thread.c"
+#line 3 "Thread.c"
 #line 1 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Include\\NUC100Series.h"
  
 
@@ -23011,7 +23010,7 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 
-#line 5 "Thread.c"
+#line 4 "Thread.c"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
  
  
@@ -23749,7 +23748,7 @@ extern __declspec(__nothrow) int __C_library_version_number(void);
 
 
  
-#line 6 "Thread.c"
+#line 5 "Thread.c"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
  
  
@@ -24172,10 +24171,9 @@ extern __declspec(__nothrow) void _membitmovewb(void *  , const void *  , int  ,
 
  
 
-#line 7 "Thread.c"
+#line 6 "Thread.c"
 
 extern osMutexId	(tcp_mutex_id); 
-
 extern char g_u8OBDRecData[100];
 extern char obdresp[20];
 extern char tempobdresp[20];
@@ -24184,6 +24182,8 @@ extern char suppportedpid[100][7];
 extern char temp[100];
 extern int pidcounter;
  
+int once = 1;
+extern uint32_t pt;
 int motion = 0;
 int32_t signal;
 int32_t signal2;
@@ -24191,8 +24191,8 @@ int start_thead = 0;
  
  
 extern int8_t charging, cpinready, cregready;
-extern char g_u8SendData[3500];
-extern char g_u8RecData[500];
+extern char g_u8SendData[2500];
+extern char g_u8RecData[1000];
 extern void cpinquerry(void);
 extern void cregquerry(void);
 extern void Save_FS(void);
@@ -24204,6 +24204,7 @@ extern int32_t life;
  
 __inline void manualdelay(int delayms);
 __inline void remove_all_chars(char* str, char c, char d);
+__inline void obd_get_data();
 
 extern void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
@@ -24215,41 +24216,37 @@ extern void SendAT_GPS(char * command, char * response1, char * response2, char 
 extern void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void parse_g(char* str, int first, int sec, char f, char s , char *string);
 
- 
+void OBD_READ (void const *argument); 
 
 
+extern osThreadId mainThreadID;
+osThreadId tid_Thread_OBD_READ;                                     
+const osThreadDef_t os_thread_def_OBD_READ = { (OBD_READ), (osPriorityNormal), (1), (4048) };                  
 
-
-
-
- 
- 
-void GSM (void const *argument);                             
-void GNSS (void const *argument); 
-
-osThreadId tid_Thread_GSM;                                          
-const osThreadDef_t os_thread_def_GSM = { (GSM), (osPriorityNormal), (1), (2050) };                   
-osThreadId tid_Thread_GNSS;                                          
-const osThreadDef_t os_thread_def_GNSS = { (GNSS), (osPriorityNormal), (1), (4048) };                   
-
-int Init_Thread (void) {
-
-  tid_Thread_GSM = osThreadCreate (&os_thread_def_GSM, 0);
-  if (!tid_Thread_GSM) return(-1);
-  tid_Thread_GNSS = osThreadCreate (&os_thread_def_GNSS, 0);
-  if (!tid_Thread_GNSS) return(-1);  
-  return(0);
-}
-void GNSS (void const *argument) 
+void OBD_READ (void const *argument) 
 {
   while (1) 
 	{
     motion = 1;
-
-    
-       
     osSignalWait (0x0002, 0xFFFFFFFFU); 
-    osSignalClear (tid_Thread_GNSS, 0x0002);
+    osSignalClear (tid_Thread_OBD_READ, 0x0002);
+
+
+
+    signal = osSignalSet (mainThreadID, 0x0001);
+    osDelay(4900);
+   }
+ }
+
+int Init_Thread (void) {
+
+      tid_Thread_OBD_READ = osThreadCreate (&os_thread_def_OBD_READ, 0);
+      if (!tid_Thread_OBD_READ) return(-1);  
+      return(0);
+
+}
+
+__inline void obd_get_data(){
     pidcounter=0;
 		while(strlen(suppportedpid[pidcounter])>3)
 		{
@@ -24272,73 +24269,5 @@ void GNSS (void const *argument)
 		sprintf(temp,",~`,LIFE=%d\n",life);
 		strcat(g_u8SendData,temp);
     remove_all_chars(g_u8SendData, '\r', ' ');
-    
     read_obd=0;
-    signal = osSignalSet (tid_Thread_GSM, 0x0001);
-    
-   }      
-    
- 
-}
-
-void GSM (void const *argument) {
-int waitstatus = 0;
-	while (1) 
-	{
-    
- 
-		SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",1);	
-    cpinquerry();
-    if(cpinready==1)
-    {
-      cregquerry();
-      if(cregready == 1)
-      {
-        SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIREGAPP=\"isafe\",\"\",\"\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIREGAPP?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QILOCIP\r\n\r\n", "Ready", "OK" , "ERROR",2);	
-      }
-    }
-		SendAT("\r\nAT+QSCLK=1\r\n\r\n", "Ready", "OK" , "ERROR",5);
-
-		SendAT("\r\nAT+CSQ\r\n\r\n", "Ready", "OK" , "ERROR",4);	
-		SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n\r\n","CONNECT","ERROR","FAIL",10);	
-		network=0;
-    
-    if (start_thead != 0){
-    osSignalWait (0x0001, 0xFFFFFFFFU); 
-    osSignalClear (tid_Thread_GSM, 0x0001);
-		}start_thead = 1;
-    TCP_Send("\r\nAT+QISEND\r\n\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
-    
-
-		if(network == 1)
-		{
-      Save_FS();
-      SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",5);	
-      signal2 = osSignalSet (tid_Thread_GNSS, 0x0002);
-      osDelay(10);    
-			SendAT("\r\nAT+QICLOSE\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
-			SendAT("\r\nAT+QDSIM=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
-			SendAT("\r\nAT+CFUN=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
-			SendAT("\r\nAT+CFUN=1\r\n\r\n", "Ready", "NOT INSERTED" , "ERROR",10);	
-      manualdelay(200);
-    }
-		else
-		{
-      SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",5);	
-      signal2 = osSignalSet (tid_Thread_GNSS, 0x0002);
-      osDelay(10);    
-
-
-
-
-			
-		}
-
-  }
- 
-  
 }

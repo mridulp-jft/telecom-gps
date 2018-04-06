@@ -452,8 +452,7 @@ void sms_mc60(void){
       parse_g(g_u8RecData,1,1,'(',')',debug_at); 
       strcat(debug_at,"\r\n\r\n");
       memset(ph_num,0,15);
-      parse_g(g_u8RecData,3,4,'"','"',ph_num); 
-      
+      parse_g(g_u8RecData,3,4,'"','"',ph_num);      
     }           
     
   RI=0; 

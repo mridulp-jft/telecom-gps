@@ -24272,7 +24272,8 @@ void obdcommand(char* cmd);
 
 char obdresp[20];
 char tempobdresp[20];
-char obdrespbinary[33];char suppportedpid[200][7];
+char obdrespbinary[33];
+char suppportedpid[200][7];
 int pidcounter;
 
 

@@ -1,4 +1,3 @@
-
 #include "stdio.h"
 #include "cmsis_os.h"                                           // CMSIS RTOS header file
 #include "NUC100Series.h"
@@ -6,7 +5,6 @@
 #include "string.h"
 
 extern osMutexId	(tcp_mutex_id); // Mutex ID
-
 extern char g_u8OBDRecData[OBDRXBUFSIZE];
 extern char obdresp[20];
 extern char tempobdresp[20];
@@ -15,6 +13,8 @@ extern char suppportedpid[100][7];
 extern char temp[100];
 extern int pidcounter;
 /************************global variables**********************/
+int once = 1;
+extern uint32_t pt;
 int motion = 0;
 int32_t signal;
 int32_t signal2;
@@ -35,6 +35,7 @@ extern int32_t life;
 /************************EXTERN FUNCTIONS***********************/
 __inline void manualdelay(int delayms);
 __inline void remove_all_chars(char* str, char c, char d);
+__inline void obd_get_data();
 
 extern void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
@@ -45,42 +46,38 @@ extern void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char
 extern void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void parse_g(char* str, int first, int sec, char f, char s , char *string);
+//void GSM (void const *argument);                                // thread function
+void OBD_READ (void const *argument); 
+//osThreadId tid_Thread_GSM;                                      // thread id
+//osThreadDef (GSM, osPriorityNormal, 1, 2050);                   // thread object
+extern osThreadId mainThreadID;
+osThreadId tid_Thread_OBD_READ;                                     // thread id
+osThreadDef (OBD_READ, osPriorityNormal, 1, 4048);                  // thread object
 
-/***************************************************************/
-
-
-
-
-/*----------------------------------------------------------------------------
- *      Thread 1 'Thread_Name': Sample thread
- *---------------------------------------------------------------------------*/
- 
-void GSM (void const *argument);                             // thread function
-void GNSS (void const *argument); 
-
-osThreadId tid_Thread_GSM;                                          // thread id
-osThreadDef (GSM, osPriorityNormal, 1, 2050);                   // thread object
-osThreadId tid_Thread_GNSS;                                          // thread id
-osThreadDef (GNSS, osPriorityNormal, 1, 4048);                   // thread object
-
-int Init_Thread (void) {
-
-  tid_Thread_GSM = osThreadCreate (osThread(GSM), NULL);
-  if (!tid_Thread_GSM) return(-1);
-  tid_Thread_GNSS = osThreadCreate (osThread(GNSS), NULL);
-  if (!tid_Thread_GNSS) return(-1);  
-  return(0);
-}
-void GNSS (void const *argument) 
+void OBD_READ (void const *argument) 
 {
   while (1) 
 	{
     motion = 1;
+    osSignalWait (0x0002, osWaitForever); // wait forever for the signal 0x0002
+    osSignalClear (tid_Thread_OBD_READ, 0x0002);
+    #ifdef OBD    
+      obd_get_data();
+    #endif    
+    signal = osSignalSet (mainThreadID, 0x0001);
+    osDelay(4900);
+   }
+ }
 
-    //SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",5);	
-       //osMutexWait(tcp_mutex_id, osWaitForever);
-    osSignalWait (0x0002, osWaitForever); // wait forever for the signal 0x0001
-    osSignalClear (tid_Thread_GNSS, 0x0002);
+int Init_Thread (void) {
+//  #ifdef OBD
+      tid_Thread_OBD_READ = osThreadCreate (osThread(OBD_READ), NULL);
+      if (!tid_Thread_OBD_READ) return(-1);  
+      return(0);
+//  #endif
+}
+
+__inline void obd_get_data(){
     pidcounter=0;
 		while(strlen(suppportedpid[pidcounter])>3)
 		{
@@ -103,73 +100,5 @@ void GNSS (void const *argument)
 		sprintf(temp,",~`,LIFE=%d\n",life);
 		strcat(g_u8SendData,temp);
     remove_all_chars(g_u8SendData, '\r', ' ');
-    
     read_obd=0;
-    signal = osSignalSet (tid_Thread_GSM, 0x0001);
-    //osMutexRelease(tcp_mutex_id);     //osDelay(4900); //4900
-   }      // suspend thread
-    //osDelay(100);
- 
-}
-
-void GSM (void const *argument) {
-int waitstatus = 0;
-	while (1) 
-	{
-    
- 
-		SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",1);	
-    cpinquerry();
-    if(cpinready==1)
-    {
-      cregquerry();
-      if(cregready == 1)
-      {
-        SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIREGAPP=\"isafe\",\"\",\"\"\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIREGAPP?\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-        SendAT("\r\nAT+QILOCIP\r\n\r\n", "Ready", "OK" , "ERROR",2);	
-      }
-    }
-		SendAT("\r\nAT+QSCLK=1\r\n\r\n", "Ready", "OK" , "ERROR",5);
-//		SendAT("\r\nAT+QISTAT\r\n\r\n", "Ready", "OK" , "ERROR",5);	
-		SendAT("\r\nAT+CSQ\r\n\r\n", "Ready", "OK" , "ERROR",4);	
-		SendAT("\r\nAT+QIOPEN=\"TCP\",\"104.236.203.4\",\"5556\"\r\n\r\n","CONNECT","ERROR","FAIL",10);	
-		network=0;
-    //osMutexWait(tcp_mutex_id, osWaitForever);
-    if (start_thead != 0){
-    osSignalWait (0x0001, osWaitForever); // wait forever for the signal 0x0001
-    osSignalClear (tid_Thread_GSM, 0x0001);
-		}start_thead = 1;
-    TCP_Send("\r\nAT+QISEND\r\n\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
-    //osMutexRelease(tcp_mutex_id);     
-
-		if(network == 1)
-		{
-      Save_FS();
-      SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",5);	
-      signal2 = osSignalSet (tid_Thread_GNSS, 0x0002);
-      osDelay(10);    
-			SendAT("\r\nAT+QICLOSE\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
-			SendAT("\r\nAT+QDSIM=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
-			SendAT("\r\nAT+CFUN=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
-			SendAT("\r\nAT+CFUN=1\r\n\r\n", "Ready", "NOT INSERTED" , "ERROR",10);	
-      manualdelay(200);
-    }
-		else
-		{
-      SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",5);	
-      signal2 = osSignalSet (tid_Thread_GNSS, 0x0002);
-      osDelay(10);    
-//      if(life > 1500){
-//        SYS_UnlockReg();
-//        SYS->IPRST_CTL1 |= SYS_IPRST_CTL1_CHIP_RST_Msk; 
-//      }
-			//osDelay(5000);                                         // suspend thread
-		}
-
-  }
- //   osThreadYield ();                                           // suspend thread
-  
 }

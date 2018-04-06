@@ -20,7 +20,10 @@
         #define RTE_CMSIS_RTOS_RTX              /* CMSIS-RTOS Keil RTX */
 #define RTE_Drivers_CLK              /* Driver CLK */
 #define RTE_Drivers_GPIO              /* Driver GPIO */
+#define RTE_Drivers_SPI              /* Driver SPI */
 #define RTE_Drivers_SYS              /* Driver SYS */
 #define RTE_Drivers_UART              /* Driver UART */
+#define RTE_Drivers_WDT              /* Driver WDT */
+#define RTE_Drivers_WWDT              /* Driver WWDT */
 
 #endif /* RTE_COMPONENTS_H */

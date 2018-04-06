@@ -9,11 +9,13 @@ extern int32_t tmr0sec, tmr1sec;
 extern int8_t charging;
 extern float	u32ADC0Result;
 extern float u32ADC0Result1;
+extern   int tcpsendchtimer;
 extern osMutexId	(uart_mutex_id); // Mutex ID
 __inline void batteryind (void);
 int8_t time;
 int32_t life=0;
 int8_t i2ctimeout=0;
+extern int interval_count;
 
 /*----- One-Shoot Timer Example -----*/
 static void Timer1_Callback (void const *arg);                  // prototype for timer callback function
@@ -34,18 +36,18 @@ static void Timer2_Callback (void const *arg);                  // prototype for
 static osTimerId id2;                                           // timer id
 static uint32_t  exec2;                                         // argument for the timer call back function
 static osTimerDef (Timer2, Timer2_Callback);
- 
+int tc = 0; 
 // Periodic Timer Example
 static void Timer2_Callback (void const *arg) 
 {
 	tmr0sec++;
   tmr1sec++;
-
-//	batteryind();
+  tcpsendchtimer++;
+  tc++;
+ 
   i2ctimeout++;
-  PB13 ^= 1;
-	life++;
-// add user code here
+  interval_count++;
+  if(tcpsendchtimer > 500)tcpsendchtimer = 0;
 }
 
 
