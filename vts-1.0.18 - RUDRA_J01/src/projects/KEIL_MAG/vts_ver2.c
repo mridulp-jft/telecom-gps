@@ -1,5 +1,6 @@
+
 /*
- * File:		KEIL_MAG.c
+ 0* File:		KEIL_MAG.c
  * Purpose:		Main process
  *
  */
@@ -71,7 +72,7 @@ int breach=0,aliveping=0;
 void send_balance(void);extern void outSRS(void);
 extern void LED_state(void),LED_state2(void);
 int sleep_flag=0;
-int32 tmeout=4,int_erval=1; //10 SECS TIMEOUT
+int32 tmeout=7,int_erval=1; //10 SECS TIMEOUT
 extern char in_char1(void),in_char2(void);
 int myAtoi(char *str);
 extern void out_char1(char ch),out_char2(char ch),ignstaton(),ignstatoff(),ignread();
@@ -113,6 +114,8 @@ char ringflag=0,lptmr_interrupt=0;
 extern void lptmr_init(int count, int clock_source),saveapn();
 __inline void GPS_COLLECT(void);
 __inline void GPS_COLLECT2(void);
+__inline void reset_func();
+
 int time52=15;
 void HardFault_Handler(void);
 char * cond277;char* cond20077;//char data_balance[200];
@@ -130,9 +133,9 @@ int main (void)
 
 
 //int_erval=10;
-								memset(data,0,strlen(data));
-								memset(data2,0,strlen(data2));
-	memset(ip,0,strlen(ip));
+		memset(data,0,strlen(data));
+		memset(data2,0,strlen(data2));
+		memset(ip,0,strlen(ip));
 		memset(port,0,strlen(ip));
 
 	
@@ -198,8 +201,6 @@ clear();
 
 msg_sim800();
 	
-GPS_COLLECT();
-strcat(data,"CH\n");	
 
 //GPS_COLLECT();
 //  strcat(data,"CH\n");	
@@ -253,12 +254,6 @@ send_GSM("\n\nAT+CIPQSEND=0\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
 send_GSM("\n\nAT+CPBS=\"SM\"\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
 
 
-
-
-
-
-
-
 send_GSM("\n\nAT+SD2PCM=0\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
 //delay(10);	
 
@@ -270,12 +265,11 @@ delay(10);
 //;	
 //send_GSM("\n\nAT+FSCREATE=D:\\LOG.TXT\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
 
-	GPS_COLLECT();
-  strcat(data,"CH\n");	
+
 
 send_GSM("\n\nAT+FSMEM\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
-delay(100);	
-
+	GPS_COLLECT();
+  strcat(data,"CH\n");	
 if(strstr(uart_string_gsm,"D:")){
 send_GSM("\n\nAT+FSCREATE=C:\\LOGGING_DRIVE.TXT\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);	
 	
@@ -298,9 +292,6 @@ clear();
 send_modem("C:");		
 	
 }	
-
-delay(100);
-
 //delay(10);
 
 send_GSM("\n\nATS0=1\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
@@ -382,9 +373,11 @@ msg_sim800();
 msg_sim800(); 
 
 								
-								clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-								delay(20);
-	
+send_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+if(strstr(uart_string_gsm,"0.0.0.0"))
+{
+	reset_func();
+}	
 
 msg_sim800(); 
 
@@ -493,10 +486,8 @@ strcat(data,"CH\n");
 GPS_COLLECT2();
 strcat(data,"CH\n");
 
-	
 send_GSM("\r\nAT+CIPSHUT\r\n", "OK", "ERROR\r\n" , "ERROR:",4);	
-GPS_COLLECT2();
-strcat(data,"CH\n");	
+
 memset(at_,0,100);
 sprintf(at_,"\r\nAT+CSTT=\"%s\"\r\n",apn);
 send_GSM(at_,	"OK", "ERROR\r\n" , "ERROR:",tmeout);							//delay(20);
@@ -506,13 +497,14 @@ GPS_COLLECT2();
 strcat(data,"CH\n");	
 GPS_COLLECT2();
 strcat(data,"CH\n");	
-
-
 msg_sim800(); 
 GPS_COLLECT2();
 strcat(data,"CH\n");	
-					clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-					delay(20);
+send_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+if(strstr(uart_string_gsm,"0.0.0.0"))
+{
+	reset_func();
+}	
 
 
 msg_sim800(); 
@@ -645,7 +637,7 @@ msg_sim800();
 	
 if(rtcticks2>=1500){
 	DTR_OFF;
-	send_modem("\r\n\r\n\r\n\n\n\n\n\nDEVICE IS RESETTING.......\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\n\n");
+//	send_modem("\r\n\r\n\r\n\n\n\n\n\nDEVICE IS RESETTING.......\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\n\n");
 	clear();
 		delay(100);
 
@@ -692,6 +684,7 @@ if	((sleep_flag != 1  || (aliveping > 5) ) )
 {
 	DTR_OFF;
 	sleep_flag=0;
+	send_GSM("\r\nAT+CSQ\r\n", "OK", "ERROR" , "DEACT",tmeout);		
 	send_GSM("\r\nAT+CIPCLOSE\r\n", "CLOSE OK", "ERROR" , "ERROR:",tmeout);		
 	memset(at_,0,100);
 	memset(data,0,strlen(data));
@@ -712,7 +705,7 @@ else{
 	adc_read(9);							
 	memset(fuelstr,0,5);
 	sprintf(fuelstr,"%d,",fuel);
-memset(acstr,0,2); //ptb2
+	memset(acstr,0,2); //ptb2
 if(GPIOB_PDIR & 0x00000004){
 			sprintf(acstr,"%d",1);
 }
@@ -873,8 +866,11 @@ if(strstr(uart_string_gsm,"ERROR")){
 	msg_sim800(); 
 	GPS_COLLECT2();
 	strcat(data,"CH\n");	
-						clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-						delay(20);
+send_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+if(strstr(uart_string_gsm,"0.0.0.0"))
+{
+	reset_func();
+}	
 
 
 	msg_sim800(); 
@@ -1126,13 +1122,14 @@ __inline float stof(const char* s)
 
 
 __inline void GPS_COLLECT()
-{imeiinc=0;
+{
 delay(200);
 clear();
 //adc_read(8);							
 //memset(fuelstr,0,5);
 //sprintf(fuelstr,"%d,",fuel);	
-	
+if(strlen(imei)<14)
+{imeiinc=0;
 memset(imei,0,20);
 send_GSM("\r\n\n\nAT+GSN\r\n","OK","ERROR\r\n","ERROR",10);	
 for(i=0;i<strlen(uart_string_gsm);i++){
@@ -1141,7 +1138,8 @@ for(i=0;i<strlen(uart_string_gsm);i++){
 			imeiinc++;
 		}
 }
-clear();	
+clear();
+}
 
 
 
@@ -1201,9 +1199,9 @@ parse_g(rmc, 7, 8, ',', ',' ,velocity);
 		sprintf(longi,"%f",mm22);	
 		strcat(data,imei);
 		strcat(data,",");	
-		strcat(data,"$GxGGA");	
+//		strcat(data,"$GxGGA");	
 		strcat(data,gga);
-		strcat(data,",$GxRMC");	
+		strcat(data,",");	
 		strcat(data,rmc);	
 		strcat(data,",");	
 		strcat(data,num2);	
@@ -1212,13 +1210,13 @@ parse_g(rmc, 7, 8, ',', ',' ,velocity);
 	memset(fuelstr,0,5);
 	sprintf(fuelstr,"%d,",fuel);
 		strcat(data,fuelstr);		
-		strcat(data,",AC=");	
+		strcat(data,"AC=");	
 		strcat(data,acstr);
 		strcat(data,",I=");	
 		strcat(data,ignstr);
 		strcat(data,",");	
 	memset(fuelstr,0,5);
-	sprintf(fuelstr,"%d,",rtcticks2);
+	sprintf(fuelstr,"%d",rtcticks2);
 		strcat(data,fuelstr);	
 		
 		
@@ -1234,16 +1232,24 @@ __inline void GPS_COLLECT2()
 {	
 time52=15;	
 
-//memset(imei,0,20);
-//send_GSM("\r\n\n\nAT+GSN\r\n","OK","ERROR\r\n","ERROR",10);	
-//for(i=0;i<strlen(uart_string_gsm);i++){
-//		if((uart_string_gsm[i]>47)   &&   (uart_string_gsm[i]<58)){   //means numeric
-//			imei[imeiinc] = uart_string_gsm[i];
-//			imeiinc++;
-//		}
-//}
+delay(200);
+clear();
+//adc_read(8);							
+//memset(fuelstr,0,5);
+//sprintf(fuelstr,"%d,",fuel);	
+if(strlen(imei)<14)
+{
+imeiinc=0;
+memset(imei,0,20);
+send_GSM("\r\n\n\nAT+GSN\r\n","OK","ERROR\r\n","ERROR",10);	
+for(i=0;i<strlen(uart_string_gsm);i++){
+		if((uart_string_gsm[i]>47)   &&   (uart_string_gsm[i]<58)){   //means numeric
+			imei[imeiinc] = uart_string_gsm[i];
+			imeiinc++;
+		}
+}
 clear();	
-
+}
 	
 	
 	adc_read(9);							
@@ -1300,16 +1306,16 @@ parse_g(rmc, 7, 8, ',', ',' ,velocity);
 		memset(longi,0,15);
 		sprintf(longi,"%f",mm22);	
 		strcat(data,imei);
-		strcat(data,", ");	
-		strcat(data,"$GxGGA");	
+		strcat(data,",");	
+	//	strcat(data,"$GxGGA");	
 		strcat(data,gga);
-		strcat(data,", $GxRMC");	
+		strcat(data,",");	
 		strcat(data,rmc);	
 		strcat(data,",");	
 		strcat(data,num2);
 		strcat(data,",F=");	
 		strcat(data,fuelstr);
-		strcat(data,",AC=");	
+		strcat(data,"AC=");	
 		strcat(data,acstr);
 		strcat(data,",I=");	
 		strcat(data,ignstr);		
@@ -1504,7 +1510,7 @@ delay(1000);
 
 								memset(ip,0,100);
 								memset(port,0,10);
-								strcat (ip, "rudra.jellyfishtele.com");
+								strcat (ip, "104.236.203.4");
 								strcat (port, "5555");		
 								memcpy (interval, "5", 1);										
 								save_ip_port();
@@ -1973,8 +1979,11 @@ strcat(data,"CH\n");
 msg_sim800(); 
 GPS_COLLECT2();
 strcat(data,"CH\n");	
-					clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-					delay(20);
+send_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+if(strstr(uart_string_gsm,"0.0.0.0"))
+{
+	reset_func();
+}	
 
 
 msg_sim800(); 
@@ -2189,8 +2198,13 @@ strcat(data,"CH\n");
 msg_sim800(); 
 GPS_COLLECT2();
 strcat(data,"CH\n");	
-					clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-					delay(20);
+send_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+if(strstr(uart_string_gsm,"0.0.0.0"))
+{
+	reset_func();
+}	
+
+//					delay(20);
 
 
 msg_sim800(); 
@@ -2378,7 +2392,41 @@ __inline	void send_message(char * data2)
 
 
 
-
+__inline void reset_func()
+{
+		savecursor();
+	
+				memset(at_,0,100);
+				sprintf(at_,"\r\nAT+FSWRITE=%s\\LOG.TXT,1,%d,10\n\n",drive,strlen(data)+1);	
+				send_SD(at_, ">", "ERROR\r\n" , "ERROR",5);
+if(strstr(uart_string_gsm,"ERROR")){
+	drive[0]='C';drive[1]=':';
+}	
+				//clear();	
+				k2=0;									//string array counter for uart 1
+				tout=0;	
+				for(k=0;k<strlen(data);k++)
+				{
+					uart_putchar(UART1_BASE_PTR, data[k]);//clear();
+				}	
+				uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	
+				//memset(data,0,1000);
+				//timer counts to wait for characters in uart 1 									
+				while(!(strstr(uart_string_gsm,"OK\r\n")  || (strstr(uart_string_gsm, "ERROR") ||  (tout > 5) )))
+				{				//uart_putchar(UART1_BASE_PTR, '\n');					
+				}
+				//clear();//uart_putchar(UART1_BASE_PTR,0x1a);
+				//memset(data,0,strlen(data));
+				//clear();
+	RESET_OFF;
+	RESET_OFF;
+	delay(100);	
+	RESET_ON;
+	RESET_ON;	
+	delay(100);
+	rtcticks2 =0;
+	
+}
 
 	
 	

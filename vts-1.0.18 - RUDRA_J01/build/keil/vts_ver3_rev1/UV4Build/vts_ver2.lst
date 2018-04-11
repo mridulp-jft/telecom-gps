@@ -1,6 +1,7 @@
 L 1 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c"
+N
 N/*
-N * File:		KEIL_MAG.c
+N 0* File:		KEIL_MAG.c
 N * Purpose:		Main process
 N *
 N */
@@ -449,35 +450,45 @@ N#define __NVIC_PRIO_BITS               2         /**< Number of priority bits i
 N#define __Vendor_SysTickConfig         0         /**< Vendor specific implementation of SysTickConfig is defined */
 N
 N#include "core_cm0plus.h"              /* Core Peripheral Access Layer */
-L 1 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\core_cm0plus.h" 1
+L 1 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0plus.h" 1
 N/**************************************************************************//**
 N * @file     core_cm0plus.h
 N * @brief    CMSIS Cortex-M0+ Core Peripheral Access Layer Header File
-N * @version  V5.0.1
-N * @date     25. November 2016
+N * @version  V4.30
+N * @date     20. October 2015
 N ******************************************************************************/
-N/*
-N * Copyright (c) 2009-2016 ARM Limited. All rights reserved.
-N *
-N * SPDX-License-Identifier: Apache-2.0
-N *
-N * Licensed under the Apache License, Version 2.0 (the License); you may
-N * not use this file except in compliance with the License.
-N * You may obtain a copy of the License at
-N *
-N * www.apache.org/licenses/LICENSE-2.0
-N *
-N * Unless required by applicable law or agreed to in writing, software
-N * distributed under the License is distributed on an AS IS BASIS, WITHOUT
-N * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-N * See the License for the specific language governing permissions and
-N * limitations under the License.
-N */
+N/* Copyright (c) 2009 - 2015 ARM LIMITED
+N
+N   All rights reserved.
+N   Redistribution and use in source and binary forms, with or without
+N   modification, are permitted provided that the following conditions are met:
+N   - Redistributions of source code must retain the above copyright
+N     notice, this list of conditions and the following disclaimer.
+N   - Redistributions in binary form must reproduce the above copyright
+N     notice, this list of conditions and the following disclaimer in the
+N     documentation and/or other materials provided with the distribution.
+N   - Neither the name of ARM nor the names of its contributors may be used
+N     to endorse or promote products derived from this software without
+N     specific prior written permission.
+N   *
+N   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+N   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+N   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+N   ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+N   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+N   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+N   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+N   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+N   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+N   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+N   POSSIBILITY OF SUCH DAMAGE.
+N   ---------------------------------------------------------------------------*/
+N
 N
 N#if   defined ( __ICCARM__ )
 X#if   0L
 S #pragma system_include         /* treat file as system include file for MISRA check */
-S#elif defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+S#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
 X#elif 1L && (5060061 >= 6010050)
 S  #pragma clang system_header   /* treat file as system include file */
 N#endif
@@ -816,7 +827,7 @@ N
 N#endif /* __stdint_h */
 N
 N/* end of stdint.h */
-L 35 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\core_cm0plus.h" 2
+L 45 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0plus.h" 2
 N
 N#ifdef __cplusplus
 S extern "C" {
@@ -846,13 +857,54 @@ N  @{
 N */
 N
 N/*  CMSIS CM0+ definitions */
-N#define __CM0PLUS_CMSIS_VERSION_MAIN ( 5U)                                      /*!< [31:16] CMSIS HAL main version */
-N#define __CM0PLUS_CMSIS_VERSION_SUB  ( 0U)                                      /*!< [15:0]  CMSIS HAL sub version */
+N#define __CM0PLUS_CMSIS_VERSION_MAIN (0x04U)                                   /*!< [31:16] CMSIS HAL main version */
+N#define __CM0PLUS_CMSIS_VERSION_SUB  (0x1EU)                                   /*!< [15:0]  CMSIS HAL sub version */
 N#define __CM0PLUS_CMSIS_VERSION      ((__CM0PLUS_CMSIS_VERSION_MAIN << 16U) | \
-N                                       __CM0PLUS_CMSIS_VERSION_SUB           )  /*!< CMSIS HAL version number */
-X#define __CM0PLUS_CMSIS_VERSION      ((__CM0PLUS_CMSIS_VERSION_MAIN << 16U) |                                        __CM0PLUS_CMSIS_VERSION_SUB           )   
+N                                       __CM0PLUS_CMSIS_VERSION_SUB           ) /*!< CMSIS HAL version number */
+X#define __CM0PLUS_CMSIS_VERSION      ((__CM0PLUS_CMSIS_VERSION_MAIN << 16U) |                                        __CM0PLUS_CMSIS_VERSION_SUB           )  
 N
-N#define __CORTEX_M                   (0U)                                       /*!< Cortex-M Core */
+N#define __CORTEX_M                (0x00U)                                      /*!< Cortex-M Core */
+N
+N
+N#if   defined ( __CC_ARM )
+X#if   1L
+N  #define __ASM            __asm                                      /*!< asm keyword for ARM Compiler */
+N  #define __INLINE         __inline                                   /*!< inline keyword for ARM Compiler */
+N  #define __STATIC_INLINE  static __inline
+N
+N#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+S  #define __ASM            __asm                                      /*!< asm keyword for ARM Compiler */
+S  #define __INLINE         __inline                                   /*!< inline keyword for ARM Compiler */
+S  #define __STATIC_INLINE  static __inline
+S
+S#elif defined ( __GNUC__ )
+S  #define __ASM            __asm                                      /*!< asm keyword for GNU Compiler */
+S  #define __INLINE         inline                                     /*!< inline keyword for GNU Compiler */
+S  #define __STATIC_INLINE  static inline
+S
+S#elif defined ( __ICCARM__ )
+S  #define __ASM            __asm                                      /*!< asm keyword for IAR Compiler */
+S  #define __INLINE         inline                                     /*!< inline keyword for IAR Compiler. Only available in High optimization mode! */
+S  #define __STATIC_INLINE  static inline
+S
+S#elif defined ( __TMS470__ )
+S  #define __ASM            __asm                                      /*!< asm keyword for TI CCS Compiler */
+S  #define __STATIC_INLINE  static inline
+S
+S#elif defined ( __TASKING__ )
+S  #define __ASM            __asm                                      /*!< asm keyword for TASKING Compiler */
+S  #define __INLINE         inline                                     /*!< inline keyword for TASKING Compiler */
+S  #define __STATIC_INLINE  static inline
+S
+S#elif defined ( __CSMC__ )
+S  #define __packed
+S  #define __ASM            _asm                                      /*!< asm keyword for COSMIC Compiler */
+S  #define __INLINE         inline                                    /*!< inline keyword for COSMIC Compiler. Use -pc99 on compile line */
+S  #define __STATIC_INLINE  static inline
+S
+S#else
+S  #error Unknown compiler
+N#endif
 N
 N/** __FPU_USED indicates whether an FPU is used or not.
 N    This core does not support an FPU at all
@@ -866,7 +918,7 @@ X  #if 0L
 S    #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
 N  #endif
 N
-N#elif defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+N#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
 S  #if defined __ARM_PCS_VFP
 S    #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
 S  #endif
@@ -881,7 +933,7 @@ S  #if defined __ARMVFP__
 S    #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
 S  #endif
 S
-S#elif defined ( __TI_ARM__ )
+S#elif defined ( __TMS470__ )
 S  #if defined __TI_VFP_SUPPORT__
 S    #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
 S  #endif
@@ -898,67 +950,98 @@ S  #endif
 S
 N#endif
 N
-N#include "cmsis_compiler.h"               /* CMSIS compiler specific defines */
-L 1 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\cmsis_compiler.h" 1
+N#include "core_cmInstr.h"                /* Core Instruction Access */
+L 1 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h" 1
 N/**************************************************************************//**
-N * @file     cmsis_compiler.h
-N * @brief    CMSIS compiler generic header file
-N * @version  V5.0.1
-N * @date     30. January 2017
+N * @file     core_cmInstr.h
+N * @brief    CMSIS Cortex-M Core Instruction Access Header File
+N * @version  V4.30
+N * @date     20. October 2015
 N ******************************************************************************/
-N/*
-N * Copyright (c) 2009-2017 ARM Limited. All rights reserved.
-N *
-N * SPDX-License-Identifier: Apache-2.0
-N *
-N * Licensed under the Apache License, Version 2.0 (the License); you may
-N * not use this file except in compliance with the License.
-N * You may obtain a copy of the License at
-N *
-N * www.apache.org/licenses/LICENSE-2.0
-N *
-N * Unless required by applicable law or agreed to in writing, software
-N * distributed under the License is distributed on an AS IS BASIS, WITHOUT
-N * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-N * See the License for the specific language governing permissions and
-N * limitations under the License.
-N */
+N/* Copyright (c) 2009 - 2015 ARM LIMITED
 N
-N#ifndef __CMSIS_COMPILER_H
-N#define __CMSIS_COMPILER_H
+N   All rights reserved.
+N   Redistribution and use in source and binary forms, with or without
+N   modification, are permitted provided that the following conditions are met:
+N   - Redistributions of source code must retain the above copyright
+N     notice, this list of conditions and the following disclaimer.
+N   - Redistributions in binary form must reproduce the above copyright
+N     notice, this list of conditions and the following disclaimer in the
+N     documentation and/or other materials provided with the distribution.
+N   - Neither the name of ARM nor the names of its contributors may be used
+N     to endorse or promote products derived from this software without
+N     specific prior written permission.
+N   *
+N   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+N   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+N   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+N   ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+N   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+N   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+N   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+N   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+N   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+N   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+N   POSSIBILITY OF SUCH DAMAGE.
+N   ---------------------------------------------------------------------------*/
 N
-N#include <stdint.h>
 N
-N/*
-N * ARM Compiler 4/5
-N */
+N#if   defined ( __ICCARM__ )
+X#if   0L
+S #pragma system_include         /* treat file as system include file for MISRA check */
+S#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+X#elif 1L && (5060061 >= 6010050)
+S  #pragma clang system_header   /* treat file as system include file */
+N#endif
+N
+N#ifndef __CORE_CMINSTR_H
+N#define __CORE_CMINSTR_H
+N
+N
+N/* ##########################  Core Instruction Access  ######################### */
+N/** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
+N  Access to dedicated instructions
+N  @{
+N*/
+N
+N/*------------------ RealView Compiler -----------------*/
 N#if   defined ( __CC_ARM )
 X#if   1L
 N  #include "cmsis_armcc.h"
-L 1 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\cmsis_armcc.h" 1
+L 1 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h" 1
 N/**************************************************************************//**
 N * @file     cmsis_armcc.h
-N * @brief    CMSIS compiler ARMCC (ARM compiler V5) header file
-N * @version  V5.0.1
-N * @date     03. February 2017
+N * @brief    CMSIS Cortex-M Core Function/Instruction Header File
+N * @version  V4.30
+N * @date     20. October 2015
 N ******************************************************************************/
-N/*
-N * Copyright (c) 2009-2017 ARM Limited. All rights reserved.
-N *
-N * SPDX-License-Identifier: Apache-2.0
-N *
-N * Licensed under the Apache License, Version 2.0 (the License); you may
-N * not use this file except in compliance with the License.
-N * You may obtain a copy of the License at
-N *
-N * www.apache.org/licenses/LICENSE-2.0
-N *
-N * Unless required by applicable law or agreed to in writing, software
-N * distributed under the License is distributed on an AS IS BASIS, WITHOUT
-N * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-N * See the License for the specific language governing permissions and
-N * limitations under the License.
-N */
+N/* Copyright (c) 2009 - 2015 ARM LIMITED
+N
+N   All rights reserved.
+N   Redistribution and use in source and binary forms, with or without
+N   modification, are permitted provided that the following conditions are met:
+N   - Redistributions of source code must retain the above copyright
+N     notice, this list of conditions and the following disclaimer.
+N   - Redistributions in binary form must reproduce the above copyright
+N     notice, this list of conditions and the following disclaimer in the
+N     documentation and/or other materials provided with the distribution.
+N   - Neither the name of ARM nor the names of its contributors may be used
+N     to endorse or promote products derived from this software without
+N     specific prior written permission.
+N   *
+N   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+N   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+N   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+N   ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+N   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+N   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+N   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+N   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+N   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+N   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+N   POSSIBILITY OF SUCH DAMAGE.
+N   ---------------------------------------------------------------------------*/
+N
 N
 N#ifndef __CMSIS_ARMCC_H
 N#define __CMSIS_ARMCC_H
@@ -969,79 +1052,13 @@ X#if 1L && (5060061 < 400677)
 S  #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
 N#endif
 N
-N/* CMSIS compiler control architecture macros */
-N#if ((defined (__TARGET_ARCH_6_M  ) && (__TARGET_ARCH_6_M   == 1)) || \
-N     (defined (__TARGET_ARCH_6S_M ) && (__TARGET_ARCH_6S_M  == 1))   )
-X#if ((0L && (__TARGET_ARCH_6_M   == 1)) ||      (1L && (1  == 1))   )
-N  #define __ARM_ARCH_6M__           1
-N#endif
-N
-N#if (defined (__TARGET_ARCH_7_M ) && (__TARGET_ARCH_7_M  == 1))
-X#if (0L && (__TARGET_ARCH_7_M  == 1))
-S  #define __ARM_ARCH_7M__           1
-N#endif
-N
-N#if (defined (__TARGET_ARCH_7E_M) && (__TARGET_ARCH_7E_M == 1))
-X#if (0L && (__TARGET_ARCH_7E_M == 1))
-S  #define __ARM_ARCH_7EM__          1
-N#endif
-N
-N  /* __ARM_ARCH_8M_BASE__  not applicable */
-N  /* __ARM_ARCH_8M_MAIN__  not applicable */
-N
-N
-N/* CMSIS compiler specific defines */
-N#ifndef   __ASM
-N  #define __ASM                     __asm
-N#endif
-N#ifndef   __INLINE
-N  #define __INLINE                  __inline
-N#endif
-N#ifndef   __STATIC_INLINE
-N  #define __STATIC_INLINE           static __inline
-N#endif
-N#ifndef   __NO_RETURN
-N  #define __NO_RETURN               __declspec(noreturn)
-N#endif
-N#ifndef   __USED
-N  #define __USED                    __attribute__((used))
-N#endif
-N#ifndef   __WEAK
-N  #define __WEAK                    __attribute__((weak))
-N#endif
-N#ifndef   __UNALIGNED_UINT32
-N  #define __UNALIGNED_UINT32(x)     (*((__packed uint32_t *)(x)))
-N#endif
-N#ifndef   __ALIGNED
-N  #define __ALIGNED(x)              __attribute__((aligned(x)))
-N#endif
-N#ifndef   __PACKED
-N  #define __PACKED                  __attribute__((packed))
-N#endif
-N#ifndef   __PACKED_STRUCT
-N  #define __PACKED_STRUCT           __packed struct
-N#endif
-N
-N
 N/* ###########################  Core Function Access  ########################### */
 N/** \ingroup  CMSIS_Core_FunctionInterface
 N    \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
 N  @{
 N */
 N
-N/**
-N  \brief   Enable IRQ Interrupts
-N  \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
-N           Can only be executed in Privileged modes.
-N */
 N/* intrinsic void __enable_irq();     */
-N
-N
-N/**
-N  \brief   Disable IRQ Interrupts
-N  \details Disables IRQ interrupts by setting the I-bit in the CPSR.
-N           Can only be executed in Privileged modes.
-N */
 N/* intrinsic void __disable_irq();    */
 N
 N/**
@@ -1198,9 +1215,8 @@ N  __regPriMask = (priMask);
 N}
 N
 N
-N#if ((defined (__ARM_ARCH_7M__ ) && (__ARM_ARCH_7M__  == 1)) || \
-N     (defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     )
-X#if ((0L && (__ARM_ARCH_7M__  == 1)) ||      (0L && (__ARM_ARCH_7EM__ == 1))     )
+N#if       (__CORTEX_M >= 0x03U) || (__CORTEX_SC >= 300U)
+X#if       ((0x00U) >= 0x03U) || (__CORTEX_SC >= 300U)
 S
 S/**
 S  \brief   Enable FIQ
@@ -1275,16 +1291,14 @@ S */
 S__STATIC_INLINE void __set_FAULTMASK(uint32_t faultMask)
 S{
 S  register uint32_t __regFaultMask       __ASM("faultmask");
-S  __regFaultMask = (faultMask & (uint32_t)1U);
+S  __regFaultMask = (faultMask & (uint32_t)1);
 S}
 S
-N#endif /* ((defined (__ARM_ARCH_7M__ ) && (__ARM_ARCH_7M__  == 1)) || \
-N           (defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     ) */
-X#endif  
+N#endif /* (__CORTEX_M >= 0x03U) || (__CORTEX_SC >= 300U) */
 N
 N
-N#if ((defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     )
-X#if ((0L && (__ARM_ARCH_7EM__ == 1))     )
+N#if       (__CORTEX_M == 0x04U) || (__CORTEX_M == 0x07U)
+X#if       ((0x00U) == 0x04U) || ((0x00U) == 0x07U)
 S
 S/**
 S  \brief   Get FPSCR
@@ -1293,9 +1307,7 @@ S  \return               Floating Point Status/Control register value
 S */
 S__STATIC_INLINE uint32_t __get_FPSCR(void)
 S{
-S#if ((defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)) && \
-S     (defined (__FPU_USED   ) && (__FPU_USED    == 1U))     )
-X#if ((defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)) &&      (defined (__FPU_USED   ) && (__FPU_USED    == 1U))     )
+S#if (__FPU_PRESENT == 1U) && (__FPU_USED == 1U)
 S  register uint32_t __regfpscr         __ASM("fpscr");
 S  return(__regfpscr);
 S#else
@@ -1311,17 +1323,13 @@ S  \param [in]    fpscr  Floating Point Status/Control value to set
 S */
 S__STATIC_INLINE void __set_FPSCR(uint32_t fpscr)
 S{
-S#if ((defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)) && \
-S     (defined (__FPU_USED   ) && (__FPU_USED    == 1U))     )
-X#if ((defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)) &&      (defined (__FPU_USED   ) && (__FPU_USED    == 1U))     )
+S#if (__FPU_PRESENT == 1U) && (__FPU_USED == 1U)
 S  register uint32_t __regfpscr         __ASM("fpscr");
 S  __regfpscr = (fpscr);
-S#else
-S  (void)fpscr;
 S#endif
 S}
 S
-N#endif /* ((defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     ) */
+N#endif /* (__CORTEX_M == 0x04U) || (__CORTEX_M == 0x07U) */
 N
 N
 N
@@ -1424,7 +1432,6 @@ N  bx lr
 N}
 N#endif
 N
-N
 N/**
 N  \brief   Reverse byte order in signed short value
 N  \details Reverses the byte order in a signed short value with sign extension to integer.
@@ -1444,8 +1451,8 @@ N
 N/**
 N  \brief   Rotate Right in unsigned value (32 bit)
 N  \details Rotate Right (immediate) provides the value of the contents of a register rotated by a variable number of bits.
-N  \param [in]    op1  Value to rotate
-N  \param [in]    op2  Number of Bits to rotate
+N  \param [in]    value  Value to rotate
+N  \param [in]    value  Number of Bits to rotate
 N  \return               Rotated value
 N */
 N#define __ROR                             __ror
@@ -1467,16 +1474,15 @@ N  \details Reverses the bit order of the given value.
 N  \param [in]    value  Value to reverse
 N  \return               Reversed value
 N */
-N#if ((defined (__ARM_ARCH_7M__ ) && (__ARM_ARCH_7M__  == 1)) || \
-N     (defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     )
-X#if ((0L && (__ARM_ARCH_7M__  == 1)) ||      (0L && (__ARM_ARCH_7EM__ == 1))     )
+N#if       (__CORTEX_M >= 0x03U) || (__CORTEX_SC >= 300U)
+X#if       ((0x00U) >= 0x03U) || (__CORTEX_SC >= 300U)
 S  #define __RBIT                          __rbit
 N#else
 N__attribute__((always_inline)) __STATIC_INLINE uint32_t __RBIT(uint32_t value)
 X__attribute__((always_inline)) static __inline uint32_t __RBIT(uint32_t value)
 N{
 N  uint32_t result;
-N  int32_t s = (4 /*sizeof(v)*/ * 8) - 1; /* extra shift needed at end */
+N  int32_t s = 4 /*sizeof(v)*/ * 8 - 1; /* extra shift needed at end */
 N
 N  result = value;                      /* r will be reversed bits of v; first get LSB of v */
 N  for (value >>= 1U; value; value >>= 1U)
@@ -1500,9 +1506,8 @@ N */
 N#define __CLZ                             __clz
 N
 N
-N#if ((defined (__ARM_ARCH_7M__ ) && (__ARM_ARCH_7M__  == 1)) || \
-N     (defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     )
-X#if ((0L && (__ARM_ARCH_7M__  == 1)) ||      (0L && (__ARM_ARCH_7EM__ == 1))     )
+N#if       (__CORTEX_M >= 0x03U) || (__CORTEX_SC >= 300U)
+X#if       ((0x00U) >= 0x03U) || (__CORTEX_SC >= 300U)
 S
 S/**
 S  \brief   LDR Exclusive (8 bit)
@@ -1684,9 +1689,7 @@ S  \param [in]    ptr  Pointer to location
 S */
 S#define __STRT(value, ptr)                __strt(value, ptr)
 S
-N#endif /* ((defined (__ARM_ARCH_7M__ ) && (__ARM_ARCH_7M__  == 1)) || \
-N           (defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     ) */
-X#endif  
+N#endif /* (__CORTEX_M >= 0x03U) || (__CORTEX_SC >= 300U) */
 N
 N/*@}*/ /* end of group CMSIS_Core_InstructionInterface */
 N
@@ -1697,8 +1700,8 @@ N  Access to dedicated SIMD instructions
 N  @{
 N*/
 N
-N#if ((defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     )
-X#if ((0L && (__ARM_ARCH_7EM__ == 1))     )
+N#if (__CORTEX_M >= 0x04U)  /* only for Cortex-M4 and above */
+X#if ((0x00U) >= 0x04U)   
 S
 S#define __SADD8                           __sadd8
 S#define __QADD8                           __qadd8
@@ -1772,112 +1775,30 @@ S#define __SMMLA(ARG1,ARG2,ARG3)          ( (int32_t)((((int64_t)(ARG1) * (ARG2)
 S                                                      ((int64_t)(ARG3) << 32U)     ) >> 32U))
 X#define __SMMLA(ARG1,ARG2,ARG3)          ( (int32_t)((((int64_t)(ARG1) * (ARG2)) +                                                       ((int64_t)(ARG3) << 32U)     ) >> 32U))
 S
-N#endif /* ((defined (__ARM_ARCH_7EM__) && (__ARM_ARCH_7EM__ == 1))     ) */
+N#endif /* (__CORTEX_M >= 0x04) */
 N/*@} end of group CMSIS_SIMD_intrinsics */
 N
 N
 N#endif /* __CMSIS_ARMCC_H */
-L 35 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\cmsis_compiler.h" 2
+L 54 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h" 2
 N
-N
-N/*
-N * ARM Compiler 6 (armclang)
-N */
-N#elif defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
-S  #include "cmsis_armclang.h"
+N/*------------------ ARM Compiler V6 -------------------*/
+N#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+S  #include "cmsis_armcc_V6.h"
 S
-S
-S/*
-S * GNU Compiler
-S */
+S/*------------------ GNU Compiler ----------------------*/
 S#elif defined ( __GNUC__ )
 S  #include "cmsis_gcc.h"
 S
-S
-S/*
-S * IAR Compiler
-S */
+S/*------------------ ICC Compiler ----------------------*/
 S#elif defined ( __ICCARM__ )
-S
-S  #ifndef   __ASM
-S    #define __ASM                     __asm
-S  #endif
-S  #ifndef   __INLINE
-S    #define __INLINE                  inline
-S  #endif
-S  #ifndef   __STATIC_INLINE
-S    #define __STATIC_INLINE           static inline
-S  #endif
-S
 S  #include <cmsis_iar.h>
 S
-S  #ifndef   __NO_RETURN
-S    #define __NO_RETURN               __noreturn
-S  #endif
-S  #ifndef   __USED
-S    #define __USED                    __root
-S  #endif
-S  #ifndef   __WEAK
-S    #define __WEAK                    __weak
-S  #endif
-S  #ifndef   __UNALIGNED_UINT32
-S    __packed struct T_UINT32 { uint32_t v; };
-S      #define __UNALIGNED_UINT32(x)     (((struct T_UINT32 *)(x))->v)
-S  #endif
-S  #ifndef   __ALIGNED
-S    #warning No compiler specific solution for __ALIGNED. __ALIGNED is ignored.
-S    #define __ALIGNED(x)
-S  #endif
-S  #ifndef   __PACKED
-S    #define __PACKED                  __packed
-S  #endif
-S  #ifndef   __PACKED_STRUCT
-S    #define __PACKED_STRUCT           __packed struct
-S  #endif
-S
-S
-S/*
-S * TI ARM Compiler
-S */
-S#elif defined ( __TI_ARM__ )
+S/*------------------ TI CCS Compiler -------------------*/
+S#elif defined ( __TMS470__ )
 S  #include <cmsis_ccs.h>
 S
-S  #ifndef   __ASM
-S    #define __ASM                     __asm
-S  #endif
-S  #ifndef   __INLINE
-S    #define __INLINE                  inline
-S  #endif
-S  #ifndef   __STATIC_INLINE
-S    #define __STATIC_INLINE           static inline
-S  #endif
-S  #ifndef   __NO_RETURN
-S    #define __NO_RETURN               __attribute__((noreturn))
-S  #endif
-S  #ifndef   __USED
-S    #define __USED                    __attribute__((used))
-S  #endif
-S  #ifndef   __WEAK
-S    #define __WEAK                    __attribute__((weak))
-S  #endif
-S  #ifndef   __UNALIGNED_UINT32
-S    struct __attribute__((packed)) T_UINT32 { uint32_t v; };
-S    #define __UNALIGNED_UINT32(x)     (((struct T_UINT32 *)(x))->v)
-S  #endif
-S  #ifndef   __ALIGNED
-S    #define __ALIGNED(x)              __attribute__((aligned(x)))
-S  #endif
-S  #ifndef   __PACKED
-S    #define __PACKED                  __attribute__((packed))
-S  #endif
-S  #ifndef   __PACKED_STRUCT
-S    #define __PACKED_STRUCT           struct __attribute__((packed))
-S  #endif
-S
-S
-S/*
-S * TASKING Compiler
-S */
+S/*------------------ TASKING Compiler ------------------*/
 S#elif defined ( __TASKING__ )
 S  /*
 S   * The CMSIS functions have been implemented as intrinsics in the compiler.
@@ -1885,90 +1806,109 @@ S   * Please use "carm -?i" to get an up to date list of all intrinsics,
 S   * Including the CMSIS ones.
 S   */
 S
-S  #ifndef   __ASM
-S    #define __ASM                     __asm
-S  #endif
-S  #ifndef   __INLINE
-S    #define __INLINE                  inline
-S  #endif
-S  #ifndef   __STATIC_INLINE
-S    #define __STATIC_INLINE           static inline
-S  #endif
-S  #ifndef   __NO_RETURN
-S    #define __NO_RETURN               __attribute__((noreturn))
-S  #endif
-S  #ifndef   __USED
-S    #define __USED                    __attribute__((used))
-S  #endif
-S  #ifndef   __WEAK
-S    #define __WEAK                    __attribute__((weak))
-S  #endif
-S  #ifndef   __UNALIGNED_UINT32
-S    struct __packed__ T_UINT32 { uint32_t v; };
-S    #define __UNALIGNED_UINT32(x)     (((struct T_UINT32 *)(x))->v)
-S  #endif
-S  #ifndef   __ALIGNED
-S    #define __ALIGNED(x)              __align(x)
-S  #endif
-S  #ifndef   __PACKED
-S    #define __PACKED                  __packed__
-S  #endif
-S  #ifndef   __PACKED_STRUCT
-S    #define __PACKED_STRUCT           struct __packed__
-S  #endif
-S
-S
-S/*
-S * COSMIC Compiler
-S */
+S/*------------------ COSMIC Compiler -------------------*/
 S#elif defined ( __CSMC__ )
-S   #include <cmsis_csm.h>
+S  #include <cmsis_csm.h>
 S
-S #ifndef   __ASM
-S    #define __ASM                     _asm
-S  #endif
-S  #ifndef   __INLINE
-S    #define __INLINE                  inline
-S  #endif
-S  #ifndef   __STATIC_INLINE
-S    #define __STATIC_INLINE           static inline
-S  #endif
-S  #ifndef   __NO_RETURN
-S    // NO RETURN is automatically detected hence no warning here
-S    #define __NO_RETURN
-S  #endif
-S  #ifndef   __USED
-S    #warning No compiler specific solution for __USED. __USED is ignored.
-S    #define __USED
-S  #endif
-S  #ifndef   __WEAK
-S    #define __WEAK                    __weak
-S  #endif
-S  #ifndef   __UNALIGNED_UINT32
-S    @packed struct T_UINT32 { uint32_t v; };
-S    #define __UNALIGNED_UINT32(x)     (((struct T_UINT32 *)(x))->v)
-S  #endif
-S  #ifndef   __ALIGNED
-S    #warning No compiler specific solution for __ALIGNED. __ALIGNED is ignored.
-S    #define __ALIGNED(x)
-S  #endif
-S  #ifndef   __PACKED
-S    #define __PACKED                  @packed
-S  #endif
-S  #ifndef   __PACKED_STRUCT
-S    #define __PACKED_STRUCT           @packed struct
-S  #endif
-S
-S
-S#else
-S  #error Unknown compiler.
 N#endif
 N
+N/*@}*/ /* end of group CMSIS_Core_InstructionInterface */
 N
-N#endif /* __CMSIS_COMPILER_H */
+N#endif /* __CORE_CMINSTR_H */
+L 164 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0plus.h" 2
+N#include "core_cmFunc.h"                 /* Core Function Access */
+L 1 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h" 1
+N/**************************************************************************//**
+N * @file     core_cmFunc.h
+N * @brief    CMSIS Cortex-M Core Function Access Header File
+N * @version  V4.30
+N * @date     20. October 2015
+N ******************************************************************************/
+N/* Copyright (c) 2009 - 2015 ARM LIMITED
 N
-L 114 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\core_cm0plus.h" 2
+N   All rights reserved.
+N   Redistribution and use in source and binary forms, with or without
+N   modification, are permitted provided that the following conditions are met:
+N   - Redistributions of source code must retain the above copyright
+N     notice, this list of conditions and the following disclaimer.
+N   - Redistributions in binary form must reproduce the above copyright
+N     notice, this list of conditions and the following disclaimer in the
+N     documentation and/or other materials provided with the distribution.
+N   - Neither the name of ARM nor the names of its contributors may be used
+N     to endorse or promote products derived from this software without
+N     specific prior written permission.
+N   *
+N   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+N   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+N   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+N   ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+N   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+N   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+N   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+N   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+N   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+N   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+N   POSSIBILITY OF SUCH DAMAGE.
+N   ---------------------------------------------------------------------------*/
 N
+N
+N#if   defined ( __ICCARM__ )
+X#if   0L
+S #pragma system_include         /* treat file as system include file for MISRA check */
+S#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+X#elif 1L && (5060061 >= 6010050)
+S  #pragma clang system_header   /* treat file as system include file */
+N#endif
+N
+N#ifndef __CORE_CMFUNC_H
+N#define __CORE_CMFUNC_H
+N
+N
+N/* ###########################  Core Function Access  ########################### */
+N/** \ingroup  CMSIS_Core_FunctionInterface
+N    \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+N  @{
+N*/
+N
+N/*------------------ RealView Compiler -----------------*/
+N#if   defined ( __CC_ARM )
+X#if   1L
+N  #include "cmsis_armcc.h"
+N
+N/*------------------ ARM Compiler V6 -------------------*/
+N#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+S  #include "cmsis_armcc_V6.h"
+S
+S/*------------------ GNU Compiler ----------------------*/
+S#elif defined ( __GNUC__ )
+S  #include "cmsis_gcc.h"
+S
+S/*------------------ ICC Compiler ----------------------*/
+S#elif defined ( __ICCARM__ )
+S  #include <cmsis_iar.h>
+S
+S/*------------------ TI CCS Compiler -------------------*/
+S#elif defined ( __TMS470__ )
+S  #include <cmsis_ccs.h>
+S
+S/*------------------ TASKING Compiler ------------------*/
+S#elif defined ( __TASKING__ )
+S  /*
+S   * The CMSIS functions have been implemented as intrinsics in the compiler.
+S   * Please use "carm -?i" to get an up to date list of all intrinsics,
+S   * Including the CMSIS ones.
+S   */
+S
+S/*------------------ COSMIC Compiler -------------------*/
+S#elif defined ( __CSMC__ )
+S  #include <cmsis_csm.h>
+S
+N#endif
+N
+N/*@} end of CMSIS_Core_RegAccFunctions */
+N
+N#endif /* __CORE_CMFUNC_H */
+L 165 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0plus.h" 2
 N
 N#ifdef __cplusplus
 S}
@@ -2219,8 +2159,8 @@ N  __IM  uint32_t CPUID;                  /*!< Offset: 0x000 (R/ )  CPUID Base R
 X  volatile const  uint32_t CPUID;                   
 N  __IOM uint32_t ICSR;                   /*!< Offset: 0x004 (R/W)  Interrupt Control and State Register */
 X  volatile uint32_t ICSR;                    
-N#if defined (__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
-X#if 1L && (1 == 1U)
+N#if (__VTOR_PRESENT == 1U)
+X#if (1 == 1U)
 N  __IOM uint32_t VTOR;                   /*!< Offset: 0x008 (R/W)  Vector Table Offset Register */
 X  volatile uint32_t VTOR;                    
 N#else
@@ -2283,8 +2223,8 @@ N
 N#define SCB_ICSR_VECTACTIVE_Pos             0U                                            /*!< SCB ICSR: VECTACTIVE Position */
 N#define SCB_ICSR_VECTACTIVE_Msk            (0x1FFUL /*<< SCB_ICSR_VECTACTIVE_Pos*/)       /*!< SCB ICSR: VECTACTIVE Mask */
 N
-N#if defined (__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
-X#if 1L && (1 == 1U)
+N#if (__VTOR_PRESENT == 1U)
+X#if (1 == 1U)
 N/* SCB Interrupt Control State Register Definitions */
 N#define SCB_VTOR_TBLOFF_Pos                 8U                                            /*!< SCB VTOR: TBLOFF Position */
 N#define SCB_VTOR_TBLOFF_Msk                (0xFFFFFFUL << SCB_VTOR_TBLOFF_Pos)            /*!< SCB VTOR: TBLOFF Mask */
@@ -2385,8 +2325,8 @@ N#define SysTick_CALIB_TENMS_Msk            (0xFFFFFFUL /*<< SysTick_CALIB_TENMS
 N
 N/*@} end of group CMSIS_SysTick */
 N
-N#if defined (__MPU_PRESENT) && (__MPU_PRESENT == 1U)
-X#if 1L && (0 == 1U)
+N#if (__MPU_PRESENT == 1U)
+X#if (0 == 1U)
 S/**
 S  \ingroup  CMSIS_core_register
 S  \defgroup CMSIS_MPU     Memory Protection Unit (MPU)
@@ -2495,18 +2435,18 @@ N
 N/**
 N  \brief   Mask and shift a bit field value for use in a register bit range.
 N  \param[in] field  Name of the register bit field.
-N  \param[in] value  Value of the bit field. This parameter is interpreted as an uint32_t type.
+N  \param[in] value  Value of the bit field.
 N  \return           Masked and shifted value.
 N*/
-N#define _VAL2FLD(field, value)    (((uint32_t)(value) << field ## _Pos) & field ## _Msk)
+N#define _VAL2FLD(field, value)    ((value << field ## _Pos) & field ## _Msk)
 N
 N/**
 N  \brief     Mask and shift a register value to extract a bit filed value.
 N  \param[in] field  Name of the register bit field.
-N  \param[in] value  Value of register. This parameter is interpreted as an uint32_t type.
+N  \param[in] value  Value of register.
 N  \return           Masked and shifted bit field value.
 N*/
-N#define _FLD2VAL(field, value)    (((uint32_t)(value) & field ## _Msk) >> field ## _Pos)
+N#define _FLD2VAL(field, value)    ((value & field ## _Msk) >> field ## _Pos)
 N
 N/*@} end of group CMSIS_core_bitfield */
 N
@@ -2518,7 +2458,7 @@ N  \brief      Definitions for base addresses, unions, and structures.
 N  @{
 N */
 N
-N/* Memory mapping of Core Hardware */
+N/* Memory mapping of Cortex-M0+ Hardware */
 N#define SCS_BASE            (0xE000E000UL)                            /*!< System Control Space Base Address */
 N#define SysTick_BASE        (SCS_BASE +  0x0010UL)                    /*!< SysTick Base Address */
 N#define NVIC_BASE           (SCS_BASE +  0x0100UL)                    /*!< NVIC Base Address */
@@ -2528,8 +2468,8 @@ N#define SCB                 ((SCB_Type       *)     SCB_BASE      )   /*!< SCB 
 N#define SysTick             ((SysTick_Type   *)     SysTick_BASE  )   /*!< SysTick configuration struct */
 N#define NVIC                ((NVIC_Type      *)     NVIC_BASE     )   /*!< NVIC configuration struct */
 N
-N#if defined (__MPU_PRESENT) && (__MPU_PRESENT == 1U)
-X#if 1L && (0 == 1U)
+N#if (__MPU_PRESENT == 1U)
+X#if (0 == 1U)
 S  #define MPU_BASE          (SCS_BASE +  0x0D90UL)                    /*!< Memory Protection Unit */
 S  #define MPU               ((MPU_Type       *)     MPU_BASE      )   /*!< Memory Protection Unit */
 N#endif
@@ -2559,28 +2499,6 @@ N  \brief    Functions that manage interrupts and exceptions via the NVIC.
 N  @{
 N */
 N
-N#ifndef CMSIS_NVIC_VIRTUAL
-N/*#define NVIC_SetPriorityGrouping    __NVIC_SetPriorityGrouping   not available for Cortex-M0+ */
-N/*#define NVIC_GetPriorityGrouping    __NVIC_GetPriorityGrouping   not available for Cortex-M0+ */
-N  #define NVIC_EnableIRQ              __NVIC_EnableIRQ
-N  #define NVIC_GetEnableIRQ           __NVIC_GetEnableIRQ
-N  #define NVIC_DisableIRQ             __NVIC_DisableIRQ
-N  #define NVIC_GetPendingIRQ          __NVIC_GetPendingIRQ
-N  #define NVIC_SetPendingIRQ          __NVIC_SetPendingIRQ
-N  #define NVIC_ClearPendingIRQ        __NVIC_ClearPendingIRQ
-N/*#define NVIC_GetActive              __NVIC_GetActive             not available for Cortex-M0+ */
-N  #define NVIC_SetPriority            __NVIC_SetPriority
-N  #define NVIC_GetPriority            __NVIC_GetPriority
-N#endif /* CMSIS_NVIC_VIRTUAL */
-N
-N#ifndef CMSIS_VECTAB_VIRTUAL
-N  #define NVIC_SetVector              __NVIC_SetVector
-N  #define NVIC_GetVector              __NVIC_GetVector
-N#endif  /* (CMSIS_VECTAB_VIRTUAL) */
-N
-N#define NVIC_USER_IRQ_OFFSET          16
-N
-N
 N/* Interrupt Priorities are WORD accessible only under ARMv6M                   */
 N/* The following MACROS handle generation of the register offset and byte masks */
 N#define _BIT_SHIFT(IRQn)         (  ((((uint32_t)(int32_t)(IRQn))         )      &  0x03UL) * 8UL)
@@ -2589,146 +2507,93 @@ N#define _IP_IDX(IRQn)            (   (((uint32_t)(int32_t)(IRQn))              
 N
 N
 N/**
-N  \brief   Enable Interrupt
-N  \details Enables a device specific interrupt in the NVIC interrupt controller.
-N  \param [in]      IRQn  Device specific interrupt number.
-N  \note    IRQn must not be negative.
+N  \brief   Enable External Interrupt
+N  \details Enables a device-specific interrupt in the NVIC interrupt controller.
+N  \param [in]      IRQn  External interrupt number. Value cannot be negative.
 N */
-N__STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
-Xstatic __inline void __NVIC_EnableIRQ(IRQn_Type IRQn)
+N__STATIC_INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
+Xstatic __inline void NVIC_EnableIRQ(IRQn_Type IRQn)
 N{
-N  if ((int32_t)(IRQn) >= 0)
-N  {
-N    NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
-X    ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISER[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
-N  }
+N  NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
+X  ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISER[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
 N}
 N
 N
 N/**
-N  \brief   Get Interrupt Enable status
-N  \details Returns a device specific interrupt enable status from the NVIC interrupt controller.
-N  \param [in]      IRQn  Device specific interrupt number.
-N  \return             0  Interrupt is not enabled.
-N  \return             1  Interrupt is enabled.
-N  \note    IRQn must not be negative.
+N  \brief   Disable External Interrupt
+N  \details Disables a device-specific interrupt in the NVIC interrupt controller.
+N  \param [in]      IRQn  External interrupt number. Value cannot be negative.
 N */
-N__STATIC_INLINE uint32_t __NVIC_GetEnableIRQ(IRQn_Type IRQn)
-Xstatic __inline uint32_t __NVIC_GetEnableIRQ(IRQn_Type IRQn)
+N__STATIC_INLINE void NVIC_DisableIRQ(IRQn_Type IRQn)
+Xstatic __inline void NVIC_DisableIRQ(IRQn_Type IRQn)
 N{
-N  if ((int32_t)(IRQn) >= 0)
-N  {
-N    return((uint32_t)(((NVIC->ISER[0U] & (1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
-X    return((uint32_t)(((((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISER[0U] & (1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
-N  }
-N  else
-N  {
-N    return(0U);
-N  }
-N}
-N
-N
-N/**
-N  \brief   Disable Interrupt
-N  \details Disables a device specific interrupt in the NVIC interrupt controller.
-N  \param [in]      IRQn  Device specific interrupt number.
-N  \note    IRQn must not be negative.
-N */
-N__STATIC_INLINE void __NVIC_DisableIRQ(IRQn_Type IRQn)
-Xstatic __inline void __NVIC_DisableIRQ(IRQn_Type IRQn)
-N{
-N  if ((int32_t)(IRQn) >= 0)
-N  {
-N    NVIC->ICER[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
-X    ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ICER[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
-N    __DSB();
-X    do { __schedule_barrier(); __dsb(0xF); __schedule_barrier(); } while (0U);
-N    __ISB();
-X    do { __schedule_barrier(); __isb(0xF); __schedule_barrier(); } while (0U);
-N  }
+N  NVIC->ICER[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
+X  ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ICER[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
 N}
 N
 N
 N/**
 N  \brief   Get Pending Interrupt
-N  \details Reads the NVIC pending register and returns the pending bit for the specified device specific interrupt.
-N  \param [in]      IRQn  Device specific interrupt number.
+N  \details Reads the pending register in the NVIC and returns the pending bit for the specified interrupt.
+N  \param [in]      IRQn  Interrupt number.
 N  \return             0  Interrupt status is not pending.
 N  \return             1  Interrupt status is pending.
-N  \note    IRQn must not be negative.
 N */
-N__STATIC_INLINE uint32_t __NVIC_GetPendingIRQ(IRQn_Type IRQn)
-Xstatic __inline uint32_t __NVIC_GetPendingIRQ(IRQn_Type IRQn)
+N__STATIC_INLINE uint32_t NVIC_GetPendingIRQ(IRQn_Type IRQn)
+Xstatic __inline uint32_t NVIC_GetPendingIRQ(IRQn_Type IRQn)
 N{
-N  if ((int32_t)(IRQn) >= 0)
-N  {
-N    return((uint32_t)(((NVIC->ISPR[0U] & (1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
-X    return((uint32_t)(((((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISPR[0U] & (1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
-N  }
-N  else
-N  {
-N    return(0U);
-N  }
+N  return((uint32_t)(((NVIC->ISPR[0U] & (1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
+X  return((uint32_t)(((((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISPR[0U] & (1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL))) != 0UL) ? 1UL : 0UL));
 N}
 N
 N
 N/**
 N  \brief   Set Pending Interrupt
-N  \details Sets the pending bit of a device specific interrupt in the NVIC pending register.
-N  \param [in]      IRQn  Device specific interrupt number.
-N  \note    IRQn must not be negative.
+N  \details Sets the pending bit of an external interrupt.
+N  \param [in]      IRQn  Interrupt number. Value cannot be negative.
 N */
-N__STATIC_INLINE void __NVIC_SetPendingIRQ(IRQn_Type IRQn)
-Xstatic __inline void __NVIC_SetPendingIRQ(IRQn_Type IRQn)
+N__STATIC_INLINE void NVIC_SetPendingIRQ(IRQn_Type IRQn)
+Xstatic __inline void NVIC_SetPendingIRQ(IRQn_Type IRQn)
 N{
-N  if ((int32_t)(IRQn) >= 0)
-N  {
-N    NVIC->ISPR[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
-X    ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISPR[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
-N  }
+N  NVIC->ISPR[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
+X  ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISPR[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
 N}
 N
 N
 N/**
 N  \brief   Clear Pending Interrupt
-N  \details Clears the pending bit of a device specific interrupt in the NVIC pending register.
-N  \param [in]      IRQn  Device specific interrupt number.
-N  \note    IRQn must not be negative.
+N  \details Clears the pending bit of an external interrupt.
+N  \param [in]      IRQn  External interrupt number. Value cannot be negative.
 N */
-N__STATIC_INLINE void __NVIC_ClearPendingIRQ(IRQn_Type IRQn)
-Xstatic __inline void __NVIC_ClearPendingIRQ(IRQn_Type IRQn)
+N__STATIC_INLINE void NVIC_ClearPendingIRQ(IRQn_Type IRQn)
+Xstatic __inline void NVIC_ClearPendingIRQ(IRQn_Type IRQn)
 N{
-N  if ((int32_t)(IRQn) >= 0)
-N  {
-N    NVIC->ICPR[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
-X    ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ICPR[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
-N  }
+N  NVIC->ICPR[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
+X  ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ICPR[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL));
 N}
 N
 N
 N/**
 N  \brief   Set Interrupt Priority
-N  \details Sets the priority of a device specific interrupt or a processor exception.
-N           The interrupt number can be positive to specify a device specific interrupt,
-N           or negative to specify a processor exception.
+N  \details Sets the priority of an interrupt.
+N  \note    The priority cannot be set for every core interrupt.
 N  \param [in]      IRQn  Interrupt number.
 N  \param [in]  priority  Priority to set.
-N  \note    The priority cannot be set for every processor exception.
 N */
-N__STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
-Xstatic __inline void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
+N__STATIC_INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
+Xstatic __inline void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
 N{
-N  if ((int32_t)(IRQn) >= 0)
+N  if ((int32_t)(IRQn) < 0)
 N  {
-N    NVIC->IP[_IP_IDX(IRQn)]  = ((uint32_t)(NVIC->IP[_IP_IDX(IRQn)]  & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
-X    ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->IP[( (((uint32_t)(int32_t)(IRQn)) >> 2UL) )]  = ((uint32_t)(((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->IP[( (((uint32_t)(int32_t)(IRQn)) >> 2UL) )]  & ~(0xFFUL << ( ((((uint32_t)(int32_t)(IRQn)) ) & 0x03UL) * 8UL))) |
+N    SCB->SHP[_SHP_IDX(IRQn)] = ((uint32_t)(SCB->SHP[_SHP_IDX(IRQn)] & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
+X    ((SCB_Type *) ((0xE000E000UL) + 0x0D00UL) )->SHP[( (((((uint32_t)(int32_t)(IRQn)) & 0x0FUL)-8UL) >> 2UL) )] = ((uint32_t)(((SCB_Type *) ((0xE000E000UL) + 0x0D00UL) )->SHP[( (((((uint32_t)(int32_t)(IRQn)) & 0x0FUL)-8UL) >> 2UL) )] & ~(0xFFUL << ( ((((uint32_t)(int32_t)(IRQn)) ) & 0x03UL) * 8UL))) |
 N       (((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL) << _BIT_SHIFT(IRQn)));
 X       (((priority << (8U - 2)) & (uint32_t)0xFFUL) << ( ((((uint32_t)(int32_t)(IRQn)) ) & 0x03UL) * 8UL)));
 N  }
 N  else
 N  {
-N    SCB->SHP[_SHP_IDX(IRQn)] = ((uint32_t)(SCB->SHP[_SHP_IDX(IRQn)] & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
-X    ((SCB_Type *) ((0xE000E000UL) + 0x0D00UL) )->SHP[( (((((uint32_t)(int32_t)(IRQn)) & 0x0FUL)-8UL) >> 2UL) )] = ((uint32_t)(((SCB_Type *) ((0xE000E000UL) + 0x0D00UL) )->SHP[( (((((uint32_t)(int32_t)(IRQn)) & 0x0FUL)-8UL) >> 2UL) )] & ~(0xFFUL << ( ((((uint32_t)(int32_t)(IRQn)) ) & 0x03UL) * 8UL))) |
+N    NVIC->IP[_IP_IDX(IRQn)]  = ((uint32_t)(NVIC->IP[_IP_IDX(IRQn)]  & ~(0xFFUL << _BIT_SHIFT(IRQn))) |
+X    ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->IP[( (((uint32_t)(int32_t)(IRQn)) >> 2UL) )]  = ((uint32_t)(((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->IP[( (((uint32_t)(int32_t)(IRQn)) >> 2UL) )]  & ~(0xFFUL << ( ((((uint32_t)(int32_t)(IRQn)) ) & 0x03UL) * 8UL))) |
 N       (((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL) << _BIT_SHIFT(IRQn)));
 X       (((priority << (8U - 2)) & (uint32_t)0xFFUL) << ( ((((uint32_t)(int32_t)(IRQn)) ) & 0x03UL) * 8UL)));
 N  }
@@ -2737,76 +2602,27 @@ N
 N
 N/**
 N  \brief   Get Interrupt Priority
-N  \details Reads the priority of a device specific interrupt or a processor exception.
-N           The interrupt number can be positive to specify a device specific interrupt,
-N           or negative to specify a processor exception.
+N  \details Reads the priority of an interrupt.
+N           The interrupt number can be positive to specify an external (device specific) interrupt,
+N           or negative to specify an internal (core) interrupt.
 N  \param [in]   IRQn  Interrupt number.
 N  \return             Interrupt Priority.
 N                      Value is aligned automatically to the implemented priority bits of the microcontroller.
 N */
-N__STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn)
-Xstatic __inline uint32_t __NVIC_GetPriority(IRQn_Type IRQn)
+N__STATIC_INLINE uint32_t NVIC_GetPriority(IRQn_Type IRQn)
+Xstatic __inline uint32_t NVIC_GetPriority(IRQn_Type IRQn)
 N{
 N
-N  if ((int32_t)(IRQn) >= 0)
-N  {
-N    return((uint32_t)(((NVIC->IP[ _IP_IDX(IRQn)] >> _BIT_SHIFT(IRQn) ) & (uint32_t)0xFFUL) >> (8U - __NVIC_PRIO_BITS)));
-X    return((uint32_t)(((((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->IP[ ( (((uint32_t)(int32_t)(IRQn)) >> 2UL) )] >> ( ((((uint32_t)(int32_t)(IRQn)) ) & 0x03UL) * 8UL) ) & (uint32_t)0xFFUL) >> (8U - 2)));
-N  }
-N  else
+N  if ((int32_t)(IRQn) < 0)
 N  {
 N    return((uint32_t)(((SCB->SHP[_SHP_IDX(IRQn)] >> _BIT_SHIFT(IRQn) ) & (uint32_t)0xFFUL) >> (8U - __NVIC_PRIO_BITS)));
 X    return((uint32_t)(((((SCB_Type *) ((0xE000E000UL) + 0x0D00UL) )->SHP[( (((((uint32_t)(int32_t)(IRQn)) & 0x0FUL)-8UL) >> 2UL) )] >> ( ((((uint32_t)(int32_t)(IRQn)) ) & 0x03UL) * 8UL) ) & (uint32_t)0xFFUL) >> (8U - 2)));
 N  }
-N}
-N
-N
-N/**
-N  \brief   Set Interrupt Vector
-N  \details Sets an interrupt vector in SRAM based interrupt vector table.
-N           The interrupt number can be positive to specify a device specific interrupt,
-N           or negative to specify a processor exception.
-N           VTOR must been relocated to SRAM before.
-N           If VTOR is not present address 0 must be mapped to SRAM.
-N  \param [in]   IRQn      Interrupt number
-N  \param [in]   vector    Address of interrupt handler function
-N */
-N__STATIC_INLINE void __NVIC_SetVector(IRQn_Type IRQn, uint32_t vector)
-Xstatic __inline void __NVIC_SetVector(IRQn_Type IRQn, uint32_t vector)
-N{
-N#if defined (__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
-X#if 1L && (1 == 1U)
-N  uint32_t *vectors = (uint32_t *)SCB->VTOR;
-X  uint32_t *vectors = (uint32_t *)((SCB_Type *) ((0xE000E000UL) + 0x0D00UL) )->VTOR;
-N#else
-S    uint32_t *vectors = (uint32_t *)0x0U;
-N#endif
-N  vectors[(int32_t)IRQn + NVIC_USER_IRQ_OFFSET] = vector;
-X  vectors[(int32_t)IRQn + 16] = vector;
-N}
-N
-N
-N/**
-N  \brief   Get Interrupt Vector
-N  \details Reads an interrupt vector from interrupt vector table.
-N           The interrupt number can be positive to specify a device specific interrupt,
-N           or negative to specify a processor exception.
-N  \param [in]   IRQn      Interrupt number.
-N  \return                 Address of interrupt handler function
-N */
-N__STATIC_INLINE uint32_t __NVIC_GetVector(IRQn_Type IRQn)
-Xstatic __inline uint32_t __NVIC_GetVector(IRQn_Type IRQn)
-N{
-N#if defined (__VTOR_PRESENT) && (__VTOR_PRESENT == 1U)
-X#if 1L && (1 == 1U)
-N  uint32_t *vectors = (uint32_t *)SCB->VTOR;
-X  uint32_t *vectors = (uint32_t *)((SCB_Type *) ((0xE000E000UL) + 0x0D00UL) )->VTOR;
-N#else
-S  uint32_t *vectors = (uint32_t *)0x0U;
-N#endif
-N  return vectors[(int32_t)IRQn + NVIC_USER_IRQ_OFFSET];
-X  return vectors[(int32_t)IRQn + 16];
-N
+N  else
+N  {
+N    return((uint32_t)(((NVIC->IP[ _IP_IDX(IRQn)] >> _BIT_SHIFT(IRQn) ) & (uint32_t)0xFFUL) >> (8U - __NVIC_PRIO_BITS)));
+X    return((uint32_t)(((((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->IP[ ( (((uint32_t)(int32_t)(IRQn)) >> 2UL) )] >> ( ((((uint32_t)(int32_t)(IRQn)) ) & 0x03UL) * 8UL) ) & (uint32_t)0xFFUL) >> (8U - 2)));
+N  }
 N}
 N
 N
@@ -2837,32 +2653,6 @@ N
 N/*@} end of CMSIS_Core_NVICFunctions */
 N
 N
-N/* ##########################  FPU functions  #################################### */
-N/**
-N  \ingroup  CMSIS_Core_FunctionInterface
-N  \defgroup CMSIS_Core_FpuFunctions FPU Functions
-N  \brief    Function that provides FPU type.
-N  @{
-N */
-N
-N/**
-N  \brief   get FPU type
-N  \details returns the FPU type
-N  \returns
-N   - \b  0: No FPU
-N   - \b  1: Single precision FPU
-N   - \b  2: Double + Single precision FPU
-N */
-N__STATIC_INLINE uint32_t SCB_GetFPUType(void)
-Xstatic __inline uint32_t SCB_GetFPUType(void)
-N{
-N    return 0U;           /* No FPU */
-N}
-N
-N
-N/*@} end of CMSIS_Core_FpuFunctions */
-N
-N
 N
 N/* ##################################    SysTick function  ############################################ */
 N/**
@@ -2872,8 +2662,8 @@ N  \brief    Functions that configure the System.
 N  @{
 N */
 N
-N#if defined (__Vendor_SysTickConfig) && (__Vendor_SysTickConfig == 0U)
-X#if 1L && (0 == 0U)
+N#if (__Vendor_SysTickConfig == 0U)
+X#if (0 == 0U)
 N
 N/**
 N  \brief   System Tick Configuration
@@ -2898,7 +2688,7 @@ N
 N  SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
 X  ((SysTick_Type *) ((0xE000E000UL) + 0x0010UL) )->LOAD  = (uint32_t)(ticks - 1UL);                          
 N  NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
-X  __NVIC_SetPriority (SysTick_IRQn, (1UL << 2) - 1UL);  
+X  NVIC_SetPriority (SysTick_IRQn, (1UL << 2) - 1UL);  
 N  SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
 X  ((SysTick_Type *) ((0xE000E000UL) + 0x0010UL) )->VAL   = 0UL;                                              
 N  SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
@@ -12023,7 +11813,7 @@ N
 N/********************************************************************/
 N
 N#endif /* _COMMON_H_ */
-L 8 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
+L 9 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
 N#include "modem.c"
 L 1 "..\..\..\src\projects\KEIL_MAG\modem.c" 1
 N#include "uart.h"
@@ -13999,7 +13789,7 @@ N																	stcond2=strstr(uart_string_gsm, "ERROR");
 N																		stcond3=strstr(uart_string_gsm, "FAIL");	
 N																			stcond4=strstr(uart_string_gsm, "DEACT");	
 N																	
-N																}while(!(stcond2 || stcond3 || stcond4 || stcond1 || (tout > 4) ) ); //|| (timeout < 1)   
+N																}while(!(stcond2 || stcond3 || stcond4 || stcond1 || (tout > 5) ) ); //|| (timeout < 1)   
 N																//delay(10);clear();
 N														uart_putchar(UART1_BASE_PTR,0x1A);
 X														uart_putchar(((UART_MemMapPtr)0x4006B000u),0x1A);
@@ -14156,8 +13946,9 @@ N
 Nmsg_sim800(); 
 NGPS_COLLECT2();
 Nstrcat(data,"CH\n");	
-N					clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-N					delay(20);
+Nsend_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR" , "DEACT",1);		
+N
+N//delay(20);
 N
 N
 Nmsg_sim800(); 
@@ -14193,7 +13984,7 @@ N																	stcond2=strstr(uart_string_gsm, "ERROR");
 N																		stcond3=strstr(uart_string_gsm, "FAIL");	
 N																			stcond4=strstr(uart_string_gsm, "DEACT");	
 N																	
-N																}while(!(stcond2 || stcond3 || stcond4 || stcond1 || (tout > 4) ) ); //|| (timeout < 1)   
+N																}while(!(stcond2 || stcond3 || stcond4 || stcond1 || (tout > 5) ) ); //|| (timeout < 1)   
 N															//	delay(10);clear();
 N														uart_putchar(UART1_BASE_PTR,0x1A);
 X														uart_putchar(((UART_MemMapPtr)0x4006B000u),0x1A);
@@ -14521,8 +14312,9 @@ N
 Nmsg_sim800(); 
 NGPS_COLLECT2();
 Nstrcat(data,"CH\n");	
-N					clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-N					delay(20);
+Nsend_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR" , "DEACT",1);		
+N
+N//delay(20);
 N
 N
 Nmsg_sim800(); 
@@ -14894,8 +14686,9 @@ N
 Nmsg_sim800(); 
 NGPS_COLLECT2();
 Nstrcat(data,"CH\n");	
-N					clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-N					delay(20);
+N					clear();
+Nsend_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR" , "DEACT",1);		
+N//					delay(20);
 N
 N
 Nmsg_sim800(); 
@@ -15633,11 +15426,11 @@ N
 N
 N}
 N
-L 9 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
+L 10 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
 N//#include "accelerometer.c"
 N#include "gps.c"
 L 1 "..\..\..\src\projects\KEIL_MAG\gps.c" 1
-L 11 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
+L 12 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
 N#include "gpios.c"
 L 1 "..\..\..\src\projects\KEIL_MAG\gpios.c" 1
 N#include <MKL26Z4.h>
@@ -15783,7 +15576,7 @@ X	((((PORT_MemMapPtr)0x4004C000u))->PCR[0]) = (((uint32_t)(((uint32_t)(10))<<16)
 N	
 N	
 N	enable_irq(PORTD_IRQn);		//PORTD & PORTC share interrupt vector
-X	__NVIC_EnableIRQ(PORTD_IRQn);		
+X	NVIC_EnableIRQ(PORTD_IRQn);		
 N#else
 S           
 S        enable_irq(31);
@@ -16101,7 +15894,7 @@ N//	processfunc[stateCount]();
 N//	}
 N
 N
-L 12 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
+L 13 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
 N#include "systick.c"
 L 1 "..\..\..\src\projects\KEIL_MAG\systick.c" 1
 N#include "common.h"
@@ -16164,7 +15957,7 @@ N	printf("systick current value read overhead: 0x%x\n\r", overhead);
 N#endif
 N
 N}
-L 13 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
+L 14 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
 N#include "stdlib.h"
 N#include <stdint.h>
 N#include "string.h"
@@ -16277,7 +16070,7 @@ N    }
 N}
 N        
 N
-L 17 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
+L 18 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
 N//#include "lptmr.c"
 N
 N
@@ -16299,7 +16092,7 @@ N// Function prototypes
 Nvoid start(void);
 Nvoid cpu_identify(void);
 Nvoid flash_identify(void);
-L 25 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
+L 26 "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 2
 N#endif
 N
 N
@@ -16349,7 +16142,7 @@ Nint breach=0,aliveping=0;
 Nvoid send_balance(void);extern void outSRS(void);
 Nextern void LED_state(void),LED_state2(void);
 Nint sleep_flag=0;
-Nint32 tmeout=4,int_erval=1; //10 SECS TIMEOUT
+Nint32 tmeout=7,int_erval=1; //10 SECS TIMEOUT
 Nextern char in_char1(void),in_char2(void);
 Nint myAtoi(char *str);
 Nextern void out_char1(char ch),out_char2(char ch),ignstaton(),ignstatoff(),ignread();
@@ -16391,6 +16184,9 @@ Nchar ringflag=0,lptmr_interrupt=0;
 Nextern void lptmr_init(int count, int clock_source),saveapn();
 N__inline void GPS_COLLECT(void);
 N__inline void GPS_COLLECT2(void);
+W "..\..\..\src\projects\KEIL_MAG\vts_ver2.c" 117 15 Deprecated declaration reset_func - give arg types
+N__inline void reset_func();
+N
 Nint time52=15;
 Nvoid HardFault_Handler(void);
 Nchar * cond277;char* cond20077;//char data_balance[200];
@@ -16408,9 +16204,9 @@ N
 N
 N
 N//int_erval=10;
-N								memset(data,0,strlen(data));
-N								memset(data2,0,strlen(data2));
-N	memset(ip,0,strlen(ip));
+N		memset(data,0,strlen(data));
+N		memset(data2,0,strlen(data2));
+N		memset(ip,0,strlen(ip));
 N		memset(port,0,strlen(ip));
 N
 N	
@@ -16479,8 +16275,6 @@ N//send_GSM("\r\nAT+CFUN=1\r\n", "Ready", "NOT INSERTED" , "ERROR",7);
 N
 Nmsg_sim800();
 N	
-NGPS_COLLECT();
-Nstrcat(data,"CH\n");	
 N
 N//GPS_COLLECT();
 N//  strcat(data,"CH\n");	
@@ -16534,12 +16328,6 @@ N//delay(10);
 Nsend_GSM("\n\nAT+CPBS=\"SM\"\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
 N
 N
-N
-N
-N
-N
-N
-N
 Nsend_GSM("\n\nAT+SD2PCM=0\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
 N//delay(10);	
 N
@@ -16551,12 +16339,11 @@ Ndelay(10);
 N//;	
 N//send_GSM("\n\nAT+FSCREATE=D:\\LOG.TXT\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
 N
-N	GPS_COLLECT();
-N  strcat(data,"CH\n");	
+N
 N
 Nsend_GSM("\n\nAT+FSMEM\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
-Ndelay(100);	
-N
+N	GPS_COLLECT();
+N  strcat(data,"CH\n");	
 Nif(strstr(uart_string_gsm,"D:")){
 Nsend_GSM("\n\nAT+FSCREATE=C:\\LOGGING_DRIVE.TXT\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);	
 N	
@@ -16579,9 +16366,6 @@ Nclear();
 Nsend_modem("C:");		
 N	
 N}	
-N
-Ndelay(100);
-N
 N//delay(10);
 N
 Nsend_GSM("\n\nATS0=1\r\n","OK\r\n","ERROR\r\n","ERROR:",tmeout);
@@ -16663,9 +16447,11 @@ N
 Nmsg_sim800(); 
 N
 N								
-N								clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-N								delay(20);
-N	
+Nsend_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+Nif(strstr(uart_string_gsm,"0.0.0.0"))
+N{
+N	reset_func();
+N}	
 N
 Nmsg_sim800(); 
 N
@@ -16783,10 +16569,8 @@ Nstrcat(data,"CH\n");
 NGPS_COLLECT2();
 Nstrcat(data,"CH\n");
 N
-N	
 Nsend_GSM("\r\nAT+CIPSHUT\r\n", "OK", "ERROR\r\n" , "ERROR:",4);	
-NGPS_COLLECT2();
-Nstrcat(data,"CH\n");	
+N
 Nmemset(at_,0,100);
 Nsprintf(at_,"\r\nAT+CSTT=\"%s\"\r\n",apn);
 Nsend_GSM(at_,	"OK", "ERROR\r\n" , "ERROR:",tmeout);							//delay(20);
@@ -16796,13 +16580,14 @@ NGPS_COLLECT2();
 Nstrcat(data,"CH\n");	
 NGPS_COLLECT2();
 Nstrcat(data,"CH\n");	
-N
-N
 Nmsg_sim800(); 
 NGPS_COLLECT2();
 Nstrcat(data,"CH\n");	
-N					clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-N					delay(20);
+Nsend_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+Nif(strstr(uart_string_gsm,"0.0.0.0"))
+N{
+N	reset_func();
+N}	
 N
 N
 Nmsg_sim800(); 
@@ -16953,7 +16738,7 @@ N
 Nif(rtcticks2>=1500){
 N	DTR_OFF;
 X	(((((GPIO_MemMapPtr)0x400FF0C0u))->PCOR) = (1U << 7));
-N	send_modem("\r\n\r\n\r\n\n\n\n\n\nDEVICE IS RESETTING.......\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\n\n");
+N//	send_modem("\r\n\r\n\r\n\n\n\n\n\nDEVICE IS RESETTING.......\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\n\n");
 N	clear();
 N		delay(100);
 N
@@ -17007,6 +16792,7 @@ N{
 N	DTR_OFF;
 X	(((((GPIO_MemMapPtr)0x400FF0C0u))->PCOR) = (1U << 7));
 N	sleep_flag=0;
+N	send_GSM("\r\nAT+CSQ\r\n", "OK", "ERROR" , "DEACT",tmeout);		
 N	send_GSM("\r\nAT+CIPCLOSE\r\n", "CLOSE OK", "ERROR" , "ERROR:",tmeout);		
 N	memset(at_,0,100);
 N	memset(data,0,strlen(data));
@@ -17028,7 +16814,7 @@ N
 N	adc_read(9);							
 N	memset(fuelstr,0,5);
 N	sprintf(fuelstr,"%d,",fuel);
-Nmemset(acstr,0,2); //ptb2
+N	memset(acstr,0,2); //ptb2
 Nif(GPIOB_PDIR & 0x00000004){
 Xif(((((GPIO_MemMapPtr)0x400FF040u))->PDIR) & 0x00000004){
 N			sprintf(acstr,"%d",1);
@@ -17208,8 +16994,11 @@ N
 N	msg_sim800(); 
 N	GPS_COLLECT2();
 N	strcat(data,"CH\n");	
-N						clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-N						delay(20);
+Nsend_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+Nif(strstr(uart_string_gsm,"0.0.0.0"))
+N{
+N	reset_func();
+N}	
 N
 N
 N	msg_sim800(); 
@@ -17486,13 +17275,14 @@ N
 N
 N
 N__inline void GPS_COLLECT()
-N{imeiinc=0;
+N{
 Ndelay(200);
 Nclear();
 N//adc_read(8);							
 N//memset(fuelstr,0,5);
 N//sprintf(fuelstr,"%d,",fuel);	
-N	
+Nif(strlen(imei)<14)
+N{imeiinc=0;
 Nmemset(imei,0,20);
 Nsend_GSM("\r\n\n\nAT+GSN\r\n","OK","ERROR\r\n","ERROR",10);	
 Nfor(i=0;i<strlen(uart_string_gsm);i++){
@@ -17501,7 +17291,8 @@ N			imei[imeiinc] = uart_string_gsm[i];
 N			imeiinc++;
 N		}
 N}
-Nclear();	
+Nclear();
+N}
 N
 N
 N
@@ -17563,9 +17354,9 @@ N		memset(longi,0,15);
 N		sprintf(longi,"%f",mm22);	
 N		strcat(data,imei);
 N		strcat(data,",");	
-N		strcat(data,"$GxGGA");	
+N//		strcat(data,"$GxGGA");	
 N		strcat(data,gga);
-N		strcat(data,",$GxRMC");	
+N		strcat(data,",");	
 N		strcat(data,rmc);	
 N		strcat(data,",");	
 N		strcat(data,num2);	
@@ -17574,13 +17365,13 @@ N	adc_read(9);
 N	memset(fuelstr,0,5);
 N	sprintf(fuelstr,"%d,",fuel);
 N		strcat(data,fuelstr);		
-N		strcat(data,",AC=");	
+N		strcat(data,"AC=");	
 N		strcat(data,acstr);
 N		strcat(data,",I=");	
 N		strcat(data,ignstr);
 N		strcat(data,",");	
 N	memset(fuelstr,0,5);
-N	sprintf(fuelstr,"%d,",rtcticks2);
+N	sprintf(fuelstr,"%d",rtcticks2);
 N		strcat(data,fuelstr);	
 N		
 N		
@@ -17597,16 +17388,24 @@ N__inline void GPS_COLLECT2()
 N{	
 Ntime52=15;	
 N
-N//memset(imei,0,20);
-N//send_GSM("\r\n\n\nAT+GSN\r\n","OK","ERROR\r\n","ERROR",10);	
-N//for(i=0;i<strlen(uart_string_gsm);i++){
-N//		if((uart_string_gsm[i]>47)   &&   (uart_string_gsm[i]<58)){   //means numeric
-N//			imei[imeiinc] = uart_string_gsm[i];
-N//			imeiinc++;
-N//		}
-N//}
+Ndelay(200);
+Nclear();
+N//adc_read(8);							
+N//memset(fuelstr,0,5);
+N//sprintf(fuelstr,"%d,",fuel);	
+Nif(strlen(imei)<14)
+N{
+Nimeiinc=0;
+Nmemset(imei,0,20);
+Nsend_GSM("\r\n\n\nAT+GSN\r\n","OK","ERROR\r\n","ERROR",10);	
+Nfor(i=0;i<strlen(uart_string_gsm);i++){
+N		if((uart_string_gsm[i]>47)   &&   (uart_string_gsm[i]<58)){   //means numeric
+N			imei[imeiinc] = uart_string_gsm[i];
+N			imeiinc++;
+N		}
+N}
 Nclear();	
-N
+N}
 N	
 N	
 N	adc_read(9);							
@@ -17665,16 +17464,16 @@ N		mm22=hh+mm11/60;
 N		memset(longi,0,15);
 N		sprintf(longi,"%f",mm22);	
 N		strcat(data,imei);
-N		strcat(data,", ");	
-N		strcat(data,"$GxGGA");	
+N		strcat(data,",");	
+N	//	strcat(data,"$GxGGA");	
 N		strcat(data,gga);
-N		strcat(data,", $GxRMC");	
+N		strcat(data,",");	
 N		strcat(data,rmc);	
 N		strcat(data,",");	
 N		strcat(data,num2);
 N		strcat(data,",F=");	
 N		strcat(data,fuelstr);
-N		strcat(data,",AC=");	
+N		strcat(data,"AC=");	
 N		strcat(data,acstr);
 N		strcat(data,",I=");	
 N		strcat(data,ignstr);		
@@ -17879,7 +17678,7 @@ N								send_GSM("\nAT+FSCREATE=C:\\IGN.TXT\r\n", "OK", "ERROR\r\n" , "ERROR:",
 N
 N								memset(ip,0,100);
 N								memset(port,0,10);
-N								strcat (ip, "rudra.jellyfishtele.com");
+N								strcat (ip, "104.236.203.4");
 N								strcat (port, "5555");		
 N								memcpy (interval, "5", 1);										
 N								save_ip_port();
@@ -18373,8 +18172,11 @@ N
 Nmsg_sim800(); 
 NGPS_COLLECT2();
 Nstrcat(data,"CH\n");	
-N					clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-N					delay(20);
+Nsend_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+Nif(strstr(uart_string_gsm,"0.0.0.0"))
+N{
+N	reset_func();
+N}	
 N
 N
 Nmsg_sim800(); 
@@ -18603,8 +18405,13 @@ N
 Nmsg_sim800(); 
 NGPS_COLLECT2();
 Nstrcat(data,"CH\n");	
-N					clear();send_modem("\nAT+CIFSR\r\r\n");clear();
-N					delay(20);
+Nsend_GSM("\r\nAT+CIFSR\r\r\n", "OK", "ERROR\r\n" , "DEACT",1);		
+Nif(strstr(uart_string_gsm,"0.0.0.0"))
+N{
+N	reset_func();
+N}	
+N
+N//					delay(20);
 N
 N
 Nmsg_sim800(); 
@@ -18802,7 +18609,47 @@ N	}
 N
 N
 N
-N
+N__inline void reset_func()
+N{
+N		savecursor();
+N	
+N				memset(at_,0,100);
+N				sprintf(at_,"\r\nAT+FSWRITE=%s\\LOG.TXT,1,%d,10\n\n",drive,strlen(data)+1);	
+N				send_SD(at_, ">", "ERROR\r\n" , "ERROR",5);
+Nif(strstr(uart_string_gsm,"ERROR")){
+N	drive[0]='C';drive[1]=':';
+N}	
+N				//clear();	
+N				k2=0;									//string array counter for uart 1
+N				tout=0;	
+N				for(k=0;k<strlen(data);k++)
+N				{
+N					uart_putchar(UART1_BASE_PTR, data[k]);//clear();
+X					uart_putchar(((UART_MemMapPtr)0x4006B000u), data[k]);
+N				}	
+N				uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	uart_putchar(UART1_BASE_PTR, '\n');	
+X				uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');	uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');	uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');	uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');	uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');	uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');	uart_putchar(((UART_MemMapPtr)0x4006B000u), '\n');	
+N				//memset(data,0,1000);
+N				//timer counts to wait for characters in uart 1 									
+N				while(!(strstr(uart_string_gsm,"OK\r\n")  || (strstr(uart_string_gsm, "ERROR") ||  (tout > 5) )))
+N				{				//uart_putchar(UART1_BASE_PTR, '\n');					
+N				}
+N				//clear();//uart_putchar(UART1_BASE_PTR,0x1a);
+N				//memset(data,0,strlen(data));
+N				//clear();
+N	RESET_OFF;
+X	(((((GPIO_MemMapPtr)0x400FF080u))->PCOR) = (1U << 5));
+N	RESET_OFF;
+X	(((((GPIO_MemMapPtr)0x400FF080u))->PCOR) = (1U << 5));
+N	delay(100);	
+N	RESET_ON;
+X	(((((GPIO_MemMapPtr)0x400FF080u))->PSOR) = (1U << 5));
+N	RESET_ON;	
+X	(((((GPIO_MemMapPtr)0x400FF080u))->PSOR) = (1U << 5));	
+N	delay(100);
+N	rtcticks2 =0;
+N	
+N}
 N
 N	
 N	
