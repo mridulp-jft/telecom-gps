@@ -18,8 +18,10 @@
 
 #define RTE_CMSIS_RTOS                  /* CMSIS-RTOS */
         #define RTE_CMSIS_RTOS_RTX              /* CMSIS-RTOS Keil RTX */
+#define RTE_Drivers_ADC              /* Driver ADC */
 #define RTE_Drivers_CLK              /* Driver CLK */
 #define RTE_Drivers_GPIO              /* Driver GPIO */
+#define RTE_Drivers_I2C              /* Driver I2C */
 #define RTE_Drivers_SPI              /* Driver SPI */
 #define RTE_Drivers_SYS              /* Driver SYS */
 #define RTE_Drivers_UART              /* Driver UART */

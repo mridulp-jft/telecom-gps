@@ -1,0 +1,321 @@
+/******************************************************************************
+ * @file     main.c
+ * @brief
+ *           Transfer data between USB device and PC through USB HID interface.
+ *           A windows tool is also included in this sample code to connect with USB device.
+ *
+ * @note
+ * Copyright (C) 2013 Nuvoton Technology Corp. All rights reserved.
+ ******************************************************************************/
+#include <stdio.h>
+#include "targetdev.h"
+#include <string.h>
+#include <stdlib.h>
+uint32_t g_au32TMRINTCount;
+
+#define PLLCON_SETTING  CLK_PLLCON_50MHz_HIRC
+#define PLL_CLOCK       50191800
+
+void parse_g(char* str, int first, int sec, char f, char s , char *string);
+void delay(int sec);
+extern uint8_t g_u8RecData[g_u8RecDatamax];
+extern void send_at(char* cmd, char* response1, char* response2, char* response3);
+static uint32_t StartAddress, StartAddress_bak, TotalLen, TotalLen_bak, LastDataLen, g_packno = 1;
+__inline void remove_all_chars(char* str, char c, char d);
+//char filesize[10] = 0;
+char *fsize;
+char filesize[10] = 0;
+int filesize_int = 0;
+int fileinstance_int = 0;
+char fileinstance[15] = 0;
+char temp[100] = 0;
+uint8_t firmwaredata[firmwarechunksize+20] = 0;
+uint32_t firmwaredata32[firmwarechunksize+20] = 0;
+extern uint32_t g_u8RecDataptr;
+void* ptr;
+volatile int tmrsec = 0;
+
+int times =0;
+int i,j,len, f = 0, fptr = 0;
+/*--------------------------------------------------------------------------*/
+
+__inline firmwareparser(char* recdata, int recdatalen, char* firststring, int firststringlen, char* laststring, int laststringlen){
+  int recdat = 0;int fi = 0;int counter = 0;int fi32 = 0;
+  
+  for(recdat = 0; recdat<recdatalen; recdat++){
+    if( recdata[recdat-8] ==  firststring[0] && recdata[recdat-7] ==  firststring[1] && recdata[recdat-6] ==  firststring[2] &&\
+       recdata[recdat-5] ==  firststring[3] && recdata[recdat-4] ==  firststring[4] && recdata[recdat-3] ==  firststring[5] &&\
+     recdata[recdat-2] ==  firststring[6] && recdata[recdat-1] ==  firststring[7])
+    break;
+  }
+  while(recdata[recdat] != '\n'){recdat++;}
+  recdat++;
+  do{
+    firmwaredata[fi] = recdata[recdat];
+    fi++;recdata++;counter++;
+    if(counter == 4){
+      counter = 0;
+      firmwaredata32[fi32] = firmwaredata[fi-1]<<24 | firmwaredata[fi-2]<<16 | firmwaredata[fi-3]<<8 | firmwaredata[fi-4]<<0 ;  
+      fi32++;
+    }
+  }while(!(recdata[recdat] == laststring[0] && recdata[recdat+1] == laststring[1] && recdata[recdat+2] == laststring[2] &&\
+  recdata[recdat+3] == laststring[3] && recdata[recdat+4] == laststring[4] && recdata[recdat+5] == laststring[5]));
+  
+}
+
+
+void SYS_Init(void)
+{
+    /*---------------------------------------------------------------------------------------------------------*/
+    /* Init System Clock                                                                                       */
+    /*---------------------------------------------------------------------------------------------------------*/
+
+    /* Enable Internal RC 22.1184MHz clock */
+    CLK->PWRCON |= (CLK_PWRCON_OSC22M_EN_Msk | CLK_PWRCON_XTL12M_EN_Msk);
+
+    /* Waiting for Internal RC clock ready */
+    while(!(CLK->CLKSTATUS & CLK_CLKSTATUS_OSC22M_STB_Msk));
+
+    /* Switch HCLK clock source to Internal RC and HCLK source divide 1 */
+    //CLK->CLKSEL0 &= ~CLK_CLKSEL0_HCLK_S_Msk;
+    //CLK->CLKSEL0 |= CLK_CLKSEL0_HCLK_S_HIRC;
+    CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLK_S_Msk)) | CLK_CLKSEL0_HCLK_S_HIRC;
+    CLK->CLKDIV &= ~CLK_CLKDIV_HCLK_N_Msk;
+    CLK->CLKDIV |= CLK_CLKDIV_HCLK(1);
+
+    /* Set core clock as PLL_CLOCK from PLL */
+    CLK->PLLCON = PLLCON_SETTING;
+    while(!(CLK->CLKSTATUS & CLK_CLKSTATUS_PLL_STB_Msk));
+    //CLK->CLKSEL0 &= (~CLK_CLKSEL0_HCLK_S_Msk);
+    //CLK->CLKSEL0 |= CLK_CLKSEL0_HCLK_S_PLL;
+    CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLK_S_Msk)) | CLK_CLKSEL0_HCLK_S_PLL;
+
+    /* Update System Core Clock */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    //SystemCoreClockUpdate();
+    //PllClock        = PLL_CLOCK;            // PLL
+    //SystemCoreClock = PLL_CLOCK / 1;        // HCLK
+    CyclesPerUs     = PLL_CLOCK / 1000000;  // For SYS_SysTickDelay()
+
+    /* Enable module clock */
+    CLK->APBCLK |= (CLK_APBCLK_UART1_EN_Msk) |  CLK_APBCLK_TMR0_EN_Msk;
+    CLK->AHBCLK |= CLK_AHBCLK_ISP_EN_Msk;	// (1ul << 2)
+
+    /* Select module clock source */
+    //CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART_S_HIRC, CLK_CLKDIV_UART(1));
+    /* Select UART module clock source */
+    CLK->CLKSEL1 &= ~CLK_CLKSEL1_UART_S_Msk;
+    CLK->CLKSEL1 |= CLK_CLKSEL1_UART_S_HIRC;
+    /*---------------------------------------------------------------------------------------------------------*/
+    /* Init I/O Multi-function                                                                                 */
+    /*---------------------------------------------------------------------------------------------------------*/
+
+    /* Set GPB multi-function pins for UART1 RXD and TXD */
+    SYS->GPB_MFP |= (SYS_GPB_MFP_PB4_UART1_RXD | SYS_GPB_MFP_PB5_UART1_TXD);
+}
+
+/*---------------------------------------------------------------------------------------------------------*/
+/*  Main Function                                                                                          */
+/*---------------------------------------------------------------------------------------------------------*/
+int32_t main(void)
+{
+    /* Unlock write-protected registers */
+    SYS_UnlockReg();
+    WDT->WTCR &= ~(WDT_WTCR_WTE_Msk | WDT_WTCR_DBGACK_WDT_Msk);
+    WDT->WTCR |= (WDT_TIMEOUT_2POW18 | WDT_WTCR_WTR_Msk);
+    /* Init system and multi-funcition I/O */
+    SYS_Init();
+
+    UART_Init();
+  
+    TIMER0->TCMPR = __HXT;
+    TIMER0->TCSR = TIMER_TCSR_IE_Msk | TIMER_PERIODIC_MODE;
+    TIMER_SET_PRESCALE_VALUE(TIMER0, 0);
+    //CLK_SetModuleClock(USBD_MODULE, 0, CLK_CLKDIV_USB(1));
+    NVIC_EnableIRQ(TMR0_IRQn);
+    TIMER_Start(TIMER0);
+  
+  
+  
+    FMC->ISPCON |= FMC_ISPCON_ISPEN_Msk;	// (1ul << 0)
+
+    g_apromSize = GetApromSize();
+    GetDataFlashInfo(&g_dataFlashAddr , &g_dataFlashSize);
+
+    SysTick->LOAD = 300000 * CyclesPerUs;
+    SysTick->VAL   =  (0x00);
+    SysTick->CTRL = SysTick->CTRL | SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;//using cpu clock
+
+    while(1) {
+//        if((bufhead >= 4) || (bUartDataReady == TRUE)) {
+//            uint32_t lcmd;
+//            lcmd = inpw(uart_rcvbuf);
+//            if(lcmd == CMD_CONNECT) {
+//                break;
+//            } else {
+//                bUartDataReady = FALSE;
+//                bufhead = 0;
+//            }
+//        }
+       /// send_at("\r\n\r\nAT+CFUN=1,1\r\n\r\n", "OK", "ERROR", "NOT CONNECTED");
+
+        send_at("\r\n\r\nAT+QFTPCFG=4,\"/RAM/\"\r\n\r\n", "OK", "ERROR", "NOT CONNECTED");
+        send_at("\r\n\r\nAT+QFTPCLOSE\r\n\r\n", "OK", "ERROR", "NOT CONNECTED");
+        send_at("\r\n\r\nAT+QFLST=\"*\"\r\n\r\n", "OK", "ERROR", "NOT CONNECTED");
+        if(!strstr(g_u8RecData,"fw.bin"))goto _APROM;
+        fsize = strstr(g_u8RecData,"fw.bin");
+        *fsize++;*fsize++;*fsize++;*fsize++;*fsize++;*fsize++;*fsize++;
+ 
+        memset(filesize,0,10);
+        parse_g(fsize, 1,1,',','\r',filesize);
+        filesize_int = atoi(filesize);      
+        send_at("\r\n\r\nAT+QFOPEN=\"fw.bin\",2\r\n\r\n", "OK", "ERROR", "NOT CONNECTED");
+        memset(fileinstance,0,15);
+        parse_g(g_u8RecData, 1,2, ':', '\n', fileinstance);
+        remove_all_chars(fileinstance, '\r', '\n');
+        if(strstr(g_u8RecData,"ERROR")){
+          send_at("\r\n\r\nAT+CFUN=1,1\r\n\r\n", "OK", "ERROR", "NOT CONNECTED");  
+          send_at("\r\n\r\nAT+QFOPEN=\"fw.bin\",2\r\n\r\n", "OK", "ERROR", "NOT CONNECTED");
+          memset(fileinstance,0,15);
+          parse_g(g_u8RecData, 1,2, ':', '\n', fileinstance);
+          remove_all_chars(fileinstance, '\r', '\n');
+        }
+        
+        //send_at("\r\n\r\nAT+QFOPEN?\r\n\r\n", "OK", "ERROR", "NOT CONNECTED");
+        
+        EraseAP(FMC_APROM_BASE, g_apromSize); // erase APROM // g_dataFlashAddr, g_apromSize
+        memset(temp, 0, 100);
+        times = (filesize_int/firmwarechunksize)+1;
+        for(i = 0; i< times; i++){
+          memset(firmwaredata,0, firmwarechunksize+20);
+          memset(firmwaredata32,0, firmwarechunksize+20);   
+          g_au32TMRINTCount = 0;
+          sprintf(temp,"\r\n\r\nAT+QFREAD=%s,%d\r\n\r\n",fileinstance,firmwarechunksize);
+          send_at(temp, "HelloWorld", "HelloWorld", "HelloWorld\r\n");
+          memset(temp, 0, 100);
+          parse_g(g_u8RecData,1,2,'\n','\n',temp);
+          strcat(temp, "\n");
+          firmwareparser(g_u8RecData, g_u8RecDatamax, temp, strlen(temp), "\r\nOK\r\n", strlen("\r\nOK\r\n"));
+          WriteData(StartAddress, StartAddress + firmwarechunksize, firmwaredata32);
+          StartAddress+=firmwarechunksize;
+          //parse_g(g_u8RecData, 2,3,'\n','\n', firmwaredata); 
+          //len = strlen(firmwaredata);
+          
+        }
+        sprintf(temp,"\r\n\r\nAT+QFCLOSE=%s\r\n\r\n",fileinstance);
+        send_at(temp, "OK", "ERROR", "NOT CONNECTED");
+        send_at(temp, "OK", "ERROR", "NOT CONNECTED");
+        delay(5);
+        //sprintf(temp,"\r\n\r\nAT+QFDEL=\"fw.bin\"\r\n\r\n",fileinstance);
+        send_at("\r\nAT+QFDEL=\"fw.bin\"\r\n", "OK", "ERROR", "NOT CONNECTED");        
+        goto _APROM;
+      
+//        if(strstr(g_u8RecData,"fw.bin")){
+//          EraseAP(FMC_APROM_BASE, g_apromSize); // erase APROM // g_dataFlashAddr, g_apromSize
+//          
+//          //WriteData(StartAddress, StartAddress + srclen, (uint32_t*)pSrc); //WriteData(StartAddress, StartAddress + srclen, (uint32_t*)pSrc);   
+//          goto _APROM;
+//        }
+//        //if((SysTick->CTRL & (1 << 16)) != 0)//timeout, then goto APROM
+//        if(SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk)
+//            goto _APROM;
+      }
+
+    while(1) {
+        if (bUartDataReady == TRUE) {
+            WDT->WTCR &= ~(WDT_WTCR_WTE_Msk | WDT_WTCR_DBGACK_WDT_Msk);
+            WDT->WTCR |= (WDT_TIMEOUT_2POW18 | WDT_WTCR_WTR_Msk);
+            bUartDataReady = FALSE;
+            ParseCmd(uart_rcvbuf, 64);
+            PutString();
+        }
+    }
+
+_APROM:
+
+    outpw(&SYS->RSTSRC, 3);//clear bit
+    outpw(&FMC->ISPCON, inpw(&FMC->ISPCON) & 0xFFFFFFFC);
+    outpw(&SCB->AIRCR, (V6M_AIRCR_VECTKEY_DATA | V6M_AIRCR_SYSRESETREQ));
+
+    /* Trap the CPU */
+    while(1);
+}
+
+void delay(int sec){
+  tmrsec = 0;
+  while(sec>tmrsec);
+}
+
+void TMR0_IRQHandler(void)
+{
+    if(TIMER_GetIntFlag(TIMER0) == 1)
+    {
+        /* Clear Timer0 time-out interrupt flag */
+        TIMER_ClearIntFlag(TIMER0);
+
+        g_au32TMRINTCount++;
+        tmrsec++;
+      if (tmrsec>1000)
+        tmrsec = 0;
+    }
+}
+
+__inline void remove_all_chars(char* str, char c, char d) {
+    char *pr = str, *pw = str;
+    while (*pr) {
+        *pw = *pr++;
+			pw += (*pw != c && *pw != d && *pw != ' ' && *pw != '/' && *pw != ':');
+    }
+    *pw = '\0';
+}
+char mystrstr(char* str1, char character)
+{int sz,cn;
+  sz=strlen(str1);
+	for(cn=0;cn<=sz;cn++)
+	{if(str1[cn] == character)
+		{return 1;}
+	}
+	return 0;
+}
+
+
+
+void parse_g(char* str, int first, int sec, char f, char s , char *string)
+{int sz1,sz2,i11,temp11,j11,l;
+    if(mystrstr(str,f) && mystrstr(str,s))
+    {  
+
+		sz1=	strlen(str);
+		sz2=	strlen(string);
+		memset(string,0,sz2);
+		for(i11=0,temp11=0;i11<sz1;i11++)
+		{
+		if(str[i11]==s)
+			{
+        temp11++;
+        j11=i11;
+      }
+		else{}
+			
+		if(temp11>=sec){i11=9900;}
+		else{}	
+		
+		}	
+		
+		for(i11=0,temp11=0;i11<sz1;i11++)
+		{
+		if(str[i11]==f)
+			{
+        temp11++;l=i11;
+      }										
+		else{}
+		if(temp11>=first){i11=9900;}else{}
+		}	
+		for(i11=0;i11<(j11-l-1);i11++)
+		{
+      string[i11] = str[l+i11+1];
+		}
+	
+
+    }
+  }

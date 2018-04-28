@@ -53,7 +53,7 @@
           <OutputName>UART_TxRx_Function</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\lst\</ListingPath>
@@ -402,14 +402,29 @@
               <FilePath>.\Timer.c</FilePath>
             </File>
             <File>
-              <FileName>obdcommand.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\obdcommand.c</FilePath>
-            </File>
-            <File>
               <FileName>WinboundFlash.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\WinboundFlash.c</FilePath>
+            </File>
+            <File>
+              <FileName>preprocessor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\preprocessor.h</FilePath>
+            </File>
+            <File>
+              <FileName>CRC32_fast_dynamic_lut.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CRC32_fast_dynamic_lut.c</FilePath>
+            </File>
+            <File>
+              <FileName>CRC32_fast_static_lut.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CRC32_fast_static_lut.c</FilePath>
+            </File>
+            <File>
+              <FileName>CRC32_slow_no_lut.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CRC32_slow_no_lut.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -445,6 +460,12 @@
           <targetInfo name="UART_TxRx_Function"/>
         </targetInfos>
       </component>
+      <component Cclass="Device" Cgroup="Driver" Csub="ADC" Cvendor="Nuvoton" Cversion="3.00.002" condition="M0NuMicro NUC100 Device">
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos>
+          <targetInfo name="UART_TxRx_Function"/>
+        </targetInfos>
+      </component>
       <component Cclass="Device" Cgroup="Driver" Csub="CLK" Cvendor="Nuvoton" Cversion="3.00.002" condition="M0NuMicro NUC100 Device">
         <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
         <targetInfos>
@@ -452,6 +473,12 @@
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="Driver" Csub="GPIO" Cvendor="Nuvoton" Cversion="3.00.002" condition="M0NuMicro NUC100 Device">
+        <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
+        <targetInfos>
+          <targetInfo name="UART_TxRx_Function"/>
+        </targetInfos>
+      </component>
+      <component Cclass="Device" Cgroup="Driver" Csub="I2C" Cvendor="Nuvoton" Cversion="3.00.002" condition="M0NuMicro NUC100 Device">
         <package name="NuMicro_DFP" schemaVersion="1.2" url="http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack" vendor="Nuvoton" version="1.1.0"/>
         <targetInfos>
           <targetInfo name="UART_TxRx_Function"/>

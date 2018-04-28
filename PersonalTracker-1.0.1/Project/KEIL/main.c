@@ -1522,17 +1522,17 @@ __inline uint8_t I2C_Write(uint16_t u16Address, uint8_t u8Data)
 {
   u32Status=0;
   I2C_SET_CONTROL_REG(I2C1, I2C_STA );
-  i2ctimeout = 0;while((u32Status != 0x08) && (i2ctimeout == 0));    //ST ack
+  i2ctimeout = 0;while((u32Status != 0x08));// && (i2ctimeout == 0));    //ST ack
   I2C_SET_DATA(I2C1, ((g_u8DeviceAddr << 1)));   
   I2C_SET_CONTROL_REG(I2C1, I2C_SI);
-  i2ctimeout = 0;while((u32Status != 0x18) && (i2ctimeout == 0));  //SAD+W ack
-  I2C_SET_DATA(I2C1, ((u16Address) ));   
+  i2ctimeout = 0;while((u32Status != 0x18));// && (i2ctimeout == 0));  //SAD+W ack
+  I2C_SET_DATA(I2C1, ((u16Address)));   
   I2C_SET_CONTROL_REG(I2C1, I2C_SI);  
-  i2ctimeout = 0;while((u32Status != 0x28) && (i2ctimeout == 0));   //SAK 
+  i2ctimeout = 0;while((u32Status != 0x28));// && (i2ctimeout == 0));   //SAK 
   u32Status = 0;
   I2C_SET_DATA(I2C1, ((u8Data)));  
   I2C_SET_CONTROL_REG(I2C1, I2C_SI);  
-  i2ctimeout = 0;while((u32Status != 0x28) && (i2ctimeout == 0));  
+  i2ctimeout = 0;while((u32Status != 0x28));// && (i2ctimeout == 0));  
   I2C_SET_CONTROL_REG(I2C1, I2C_STO | I2C_SI);  
   return 0;
 }
@@ -1547,25 +1547,25 @@ __inline uint8_t I2C_Write(uint16_t u16Address, uint8_t u8Data)
 __inline uint8_t I2C_Read(uint16_t u16Address){
   I2C_SET_CONTROL_REG(I2C1, I2C_STA );
   i2ctimeout = 0;
-  while((u32Status != 0x08) && (i2ctimeout == 0));
+  while((u32Status != 0x08));// && (i2ctimeout == 0));
   I2C_SET_DATA(I2C1, ((g_u8DeviceAddr << 1)));   
   I2C_SET_CONTROL_REG(I2C1, I2C_SI);
   i2ctimeout = 0;
-  while((u32Status != 0x18) && (i2ctimeout == 0));
+  while((u32Status != 0x18));// && (i2ctimeout == 0));
   I2C_SET_DATA(I2C1, ((u16Address)));   
   I2C_SET_CONTROL_REG(I2C1, I2C_SI);  
   i2ctimeout = 0;
-  while((u32Status != 0x28) && (i2ctimeout == 0));
+  while((u32Status != 0x28));// && (i2ctimeout == 0));
   I2C_SET_CONTROL_REG(I2C1, I2C_STA | I2C_SI);
   i2ctimeout = 0;
-  while((u32Status != 0x10) && (i2ctimeout == 0));   
+  while((u32Status != 0x10));// && (i2ctimeout == 0));   
   I2C_SET_DATA(I2C1, ((g_u8DeviceAddr << 1) | (0x01) ));   
   I2C_SET_CONTROL_REG(I2C1, I2C_SI);
   i2ctimeout = 0;
-  while((u32Status != 0x40) && (i2ctimeout == 0));
+  while((u32Status != 0x40));// && (i2ctimeout == 0));
   I2C_SET_CONTROL_REG(I2C1, I2C_SI);  
   i2ctimeout = 0;
-  while((u32Status != 0x58) && (i2ctimeout == 0));
+  while((u32Status != 0x58));// && (i2ctimeout == 0));
   g_u8RxData = I2C_GET_DATA(I2C1);
   I2C_SET_CONTROL_REG(I2C1, I2C_STO | I2C_SI);  
   return g_u8RxData;

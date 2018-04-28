@@ -379,7 +379,6 @@ RTC_IRQHandler
                 B       .
                 ENDP
 
-
                 ALIGN
 
 

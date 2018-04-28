@@ -3,6 +3,7 @@
 .\obj\main.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\obj\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
@@ -33,3 +34,4 @@
 .\obj\main.o: C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver\CLK.h
 .\obj\main.o: C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver\ACMP.h
 .\obj\main.o: WinboundFlash.h
+.\obj\main.o: preprocessor.h

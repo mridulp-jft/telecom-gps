@@ -1,0 +1,129 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.24.2.0
+Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: mridul pandey, jft, LIC=W96WF-63AUC-EXNUX-H8FAP-A3NT4-94MS0
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.24.1
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 5 (build 528)
+Assembler:       Armasm.exe V5.06 update 5 (build 528)
+Linker/Locator:  ArmLink.exe V5.06 update 5 (build 528)
+Library Manager: ArmAr.exe V5.06 update 5 (build 528)
+Hex Converter:   FromElf.exe V5.06 update 5 (build 528)
+CPU DLL:         SARMCM3.DLL V5.24.1
+Dialog DLL:      DARMCM1.DLL V1.18.0.0
+Target DLL:      NULink\Nu_Link.dll V2.01
+Dialog DLL:      TARMCM1.DLL V1.13.0.0
+ 
+<h2>Project:</h2>
+E:\GIT_JFT_2\telecom-gps\Bootloader_NUC130_AT\Src\ISP\ISP_UART\KEIL\ISP_UART.uvprojx
+Project File Date:  04/19/2018
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'ISP_UART'
+creating preprocessor file for system_NUC100Series.c...
+assembling startup_NUC100Series.s...
+creating preprocessor file for main.c...
+creating preprocessor file for FMC_USER.c...
+compiling system_NUC100Series.c...
+creating preprocessor file for ISP_USER.c...
+compiling main.c...
+..\main.c(27): warning:  #520-D: initialization with "{...}" expected for aggregate object
+  char filesize[10] = 0;
+..\main.c(30): warning:  #520-D: initialization with "{...}" expected for aggregate object
+  char fileinstance[15] = 0;
+..\main.c(31): warning:  #520-D: initialization with "{...}" expected for aggregate object
+  char temp[100] = 0;
+..\main.c(32): warning:  #520-D: initialization with "{...}" expected for aggregate object
+  uint8_t firmwaredata[
+irmwarechunksize+20] = 0;
+..\main.c(33): warning:  #520-D: initialization with "{...}" expected for aggregate object
+  uint32_t firmwaredata32[
+irmwarechunksize+20] = 0;
+..\main.c(147): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+          if(!strstr(g_u8RecData,"fw.bin"))goto _APROM;
+..\main.c(148): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+          if(strstr(g_u8RecData,"\"fw.bin\",0"))goto _APROM;
+..\main.c(149): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+          fsize = strstr(g_u8RecData,"fw.bin");
+..\main.c(156): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *"
+          parse_g(g_u8RecData, 1,2, ':', '\n', fileinstance);
+..\main.c(158): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+          if(strstr(g_u8RecData,"ERROR")){
+..\main.c(162): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *"
+            parse_g(g_u8RecData, 1,2, ':', '\n', fileinstance);
+..\main.c(165): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+          if(strstr(g_u8RecData,"ERROR")){
+..\main.c(183): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *"
+            parse_g(g_u8RecData,1,2,'\n','\n',temp);
+..\main.c(189): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *"
+            firmwareparser(g_u8RecData, 
+_u8RecDatamax, temp, strlen(temp), "\r\nOK\r\n", strlen("\r\nOK\r\n"));
+..\main.c(205): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+          }while(!strstr(g_u8RecData,"OK"));
+..\main.c(221): warning:  #128-D: loop is not reachable
+      while(1) {
+..\main.c(23): warning:  #177-D: variable "StartAddress_bak"  was declared but never referenced
+  static uint32_t StartAddress, StartAddress_bak, TotalLen, TotalLen_bak, LastDataLen, g_packno = 1;
+..\main.c(23): warning:  #177-D: variable "TotalLen"  was declared but never referenced
+  static uint32_t StartAddress, StartAddress_bak, TotalLen, TotalLen_bak, LastDataLen, g_packno = 1;
+..\main.c(23): warning:  #177-D: variable "TotalLen_bak"  was declared but never referenced
+  static uint32_t StartAddress, StartAddress_bak, TotalLen, TotalLen_bak, LastDataLen, g_packno = 1;
+..\main.c(23): warning:  #177-D: variable "LastDataLen"  was declared but never referenced
+  static uint32_t StartAddress, StartAddress_bak, TotalLen, TotalLen_bak, LastDataLen, g_packno = 1;
+..\main.c(23): warning:  #177-D: variable "g_packno"  was declared but never referenced
+  static uint32_t StartAddress, StartAddress_bak, TotalLen, TotalLen_bak, LastDataLen, g_packno = 1;
+..\main.c: 21 warnings, 0 errors
+compiling FMC_USER.c...
+creating preprocessor file for targetdev.c...
+compiling ISP_USER.c...
+creating preprocessor file for uart_transfer.c...
+compiling targetdev.c...
+compiling uart_transfer.c...
+..\uart_transfer.c(26): warning:  #520-D: initialization with "{...}" expected for aggregate object
+  uint8_t g_u8RecData[
+_u8RecDatamax] = 0;
+..\uart_transfer.c(99): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+      while(!((strstr(g_u8RecData, response1)) ||  (strstr(g_u8RecData, response2)) ||  (strstr(g_u8RecData, response3))) && ((g_au32TMRINTCount < 2)) );    
+..\uart_transfer.c(99): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+      while(!((strstr(g_u8RecData, response1)) ||  (strstr(g_u8RecData, response2)) ||  (strstr(g_u8RecData, response3))) && ((g_au32TMRINTCount < 2)) );    
+..\uart_transfer.c(99): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+      while(!((strstr(g_u8RecData, response1)) ||  (strstr(g_u8RecData, response2)) ||  (strstr(g_u8RecData, response3))) && ((g_au32TMRINTCount < 2)) );    
+..\uart_transfer.c: 4 warnings, 0 errors
+linking...
+Program Size: Code=3600 RO-data=360 RW-data=132 ZI-data=14252  
+After Build - User command #1: fromelf --bin ".\obj\NUC100_ISP_UART1_PB4_PB5.axf" --output ".\obj\NUC100_ISP_UART1_PB4_PB5.bin"
+After Build - User command #2: fromelf --text -c ".\obj\NUC100_ISP_UART1_PB4_PB5.axf" --output ".\obj\NUC100_ISP_UART1_PB4_PB5.txt"
+".\obj\NUC100_ISP_UART1_PB4_PB5.axf" - 0 Error(s), 25 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.2.0.pack
+                ARM.CMSIS.5.2.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.0.2
+
+Package Vendor: Nuvoton
+                http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack/Nuvoton.NuMicro_DFP.1.1.0.pack
+                Nuvoton.NuMicro_DFP.1.1.0
+                Nuvoton ARM Cortex-M NuMicro Family Device Support
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_ISP_UART
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include
+  C:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.0.2
+Build Time Elapsed:  00:00:04
+</pre>
+</body>
+</html>

@@ -12,10 +12,9 @@
 extern uint8_t g_u8OBDRecDataptr;
 extern char g_u8OBDRecData[OBDRXBUFSIZE];
 /****************************************************************/
-
+extern uint8_t tmr1sec;
 /*	Global Variables
 *****************************************************************/
-uint8_t tmr1sec;
 char *obdr1;
 char *obdr2;
 char *obdr3; 
@@ -35,7 +34,7 @@ void obdcommand(char* cmd);
 char obdresp[20];
 char tempobdresp[20];
 char obdrespbinary[33];
-char suppportedpid[200][7];
+//char suppportedpid[200][7];
 int pidcounter;
 
 

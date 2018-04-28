@@ -14,7 +14,7 @@ extern osMutexId	(uart_mutex_id); // Mutex ID
 __inline void batteryind (void);
 int8_t time;
 int32_t life=0;
-int8_t i2ctimeout=0;
+
 extern int interval_count;
 
 /*----- One-Shoot Timer Example -----*/
@@ -40,14 +40,7 @@ int tc = 0;
 // Periodic Timer Example
 static void Timer2_Callback (void const *arg) 
 {
-	tmr0sec++;
-  tmr1sec++;
-  tcpsendchtimer++;
-  tc++;
- 
-  i2ctimeout++;
-  interval_count++;
-  if(tcpsendchtimer > 500)tcpsendchtimer = 0;
+
 }
 
 

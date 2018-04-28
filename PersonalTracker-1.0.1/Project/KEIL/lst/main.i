@@ -24162,17 +24162,17 @@ __inline uint8_t I2C_Write(uint16_t u16Address, uint8_t u8Data)
 {
   u32Status=0;
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 );
-  i2ctimeout = 0;while((u32Status != 0x08) && (i2ctimeout == 0));    
+  i2ctimeout = 0;while((u32Status != 0x08));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1)) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
-  i2ctimeout = 0;while((u32Status != 0x18) && (i2ctimeout == 0));  
-  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u16Address) ) );   
+  i2ctimeout = 0;while((u32Status != 0x18));
+  ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u16Address)) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
-  i2ctimeout = 0;while((u32Status != 0x28) && (i2ctimeout == 0));   
+  i2ctimeout = 0;while((u32Status != 0x28));
   u32Status = 0;
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u8Data)) );  
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
-  i2ctimeout = 0;while((u32Status != 0x28) && (i2ctimeout == 0));  
+  i2ctimeout = 0;while((u32Status != 0x28));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );  
   return 0;
 }
@@ -24187,25 +24187,25 @@ __inline uint8_t I2C_Write(uint16_t u16Address, uint8_t u8Data)
 __inline uint8_t I2C_Read(uint16_t u16Address){
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 );
   i2ctimeout = 0;
-  while((u32Status != 0x08) && (i2ctimeout == 0));
+  while((u32Status != 0x08));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1)) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
   i2ctimeout = 0;
-  while((u32Status != 0x18) && (i2ctimeout == 0));
+  while((u32Status != 0x18));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((u16Address)) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
   i2ctimeout = 0;
-  while((u32Status != 0x28) && (i2ctimeout == 0));
+  while((u32Status != 0x28));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x08 | 0x10 );
   i2ctimeout = 0;
-  while((u32Status != 0x10) && (i2ctimeout == 0));   
+  while((u32Status != 0x10));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA = ((g_u8DeviceAddr << 1) | (0x01) ) );   
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );
   i2ctimeout = 0;
-  while((u32Status != 0x40) && (i2ctimeout == 0));
+  while((u32Status != 0x40));
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x10 );  
   i2ctimeout = 0;
-  while((u32Status != 0x58) && (i2ctimeout == 0));
+  while((u32Status != 0x58));
   g_u8RxData = ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->DATA );
   ( (((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON = ((((I2C_T *) (((uint32_t)0x40100000) + 0x20000)))->CON & ~0x1e) | 0x04 | 0x10 );  
   return g_u8RxData;

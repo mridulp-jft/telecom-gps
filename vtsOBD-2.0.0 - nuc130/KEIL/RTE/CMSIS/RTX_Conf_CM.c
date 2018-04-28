@@ -62,7 +62,7 @@
 //   <i> Defines stack size for main thread.
 //   <i> Default: 200
 #ifndef OS_MAINSTKSIZE
- #define OS_MAINSTKSIZE 398      // this stack size value is in words
+ #define OS_MAINSTKSIZE 898      // this stack size value is in words
 #endif
  
 //   <o>Number of threads with user-provided stack size <0-250>
@@ -76,7 +76,7 @@
 //   <i> Defines the combined stack size for threads with user-provided stack size.
 //   <i> Default: 0
 #ifndef OS_PRIVSTKSIZE
- #define OS_PRIVSTKSIZE 1526       // this stack size value is in words
+ #define OS_PRIVSTKSIZE 124       // this stack size value is in words
 #endif
  
 //   <q>Stack overflow checking
@@ -145,7 +145,7 @@
 //   <i> Defines how long a thread will execute before a thread switch.
 //   <i> Default: 5
 #ifndef OS_ROBINTOUT
- #define OS_ROBINTOUT   5
+ #define OS_ROBINTOUT   2
 #endif
  
 // </e>
@@ -154,7 +154,7 @@
 // ==============
 //   <i> Enables user Timers
 #ifndef OS_TIMERS
- #define OS_TIMERS      1
+ #define OS_TIMERS      0
 #endif
  
 //   <o>Timer Thread Priority
@@ -172,14 +172,14 @@
 //   <i> Defines stack size for Timer thread.
 //   <i> Default: 200
 #ifndef OS_TIMERSTKSZ
- #define OS_TIMERSTKSZ  50     // this stack size value is in words
+ #define OS_TIMERSTKSZ  250     // this stack size value is in words
 #endif
  
 //   <o>Timer Callback Queue size <1-32>
 //   <i> Number of concurrent active timer callback functions.
 //   <i> Default: 4
 #ifndef OS_TIMERCBQS
- #define OS_TIMERCBQS   4
+ #define OS_TIMERCBQS   10
 #endif
  
 // </e>
@@ -224,7 +224,7 @@
 /// \brief The idle demon is running when no other thread is ready to run
 void os_idle_demon (void) {
  
-  for (;;) {
+  for (;;) {//osThreadYield();
     /* HERE: include optional user code to be executed when no thread runs.*/
   }
 }
@@ -298,6 +298,7 @@ void os_error (uint32_t error_code) {
     default:
       break;
   }
+  HardFault_Handler();
   for (;;);
 }
  

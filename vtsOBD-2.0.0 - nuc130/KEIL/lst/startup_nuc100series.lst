@@ -674,29 +674,28 @@ ARM Macro Assembler    Page 11
   379 0000002A E7FE            B                .
   380 0000002C                 ENDP
   381 0000002C         
-  382 0000002C         
-  383 0000002C                 ALIGN
+  382 0000002C                 ALIGN
+  383 0000002C         
   384 0000002C         
-  385 0000002C         
-  386 0000002C         ; User Initial Stack & Heap
-  387 0000002C         
-  388 0000002C                 IF               :DEF:__MICROLIB
-  395 0000002C         
-  396 0000002C                 IMPORT           __use_two_region_memory
-  397 0000002C                 EXPORT           __user_initial_stackheap
-  398 0000002C         __user_initial_stackheap
-  399 0000002C         
-  400 0000002C 480A            LDR              R0, =  Heap_Mem
-  401 0000002E 490B            LDR              R1, = (Stack_Mem + Stack_Size)
-  402 00000030 4A09            LDR              R2, = (Heap_Mem +  Heap_Size)
-  403 00000032 4B0B            LDR              R3, = Stack_Mem
-  404 00000034 4770            BX               LR
-  405 00000036         
-  406 00000036 00 00           ALIGN
-  407 00000038         
-  408 00000038                 ENDIF
-  409 00000038         
-  410 00000038                 END
+  385 0000002C         ; User Initial Stack & Heap
+  386 0000002C         
+  387 0000002C                 IF               :DEF:__MICROLIB
+  394 0000002C         
+  395 0000002C                 IMPORT           __use_two_region_memory
+  396 0000002C                 EXPORT           __user_initial_stackheap
+  397 0000002C         __user_initial_stackheap
+  398 0000002C         
+  399 0000002C 480A            LDR              R0, =  Heap_Mem
+  400 0000002E 490B            LDR              R1, = (Stack_Mem + Stack_Size)
+  401 00000030 4A09            LDR              R2, = (Heap_Mem +  Heap_Size)
+  402 00000032 4B0B            LDR              R3, = Stack_Mem
+  403 00000034 4770            BX               LR
+  404 00000036         
+  405 00000036 00 00           ALIGN
+  406 00000038         
+  407 00000038                 ENDIF
+  408 00000038         
+  409 00000038                 END
               50000100 
               00000059 
               00000016 
@@ -713,13 +712,13 @@ nterwork --depend=.\obj\startup_nuc100series.d -o.\obj\startup_nuc100series.o -
 I.\RTE\_UART_TxRx_Function -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include 
 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\INC -IC:\Keil_v5\ARM\PACK\
 Nuvoton\NuMicro_DFP\1.1.0\Device\NUC100\Driver -IC:\Keil_v5\ARM\PACK\Nuvoton\Nu
+Micro_DFP\1.1.0\Device\NUC100\Include --predefine="__RTX SETA 1" --predefine="_
 
 
 
 ARM Macro Assembler    Page 12 
 
 
-Micro_DFP\1.1.0\Device\NUC100\Include --predefine="__RTX SETA 1" --predefine="_
 _UVISION_VERSION SETA 524" --predefine="_RTE_ SETA 1" --list=.\lst\startup_nuc1
 00series.lst RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
@@ -742,8 +741,8 @@ Symbol: Stack_Mem
    Definitions
       At line 167 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
-      At line 401 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 403 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 400 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 402 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 __initial_sp 00000400
 
@@ -774,8 +773,8 @@ Symbol: Heap_Mem
    Definitions
       At line 181 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
-      At line 400 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 402 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 399 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 401 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 __heap_base 00000000
 
@@ -1206,7 +1205,7 @@ __user_initial_stackheap 0000002C
 
 Symbol: __user_initial_stackheap
    Definitions
-      At line 398 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 397 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 
 
@@ -1214,7 +1213,7 @@ ARM Macro Assembler    Page 7 Alphabetic symbol ordering
 Relocatable symbols
 
    Uses
-      At line 397 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 396 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 Comment: __user_initial_stackheap used once
 40 symbols
 
@@ -1642,7 +1641,7 @@ Symbol: Heap_Size
       At line 176 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 181 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 402 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 401 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 INT_BA_base 50000300
 
@@ -1969,7 +1968,7 @@ Symbol: Stack_Size
       At line 163 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       At line 167 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
-      At line 401 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 400 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
 
 TEST_S 00000030
 
@@ -2146,7 +2145,7 @@ __use_two_region_memory 00000000
 
 Symbol: __use_two_region_memory
    Definitions
-      At line 396 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
+      At line 395 in file RTE\Device\NUC130RE3CN\startup_NUC100Series.s
    Uses
       None
 Comment: __use_two_region_memory unused

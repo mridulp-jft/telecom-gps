@@ -24291,6 +24291,762 @@ extern void SpiFlash_ReadData(unsigned char *DataBuffer, unsigned int StartAddre
 
  
 #line 11 "at_command.c"
+#line 1 "preprocessor.h"
+#line 12 "at_command.c"
+#line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+#line 61 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+#line 75 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+
+
+   
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+#line 112 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+extern __attribute__((__pcs__("aapcs"))) unsigned __ARM_dcmp4(double  , double  );
+extern __attribute__((__pcs__("aapcs"))) unsigned __ARM_fcmp4(float  , float  );
+    
+
+
+
+
+ 
+
+extern __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_fpclassifyf(float  );
+extern __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_fpclassify(double  );
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isfinitef(float __x)
+{
+    return (((*(unsigned *)&(__x)) >> 23) & 0xff) != 0xff;
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isfinite(double __x)
+{
+    return (((*(1 + (unsigned *)&(__x))) >> 20) & 0x7ff) != 0x7ff;
+}
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isinff(float __x)
+{
+    return ((*(unsigned *)&(__x)) << 1) == 0xff000000;
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isinf(double __x)
+{
+    return (((*(1 + (unsigned *)&(__x))) << 1) == 0xffe00000) && ((*(unsigned *)&(__x)) == 0);
+}
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_islessgreaterf(float __x, float __y)
+{
+    unsigned __f = __ARM_fcmp4(__x, __y) >> 28;
+    return (__f == 8) || (__f == 2);  
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_islessgreater(double __x, double __y)
+{
+    unsigned __f = __ARM_dcmp4(__x, __y) >> 28;
+    return (__f == 8) || (__f == 2);  
+}
+    
+
+
+ 
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnanf(float __x)
+{
+    return (0x7f800000 - ((*(unsigned *)&(__x)) & 0x7fffffff)) >> 31;
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnan(double __x)
+{
+    unsigned __xf = (*(1 + (unsigned *)&(__x))) | (((*(unsigned *)&(__x)) == 0) ? 0 : 1);
+    return (0x7ff00000 - (__xf & 0x7fffffff)) >> 31;
+}
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnormalf(float __x)
+{
+    unsigned __xe = ((*(unsigned *)&(__x)) >> 23) & 0xff;
+    return (__xe != 0xff) && (__xe != 0);
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_isnormal(double __x)
+{
+    unsigned __xe = ((*(1 + (unsigned *)&(__x))) >> 20) & 0x7ff;
+    return (__xe != 0x7ff) && (__xe != 0);
+}
+     
+     
+
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_signbitf(float __x)
+{
+    return (*(unsigned *)&(__x)) >> 31;
+}
+__inline __declspec(__nothrow) __attribute__((__pcs__("aapcs"))) int __ARM_signbit(double __x)
+{
+    return (*(1 + (unsigned *)&(__x))) >> 31;
+}
+     
+     
+
+
+
+
+
+
+
+
+#line 230 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+
+
+   
+  typedef float float_t;
+  typedef double double_t;
+#line 251 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+extern const int math_errhandling;
+#line 261 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+extern __declspec(__nothrow) double acos(double  );
+    
+    
+    
+extern __declspec(__nothrow) double asin(double  );
+    
+    
+    
+    
+
+extern __declspec(__nothrow) __attribute__((const)) double atan(double  );
+    
+    
+
+extern __declspec(__nothrow) double atan2(double  , double  );
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double cos(double  );
+    
+    
+    
+    
+extern __declspec(__nothrow) double sin(double  );
+    
+    
+    
+    
+
+extern void __use_accurate_range_reduction(void);
+    
+    
+
+extern __declspec(__nothrow) double tan(double  );
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double cosh(double  );
+    
+    
+    
+    
+extern __declspec(__nothrow) double sinh(double  );
+    
+    
+    
+    
+    
+
+extern __declspec(__nothrow) __attribute__((const)) double tanh(double  );
+    
+    
+
+extern __declspec(__nothrow) double exp(double  );
+    
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double frexp(double  , int *  ) __attribute__((__nonnull__(2)));
+    
+    
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double ldexp(double  , int  );
+    
+    
+    
+    
+extern __declspec(__nothrow) double log(double  );
+    
+    
+    
+    
+    
+extern __declspec(__nothrow) double log10(double  );
+    
+    
+    
+extern __declspec(__nothrow) double modf(double  , double *  ) __attribute__((__nonnull__(2)));
+    
+    
+    
+    
+
+extern __declspec(__nothrow) double pow(double  , double  );
+    
+    
+    
+    
+    
+    
+extern __declspec(__nothrow) double sqrt(double  );
+    
+    
+    
+
+
+
+
+    __inline double _sqrt(double __x) { return sqrt(__x); }
+
+
+
+
+    __inline float _sqrtf(float __x) { return (float)sqrt(__x); }
+
+    
+
+
+
+ 
+
+extern __declspec(__nothrow) __attribute__((const)) double ceil(double  );
+    
+    
+extern __declspec(__nothrow) __attribute__((const)) double fabs(double  );
+    
+    
+
+extern __declspec(__nothrow) __attribute__((const)) double floor(double  );
+    
+    
+
+extern __declspec(__nothrow) double fmod(double  , double  );
+    
+    
+    
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+extern __declspec(__nothrow) double acosh(double  );
+    
+
+ 
+extern __declspec(__nothrow) double asinh(double  );
+    
+
+ 
+extern __declspec(__nothrow) double atanh(double  );
+    
+
+ 
+extern __declspec(__nothrow) double cbrt(double  );
+    
+
+ 
+__inline __declspec(__nothrow) __attribute__((const)) double copysign(double __x, double __y)
+    
+
+ 
+{
+    (*(1 + (unsigned *)&(__x))) = ((*(1 + (unsigned *)&(__x))) & 0x7fffffff) | ((*(1 + (unsigned *)&(__y))) & 0x80000000);
+    return __x;
+}
+__inline __declspec(__nothrow) __attribute__((const)) float copysignf(float __x, float __y)
+    
+
+ 
+{
+    (*(unsigned *)&(__x)) = ((*(unsigned *)&(__x)) & 0x7fffffff) | ((*(unsigned *)&(__y)) & 0x80000000);
+    return __x;
+}
+extern __declspec(__nothrow) double erf(double  );
+    
+
+ 
+extern __declspec(__nothrow) double erfc(double  );
+    
+
+ 
+extern __declspec(__nothrow) double expm1(double  );
+    
+
+ 
+
+
+
+    
+
+ 
+
+
+
+
+
+
+#line 479 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+extern __declspec(__nothrow) double hypot(double  , double  );
+    
+
+
+
+
+ 
+extern __declspec(__nothrow) int ilogb(double  );
+    
+
+ 
+extern __declspec(__nothrow) int ilogbf(float  );
+    
+
+ 
+extern __declspec(__nothrow) int ilogbl(long double  );
+    
+
+ 
+
+
+
+
+
+
+
+    
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+
+
+ 
+
+
+
+
+
+    
+
+ 
+
+
+
+
+
+    
+
+ 
+
+
+
+
+
+    
+
+
+ 
+
+extern __declspec(__nothrow) double lgamma (double  );
+    
+
+
+ 
+extern __declspec(__nothrow) double log1p(double  );
+    
+
+ 
+extern __declspec(__nothrow) double logb(double  );
+    
+
+ 
+extern __declspec(__nothrow) float logbf(float  );
+    
+
+ 
+extern __declspec(__nothrow) long double logbl(long double  );
+    
+
+ 
+extern __declspec(__nothrow) double nextafter(double  , double  );
+    
+
+
+ 
+extern __declspec(__nothrow) float nextafterf(float  , float  );
+    
+
+
+ 
+extern __declspec(__nothrow) long double nextafterl(long double  , long double  );
+    
+
+
+ 
+extern __declspec(__nothrow) double nexttoward(double  , long double  );
+    
+
+
+ 
+extern __declspec(__nothrow) float nexttowardf(float  , long double  );
+    
+
+
+ 
+extern __declspec(__nothrow) long double nexttowardl(long double  , long double  );
+    
+
+
+ 
+extern __declspec(__nothrow) double remainder(double  , double  );
+    
+
+ 
+extern __declspec(__nothrow) __attribute__((const)) double rint(double  );
+    
+
+ 
+extern __declspec(__nothrow) double scalbln(double  , long int  );
+    
+
+ 
+extern __declspec(__nothrow) float scalblnf(float  , long int  );
+    
+
+ 
+extern __declspec(__nothrow) long double scalblnl(long double  , long int  );
+    
+
+ 
+extern __declspec(__nothrow) double scalbn(double  , int  );
+    
+
+ 
+extern __declspec(__nothrow) float scalbnf(float  , int  );
+    
+
+ 
+extern __declspec(__nothrow) long double scalbnl(long double  , int  );
+    
+
+ 
+
+
+
+
+    
+
+ 
+
+
+
+ 
+extern __declspec(__nothrow) __attribute__((const)) float _fabsf(float);  
+__inline __declspec(__nothrow) __attribute__((const)) float fabsf(float __f) { return _fabsf(__f); }
+extern __declspec(__nothrow) float sinf(float  );
+extern __declspec(__nothrow) float cosf(float  );
+extern __declspec(__nothrow) float tanf(float  );
+extern __declspec(__nothrow) float acosf(float  );
+extern __declspec(__nothrow) float asinf(float  );
+extern __declspec(__nothrow) float atanf(float  );
+extern __declspec(__nothrow) float atan2f(float  , float  );
+extern __declspec(__nothrow) float sinhf(float  );
+extern __declspec(__nothrow) float coshf(float  );
+extern __declspec(__nothrow) float tanhf(float  );
+extern __declspec(__nothrow) float expf(float  );
+extern __declspec(__nothrow) float logf(float  );
+extern __declspec(__nothrow) float log10f(float  );
+extern __declspec(__nothrow) float powf(float  , float  );
+extern __declspec(__nothrow) float sqrtf(float  );
+extern __declspec(__nothrow) float ldexpf(float  , int  );
+extern __declspec(__nothrow) float frexpf(float  , int *  ) __attribute__((__nonnull__(2)));
+extern __declspec(__nothrow) __attribute__((const)) float ceilf(float  );
+extern __declspec(__nothrow) __attribute__((const)) float floorf(float  );
+extern __declspec(__nothrow) float fmodf(float  , float  );
+extern __declspec(__nothrow) float modff(float  , float *  ) __attribute__((__nonnull__(2)));
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+__declspec(__nothrow) long double acosl(long double );
+__declspec(__nothrow) long double asinl(long double );
+__declspec(__nothrow) long double atanl(long double );
+__declspec(__nothrow) long double atan2l(long double , long double );
+__declspec(__nothrow) long double ceill(long double );
+__declspec(__nothrow) long double cosl(long double );
+__declspec(__nothrow) long double coshl(long double );
+__declspec(__nothrow) long double expl(long double );
+__declspec(__nothrow) long double fabsl(long double );
+__declspec(__nothrow) long double floorl(long double );
+__declspec(__nothrow) long double fmodl(long double , long double );
+__declspec(__nothrow) long double frexpl(long double , int* ) __attribute__((__nonnull__(2)));
+__declspec(__nothrow) long double ldexpl(long double , int );
+__declspec(__nothrow) long double logl(long double );
+__declspec(__nothrow) long double log10l(long double );
+__declspec(__nothrow) long double modfl(long double  , long double *  ) __attribute__((__nonnull__(2)));
+__declspec(__nothrow) long double powl(long double , long double );
+__declspec(__nothrow) long double sinl(long double );
+__declspec(__nothrow) long double sinhl(long double );
+__declspec(__nothrow) long double sqrtl(long double );
+__declspec(__nothrow) long double tanl(long double );
+__declspec(__nothrow) long double tanhl(long double );
+
+
+
+
+
+ 
+extern __declspec(__nothrow) float acoshf(float  );
+__declspec(__nothrow) long double acoshl(long double );
+extern __declspec(__nothrow) float asinhf(float  );
+__declspec(__nothrow) long double asinhl(long double );
+extern __declspec(__nothrow) float atanhf(float  );
+__declspec(__nothrow) long double atanhl(long double );
+__declspec(__nothrow) long double copysignl(long double , long double );
+extern __declspec(__nothrow) float cbrtf(float  );
+__declspec(__nothrow) long double cbrtl(long double );
+extern __declspec(__nothrow) float erff(float  );
+__declspec(__nothrow) long double erfl(long double );
+extern __declspec(__nothrow) float erfcf(float  );
+__declspec(__nothrow) long double erfcl(long double );
+extern __declspec(__nothrow) float expm1f(float  );
+__declspec(__nothrow) long double expm1l(long double );
+extern __declspec(__nothrow) float log1pf(float  );
+__declspec(__nothrow) long double log1pl(long double );
+extern __declspec(__nothrow) float hypotf(float  , float  );
+__declspec(__nothrow) long double hypotl(long double , long double );
+extern __declspec(__nothrow) float lgammaf(float  );
+__declspec(__nothrow) long double lgammal(long double );
+extern __declspec(__nothrow) float remainderf(float  , float  );
+__declspec(__nothrow) long double remainderl(long double , long double );
+extern __declspec(__nothrow) float rintf(float  );
+__declspec(__nothrow) long double rintl(long double );
+
+
+
+#line 875 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+#line 896 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+#line 1087 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+
+
+
+
+
+
+#line 1317 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
+
+
+
+
+
+ 
+#line 13 "at_command.c"
+
 
 
 
@@ -24303,49 +25059,66 @@ extern char g_u8RecData[1000];
 extern	int32_t life;
 extern void SendChar(int ch);
 extern void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
-
-
-char SrcArray[257];char DestArray[257];
-
-uint8_t g_u8DeviceAddr = 0x1E;
-uint32_t u32Status;
-uint8_t g_au8TxData[1];
-uint8_t g_u8RxData;
-uint8_t g_u8DataLen = 0;
+extern volatile int interval_count_health;
+volatile int sleepinterval_health=2;
+volatile int wakeinterval_emer;
+char SrcArray[257];
+char DestArray[257];
+extern char configdata[300];
 uint8_t sendfs=0;
-volatile uint8_t g_u8EndFlag = 0;
 extern void Open_SPI_Flash(void);
 extern unsigned int SpiFlash_ReadMidDid(void);
-uint32_t readpt = 256;
+float readpt = 256;
 extern int once;
-extern uint32_t pt;
-
-
-
+extern float pt;
+int loginpacket = 0;
+float speed;
+int messagecounter;
+uint8_t alertid = 0;
+extern uint32_t crc32_fsl(uint32_t crc, const uint8_t *buf, uint32_t len);
  
+extern float overspeed;
 extern char obdresp[20];
 extern char tempobdresp[20];
 extern char obdrespbinary[33];
 extern char suppportedpid[100][7];
 extern int pidcounter;
 extern char g_u8OBDRecData[100];
-
+extern int saveipconfigurations(void);
 extern char vehicleregnum[15];
+char lastlocation[50];
 char signalquality[5] = {0};
+char emernum1[15] = {0};
+char emernum2[15] = {0};
+extern volatile uint8_t wetmr;
+extern volatile int notsentcounter;
 
-
+volatile uint8_t timeoutflag = 0 ;
  
   int tcpsendchtimer;
   int powerstatus = 0;
-  int ignition = 0;
+  volatile int ignition = 0;
+  volatile int emergencystatus = 0;  
   int fix = 0;
-  int emergencystatus = 0;
-  char tamperalert = 'C';
+  float int_bat_per;
+  int int_bat_thresh;
+  float mem_per;
+  static int d1,d2;
+  int iz;
+  double a,b,c;int hh,mm1,mm2;
+  double a1,b1,c1;
+  double hh11, mm11,mm22;
+  volatile char tamperalert = 'C';
   float ext_bat, int_bat, lati, longi, speed;
+  float analog1,analog2,analog3,analog4;
+
+  float antennafeedback = 0;
   float batteryvoltage = 0;
   float inputvoltage = 0;
   char latitude[12] = 0;
   char longitude[12] = 0;
+  char prevlatitude[12] = 0;
+  char prevlongitude[12] = 0;
   char gpsdate[7] = 0;
   char gpstime[7] = 0;
   char kmph[6] = 0;
@@ -24363,8 +25136,10 @@ char signalquality[5] = {0};
   char cellid[10] = 0;
   char packetstatus = 'L';
   char nmr[200] = 0;
-  
-
+  extern volatile uint8_t input1, input2, input3, input4;
+  extern char apn[20];
+  extern volatile int parameterupgrade;
+  int outfromloop = 0;
 
 
 
@@ -24372,19 +25147,20 @@ char signalquality[5] = {0};
 int32_t	inc=0;
 int stlen;
 uint8_t u8InChar=0xFF;
-int32_t g_u8RecDataptr=0;
+volatile int32_t g_u8RecDataptr=0;
 float	u32ADC0Result;
 float u32ADC0Result1;
+float batteryvoltagethreshold;
 int8_t charging, cpinready, cregready;
 int motion_counts,immotion_counts;
-int32_t timer0ticks=0;
-int32_t tmr0sec=0;
+volatile int32_t timer0ticks=0;
+volatile int32_t tmr0sec=0;
 char * r1;
 char * r2;
 char * r3;
 char temp[100];
 char fileinstance[20] = {0};
-int8_t  network;
+int8_t  network = 1;
 int breaker=0;
 int seeker = 0;
 int imeiptr0=0;
@@ -24403,10 +25179,13 @@ extern osMutexId	(uart_mutex_id);
 		
 
 extern osMutexId	(tcp_mutex_id); 
-
+extern unsigned int xcrc32 (const unsigned char *buf, int len, unsigned int init);
 
 extern osMutexId	(fs_mutex_id); 
-
+extern volatile int interval_count;
+extern volatile int g_u32AdcIntFlag;
+volatile int sleepinterval_i1;
+volatile int sleepinterval_i0;
 
 
  
@@ -24432,10 +25211,37 @@ void Save_FS(void);
 char *response1;
 char *response2;
 char *response3;
+double deg2rad(double);
+double rad2deg(double);
 
- 
+double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
+  double theta, dist;
+  theta = lon1 - lon2;
+  dist = sin(deg2rad(lat1)) * sin(deg2rad(lat2)) + cos(deg2rad(lat1)) * cos(deg2rad(lat2)) * cos(deg2rad(theta));
+  dist = acos(dist);
+  dist = rad2deg(dist);
+  dist = dist * 60 * 1.1515;
+  switch(unit) {
+    case 'M':
+      break;
+    case 'K':
+      dist = dist * 1.609344;
+      break;
+    case 'N':
+      dist = dist * 0.8684;
+      break;
+  }
+  return (dist);
+}
+
+double deg2rad(double deg) {
+  return (deg * 3.14159265358979323846 / 180);
+}
 
 
+double rad2deg(double rad) {
+  return (rad * 180 / 3.14159265358979323846);
+}
 
 void SendAT(char * command, char * res1, char * res2, char * res3, int32_t timeout)
 {
@@ -24444,6 +25250,7 @@ void SendAT(char * command, char * res1, char * res2, char * res3, int32_t timeo
   response2 = res2;
   response3 = res3;
 
+  timeoutflag =  0;
 	tmr0sec=0;
 
 	r1=0;
@@ -24465,23 +25272,27 @@ void SendAT(char * command, char * res1, char * res2, char * res3, int32_t timeo
    if(!(strstr(command, "QILOCIP") || strstr(command, "QGNSSC")))
    {
      if(!(r1 || r2 || r3))
-      {
-        (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((13)<<2))))=1;
+      {timeoutflag =  1;
+        
         attry++;
         if(attry > 3){
-            printf("\r\nAT+CFUN=1,1\r\n");	
+            (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((15)<<2)))) = 0;
+            manualdelay(1);
+            (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((15)<<2)))) = 1;
+            manualdelay(100);      
+            SendAT("\r\nAT\r\n", "ERROR", "OK" , "4010",10);
+            manualdelay(200);
         }
-        (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((13)<<2))))=0;
+        
       }
       else{attry=0;}
    }
-
+readaccgyrodata();
 }
 
-__inline void manualdelay(int delayms)
+ void manualdelay(int delayms)
 {
-
-	int d1,d2;
+	
 	for(d1 = 0; d1 < delayms ; d1++)
 	{
 		for(d2=0; d2 < 65535; d2++)
@@ -24522,10 +25333,12 @@ __inline void remove_all_chars(char* str, char c, char d) {
     char *pr = str, *pw = str;
     while (*pr) {
         *pw = *pr++;
-			pw += (*pw != c && *pw != d && *pw != ' ' && *pw != '/' && *pw != ':');
+			pw += (*pw != c && *pw != d);
     }
     *pw = '\0';
 }
+
+
 
 
 void parse_g(char* str, int first, int sec, char f, char s , char *string)
@@ -24598,6 +25411,12 @@ void Save_FS(void)
 { char * pch = 0;
   int i,j;
   int len=0;
+  
+  if(readpt == 0 && pt == 0){
+      SpiFlash_WaitReady();
+      SpiFlash_ChipErase();
+  }
+  
   strcat(g_u8SendData,"\n");
   pch = strstr (g_u8SendData,",L,");
   if (pch){
@@ -24606,10 +25425,6 @@ void Save_FS(void)
   strreplace(g_u8SendData, 0x1A, '\n'); 
   remove_all_chars(g_u8SendData,'\r',0x1A);
   SpiFlash_WaitReady();
-  
-
-  remove_all_chars(g_u8SendData,'\n','\n'); 
-  strcat(g_u8SendData, "S**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************E\n");
   life = strlen(g_u8SendData); 
   times = life/256 + 1;
   j = 0;
@@ -24620,16 +25435,20 @@ void Save_FS(void)
       SrcArray[i] = g_u8SendData[j];
       j++;
     }
-    manualdelay(25);
+    manualdelay(50);
+    SpiFlash_WaitReady();    
     SpiFlash_PageProgram(SrcArray, pt, 256);
-    
     memset(DestArray,0,257);
-    
+    SpiFlash_WaitReady();
     SpiFlash_ReadData(DestArray, pt, 256);
-    times--; 
-    pt+=256;
+    if(strcmp(SrcArray, DestArray) == 0){
+      times--; 
+      pt+=256;
+    }
   }
   memset(g_u8SendData,0,2500);
+  saveipconfigurations();
+
 }
 
  void cpinquerry()
@@ -24679,7 +25498,7 @@ void cregquerry()
 	memset(g_u8RecData,0,1000);
 	printf("%c",0x1A);
 	clear();
-	printf("\r\nAT+CREG?\r\n\r\n");
+	printf("\r\nAT+CREG?\r\n");
 	do{
     g_u8RecData[0] = '\r';
 		r1 = strstr(g_u8RecData, "CPIN: READY");
@@ -24688,8 +25507,10 @@ void cregquerry()
 	}while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
   clear();
   memset(cregresp,0,10);
-  parse_g(g_u8RecData, 1, 2, ',', '\n' , cregresp);
-  if(strstr(cregresp,"1") || strstr(cregresp, "5"))
+  parse_g(g_u8RecData, 1, 1, ',', 'O' , cregresp);
+  remove_all_chars(cregresp,'\r','\n');
+  
+  if(strstr(cregresp,"1") || strstr(cregresp, "5")|| strstr(cregresp, "2"))
   {
     cregready=1;
   }
@@ -24784,7 +25605,6 @@ __inline int8_t checkallnumsinstring(char* checkstring)
 
 void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout)
 {
-  int outfromloop = 0;
   int tcpdatalength=0;
 	int tcpdataptr=0;
 	int times = 0;
@@ -24801,17 +25621,21 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 
 do{
   memset(tcpdata,0,300);
-  
+  SpiFlash_WaitReady();
   SpiFlash_ReadData(tcpdata, readpt, 256);
+  outfromloop = readpt;
   if(tcpdata[0] != 0xFF && tcpdata[0] != '\0')
     times = 1;
   else{
-    SpiFlash_ChipErase();
-    times = 0;
-    pt = 0;
-    readpt = 0;
-    readpt = 0;
-    pt = 0;    
+        SpiFlash_WaitReady();
+        SpiFlash_ChipErase();
+        times = 0;
+        pt = 0;
+        readpt = 0;
+        readpt = 0;
+        pt = 0; 
+        
+    
     
   }
   if(times == 1){
@@ -24929,14 +25753,19 @@ do{
           network=0;
         }
       }
-      if(tcpsendchtimer > 4){
+      if((tcpsendchtimer > 4) && (strstr(tcpdata, "*"))){
         breaker = 1;
         break;
       }else breaker = 0;
     
     }
-  outfromloop = 1;
+  
+  manualdelay(5);
   }while(times == 1);
+  if (breaker==1){
+    readpt-=512;
+  }
+  saveipconfigurations();
 
 }
 
@@ -24961,6 +25790,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 	tcpdatalength = strlen(tcpdata);
 		if(tcpdatalength>15)
 		{
+      
 			clear();
 			g_u8RecDataptr=0;
 			tmr0sec=0;
@@ -25002,10 +25832,12 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
         sendfs = 0;
 			}
 			else{
+        notsentcounter= 0;
 				network=0;
         sendfs = 1;        
 			}
-	}else{network = 1;sendfs = 0;} 
+	}else{
+    sendfs = 0;} 
    
   tcpdatalength=0;
   tcpdataptr=0;
@@ -25066,24 +25898,30 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
           sendfs = 0;
         }
         else{
+          notsentcounter= 0;
           network=0;
           sendfs = 1;
         }
     if(network == 0 && timesptr>=times){
-      memset(g_u8SendData,0,2500);
+      if(loginpacket == 1){
+        memset(temp,0,100);        
+      }else{
+        memset(g_u8SendData,0,2500);
+      }
       sendfs=1;
     }
     else{
       sendfs=0;
     }
-    }else{network = 1; sendfs = 1;}
+    }else{
+    sendfs = 1;}
   }
   
   if(sendfs == 1){
-    memset(tcpdata,0,300);
+    memset(configdata,0,300);
     
-    SpiFlash_ReadData(tcpdata, readpt, 256);
-    if(tcpdata[0] != 0xFF)
+    SpiFlash_ReadData(configdata, readpt, 256);
+    if(configdata[0] != 0xFF)
       sendfs = 1;
     else
       sendfs = 0;
@@ -25167,7 +26005,33 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
     strcat(g_u8SendData,"error:RAMfull\n");
   }
 
+  
 }
+
+__inline float stof(const char* s)
+{int d,point_seen;
+  float rez = 0, fact = 1;
+  rez=0;fact=1;
+
+  if (*s == '-'){
+    s++;
+    fact = -1;
+  };
+  for (point_seen = 0; *s; s++){
+    if (*s == '.'){
+      point_seen = 1; 
+      continue;
+    };
+    d = *s - '0';
+    if (d >= 0 && d <= 9){
+      if (point_seen) fact /= 10.0f;
+      rez = rez * 10.0f + (float)d;
+    };
+  };
+  return rez * fact;
+};  
+  
+
 
 
 
@@ -25188,42 +26052,43 @@ void SendAT_GPS_WO_MUTEX(char * command, char * response1, char * response2, cha
 
 void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
-  powerstatus = 0;
-  ignition = 0;
+  int batterydischarging = 0;
+  int sleepinterval;
+  double d_distance;
+  char send_temp[1000] = {0};
+  char av[3] = {0};
+  uint32_t checksumdata = 0;
   fix = 0;
-  emergencystatus = 0;
   tamperalert = 'C';
   ext_bat, int_bat, lati, longi, speed;
   batteryvoltage = 0;
   inputvoltage = 0;
-  latitude[12] = 0;
-  longitude[12] = 0;
-  gpsdate[7] = 0;
-  gpstime[7] = 0;
-  kmph[6] = 0;
-  heading[8] = 0;
-  alt[8] = 0;
-  sat[2] = 0;
-  latdir[2] = 0;
-  longdir[2] = 0;
-  hdop[6] = 0;
-  pdop[5] = 0;
-  networkoperator[30] = 0;
-  mcc[5] = 0;
-  mnc[5] = 0;
-  lac[5] = 0;
-  cellid[10] = 0;
+  memset(send_temp,0,1000);
+  memset(latitude,0,12);
+  memset(longitude,0,12);
+
+  memset(gpsdate,0,7);
+  memset(gpstime,0,7);
+  memset(kmph,0,6);
+  memset(alt,0,8);
+  memset(sat,0,2);
+  memset(latdir,0,2);
+  memset(longdir,0,2);
+  memset(hdop,0,6);
+  memset(pdop,0,5);
+  memset(networkoperator,0,30);
+  memset(mcc,0,5);
+  memset(mnc,0,5);
+  memset(lac,0,5);
+  memset(cellid,0,10);
+  memset(nmr,0,200);
   packetstatus = 'L';
-  nmr[200] = 0;  
 
 
 
-
-	
+  memset(g_u8SendData,0, 2500);
   SendAT("\r\nAT+QGNSSC=1\r\n\r\n", "OK", "ERROR: 7103" , "OK",5);
   clear();
-  
-
   SendAT("\r\nAT+CSQ\r\n\r\n", "Ready", "OK" , "ERROR",4);	
   parse_g(g_u8RecData, 1, 1, ' ', ',' , signalquality);	
 
@@ -25280,11 +26145,30 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
     parse_g(temp, 6, 7, ',', ',' , longdir);
     parse_g(temp, 8, 9, ',', ',' , heading);
     parse_g(temp, 9, 10, ',', ',' , gpsdate);
-    if(latitude != '\0')
+    
+		c=atof(latitude);
+		hh= c/100; 
+		hh11 = c/100; 
+		mm11 = hh11-hh; 
+		mm11*=100;
+		mm22=hh+mm11/60;	
+		memset(latitude,0,12);
+		sprintf(latitude,"%f",mm22);
+		c=atof(longitude);
+		hh= c/100; 
+		hh11 = c/100; 
+		mm11 = hh11-hh; 
+		mm11*=100;
+		mm22=hh+mm11/60;	
+		memset(longitude,0,12);
+		sprintf(longitude,"%f",mm22);	
+
+
+    if(mm22 != 0){
       fix = 1;
-    else
-      fix = 0;
-      
+      }else{
+      fix = 0;      
+    }
     tmr0sec=0;
     r1=0;
     r2=0;
@@ -25382,22 +26266,26 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
     clear();  
 
     parse_g(g_u8RecData, 1,2, '"', '"' , networkoperator);  
-    tmr0sec=0;
-    r1=0;
-    r2=0;
-    r3=0;
-    g_u8RecDataptr=0;
-    memset(g_u8RecData,0,1000);
-    clear();
+    
+    
+    
+    SendAT("\r\nAT+QENG=2,3\r\n", "null", "null" , "+QENG: 2,",5);
 
-    printf("\r\n\r\nAT+QENG = 2,3\r\n\r\n\r\n");
-    do{
-      g_u8RecData[0] = '\r';
-      r1 = strstr(g_u8RecData, "NULL");
-      r2 = strstr(g_u8RecData, "NULL");
-      r3 = strstr(g_u8RecData, "+QENG: 2");
-    }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
-    clear();  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     memset(mcc,0,strlen(mcc));
     memset(mnc,0,strlen(mnc));
@@ -25429,22 +26317,37 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
       r3 = strstr(g_u8RecData, "ËRROR");
     }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
     clear();  
-        
+    (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((7)<<2)))) = 1; 
     packetstatus = 'L';
-    u32ADC0Result = 3;
-    ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADCR |= (1ul << 11));
+    g_u32AdcIntFlag = 0;
+    ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADCR |= (1ul << 11));   
+    while(g_u32AdcIntFlag == 0);
+    (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((7)<<2)))) = 0; 
     u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(0)] & (0xFFFFul << 0));
-    u32ADC0Result = (3.943/2.097)*((u32ADC0Result*3.312) /4096);
-    batteryvoltage = u32ADC0Result;
-
+    u32ADC0Result = (2.72/0.852)*((u32ADC0Result*3.299) /4096);
+    batteryvoltage = u32ADC0Result;      
+    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(1)] & (0xFFFFul << 0));
+    u32ADC0Result = (12.25/0.875)*((u32ADC0Result*3.299) /4096);
+    inputvoltage = u32ADC0Result;
+    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(2)] & (0xFFFFul << 0));
+    u32ADC0Result = (12.25/0.875)*((u32ADC0Result*3.299) /4096);
+    analog1 = u32ADC0Result;
+    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(3)] & (0xFFFFul << 0));
+    u32ADC0Result = (12.25/0.875)*((u32ADC0Result*3.299) /4096);
+    analog2 = u32ADC0Result;
+    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(4)] & (0xFFFFul << 0));
+    u32ADC0Result = (12.25/0.875)*((u32ADC0Result*3.299) /4096);
+    analog3 = u32ADC0Result;
+    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(5)] & (0xFFFFul << 0));
+    u32ADC0Result = (12.25/0.875)*((u32ADC0Result*3.299) /4096);
+    analog4 = u32ADC0Result;
+    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(5)] & (0xFFFFul << 0));
+    u32ADC0Result = (12.25/0.875)*((u32ADC0Result*3.299) /4096);
+    antennafeedback = u32ADC0Result;  
     
     
-    sprintf(g_u8SendData, "$%s,%s,%s,NR,%c,%s,%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%.1f,%.1f,%d,%c,%s,%s,%s,%s,%s,%s\n"    ,"HEADER", "JFT", "2.1.0", packetstatus, imei,vehicleregnum,fix,gpsdate,    gpstime,latitude,latdir,longitude,longdir,kmph,heading,sat,alt,pdop,hdop,networkoperator,    ignition,powerstatus,inputvoltage,batteryvoltage,emergencystatus,tamperalert,signalquality,    mcc, mnc, lac, cellid, nmr);
-
-
-
-
-  
+    memset(lastlocation,0,50);
+    sprintf(lastlocation,"$%s,%s,%s,%s",latitude,latdir,longitude,longdir);
     }
     if((strlen(g_u8SendData) > 2900))
     {
@@ -25452,6 +26355,175 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
       strcat(g_u8SendData,imei);
       strcat(g_u8SendData,"error:RAMfull\n");
     }
-    osDelay(5);
-#line 1248 "at_command.c"
+    
+
+
+
+
+
+
+    
+    
+    
+    
+    speed = atof(kmph);
+    if(speed > overspeed){
+      
+    }
+  if(packetstatus == 'L'){
+    alertid = 1; 
+    powerstatus = 0;  
+  }
+
+    if(inputvoltage < 5){
+      alertid = 3; 
+      powerstatus = 0;  
+    }else{powerstatus = 1;}  
+
+    if(batteryvoltage < batteryvoltagethreshold){
+      alertid = 4;
+    }   
+
+    if(inputvoltage < 6){
+      batterydischarging = 1;     
+    } 
+
+    if(speed > overspeed){
+      
+    }    
+
+    if(ignition == 1){
+      alertid = 7;
+      ignition = 0;
+    }    
+
+
+  
+
+    if(emergencystatus == 1 && (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((9)<<2)))) == 0){
+      alertid = 11;
+    }    
+
+    if(parameterupgrade == 1){
+      alertid = 12;
+      parameterupgrade = 0;
+    }        
+
+   
+
+   
+
+    
+
+
+    if(emergencystatus == 1){
+      alertid = 10;
+    }  
+    
+
+    if(wetmr > wakeinterval_emer){
+      emergencystatus = 0;
+    }
+
+    if(ignition == 1){
+      sleepinterval = sleepinterval_i1;
+    }else{
+      sleepinterval = sleepinterval_i0;      
+    }
+    
+    if(interval_count >= sleepinterval){       
+      interval_count = 0;
+      checksumdata = 0;
+      
+      memset(temp,0,100);
+      sprintf(temp,"$%s,%s,%s,NR,%.2d,%c,%s,","J01","JELLYFISH","2.1.6",alertid,packetstatus,imei); 
+      strcat(g_u8SendData,temp);                                         
+
+      
+      
+      memset(temp,0,100);
+      sprintf(temp,"%s,%d,%s,%s,%s,%s,%s,%s,",vehicleregnum,fix,gpsdate,gpstime,latitude,latdir,longitude,longdir);       
+      strcat(g_u8SendData,temp);                               
+
+      
+      memset(temp,0,100);
+      sprintf(temp,"%s,%s,%s,%s,%s,%s,%s,",kmph,heading,sat,alt,pdop,hdop,networkoperator);       
+      strcat(g_u8SendData,temp);                               
+      
+      memset(temp,0,100);
+      sprintf(temp,"%d,%d,%.2f,%.2f,%d,%c,",(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((10)<<2)))),powerstatus,inputvoltage,batteryvoltage,emergencystatus,tamperalert);
+      strcat(g_u8SendData,temp);                                        
+
+      
+      memset(temp,0,100);
+      sprintf(temp,"%s,%s,%s,%s,%s,",signalquality,mcc,mnc,lac,cellid);
+      strcat(g_u8SendData,temp);           
+ 
+      
+      strcat(g_u8SendData,nmr);                                         
+      strcat(g_u8SendData,",");                                         
+
+
+      memset(temp,0,100);
+      sprintf(temp,"%d%d%d%d,",input1,input2,input3,input4);
+      strcat(g_u8SendData,temp);       
+      input1=input2=input3=input4 = 0;
+
+      memset(temp,0,100);
+      sprintf(temp,"11,%.6d*",messagecounter++);
+      strcat(g_u8SendData,temp);                                         
+
+      strcat(send_temp,g_u8SendData);
+      remove_all_chars(send_temp,'$','*');      
+      checksumdata = crc32_fsl(0,send_temp,strlen(send_temp));
+      memset(temp,0,100);
+      sprintf(temp,"%x\n",checksumdata);  
+      strcat(g_u8SendData,temp);      
+      alertid = 0;
+
+    } 
+    int_bat_per = (batteryvoltage/4.2) * 100;
+    mem_per = (pt/134217728) * 100;
+    
+    if(interval_count_health >= sleepinterval_health){       
+      interval_count_health = 0;
+      memset(configdata,0,300);
+      sprintf(configdata,"$%s,%s,%s,HP,%s,%.3f,%d,%.3f,%d,%d,%d%d%d%d,%.1f,%.1f*","J01","JELLYFISH","2.1.6",imei,int_bat_per,batteryvoltagethreshold,mem_per,sleepinterval_i1,sleepinterval_i0,input1,input2,input3,input4,analog1,analog2);
+      strcat(g_u8SendData, configdata);
+      remove_all_chars(configdata,'$','*');
+      checksumdata = crc32_fsl(0,configdata,strlen(configdata));  
+      memset(temp,0,100);
+      sprintf(temp,"%x\n",checksumdata);
+      strcat(g_u8SendData,temp);
+    }    
+    
+    
+    if(emergencystatus == 1){
+      memset(configdata,0,300);
+      memset(av,0,3);
+      d_distance = distance(atof(prevlatitude), atof(prevlongitude), atof(latitude), atof(longitude), 'K');      
+      memset(temp,0,100);
+      sprintf(temp,"%f,",d_distance);      
+      if(fix == 1){
+        strcat(av,"A,");                                         
+      }else{
+        strcat(av,"V,");                                         
+      }     
+      memset(configdata,0,300);      
+      sprintf(configdata,"$%s,EMR,%s,NM,%s%s,%s,%s,%s,%s,%s,%s,%s,%s,G,%s,%s,%s*",      "J01",imei,gpsdate,gpstime,av,latitude,latdir,longitude,longdir,alt,kmph,temp,vehicleregnum,emernum1,emernum2);
+
+      strcat(g_u8SendData,configdata);
+      remove_all_chars(configdata,'$','*');
+      checksumdata = crc32_fsl(0,configdata,strlen(configdata)); 
+      memset(temp,0,100);
+      sprintf(temp,"%x\n",checksumdata);
+      strcat(g_u8SendData,temp);
+    }
+
+
+memset(prevlatitude,0,12);
+memset(prevlongitude,0,12);    
+strcat(prevlatitude,latitude);
+strcat(prevlongitude,longitude);
+
 }

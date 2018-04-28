@@ -96,7 +96,7 @@ I (..\..\Library\StdDriver\inc\wdt.h)(0x58EF0E22)
 I (..\..\Library\StdDriver\inc\wwdt.h)(0x58EF0E22)
 I (..\..\Library\StdDriver\inc\i2s.h)(0x58EF0E22)
 I (..\..\Library\StdDriver\inc\lcd.h)(0x58EF0E22)
-F (.\main.c)(0x5A745DA2)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I.\RTE\_PersonalTracker_MC60_Nano110LE3BN-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="524" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3500"-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+F (.\main.c)(0x5ADD69F1)(-c --cpu Cortex-M0 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork -I ..\..\Library\CMSIS\Include -I ..\..\Library\Device\Nuvoton\Nano100Series\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\Nano100Series\Source-I.\RTE\_PersonalTracker_MC60_Nano110LE3BN-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Nuvoton\NuMicro_DFP\1.1.0\Device\NANO100BN\Include-D__UVISION_VERSION="524" -D_RTE_ -DRXBUFSIZE="1000" -DTXBUFSIZE="3500"-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x588BA66C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588BA66C)
 I (..\..\Library\Device\Nuvoton\Nano100Series\Include\Nano100Series.h)(0x5A1BD5CE)

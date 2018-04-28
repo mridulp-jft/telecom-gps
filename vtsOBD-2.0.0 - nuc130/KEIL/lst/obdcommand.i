@@ -24250,10 +24250,9 @@ __declspec(noreturn) void os_error (uint32_t error_code);
 extern uint8_t g_u8OBDRecDataptr;
 extern char g_u8OBDRecData[100];
  
-
+extern uint8_t tmr1sec;
 
  
-uint8_t tmr1sec;
 char *obdr1;
 char *obdr2;
 char *obdr3; 
@@ -24273,7 +24272,7 @@ void obdcommand(char* cmd);
 char obdresp[20];
 char tempobdresp[20];
 char obdrespbinary[33];
-char suppportedpid[200][7];
+
 int pidcounter;
 
 
