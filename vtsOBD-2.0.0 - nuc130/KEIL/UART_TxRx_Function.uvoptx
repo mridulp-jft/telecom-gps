@@ -155,18 +155,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>1455</LineNumber>
+          <LineNumber>874</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>44744</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>.\at_command.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\UART_TxRx_Function\main.c\874</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -568,7 +568,107 @@
         <Ww>
           <count>79</count>
           <WinNumber>1</WinNumber>
-          <ItemText>r3</ItemText>
+          <ItemText>alertid</ItemText>
+        </Ww>
+        <Ww>
+          <count>80</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>wetmr</ItemText>
+        </Ww>
+        <Ww>
+          <count>81</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>wakeinterval_emer</ItemText>
+        </Ww>
+        <Ww>
+          <count>82</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>temp</ItemText>
+        </Ww>
+        <Ww>
+          <count>83</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>sat</ItemText>
+        </Ww>
+        <Ww>
+          <count>84</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>g_u8SendData</ItemText>
+        </Ww>
+        <Ww>
+          <count>85</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>tcpdata</ItemText>
+        </Ww>
+        <Ww>
+          <count>86</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>tcpdataptr,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>87</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>sleepinterval_i0,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>88</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>sleepinterval,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>89</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>interval_count,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>90</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>response1</ItemText>
+        </Ww>
+        <Ww>
+          <count>91</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>response2</ItemText>
+        </Ww>
+        <Ww>
+          <count>92</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>response3</ItemText>
+        </Ww>
+        <Ww>
+          <count>93</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>simselect</ItemText>
+        </Ww>
+        <Ww>
+          <count>94</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>cregresp</ItemText>
+        </Ww>
+        <Ww>
+          <count>95</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>del</ItemText>
+        </Ww>
+        <Ww>
+          <count>96</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>antennafeedback</ItemText>
+        </Ww>
+        <Ww>
+          <count>97</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>u32ADC0Result</ItemText>
+        </Ww>
+        <Ww>
+          <count>98</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>alertid</ItemText>
+        </Ww>
+        <Ww>
+          <count>99</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>cregready,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -595,7 +695,7 @@
         <Ww>
           <count>4</count>
           <WinNumber>2</WinNumber>
-          <ItemText>readpt_c</ItemText>
+          <ItemText>vehicleregnum</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
@@ -795,47 +895,47 @@
         <Ww>
           <count>44</count>
           <WinNumber>2</WinNumber>
-          <ItemText>ax,0x0A</ItemText>
+          <ItemText>aax</ItemText>
         </Ww>
         <Ww>
           <count>45</count>
           <WinNumber>2</WinNumber>
-          <ItemText>ay,0x0A</ItemText>
+          <ItemText>aay</ItemText>
         </Ww>
         <Ww>
           <count>46</count>
           <WinNumber>2</WinNumber>
-          <ItemText>az,0x0A</ItemText>
+          <ItemText>aaz</ItemText>
         </Ww>
         <Ww>
           <count>47</count>
           <WinNumber>2</WinNumber>
-          <ItemText>binary</ItemText>
+          <ItemText>ggx</ItemText>
         </Ww>
         <Ww>
           <count>48</count>
           <WinNumber>2</WinNumber>
-          <ItemText>newbin</ItemText>
+          <ItemText>ggy</ItemText>
         </Ww>
         <Ww>
           <count>49</count>
           <WinNumber>2</WinNumber>
-          <ItemText>STATUS_REG_A</ItemText>
+          <ItemText>ggz</ItemText>
         </Ww>
         <Ww>
           <count>50</count>
           <WinNumber>2</WinNumber>
-          <ItemText>signbit,0x0A</ItemText>
+          <ItemText>gx,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>51</count>
           <WinNumber>2</WinNumber>
-          <ItemText>sum,0x0A</ItemText>
+          <ItemText>gy,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>52</count>
           <WinNumber>2</WinNumber>
-          <ItemText>\\UART_TxRx_Function\at_command.c\fileinstance</ItemText>
+          <ItemText>gz,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>53</count>
@@ -897,6 +997,16 @@
           <WinNumber>2</WinNumber>
           <ItemText>apn2</ItemText>
         </Ww>
+        <Ww>
+          <count>65</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>cregretry</ItemText>
+        </Ww>
+        <Ww>
+          <count>66</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>inputvoltage</ItemText>
+        </Ww>
       </WatchWindow2>
       <MemoryWindow1>
         <Mm>
@@ -918,7 +1028,7 @@
         <Mm>
           <WinNumber>3</WinNumber>
           <SubType>8</SubType>
-          <ItemText>tcpdata</ItemText>
+          <ItemText>g_u8SendData</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow3>
@@ -926,7 +1036,7 @@
         <Mm>
           <WinNumber>4</WinNumber>
           <SubType>8</SubType>
-          <ItemText>configdata</ItemText>
+          <ItemText>tcpdata</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow4>

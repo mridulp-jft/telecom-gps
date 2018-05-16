@@ -22,212 +22,133 @@ Dialog DLL:      TARMCM1.DLL V1.13.0.0
  
 <h2>Project:</h2>
 E:\GIT_JFT_2\telecom-gps\vtsOBD-2.0.0 - nuc130\KEIL\UART_TxRx_Function.uvprojx
-Project File Date:  04/28/2018
+Project File Date:  05/02/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'UART_TxRx_Function'
+Build target 'UART_TxRx_Function'
 creating preprocessor file for main.c...
 creating preprocessor file for Thread.c...
 creating preprocessor file for at_command.c...
-compiling Thread.c...
-Thread.c(38): warning:  #1295-D: Deprecated declaration obd_get_data - give arg types
-  __inline void obd_get_data();
-Thread.c: 1 warning, 0 errors
-compiling main.c...
-preprocessor.h(5): warning:  #1-D: last line of file ends without a newline
-  #define frameformat         "1.0.0"
-main.c(67): warning:  #520-D: initialization with "{...}" expected for aggregate object
-  char firmwaresize[20] = 0;
-main.c(103): warning:  #1295-D: Deprecated declaration UARTs_Init - give arg types
-  __inline void UARTs_Init();
-main.c(109): warning:  #1295-D: Deprecated declaration Init_IOs - give arg types
-  __inline void Init_IOs();
-main.c(110): warning:  #1295-D: Deprecated declaration OBD_GET_PID - give arg types
-  __inline void OBD_GET_PID();
-main.c(116): warning:  #1295-D: Deprecated declaration sendalert - give arg types
-  __inline void sendalert();
-main.c(118): warning:  #1295-D: Deprecated declaration networkswitch - give arg types
-  __inline void networkswitch();
-main.c(140): warning:  #1295-D: Deprecated declaration cpinquerry - give arg types
-  extern  void cpinquerry();
-main.c(157): warning:  #520-D: initialization with "{...}" expected for aggregate object
-  char sender_num[15] = 0;
-main.c(158): warning:  #520-D: initialization with "{...}" expected for aggregate object
-  char ph_num[15] = 0;
-main.c(339): warning:  #192-D: unrecognized character escape sequence
-              SendAT("\r\nAT+QFTPCFG=4,\"/UFS\/fw.bin\"\r\n\r\n", "QFTPCFG:", "NOT INSERTED" , "ERROR",5);
-main.c(343): warning:  #192-D: unrecognized character escape sequence
-              sprintf(temp,"\r\nAT+QFTPSIZE=\"\/files\/%s\"\r\n",filename);
-main.c(343): warning:  #192-D: unrecognized character escape sequence
-              sprintf(temp,"\r\nAT+QFTPSIZE=\"\/files\/%s\"\r\n",filename);
-main.c(350): warning:  #192-D: unrecognized character escape sequence
-              sprintf(temp,"\r\nAT+QFTPGET=\"\/files\/%s\"\r\n",filename);
-main.c(350): warning:  #192-D: unrecognized character escape sequence
-              sprintf(temp,"\r\nAT+QFTPGET=\"\/files\/%s\"\r\n",filename);
-main.c(356): warning:  #223-D: function "mystrstr" declared implicitly
-              if((!(mystrstr(temp,'-'))) && (!(mystrstr(temp,'-')))){
-main.c(672): warning:  #187-D: use of "=" where "==" may have been intended
-    if(ring = 1){
-main.c(670): warning:  #550-D: variable "smsreq"  was set but never used
-    int smsreq=0;
-main.c(840): warning:  #223-D: function "clear" declared implicitly
-    clear();
-main.c(853): warning:  #177-D: variable "sn"  was declared but never referenced
-    char *sn = sender_num+3;
-main.c(854): warning:  #177-D: variable "go"  was declared but never referenced
-    int go = 0;
-main.c(956): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char pt_c[10] = 0;
-main.c(957): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char readpt_c[10] = 0;
-main.c(958): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char interval_c[10] = 0;
-main.c(955): warning:  #177-D: variable "len"  was declared but never referenced
-    int len;
-main.c(1459): warning:  #550-D: variable "trueint"  was set but never used
-    int trueint = 0;
-main.c: 26 warnings, 0 errors
 creating preprocessor file for Timer.c...
 creating preprocessor file for WinboundFlash.c...
+creating preprocessor file for CRC32_fast_dynamic_lut.c...
+creating preprocessor file for CRC32_fast_static_lut.c...
+creating preprocessor file for CRC32_slow_no_lut.c...
+creating preprocessor file for RTX_Conf_CM.c...
+creating preprocessor file for adc.c...
+creating preprocessor file for clk.c...
 compiling at_command.c...
-preprocessor.h(5): warning:  #1-D: last line of file ends without a newline
-  #define frameformat         "1.0.0"
-at_command.c(82): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char latitude[12] = 0;
-at_command.c(83): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char longitude[12] = 0;
-at_command.c(84): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char prevlatitude[12] = 0;
-at_command.c(85): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char prevlongitude[12] = 0;
-at_command.c(86): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char gpsdate[7] = 0;
-at_command.c(87): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char gpstime[7] = 0;
-at_command.c(88): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char kmph[6] = 0;
+preprocessor.h(6): warning:  #1-D: last line of file ends without a newline
+  #define dtr                 PB7
 at_command.c(89): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char heading[8] = 0;
+    char latitude[12] = 0;
 at_command.c(90): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char alt[8] = 0;
+    char longitude[12] = 0;
 at_command.c(91): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char sat[2] = 0;
+    char prevlatitude[12] = 0;
 at_command.c(92): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char latdir[2] = 0;
+    char prevlongitude[12] = 0;
 at_command.c(93): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char longdir[2] = 0;
+    char gpsdate[7] = 0;
 at_command.c(94): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char hdop[6] = 0;
+    char gpstime[7] = 0;
 at_command.c(95): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char pdop[5] = 0;
+    char kmph[6] = 0;
 at_command.c(96): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char networkoperator[30] = 0;
+    char heading[8] = 0;
 at_command.c(97): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char mcc[5] = 0;
+    char alt[8] = 0;
 at_command.c(98): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char mnc[5] = 0;
+    char sat[3] = 0;
 at_command.c(99): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char lac[5] = 0;
+    char latdir[2] = 0;
 at_command.c(100): warning:  #520-D: initialization with "{...}" expected for aggregate object
-    char cellid[10] = 0;
+    char longdir[2] = 0;
+at_command.c(101): warning:  #520-D: initialization with "{...}" expected for aggregate object
+    char hdop[6] = 0;
 at_command.c(102): warning:  #520-D: initialization with "{...}" expected for aggregate object
+    char pdop[5] = 0;
+at_command.c(103): warning:  #520-D: initialization with "{...}" expected for aggregate object
+    char networkoperator[30] = 0;
+at_command.c(104): warning:  #520-D: initialization with "{...}" expected for aggregate object
+    char mcc[5] = 0;
+at_command.c(105): warning:  #520-D: initialization with "{...}" expected for aggregate object
+    char mnc[5] = 0;
+at_command.c(106): warning:  #520-D: initialization with "{...}" expected for aggregate object
+    char lac[5] = 0;
+at_command.c(107): warning:  #520-D: initialization with "{...}" expected for aggregate object
+    char cellid[10] = 0;
+at_command.c(109): warning:  #520-D: initialization with "{...}" expected for aggregate object
     char nmr[200] = 0;
-at_command.c(254): warning:  #223-D: function "readaccgyrodata" declared implicitly
-  readaccgyrodata();
-at_command.c(359): warning:  #550-D: variable "dump"  was set but never used
+at_command.c(371): warning:  #550-D: variable "dump"  was set but never used
   {char dump = 0;
-at_command.c(404): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "unsigned char *"
+at_command.c(417): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "unsigned char *"
       SpiFlash_PageProgram(SrcArray, pt, 256);
-at_command.c(407): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "unsigned char *"
+at_command.c(420): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "unsigned char *"
       SpiFlash_ReadData(DestArray, pt, 256);
-at_command.c(377): warning:  #177-D: variable "len"  was declared but never referenced
+at_command.c(389): warning:  #177-D: variable "len"  was declared but never referenced
     int len=0;
-at_command.c(589): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "unsigned char *"
+at_command.c(474): warning:  #223-D: function "hextoascii" declared implicitly
+    hextoascii(configdata,strlen(configdata));
+at_command.c(551): warning:  #223-D: function "networkswitch" declared implicitly
+        networkswitch();
+at_command.c(658): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "unsigned char *"
     SpiFlash_ReadData(tcpdata, readpt, 256);
-at_command.c(572): warning:  #177-D: variable "tcpdatalength"  was declared but never referenced
+at_command.c(641): warning:  #177-D: variable "tcpdatalength"  was declared but never referenced
     int tcpdatalength=0;
-at_command.c(575): warning:  #177-D: variable "timesptr"  was declared but never referenced
+at_command.c(644): warning:  #177-D: variable "timesptr"  was declared but never referenced
   	int timesptr=0;
-at_command.c(578): warning:  #177-D: variable "chdatalength"  was declared but never referenced
+at_command.c(647): warning:  #177-D: variable "chdatalength"  was declared but never referenced
     char chdatalength[5];
-at_command.c(580): warning:  #177-D: variable "cc"  was declared but never referenced
+at_command.c(649): warning:  #177-D: variable "cc"  was declared but never referenced
     int  cc =0;
-at_command.c(887): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "unsigned char *"
+at_command.c(965): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "unsigned char *"
       SpiFlash_ReadData(configdata, readpt, 256);
-at_command.c(745): warning:  #550-D: variable "tdpend"  was set but never used
+at_command.c(815): warning:  #550-D: variable "tdpend"  was set but never used
   	int tdpend=600;
-at_command.c(1027): warning:  #174-D: expression has no effect
+at_command.c(1118): warning:  #174-D: expression has no effect
     ext_bat, int_bat, lati, longi, speed;
-at_command.c(1027): warning:  #174-D: expression has no effect
+at_command.c(1118): warning:  #174-D: expression has no effect
     ext_bat, int_bat, lati, longi, speed;
-at_command.c(1027): warning:  #174-D: expression has no effect
+at_command.c(1118): warning:  #174-D: expression has no effect
     ext_bat, int_bat, lati, longi, speed;
-at_command.c(1027): warning:  #174-D: expression has no effect
+at_command.c(1118): warning:  #174-D: expression has no effect
     ext_bat, int_bat, lati, longi, speed;
-at_command.c(1027): warning:  #174-D: expression has no effect
+at_command.c(1118): warning:  #174-D: expression has no effect
     ext_bat, int_bat, lati, longi, speed;
-at_command.c(1442): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const uint8_t *"
+at_command.c(1617): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const uint8_t *"
         checksumdata = crc32_fsl(0,send_temp,strlen(send_temp));
-at_command.c(1455): warning:  #181-D: argument is incompatible with corresponding format string conversion
-        sprintf(configdata,"$%s,%s,%s,HP,%s,%.3f,%d,%.3f,%d,%d,%d%d%d%d,%.1f,%.1f*",
+at_command.c(1629): warning:  #181-D: argument is incompatible with corresponding format string conversion
+        sprintf(configdata,"$%s,%s,%s,HP,%s,%.3f,%d,%.3f,%d,%d,%d%d%d%d,%.1f,%.1f",
 eader,
 endorID,
 irmwareversion,imei,int_bat_per,batteryvoltagethreshold,mem_per,sleepinterval_i1,sleepinterval_i0,input1,input2,input3,input4,analog1,analog2);//digital i/o 0000, analog io, *
-at_command.c(1458): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const uint8_t *"
+at_command.c(1632): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const uint8_t *"
         checksumdata = crc32_fsl(0,configdata,strlen(configdata));  
-at_command.c(1481): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const uint8_t *"
+at_command.c(1655): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const uint8_t *"
         checksumdata = crc32_fsl(0,configdata,strlen(configdata)); 
-at_command.c(1493): warning:  #1-D: last line of file ends without a newline
+at_command.c(1668): warning:  #1-D: last line of file ends without a newline
   }
-at_command.c(1019): warning:  #550-D: variable "batterydischarging"  was set but never used
+at_command.c(1097): warning:  #550-D: variable "batterydischarging"  was set but never used
     int batterydischarging = 0;
-at_command.c: 44 warnings, 0 errors
-compiling Timer.c...
-creating preprocessor file for CRC32_fast_dynamic_lut.c...
-creating preprocessor file for CRC32_fast_static_lut.c...
-compiling CRC32_fast_dynamic_lut.c...
-compiling WinboundFlash.c...
-WinboundFlash.c(43): warning:  #177-D: variable "u32HCLKFreq"  was declared but never referenced
-  {uint32_t u32HCLKFreq;
-WinboundFlash.c: 1 warning, 0 errors
-creating preprocessor file for CRC32_slow_no_lut.c...
-compiling CRC32_fast_static_lut.c...
-creating preprocessor file for RTX_Conf_CM.c...
-compiling CRC32_slow_no_lut.c...
-creating preprocessor file for adc.c...
-compiling RTX_Conf_CM.c...
-RTE\CMSIS\RTX_Conf_CM.c(301): warning:  #223-D: function "HardFault_Handler" declared implicitly
-    HardFault_Handler();
-RTE\CMSIS\RTX_Conf_CM.c: 1 warning, 0 errors
-creating preprocessor file for clk.c...
+at_command.c: 45 warnings, 0 errors
 creating preprocessor file for gpio.c...
-compiling adc.c...
 creating preprocessor file for i2c.c...
-compiling clk.c...
-compiling gpio.c...
 creating preprocessor file for retarget.c...
 creating preprocessor file for spi.c...
-compiling i2c.c...
 creating preprocessor file for sys.c...
-compiling retarget.c...
+creating preprocessor file for timer.c...
 creating preprocessor file for uart.c...
-compiling spi.c...
 creating preprocessor file for wdt.c...
-compiling sys.c...
 creating preprocessor file for wwdt.c...
-compiling uart.c...
-compiling wdt.c...
-assembling startup_NUC100Series.s...
 creating preprocessor file for system_NUC100Series.c...
-compiling wwdt.c...
-compiling system_NUC100Series.c...
 linking...
-Program Size: Code=43612 RO-data=4708 RW-data=676 ZI-data=11364  
+Program Size: Code=47464 RO-data=4964 RW-data=752 ZI-data=12128  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin ".\obj\UART_TxRx_Function.axf" --output ".\obj\UART_TxRx_Function.bin"
 After Build - User command #2: fromelf --text -c ".\obj\UART_TxRx_Function.axf" --output ".\obj\UART_TxRx_Function.txt"
-".\obj\UART_TxRx_Function.axf" - 0 Error(s), 73 Warning(s).
+".\obj\UART_TxRx_Function.axf" - 0 Error(s), 45 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -247,6 +168,7 @@ Package Vendor: Nuvoton
    * Component: WWDT Version: 3.00.002
    * Component: WDT Version: 3.00.002
    * Component: UART Version: 3.00.002
+   * Component: Timer Version: 3.00.002
    * Component: SYS Version: 3.00.002
    * Component: SPI Version: 3.00.002
    * Component: I2C Version: 3.00.002
@@ -264,9 +186,9 @@ Package Vendor: Nuvoton
 <h2>Collection of Component Files used:</h2>
 
    * Component: Nuvoton::Device:Startup:3.00.002
-      Include file:  Device\NUC100\Include\NUC100Series.h
       Source file:   Device\NUC100\Source\ARM\startup_NUC100Series.s
       Source file:   Device\NUC100\Source\system_NUC100Series.c
+      Include file:  Device\NUC100\Include\NUC100Series.h
       Source file:   Device\NUC100\Driver\retarget.c
 
    * Component: Nuvoton::Device:Driver:WWDT:3.00.002
@@ -274,56 +196,60 @@ Package Vendor: Nuvoton
       Include file:  Device\NUC100\Driver\wwdt.h
 
    * Component: Nuvoton::Device:Driver:WDT:3.00.002
-      Source file:   Device\NUC100\Driver\wdt.c
       Include file:  Device\NUC100\Driver\wdt.h
+      Source file:   Device\NUC100\Driver\wdt.c
 
    * Component: Nuvoton::Device:Driver:UART:3.00.002
       Include file:  Device\NUC100\Driver\uart.h
       Source file:   Device\NUC100\Driver\uart.c
 
+   * Component: Nuvoton::Device:Driver:Timer:3.00.002
+      Source file:   Device\NUC100\Driver\timer.c
+      Include file:  Device\NUC100\Driver\timer.h
+
    * Component: Nuvoton::Device:Driver:SYS:3.00.002
-      Source file:   Device\NUC100\Driver\sys.c
       Include file:  Device\NUC100\Driver\sys.h
+      Source file:   Device\NUC100\Driver\sys.c
 
    * Component: Nuvoton::Device:Driver:SPI:3.00.002
-      Include file:  Device\NUC100\Driver\spi.h
       Source file:   Device\NUC100\Driver\spi.c
+      Include file:  Device\NUC100\Driver\spi.h
 
    * Component: Nuvoton::Device:Driver:I2C:3.00.002
-      Include file:  Device\NUC100\Driver\i2c.h
       Source file:   Device\NUC100\Driver\i2c.c
+      Include file:  Device\NUC100\Driver\i2c.h
 
    * Component: Nuvoton::Device:Driver:GPIO:3.00.002
-      Include file:  Device\NUC100\Driver\gpio.h
       Source file:   Device\NUC100\Driver\gpio.c
+      Include file:  Device\NUC100\Driver\gpio.h
 
    * Component: Nuvoton::Device:Driver:CLK:3.00.002
-      Source file:   Device\NUC100\Driver\clk.c
       Include file:  Device\NUC100\Driver\clk.h
+      Source file:   Device\NUC100\Driver\clk.c
 
    * Component: Nuvoton::Device:Driver:ADC:3.00.002
-      Source file:   Device\NUC100\Driver\adc.c
       Include file:  Device\NUC100\Driver\adc.h
+      Source file:   Device\NUC100\Driver\adc.c
 
    * Component: ARM::CMSIS:RTOS:Keil RTX:4.81.1
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
+      Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib
+      Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
       Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
+      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
       Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
-      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
-      Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
-      Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM0.lib
 
    * Component: ARM::CMSIS:CORE:5.0.2
 
    * Component: ::CMSIS:RTOS:1.0.0 (API)
-Build Time Elapsed:  00:00:10
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

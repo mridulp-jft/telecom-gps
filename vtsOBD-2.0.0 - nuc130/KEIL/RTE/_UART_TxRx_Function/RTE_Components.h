@@ -24,6 +24,7 @@
 #define RTE_Drivers_I2C              /* Driver I2C */
 #define RTE_Drivers_SPI              /* Driver SPI */
 #define RTE_Drivers_SYS              /* Driver SYS */
+#define RTE_Drivers_Timer              /* Driver Timer */
 #define RTE_Drivers_UART              /* Driver UART */
 #define RTE_Drivers_WDT              /* Driver WDT */
 #define RTE_Drivers_WWDT              /* Driver WWDT */

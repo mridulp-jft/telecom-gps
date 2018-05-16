@@ -25072,13 +25072,18 @@ float readpt = 256;
 extern int once;
 extern float pt;
 int loginpacket = 0;
+int cregretry = 0;
 float speed;
 int messagecounter;
+extern int simselect;
 uint8_t alertid = 0;
 extern uint32_t crc32_fsl(uint32_t crc, const uint8_t *buf, uint32_t len);
  
+extern volatile int ignitionhighlow;
+extern volatile int emergencyhighlow;
 extern float overspeed;
 extern char obdresp[20];
+char cregresp[10];
 extern char tempobdresp[20];
 extern char obdrespbinary[33];
 extern char suppportedpid[100][7];
@@ -25090,9 +25095,11 @@ char lastlocation[50];
 char signalquality[5] = {0};
 char emernum1[15] = {0};
 char emernum2[15] = {0};
-extern volatile uint8_t wetmr;
+extern volatile uint32_t wetmr;
 extern volatile int notsentcounter;
-
+extern osThreadId tid_Thread_accgyro_READ;
+  int sleepinterval;
+__inline void remove_all_alpha(char* str, char c, char d);
 volatile uint8_t timeoutflag = 0 ;
  
   int tcpsendchtimer;
@@ -25124,7 +25131,7 @@ volatile uint8_t timeoutflag = 0 ;
   char kmph[6] = 0;
   char heading[8] = 0;
   char alt[8] = 0;
-  char sat[2] = 0;
+  char sat[3] = 0;
   char latdir[2] = 0;
   char longdir[2] = 0;
   char hdop[6] = 0;
@@ -25147,6 +25154,7 @@ volatile uint8_t timeoutflag = 0 ;
 int32_t	inc=0;
 int stlen;
 uint8_t u8InChar=0xFF;
+volatile int pushemergency=0;
 volatile int32_t g_u8RecDataptr=0;
 float	u32ADC0Result;
 float u32ADC0Result1;
@@ -25197,6 +25205,7 @@ void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * 
 void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
 
 void clear(void);
+extern void readaccgyrodata(void);
 __inline void manualdelay(int delayms);
 __inline void fileclose(void);  
 __inline void fileopen(void);
@@ -25249,7 +25258,7 @@ void SendAT(char * command, char * res1, char * res2, char * res3, int32_t timeo
   response1 = res1;
   response2 = res2;
   response3 = res3;
-
+  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((7)<<2)))) = 0;
   timeoutflag =  0;
 	tmr0sec=0;
 
@@ -25287,18 +25296,20 @@ void SendAT(char * command, char * res1, char * res2, char * res3, int32_t timeo
       }
       else{attry=0;}
    }
-readaccgyrodata();
+   (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((7)<<2)))) = 1;
+osSignalSet (tid_Thread_accgyro_READ, 0x0001);    
 }
 
  void manualdelay(int delayms)
 {
-	
+  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((7)<<2)))) = 0;
 	for(d1 = 0; d1 < delayms ; d1++)
 	{
 		for(d2=0; d2 < 65535; d2++)
 		{
 		}
 	}
+  (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((7)<<2)))) = 1;
 }
 char mystrstr(char* str1, char character)
 {int sz,cn;
@@ -25337,6 +25348,7 @@ __inline void remove_all_chars(char* str, char c, char d) {
     }
     *pw = '\0';
 }
+
 
 
 
@@ -25417,13 +25429,14 @@ void Save_FS(void)
       SpiFlash_ChipErase();
   }
   
-  strcat(g_u8SendData,"\n");
+  
   pch = strstr (g_u8SendData,",L,");
   if (pch){
     strncpy(pch,",H,",3);
   }
-  strreplace(g_u8SendData, 0x1A, '\n'); 
+  
   remove_all_chars(g_u8SendData,'\r',0x1A);
+  remove_all_chars(g_u8SendData,'\r','\n');
   SpiFlash_WaitReady();
   life = strlen(g_u8SendData); 
   times = life/256 + 1;
@@ -25488,7 +25501,49 @@ void Save_FS(void)
 void cregquerry()
 {
   int timeout;
-  char cregresp[10];
+  
+  
+  SendAT("\r\nAT+STKTR=\"810301218082028281830100\"\r\n", "+STKPCI: 0", "NAK" , "NAK",2);   
+  manualdelay(5);
+  memset(configdata,0,300);
+  parse_g(g_u8RecData,3,4,'"','"',configdata);  
+  hextoascii(configdata,strlen(configdata));
+  
+  if(strstr(DestArray,"National(ON)")){
+    simselect = 1;
+    
+  }else if(strstr(DestArray,"International(ON)")){
+    simselect = 2;
+    
+  }else{
+    SendAT("\r\nAT+STKENV=\"D30782020181900101\"\r\n", "+STKPCI: 0", "NAK" , "NAK",5);
+    manualdelay(5);
+    memset(configdata,0,300);
+    parse_g(g_u8RecData,3,4,'"','"',configdata);  
+    hextoascii(configdata,strlen(configdata));
+    
+    if(strstr(DestArray,"National(ON)")){
+      simselect = 1;
+    }else if(strstr(DestArray,"International(ON)")){
+      simselect = 2;
+    }
+  } 
+  
+  tmr0sec=0;
+  timeout =10;
+  r1=0;r2=0;r3=0;
+  g_u8RecDataptr=0;
+  memset(g_u8RecData,0,1000);
+  printf("%c",0x1A);
+  clear();
+  printf("\r\nAT+CREG=1\r\n");
+  do{
+  g_u8RecData[0] = '\r';
+  r1 = strstr(g_u8RecData, "CPIN: READY");
+  r2 = strstr(g_u8RecData, "OK");
+  r3 = strstr(g_u8RecData, "ERROR");
+  }while(!(r1 || r2 || r3 ||((tmr0sec >= timeout))));	 
+  clear();
 	
   
 	tmr0sec=0;
@@ -25510,13 +25565,27 @@ void cregquerry()
   parse_g(g_u8RecData, 1, 1, ',', 'O' , cregresp);
   remove_all_chars(cregresp,'\r','\n');
   
-  if(strstr(cregresp,"1") || strstr(cregresp, "5")|| strstr(cregresp, "2"))
+  if(strstr(cregresp,"1") || strstr(cregresp, "5"))
   {
     cregready=1;
+    cregretry = 0;
   }
   else
   {
-    cregready=0;
+    SendAT("\r\nAT+CSQ\r\n", "OK", "NAK" , "NAK",10);
+    
+    
+
+    if(simselect == 1){
+      SendAT("\r\nAT+COPS=4,1,\"airtel\"\r\n", "OK", "ERROR" , "+CREG:",50);
+    }else if(simselect == 2){
+      SendAT("\r\nAT+COPS=4,1,\"IDEA\"\r\n\r\n\r\n", "OK", "NAK" , "+CREG:",50);
+    }
+    cregready=0;cregretry++;
+    if(cregretry >= 5){
+      cregretry = 0;
+      networkswitch();
+    }
   }
  
 }
@@ -25773,6 +25842,7 @@ do{
 
 void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout)
 {
+  int network1,network2;
 	int tcpdatalength=0;
 	int tcpdataptr=0;
 	int times = 0;
@@ -25781,7 +25851,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 	int tdpend=600;
 
 	tmr0sec=0;
-	tcptimeout =5;
+	tcptimeout =20;
 	r1=0;
 	r2=0;
 	r3=0;
@@ -25807,7 +25877,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
 				if(r1)
 					{
 						tmr0sec=0;
-						tcptimeout =5;
+						tcptimeout =20;
 						r1=0;
 						r2=0;
 						r3=0;
@@ -25828,12 +25898,12 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
            clear();            
           }
 			if(!(r3)){
-				network=1;
+				network1=1;
         sendfs = 0;
 			}
 			else{
         notsentcounter= 0;
-				network=0;
+				network1=0;
         sendfs = 1;        
 			}
 	}else{
@@ -25846,9 +25916,10 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
   tdp=0;
   tdpend=600;  
    
-  if(network == 0){  
+  
+    {  
     tmr0sec=0;
-    tcptimeout =5;
+    tcptimeout =20;
     r1=0;
     r2=0;
     r3=0;
@@ -25873,7 +25944,7 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
           if(r1)
             {
               tmr0sec=0;
-              tcptimeout =5;
+              tcptimeout =20;
               r1=0;
               r2=0;
               r3=0;
@@ -25884,6 +25955,8 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
               SendChar(tcpdata[tcpdataptr]);
               tcpdataptr++;
               }
+              
+              printf("\n");
               printf("%c",0x1A);
               do{
                 g_u8RecData[0] = '\r';
@@ -25894,14 +25967,19 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
              clear();           
             }
         if(!(r3)){
-          network=1;
+          network2=1;
           sendfs = 0;
         }
         else{
           notsentcounter= 0;
-          network=0;
+          network2=0;
           sendfs = 1;
         }
+        
+        
+    if(network1 & network2 == 1)network = 1;
+    if(network1 & network2 == 0){network = 0;notsentcounter = 0;}
+        
     if(network == 0 && timesptr>=times){
       if(loginpacket == 1){
         memset(temp,0,100);        
@@ -25925,8 +26003,8 @@ void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char * tcpr
       sendfs = 1;
     else
       sendfs = 0;
-  }
-
+  }  
+remove_all_chars(g_u8SendData,'\r','\n'); 
 }
 
 
@@ -26053,10 +26131,23 @@ __inline float stof(const char* s)
 void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout)
 {
   int batterydischarging = 0;
-  int sleepinterval;
+
   double d_distance;
   char send_temp[1000] = {0};
   char av[3] = {0};
+  char lac1[7] = {0};
+  char lac2[7] = {0};
+  char lac3[7] = {0};
+  char lac4[7] = {0};
+  char cellid1[7] = {0};
+  char cellid2[7] = {0};
+  char cellid3[7] = {0};
+  char cellid4[7] = {0};
+  char sig1[7] = {0};
+  char sig2[7] = {0};
+  char sig3[7] = {0};
+  char sig4[7] = {0};
+  char alert[4] = {0};
   uint32_t checksumdata = 0;
   fix = 0;
   tamperalert = 'C';
@@ -26071,7 +26162,7 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
   memset(gpstime,0,7);
   memset(kmph,0,6);
   memset(alt,0,8);
-  memset(sat,0,2);
+  memset(sat,0,3);
   memset(latdir,0,2);
   memset(longdir,0,2);
   memset(hdop,0,6);
@@ -26083,6 +26174,24 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
   memset(cellid,0,10);
   memset(nmr,0,200);
   packetstatus = 'L';
+
+
+
+    g_u32AdcIntFlag = 0;
+    ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADCR |= (1ul << 11));   
+    while(g_u32AdcIntFlag == 0);
+    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(6)] & (0xFFFFul << 0));
+    u32ADC0Result = (2.8/2.8)*((u32ADC0Result*3.299) /4096);
+    antennafeedback = u32ADC0Result; 
+
+   
+      
+    
+  
+      
+   
+   
+
 
 
 
@@ -26233,6 +26342,9 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
     parse_g(g_u8RecData, 1, 1, '$', '*' , temp);
     parse_g(temp, 15, 16, ',', ',' , pdop);  
 
+    SendAT("\r\nAT+QGNSSRD?\r\n\r\n", "OK", "ERROR: 7103" , "OK",5);
+
+    
     tmr0sec=0;
     r1=0;
     r2=0;
@@ -26269,23 +26381,23 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
     
     
     
-    SendAT("\r\nAT+QENG=2,3\r\n", "null", "null" , "+QENG: 2,",5);
+    
+    tmr0sec=0;
+    r1=0;
+    r2=0;
+    r3=0;
+    g_u8RecDataptr=0;
+    memset(g_u8RecData,0,1000);
+    clear();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    printf("\r\nAT+QENG=2,3\r\n");
+    do{
+      g_u8RecData[0] = '\r';
+      r1 = strstr(g_u8RecData, "NULL");
+      r2 = strstr(g_u8RecData, "NULL");
+      r3 = strstr(g_u8RecData, "+QENG: 2,");
+    }while(!(r1 || r2 || r3 || ((tmr0sec >= 2))));	 
+    clear();  
     
     memset(mcc,0,strlen(mcc));
     memset(mnc,0,strlen(mnc));
@@ -26297,7 +26409,40 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
     parse_g(g_u8RecData, 4, 5, ',', ',' , lac);
     parse_g(g_u8RecData, 5, 6, ',', ',' , cellid);
     parse_g(g_u8RecData, 20, 60, ',', ',' , nmr);
-   
+    
+
+    strcat(nmr,",");
+    memset(lac1,0,7);
+    memset(lac2,0,7);
+    memset(lac3,0,7);
+    memset(lac4,0,7);
+    memset(cellid1,0,7);
+    memset(cellid2,0,7);
+    memset(cellid3,0,7);
+    memset(cellid4,0,7);
+    memset(sig1,0,7);
+    memset(sig2,0,7);
+    memset(sig3,0,7);
+    memset(sig4,0,7);
+    
+    parse_g(nmr, 2, 3, ',', ',' , sig1);
+    parse_g(nmr, 12, 13, ',', ',' , sig2);
+    parse_g(nmr, 22, 23, ',', ',' , sig3);
+    parse_g(nmr, 32, 33, ',', ',' , sig4);
+    
+    parse_g(nmr, 8, 9, ',', ',' , lac1);
+    parse_g(nmr, 18, 19, ',', ',' , lac2);
+    parse_g(nmr, 28, 29, ',', ',' , lac3);
+    parse_g(nmr, 38, 39, ',', ',' , lac4);
+    
+    parse_g(nmr, 9, 10, ',', ',' , cellid1);
+    parse_g(nmr, 19, 20, ',', ',' , cellid2);
+    parse_g(nmr, 29, 30, ',', ',' , cellid3);
+    parse_g(nmr, 39, 40, ',', ',' , cellid4);    
+
+    memset(nmr,0,200);
+    sprintf(nmr,"%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",lac1,cellid1,sig1,lac2,cellid2,sig2,lac3,cellid3,sig3,lac4,cellid4,sig4);
+
     
 
  
@@ -26317,14 +26462,15 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
       r3 = strstr(g_u8RecData, "ËRROR");
     }while(!(r1 || r2 || r3 || ((tmr0sec >= timeout))));	 
     clear();  
-    (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((7)<<2)))) = 1; 
+    
+    manualdelay(10);
     packetstatus = 'L';
     g_u32AdcIntFlag = 0;
     ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADCR |= (1ul << 11));   
     while(g_u32AdcIntFlag == 0);
-    (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((7)<<2)))) = 0; 
+    
     u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(0)] & (0xFFFFul << 0));
-    u32ADC0Result = (2.72/0.852)*((u32ADC0Result*3.299) /4096);
+    u32ADC0Result = (3.712/0.974)*((u32ADC0Result*3.299) /4096);
     batteryvoltage = u32ADC0Result;      
     u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(1)] & (0xFFFFul << 0));
     u32ADC0Result = (12.25/0.875)*((u32ADC0Result*3.299) /4096);
@@ -26341,9 +26487,15 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
     u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(5)] & (0xFFFFul << 0));
     u32ADC0Result = (12.25/0.875)*((u32ADC0Result*3.299) /4096);
     analog4 = u32ADC0Result;
-    u32ADC0Result = ((((ADC_T *) ((( uint32_t)0x40000000) + 0xE0000)))->ADDR[(5)] & (0xFFFFul << 0));
-    u32ADC0Result = (12.25/0.875)*((u32ADC0Result*3.299) /4096);
-    antennafeedback = u32ADC0Result;  
+    
+
+
+    input1 = !(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((14)<<2))));
+    input2 = !(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((15)<<2))));
+    input3 = !(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((12)<<2))));
+    input4 = !(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(0))) + ((13)<<2))));
+    
+    
     
     
     memset(lastlocation,0,50);
@@ -26361,24 +26513,27 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 
 
 
-
-    
-    
-    
-    
+    memset(alert,0,4);
+    strstr(alert, "NR");
     speed = atof(kmph);
     if(speed > overspeed){
       
     }
   if(packetstatus == 'L'){
     alertid = 1; 
-    powerstatus = 0;  
   }
 
     if(inputvoltage < 5){
       alertid = 3; 
       powerstatus = 0;  
-    }else{powerstatus = 1;}  
+      memset(alert,0,4);
+      strstr(alert, "BD");
+    }else{
+      if(powerstatus == 0){
+        memset(alert,0,4);
+        strstr(alert, "BR");        
+      }
+    powerstatus = 1;}  
 
     if(batteryvoltage < batteryvoltagethreshold){
       alertid = 4;
@@ -26392,16 +26547,24 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
       
     }    
 
-    if(ignition == 1){
+    if(ignition == 1 && ignitionhighlow == 1){
       alertid = 7;
       ignition = 0;
+      memset(alert,0,4);
+      strstr(alert, "IN");       
     }    
 
-
+    if(ignition == 1 && ignitionhighlow == 0){
+      alertid = 8;
+      ignition = 0;
+      memset(alert,0,4);
+      strstr(alert, "IF"); 
+    }    
   
 
-    if(emergencystatus == 1 && (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((9)<<2)))) == 0){
+    if(emergencystatus == 1 && emergencyhighlow == 0){
       alertid = 11;
+      
     }    
 
     if(parameterupgrade == 1){
@@ -26416,13 +26579,21 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
     
 
 
-    if(emergencystatus == 1){
+    if(emergencystatus == 1 && emergencyhighlow == 1){
       alertid = 10;
+      wetmr = 0;
+
+      
     }  
     
 
     if(wetmr > wakeinterval_emer){
+      memset(alert,0,4);
+      strstr(alert, "EA");   
       emergencystatus = 0;
+      pushemergency = 0;
+    }else if(emergencystatus == 1){
+      alertid = 10;
     }
 
     if(ignition == 1){
@@ -26431,15 +26602,15 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
       sleepinterval = sleepinterval_i0;      
     }
     
-    if(interval_count >= sleepinterval){       
+    if(interval_count >= sleepinterval)
+      {       
       interval_count = 0;
       checksumdata = 0;
       
       memset(temp,0,100);
-      sprintf(temp,"$%s,%s,%s,NR,%.2d,%c,%s,","J01","JELLYFISH","2.1.6",alertid,packetstatus,imei); 
+      sprintf(temp,"$%s,%s,%s,%s,%.2d,%c,%s,","J01","JELLYFISH","2.1.6",alert,alertid,packetstatus,imei); 
       strcat(g_u8SendData,temp);                                         
 
-      
       
       memset(temp,0,100);
       sprintf(temp,"%s,%d,%s,%s,%s,%s,%s,%s,",vehicleregnum,fix,gpsdate,gpstime,latitude,latdir,longitude,longdir);       
@@ -26451,7 +26622,7 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
       strcat(g_u8SendData,temp);                               
       
       memset(temp,0,100);
-      sprintf(temp,"%d,%d,%.2f,%.2f,%d,%c,",(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((10)<<2)))),powerstatus,inputvoltage,batteryvoltage,emergencystatus,tamperalert);
+      sprintf(temp,"%d,%d,%.2f,%.2f,%d,%c,",!(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((10)<<2)))),powerstatus,inputvoltage,batteryvoltage,!(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((9)<<2)))),tamperalert);
       strcat(g_u8SendData,temp);                                        
 
       
@@ -26465,21 +26636,24 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
 
 
       memset(temp,0,100);
-      sprintf(temp,"%d%d%d%d,",input1,input2,input3,input4);
+
+
+      sprintf(temp,"%d,%d,%d,%d,",input1,input2,input3,input4);
       strcat(g_u8SendData,temp);       
       input1=input2=input3=input4 = 0;
 
       memset(temp,0,100);
-      sprintf(temp,"11,%.6d*",messagecounter++);
+ 
+
+      sprintf(temp,"1,1,%.6d,",messagecounter++);   
       strcat(g_u8SendData,temp);                                         
 
       strcat(send_temp,g_u8SendData);
       remove_all_chars(send_temp,'$','*');      
       checksumdata = crc32_fsl(0,send_temp,strlen(send_temp));
       memset(temp,0,100);
-      sprintf(temp,"%x\n",checksumdata);  
+      sprintf(temp,"%x*\n",checksumdata);  
       strcat(g_u8SendData,temp);      
-      alertid = 0;
 
     } 
     int_bat_per = (batteryvoltage/4.2) * 100;
@@ -26488,12 +26662,12 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
     if(interval_count_health >= sleepinterval_health){       
       interval_count_health = 0;
       memset(configdata,0,300);
-      sprintf(configdata,"$%s,%s,%s,HP,%s,%.3f,%d,%.3f,%d,%d,%d%d%d%d,%.1f,%.1f*","J01","JELLYFISH","2.1.6",imei,int_bat_per,batteryvoltagethreshold,mem_per,sleepinterval_i1,sleepinterval_i0,input1,input2,input3,input4,analog1,analog2);
+      sprintf(configdata,"$%s,%s,%s,HP,%s,%.3f,%d,%.3f,%d,%d,%d%d%d%d,%.1f,%.1f","J01","JELLYFISH","2.1.6",imei,int_bat_per,batteryvoltagethreshold,mem_per,sleepinterval_i1,sleepinterval_i0,input1,input2,input3,input4,analog1,analog2);
       strcat(g_u8SendData, configdata);
       remove_all_chars(configdata,'$','*');
       checksumdata = crc32_fsl(0,configdata,strlen(configdata));  
       memset(temp,0,100);
-      sprintf(temp,"%x\n",checksumdata);
+      sprintf(temp,"%x*\n",checksumdata);
       strcat(g_u8SendData,temp);
     }    
     
@@ -26516,10 +26690,11 @@ void SendAT_GPS(char * command, char * response1, char * response2, char * respo
       remove_all_chars(configdata,'$','*');
       checksumdata = crc32_fsl(0,configdata,strlen(configdata)); 
       memset(temp,0,100);
-      sprintf(temp,"%x\n",checksumdata);
+      sprintf(temp,"%x*\n\n\n",checksumdata);
       strcat(g_u8SendData,temp);
     }
 
+remove_all_chars(g_u8SendData,'\r','\n');
 
 memset(prevlatitude,0,12);
 memset(prevlongitude,0,12);    

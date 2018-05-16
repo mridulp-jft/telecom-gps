@@ -1,12 +1,47 @@
-#line 1 "Timer.c"
-
-#line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
+#line 1 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\timer.c"
+ 
 
 
 
 
 
+
+
+
+ 
+#line 1 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Include\\NUC100Series.h"
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
@@ -51,11 +86,84 @@
 
 
 
+ 
 
 
 
 
-#line 63 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+ 
+
+
+
+ 
+
+typedef enum IRQn
+{
+     
+    NonMaskableInt_IRQn         = -14,     
+    HardFault_IRQn              = -13,     
+    SVCall_IRQn                 = -5,      
+    PendSV_IRQn                 = -2,      
+    SysTick_IRQn                = -1,      
+
+     
+    BOD_IRQn                  = 0,         
+    WDT_IRQn                  = 1,         
+    EINT0_IRQn                = 2,         
+    EINT1_IRQn                = 3,         
+    GPAB_IRQn                 = 4,         
+    GPCDEF_IRQn               = 5,         
+    PWMA_IRQn                 = 6,         
+    PWMB_IRQn                 = 7,         
+    TMR0_IRQn                 = 8,         
+    TMR1_IRQn                 = 9,         
+    TMR2_IRQn                 = 10,        
+    TMR3_IRQn                 = 11,        
+    UART02_IRQn               = 12,        
+    UART1_IRQn                = 13,        
+    SPI0_IRQn                 = 14,        
+    SPI1_IRQn                 = 15,        
+    SPI2_IRQn                 = 16,        
+    SPI3_IRQn                 = 17,        
+    I2C0_IRQn                 = 18,        
+    I2C1_IRQn                 = 19,        
+    CAN0_IRQn                 = 20,        
+    CAN1_IRQn                 = 21,        
+    SC012_IRQn                = 22,        
+    USBD_IRQn                 = 23,        
+    PS2_IRQn                  = 24,        
+    ACMP_IRQn                 = 25,        
+    PDMA_IRQn                 = 26,        
+    I2S_IRQn                  = 27,        
+    PWRWU_IRQn                = 28,        
+    ADC_IRQn                  = 29,        
+    IRC_IRQn                  = 30,        
+    RTC_IRQn                  = 31         
+} IRQn_Type;
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+   
+
+
+#line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\Include\\core_cm0.h"
+ 
+
+
+
+
+ 
 
 
 
@@ -63,7 +171,25 @@
 
 
 
-#line 81 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
 
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdint.h"
  
@@ -321,799 +447,6 @@ typedef unsigned     long long uintmax_t;
 
 
  
-#line 83 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-#line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stddef.h"
- 
-
-
-
-
-
-
- 
-
- 
- 
- 
-
-
-
-
-
- 
-
-
-
-
-
-#line 34 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stddef.h"
-
-
-
-
-  typedef signed int ptrdiff_t;
-
-
-
-  
-
-
-
-    typedef unsigned int size_t;    
-#line 57 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stddef.h"
-
-
-
-   
-
-
-
-      typedef unsigned short wchar_t;  
-#line 82 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stddef.h"
-
-
-
-    
-
-
-
-
-   
-
-
-
-
-  typedef long double max_align_t;
-
-
-
-
-
-
-
-
-
-#line 114 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stddef.h"
-
-
-
- 
-
-#line 84 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
-
-typedef enum  {
-  osPriorityIdle          = -3,          
-  osPriorityLow           = -2,          
-  osPriorityBelowNormal   = -1,          
-  osPriorityNormal        =  0,          
-  osPriorityAboveNormal   = +1,          
-  osPriorityHigh          = +2,          
-  osPriorityRealtime      = +3,          
-  osPriorityError         =  0x84,       
-  os_priority_reserved    =  0x7FFFFFFF  
-} osPriority;
-
-
-
-
-
-typedef enum  {
-  osOK                    =     0,       
-  osEventSignal           =  0x08,       
-  osEventMessage          =  0x10,       
-  osEventMail             =  0x20,       
-  osEventTimeout          =  0x40,       
-  osErrorParameter        =  0x80,       
-  osErrorResource         =  0x81,       
-  osErrorTimeoutResource  =  0xC1,       
-  osErrorISR              =  0x82,       
-  osErrorISRRecursive     =  0x83,       
-  osErrorPriority         =  0x84,       
-  osErrorNoMemory         =  0x85,       
-  osErrorValue            =  0x86,       
-  osErrorOS               =  0xFF,       
-  os_status_reserved      =  0x7FFFFFFF  
-} osStatus;
-
-
-
-typedef enum  {
-  osTimerOnce             =     0,       
-  osTimerPeriodic         =     1        
-} os_timer_type;
-
-
-typedef void (*os_pthread) (void const *argument);
-
-
-typedef void (*os_ptimer) (void const *argument);
-
-
-
-
-typedef struct os_thread_cb *osThreadId;
-
-
-typedef struct os_timer_cb *osTimerId;
-
-
-typedef struct os_mutex_cb *osMutexId;
-
-
-typedef struct os_semaphore_cb *osSemaphoreId;
-
-
-typedef struct os_pool_cb *osPoolId;
-
-
-typedef struct os_messageQ_cb *osMessageQId;
-
-
-typedef struct os_mailQ_cb *osMailQId;
-
-
-
-typedef struct os_thread_def  {
-  os_pthread               pthread;    
-  osPriority             tpriority;    
-  uint32_t               instances;    
-  uint32_t               stacksize;    
-} osThreadDef_t;
-
-
-typedef struct os_timer_def  {
-  os_ptimer                 ptimer;    
-  void                      *timer;    
-} osTimerDef_t;
-
-
-typedef struct os_mutex_def  {
-  void                      *mutex;    
-} osMutexDef_t;
-
-
-typedef struct os_semaphore_def  {
-  void                  *semaphore;    
-} osSemaphoreDef_t;
-
-
-typedef struct os_pool_def  {
-  uint32_t                 pool_sz;    
-  uint32_t                 item_sz;    
-  void                       *pool;    
-} osPoolDef_t;
-
-
-typedef struct os_messageQ_def  {
-  uint32_t                queue_sz;    
-  void                       *pool;    
-} osMessageQDef_t;
-
-
-typedef struct os_mailQ_def  {
-  uint32_t                queue_sz;    
-  uint32_t                 item_sz;    
-  void                       *pool;    
-} osMailQDef_t;
-
-
-typedef struct  {
-  osStatus                 status;     
-  union  {
-    uint32_t                    v;     
-    void                       *p;     
-    int32_t               signals;     
-  } value;                             
-  union  {
-    osMailQId             mail_id;     
-    osMessageQId       message_id;     
-  } def;                               
-} osEvent;
-
-
-
-
-
-
-osStatus osKernelInitialize (void);
-
-
-
-osStatus osKernelStart (void);
-
-
-
-int32_t osKernelRunning(void);
-
-
-
-
-extern uint32_t const os_tickfreq;
-extern uint16_t const os_tickus_i;
-extern uint16_t const os_tickus_f;
-
-
-
-
-uint32_t osKernelSysTick (void);
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-#line 280 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
-
-
-osThreadId osThreadCreate (const osThreadDef_t *thread_def, void *argument);
-
-
-
-osThreadId osThreadGetId (void);
-
-
-
-
-osStatus osThreadTerminate (osThreadId thread_id);
-
-
-
-osStatus osThreadYield (void);
-
-
-
-
-
-osStatus osThreadSetPriority (osThreadId thread_id, osPriority priority);
-
-
-
-
-osPriority osThreadGetPriority (osThreadId thread_id);
-
-
-
-
-
-
-
-osStatus osDelay (uint32_t millisec);
-
-#line 333 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-#line 348 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
-
-
-osTimerId osTimerCreate (const osTimerDef_t *timer_def, os_timer_type type, void *argument);
-
-
-
-
-
-osStatus osTimerStart (osTimerId timer_id, uint32_t millisec);
-
-
-
-
-osStatus osTimerStop (osTimerId timer_id);
-
-
-
-
-osStatus osTimerDelete (osTimerId timer_id);
-
-
-
-
-
-
-
-
-int32_t osSignalSet (osThreadId thread_id, int32_t signals);
-
-
-
-
-
-int32_t osSignalClear (osThreadId thread_id, int32_t signals);
-
-
-
-
-
-
-
-
-
-__value_in_regs osEvent osSignalWait (int32_t signals, uint32_t millisec);
-
-
-
-
-
-
-
-#line 416 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
-osMutexId osMutexCreate (const osMutexDef_t *mutex_def);
-
-
-
-
-
-osStatus osMutexWait (osMutexId mutex_id, uint32_t millisec);
-
-
-
-
-osStatus osMutexRelease (osMutexId mutex_id);
-
-
-
-
-osStatus osMutexDelete (osMutexId mutex_id);
-
-
-
-
-
-
-
-
-#line 458 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
-
-osSemaphoreId osSemaphoreCreate (const osSemaphoreDef_t *semaphore_def, int32_t count);
-
-
-
-
-
-int32_t osSemaphoreWait (osSemaphoreId semaphore_id, uint32_t millisec);
-
-
-
-
-osStatus osSemaphoreRelease (osSemaphoreId semaphore_id);
-
-
-
-
-osStatus osSemaphoreDelete (osSemaphoreId semaphore_id);
-
-
-
-
-
-
-
-
-
-
-
-
-#line 506 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
-osPoolId osPoolCreate (const osPoolDef_t *pool_def);
-
-
-
-
-void *osPoolAlloc (osPoolId pool_id);
-
-
-
-
-void *osPoolCAlloc (osPoolId pool_id);
-
-
-
-
-
-osStatus osPoolFree (osPoolId pool_id, void *block);
-
-
-
-
-
-
-
-
-
-
-
-
-#line 553 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
-
-osMessageQId osMessageCreate (const osMessageQDef_t *queue_def, osThreadId thread_id);
-
-
-
-
-
-
-osStatus osMessagePut (osMessageQId queue_id, uint32_t info, uint32_t millisec);
-
-
-
-
-
-
-
-
-
-__value_in_regs osEvent osMessageGet (osMessageQId queue_id, uint32_t millisec);
-
-
-
-
-
-
-
-
-
-
-
-
-
-#line 605 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\cmsis_os.h"
-
-
-
-
-
-
-
-
-
-
-osMailQId osMailCreate (const osMailQDef_t *queue_def, osThreadId thread_id);
-
-
-
-
-
-void *osMailAlloc (osMailQId queue_id, uint32_t millisec);
-
-
-
-
-
-void *osMailCAlloc (osMailQId queue_id, uint32_t millisec);
-
-
-
-
-
-osStatus osMailPut (osMailQId queue_id, void *mail);
-
-
-
-
-
-
-
-
-
-__value_in_regs osEvent osMailGet (osMailQId queue_id, uint32_t millisec);
-
-
-
-
-
-
-osStatus osMailFree (osMailQId queue_id, void *mail);
-
-
-
-
-
-
-
-
-uint32_t os_suspend (void);
-
-
-
-void os_resume (uint32_t sleep_time);
-
-
-__declspec(noreturn) void os_idle_demon (void);
-
-
-
-__declspec(noreturn) void os_error (uint32_t error_code);
-
-
-
-
-
-
-#line 3 "Timer.c"
-#line 1 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Include\\NUC100Series.h"
- 
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
- 
-
-
-
-
- 
-
-
-
- 
-
-typedef enum IRQn
-{
-     
-    NonMaskableInt_IRQn         = -14,     
-    HardFault_IRQn              = -13,     
-    SVCall_IRQn                 = -5,      
-    PendSV_IRQn                 = -2,      
-    SysTick_IRQn                = -1,      
-
-     
-    BOD_IRQn                  = 0,         
-    WDT_IRQn                  = 1,         
-    EINT0_IRQn                = 2,         
-    EINT1_IRQn                = 3,         
-    GPAB_IRQn                 = 4,         
-    GPCDEF_IRQn               = 5,         
-    PWMA_IRQn                 = 6,         
-    PWMB_IRQn                 = 7,         
-    TMR0_IRQn                 = 8,         
-    TMR1_IRQn                 = 9,         
-    TMR2_IRQn                 = 10,        
-    TMR3_IRQn                 = 11,        
-    UART02_IRQn               = 12,        
-    UART1_IRQn                = 13,        
-    SPI0_IRQn                 = 14,        
-    SPI1_IRQn                 = 15,        
-    SPI2_IRQn                 = 16,        
-    SPI3_IRQn                 = 17,        
-    I2C0_IRQn                 = 18,        
-    I2C1_IRQn                 = 19,        
-    CAN0_IRQn                 = 20,        
-    CAN1_IRQn                 = 21,        
-    SC012_IRQn                = 22,        
-    USBD_IRQn                 = 23,        
-    PS2_IRQn                  = 24,        
-    ACMP_IRQn                 = 25,        
-    PDMA_IRQn                 = 26,        
-    I2S_IRQn                  = 27,        
-    PWRWU_IRQn                = 28,        
-    ADC_IRQn                  = 29,        
-    IRC_IRQn                  = 30,        
-    RTC_IRQn                  = 31         
-} IRQn_Type;
-
-
-
-
-
-
- 
-
- 
-
-
-
-
-
-   
-
-
-#line 1 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\Include\\core_cm0.h"
- 
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
 #line 35 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\Include\\core_cm0.h"
 
 
@@ -22111,133 +21444,285 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 
-#line 4 "Timer.c"
+#line 12 "C:\\Keil_v5\\ARM\\PACK\\Nuvoton\\NuMicro_DFP\\1.1.0\\Device\\NUC100\\Driver\\timer.c"
+
+
+
+
+ 
 
 
 
  
-extern int32_t tmr0sec, tmr1sec;
-extern int8_t charging;
-extern float	u32ADC0Result;
-extern float u32ADC0Result1;
-extern   int tcpsendchtimer;
-extern osMutexId	(uart_mutex_id); 
-__inline void batteryind (void);
-int8_t time;
-int32_t life=0;
 
-extern int interval_count;
+
 
  
-static void Timer1_Callback (void const *arg);                  
-
-static osTimerId id1;                                           
-static uint32_t  exec1;                                         
-static uint32_t os_timer_cb_Timer1[6]; const osTimerDef_t os_timer_def_Timer1 = { (Timer1_Callback), (os_timer_cb_Timer1) };                    
 
 
-static void Timer1_Callback (void const *arg) {
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+uint32_t TIMER_Open(TIMER_T *timer, uint32_t u32Mode, uint32_t u32Freq)
+{
+    uint32_t u32Clk = TIMER_GetModuleClock(timer);
+    uint32_t u32Cmpr = 0, u32Prescale = 0;
+
+    
+    if(u32Freq > (u32Clk / 2))
+    {
+        u32Cmpr = 2;
+    }
+    else
+    {
+        if(u32Clk >= 0x4000000)
+        {
+            u32Prescale = 7;    
+            u32Clk >>= 3;
+        }
+        else if(u32Clk >= 0x2000000)
+        {
+            u32Prescale = 3;    
+            u32Clk >>= 2;
+        }
+        else if(u32Clk >= 0x1000000)
+        {
+            u32Prescale = 1;    
+            u32Clk >>= 1;
+        }
+
+        u32Cmpr = u32Clk / u32Freq;
+    }
+
+    timer->TCSR = u32Mode | u32Prescale;
+    timer->TCMPR = u32Cmpr;
+
+    return(u32Clk / (u32Cmpr * (u32Prescale + 1)));
 }
 
 
+
+
+
+
+
+
+
  
-static void Timer2_Callback (void const *arg);                  
+void TIMER_Close(TIMER_T *timer)
+{
+    timer->TCSR = 0;
+    timer->TEXCON = 0;
+}
 
-static osTimerId id2;                                           
-static uint32_t  exec2;                                         
-static uint32_t os_timer_cb_Timer2[6]; const osTimerDef_t os_timer_def_Timer2 = { (Timer2_Callback), (os_timer_cb_Timer2) };
-int tc = 0; 
 
-static void Timer2_Callback (void const *arg) 
+
+
+
+
+
+
+
+
+
+
+ 
+void TIMER_Delay(TIMER_T *timer, uint32_t u32Usec)
+{
+    uint32_t u32Clk = TIMER_GetModuleClock(timer);
+    uint32_t u32Prescale = 0, delay = (SystemCoreClock / u32Clk) + 1;
+    uint32_t u32Cmpr, u32NsecPerTick;
+
+    
+    timer->TCSR = 0;
+    timer->TEXCON = 0;
+
+    if(u32Clk <= 1000000)    
+    {
+        if(u32Usec < 1000)
+            u32Usec = 1000;
+        if(u32Usec > 1000000)
+            u32Usec = 1000000;
+    }
+    else
+    {
+        if(u32Usec < 100)
+            u32Usec = 100;
+        if(u32Usec > 1000000)
+            u32Usec = 1000000;
+    }
+
+    if(u32Clk <= 1000000)
+    {
+        u32Prescale = 0;
+        u32NsecPerTick = 1000000000 / u32Clk;
+        u32Cmpr = (u32Usec * 1000) / u32NsecPerTick;
+    }
+    else
+    {
+        if(u32Clk > 64000000)
+        {
+            u32Prescale = 7;    
+            u32Clk >>= 3;
+        }
+        else if(u32Clk > 32000000)
+        {
+            u32Prescale = 3;    
+            u32Clk >>= 2;
+        }
+        else if(u32Clk > 16000000)
+        {
+            u32Prescale = 1;    
+            u32Clk >>= 1;
+        }
+
+        if(u32Usec < 250)
+        {
+            u32Cmpr = (u32Usec * u32Clk) / 1000000;
+        }
+        else
+        {
+            u32NsecPerTick = 1000000000 / u32Clk;
+            u32Cmpr = (u32Usec * 1000) / u32NsecPerTick;
+        }
+    }
+
+    timer->TCMPR = u32Cmpr;
+    timer->TCSR = (1ul << 30) | u32Prescale; 
+
+    
+    
+    for(; delay > 0; delay--)
+    {
+        __nop();
+    }
+
+    while(timer->TCSR & (1ul << 25));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+void TIMER_EnableCapture(TIMER_T *timer, uint32_t u32CapMode, uint32_t u32Edge)
 {
 
+    timer->TEXCON = (timer->TEXCON & ~((1ul << 4) |
+                                       (0x3ul << 1))) |
+                    u32CapMode | u32Edge | (1ul << 3);
 }
 
 
 
- void Init_Timers (void) {
-  osStatus status;                                              
+
+
+
+
+
+
  
-  
-  exec1 = 1;
-  id1 = osTimerCreate (&os_timer_def_Timer1, osTimerOnce, &exec1);
-  if (id1 != 0) {    
-    
-    status = osTimerStart (id1, 100);            
-    if (status != osOK) {
-      
-    }
-  }
- 
-  
-  exec2 = 2;
-  id2 = osTimerCreate (&os_timer_def_Timer2, osTimerPeriodic, &exec2);
-  if (id2 != 0) {    
-    
-    status = osTimerStart (id2, 2000);            
-    if (status != osOK) {
-      
-    }
-  }
-}
- 
-
-
-
-
-
-
-__inline void batteryind (void)
+void TIMER_DisableCapture(TIMER_T *timer)
 {
-  time++;
-  if(time == 1)
-  {  
-
-
-
-
-  }
-  else
-  {
-		if( u32ADC0Result > 4.600 )
-		{      
- 
-      
-		}
-		else if( u32ADC0Result < 3.25)
-		{
-
-		
-			charging = 0;
-
-			
-		}
-		else if( u32ADC0Result < 3.50 )
-		{
-
-		
-			charging = 0;
-
-			
-		}
-		else if( u32ADC0Result < 3.75)
-		{
-
-		
-			charging = 0;
-
-			
-		}
-		else
-		{
-
-		
-			charging = 0;
-			
-		}
-	time=0;
-  }
-	
+    timer->TEXCON &= ~(1ul << 3);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+void TIMER_EnableEventCounter(TIMER_T *timer, uint32_t u32Edge)
+{
+    timer->TEXCON = (timer->TEXCON & ~(1ul << 0)) | u32Edge;
+    timer->TCSR |= (1ul << 24);
+}
+
+
+
+
+
+
+
+
+
+ 
+void TIMER_DisableEventCounter(TIMER_T *timer)
+{
+    timer->TCSR &= ~(1ul << 24);
+}
+
+
+
+
+
+
+
+
+
+
+ 
+uint32_t TIMER_GetModuleClock(TIMER_T *timer)
+{
+    uint32_t u32Src;
+    const uint32_t au32Clk[] = {(12000000UL), (32768UL), 0, 0, 0, (10000UL), 0, (22118400UL)};
+
+    if(timer == ((TIMER_T *) ((( uint32_t)0x40000000) + 0x10000)))
+        u32Src = (((CLK_T *) ((( uint32_t)0x50000000) + 0x00200))->CLKSEL1 & (7ul << 8)) >> 8;
+    else if(timer == ((TIMER_T *) ((( uint32_t)0x40000000) + 0x10020)))
+        u32Src = (((CLK_T *) ((( uint32_t)0x50000000) + 0x00200))->CLKSEL1 & (7ul << 12)) >> 12;
+    else if(timer == ((TIMER_T *) ((( uint32_t)0x40100000) + 0x10000)))
+        u32Src = (((CLK_T *) ((( uint32_t)0x50000000) + 0x00200))->CLKSEL1 & (7ul << 16)) >> 16;
+    else  
+        u32Src = (((CLK_T *) ((( uint32_t)0x50000000) + 0x00200))->CLKSEL1 & (7ul << 20)) >> 20;
+
+    if(u32Src == 2)
+    {
+        return(SystemCoreClock);
+    }
+
+    return(au32Clk[u32Src]);
+}
+
+   
+
+   
+
+   
+
+ 

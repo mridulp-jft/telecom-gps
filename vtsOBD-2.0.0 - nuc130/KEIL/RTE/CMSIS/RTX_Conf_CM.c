@@ -48,7 +48,7 @@
 //   <i> Defines max. number of user threads that will run at the same time.
 //   <i> Default: 6
 #ifndef OS_TASKCNT
- #define OS_TASKCNT     1
+ #define OS_TASKCNT     2
 #endif
  
 //   <o>Default Thread stack size [bytes] <64-4096:8><#/4>
@@ -69,14 +69,14 @@
 //   <i> Defines the number of threads with user-provided stack size.
 //   <i> Default: 0
 #ifndef OS_PRIVCNT
- #define OS_PRIVCNT     0
+ #define OS_PRIVCNT     1
 #endif
  
 //   <o>Total stack size [bytes] for threads with user-provided stack size <0-1048576:8><#/4>
 //   <i> Defines the combined stack size for threads with user-provided stack size.
 //   <i> Default: 0
 #ifndef OS_PRIVSTKSIZE
- #define OS_PRIVSTKSIZE 124       // this stack size value is in words
+ #define OS_PRIVSTKSIZE 274       // this stack size value is in words
 #endif
  
 //   <q>Stack overflow checking
@@ -145,7 +145,7 @@
 //   <i> Defines how long a thread will execute before a thread switch.
 //   <i> Default: 5
 #ifndef OS_ROBINTOUT
- #define OS_ROBINTOUT   2
+ #define OS_ROBINTOUT   10
 #endif
  
 // </e>
@@ -213,8 +213,9 @@
  *---------------------------------------------------------------------------*/
  
 #define OS_TRV          ((uint32_t)(((double)OS_CLOCK*(double)OS_TICK)/1E6)-1)
- 
 
+extern int32_t HardFault_Handler();
+extern volatile int32_t tmr0sec;
 /*----------------------------------------------------------------------------
  *      Global Functions
  *---------------------------------------------------------------------------*/
@@ -223,8 +224,13 @@
 
 /// \brief The idle demon is running when no other thread is ready to run
 void os_idle_demon (void) {
- 
-  for (;;) {//osThreadYield();
+int idletime = 0; 
+  idletime = tmr0sec;
+  for (;;) {
+    if(tmr0sec > (idletime+10)){
+      HardFault_Handler();
+    }
+    //osThreadYield();
     /* HERE: include optional user code to be executed when no thread runs.*/
   }
 }
@@ -299,7 +305,7 @@ void os_error (uint32_t error_code) {
       break;
   }
   HardFault_Handler();
-  for (;;);
+  //for (;;);
 }
  
 

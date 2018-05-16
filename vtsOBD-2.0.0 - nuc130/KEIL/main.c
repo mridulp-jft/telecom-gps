@@ -28,9 +28,12 @@
     uint32_t u32BusClock;
 int16_t OUT_Y_H_A,  OUT_X_H_A,  OUT_Z_H_A, OUT_X_L_A, OUT_Y_L_A, OUT_Z_L_A, STATUS_REG_A, CTRL_REG4_A;
 int ay,ax,az = -1;
+int gy,gx,gz = -1;
+float aay,aax,aaz = -1;
+int ggy,ggx,ggz = -1;
 int simselect = 0; 
 char IP1[50] = "104.236.203.4";
-char PORT1[10] = "5556";
+char PORT1[10] = "5557";
 char IP2[50] = "159.89.254.53";
 char PORT2[10] = "5556";
 char vehicleregnum[15] = "DL15AN1234";
@@ -52,22 +55,24 @@ extern volatile char tamperalert;
 extern char emernum1[15];
 extern char emernum2[15];
 extern char networkoperator[30];
-
+uint8_t antennaselect = 0;
 extern uint8_t alertid;
 extern int fix;
 volatile int g_u32AdcIntFlag;
 volatile int netselect;
-
+volatile int ignitionhighlow = 0;
+volatile int emergencyhighlow = 0;
 //**********************************************
 uint8_t tmr1sec;
-volatile uint8_t wetmr = 0;
+volatile uint32_t wetmr;
 volatile int interval_count = 0;
 volatile int interval_count_health = 0;
 extern volatile int sleepinterval_health;
+extern char cregresp[10];
 char firmwaresize[20] = 0;
 char messagedata[200];
 volatile uint8_t input1, input2, input3, input4;
-
+extern   int sleepinterval;
 /*---------------------------------------------------------------------------------------------------------*/
 /* Extern variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -76,7 +81,27 @@ volatile uint8_t input1, input2, input3, input4;
 extern char suppportedpid[100][7];
 #endif
 extern volatile int pidcounter;
-
+extern char latitude[12];
+extern char longitude[12];
+extern char prevlatitude[12];
+extern char prevlongitude[12];
+extern char gpsdate[7];
+extern char gpstime[7];
+extern char kmph[6];
+extern char heading[8];
+extern char alt[8];
+extern char sat[3];
+extern char latdir[2];
+extern char longdir[2];
+extern char hdop[6];
+extern char pdop[5];
+extern char networkoperator[30];
+extern char mcc[5];
+extern char mnc[5];
+extern char lac[5];
+extern char cellid[10];
+extern char packetstatus;
+extern char nmr[200];
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -119,7 +144,6 @@ __inline void networkswitch();
 /*---------------------------------------------------------------------------------------------------------*/
 /* Extern variables                                                                              */
 /*---------------------------------------------------------------------------------------------------------*/
-
 extern void cregquerry(void);
 extern void Save_FS(void);
 extern volatile int32_t g_u8RecDataptr;
@@ -136,6 +160,7 @@ extern void SendAT_GPS(char * command, char * response1, char * response2, char 
 extern void parse_g(char* str, int first, int sec, char f, char s , char *string);
 extern float batteryvoltagethreshold;
 extern __inline void remove_all_chars(char* str, char c, char d);
+__inline void remove_all_alpha(char* str, char c, char d);
 extern void supportedpid(char command[5]);
 extern  void cpinquerry();
 extern int8_t charging, cpinready, cregready;
@@ -145,6 +170,7 @@ extern volatile int start_thead;
 extern osThreadId tid_Thread_OBD_READ;                                          // thread id
 //extern osThreadId tid_Thread_GSM;                                          // thread id
 osThreadId mainThreadID;
+extern osThreadId tid_Thread_accgyro_READ;
 extern int32_t signal;
 extern int32_t signal2;
 //extern char suppportedpid[200][7];
@@ -171,7 +197,7 @@ osMutexDef (tcp_mutex);		// Declare mutex
 osMutexId	(tcp_mutex_id); // Mutex ID
 osMutexDef (fs_mutex);		// Declare mutex
 osMutexId	(fs_mutex_id); // Mutex ID		
-
+volatile int wait=0;
 volatile uint8_t g_u8DeviceAddr = 0x6B;
 volatile uint8_t g_au8TxData[3];
 volatile uint8_t g_u8RxData;
@@ -182,23 +208,23 @@ volatile uint32_t u32Status = 0;
  * main: initialize and start the system
  */
 int main (void) {
+  int one = 0;
 
   SYS_UnlockReg();                          // Unlock Registers
   SYS_Init();                               // Initialise System
   SYS_LockReg();                            // Lock Registers
-  TIMER0->TCMPR = ((SystemCoreClock / 3) / 1);
-  TIMER0->TCSR = TIMER_TCSR_IE_Msk | TIMER_PERIODIC_MODE;
-  TIMER_SET_PRESCALE_VALUE(TIMER0, 0);
+  TIMER_Open(TIMER0, TIMER_PERIODIC_MODE, 1);
+  TIMER_EnableInt(TIMER0);
   NVIC_EnableIRQ(TMR0_IRQn);
   TIMER_Start(TIMER0);
   ADC_Open(ADC, ADC_ADCR_DIFFEN_SINGLE_END, ADC_ADCR_ADMD_CONTINUOUS, 0x7f);
   ADC_POWER_ON(ADC);
   ADC_EnableInt(ADC, ADC_ADF_INT);  
   NVIC_EnableIRQ(ADC_IRQn);
-
   Open_SPI_Flash();         
   // Initialise SPI Flash  
   //Init_Timers();                            // Initialise Timers
+  cregready  =   Init_Thread ();
   osKernelInitialize ();                    // initialise CMSIS-RTOS
 
   SYS_UnlockReg();
@@ -211,14 +237,13 @@ int main (void) {
   //Init_IOs();                               // Initialise Input/Outputs
   UARTs_Init();                             // Initialise UARTs
   osKernelStart ();                         // start thread execution 
-
   MidDid = SpiFlash_ReadMidDid();
   MidDid = SpiFlash_ReadMidDid();
   #ifdef OBD
     OBD_GET_PID();
   #endif
   mainThreadID = osThreadGetId();
-//Init_Thread ();
+PA7 = 1;
 //SpiFlash_ChipErase();
 //pt = readpt = 0;
 //saveipconfigurations();
@@ -232,55 +257,28 @@ SendAT(temp, "OK", "NOT INSERTED" , "ERROR",5);
 SendAT("\r\nAT+QSCLK=1\r\n\r\n", "Ready", "OK" , "ERROR",5);
 SendAT("\r\nAT+QSTK?\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
 SendAT("\r\nAT+QSTK=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
-//send_sms("8287324005", "I am Rudra");
+//send_sms("8287324005", "I am Rudra"); 
 //accgyroconfig();
 //saveipconfigurations();
-//readipconfigurations();
+readipconfigurations();
   while (1) {
     //saveipconfigurations();
-    readipconfigurations();
-    netselect = 2;
-//    memset(IP1,0,50);memset(PORT1,0,10);
-//    memset(IP2,0,50);memset(PORT2,0,10);
-//    memset(apn1,0,20);
-//    memset(apn2,0,20);
-//    strcat(apn1, "airtelgprs.com");
-//    strcat(apn2, "internet");
-//    
-//    strcat(IP1, "104.236.203.4");
-//    strcat(IP2, "159.89.254.53");
-//    strcat(PORT1, "5556");
-//    strcat(PORT2, "5556");
-//    saveipconfigurations();
-
-    
-
-//    memset(configdata,0,300);
-//    parse_g(configdata,1,2,'"','"',g_u8RecData);
-//    hextoascii(configdata,strlen(configdata));
-
-//    SendAT("\r\nAT\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
-//    SendAT("\r\nAT\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
-//    SendAT("\r\nAT\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
-//    SendAT("\r\nAT\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
-    
-    
-    
-    
+    //readipconfigurations();
+    netselect = 1;
+    SendAT("\r\nAT+CFUN=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
     if(netselect == 1){
-    SendAT("\r\nAT+QDSIM=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
+      SendAT("\r\nAT+QDSIM=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
     }else{
-    SendAT("\r\nAT+QDSIM=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5); 
+      SendAT("\r\nAT+QDSIM=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5); 
     }
-  
-    
+
     SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",5);	
     if(network == 1){
       cpinquerry();
       if(cpinready==1){
         cregquerry();
-        if(cregready == 1){
-          
+        //if(cregready == 1)
+          {
             SendAT("\r\nAT+CGREG?\r\n\r\n", "Ready", "OK" , "ERROR",5);
             if(netselect == 1){
               SendAT("\r\nAT+STKTR=\"810301218082028281830100\"\r\n", "+STKPCI: 0", "NAK" , "NAK",2);   //international
@@ -291,8 +289,10 @@ SendAT("\r\nAT+QSTK=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
               // Switch to international .  You need to give command AT+STKTR="810301240082028281830100900101"  For National Switch
               if(strstr(DestArray,"National(ON)")){
                 simselect = 1;
+                //SendAT("\r\nAT+COPS=1,2,\"40404\"\r\n", "+STKPCI: 0", "NAK" , "NAK",5);
               }else if(strstr(DestArray,"International(ON)")){
                 simselect = 2;
+                //SendAT("\r\nAT+COPS=1,2,\"40404\"\r\n", "+STKPCI: 0", "NAK" , "NAK",5);
               }else{
                 SendAT("\r\nAT+STKENV=\"D30782020181900101\"\r\n", "+STKPCI: 0", "NAK" , "NAK",5);
                 manualdelay(5);
@@ -314,19 +314,19 @@ SendAT("\r\nAT+QSTK=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
                 sprintf(temp,"\r\nAT+QIREGAPP=\"%s\",\"\",\"\"\r\n\r\n",apn2);          
               }
             }else{
-              sprintf(temp,"\r\nAT+QIREGAPP=\"%s\",\"\",\"\"\r\n\r\n","iot.com");      
+              sprintf(temp,"\r\nAT+QIREGAPP=\"%s\",\"\",\"\"\r\n\r\n","www");      
             }
             SendAT(temp, "Ready", "OK" , "ERROR",5);	
             SendAT("\r\nAT+QIACT\r\n\r\n", "Ready", "OK" , "ERROR",10);	
             if(timeoutflag != 0){
+                SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
+              
                 PB15 = 0;
                 manualdelay(1);
                 PB15 = 1;
                 manualdelay(100);      
                 SendAT("\r\nAT\r\n", "ERROR", "OK" , "4010",10);
             }
-         
-          
           if(updatefirmware == 1){
             SendAT("\r\nAT+QIFGCNT=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
             SendAT("\r\nAT+QICSGP=1,\"www\"\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
@@ -373,7 +373,7 @@ SendAT("\r\nAT+QSTK=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
     memset(temp,0,100);
     sprintf(temp,"\r\nAT+QIOPEN=0,\"TCP\",\"%s\",\"%s\"\r\n\r\n",IP1,PORT1);
     SendAT(temp,"CONNECT","ERROR","FAIL",10);
-    if((network == 1) && strstr(g_u8RecData,"CONNECT OK")){
+    if((network == 1) && strstr(g_u8RecData,"CONNECT OK")){ 
       memset(temp,0,100);
       sprintf(temp,"\n\n$%s$%s$%s$%s$%s\n%c",vehicleregnum,imei,firmwareversion,frameformat,lastlocation,0x1A);
       loginpacket = 1;
@@ -392,7 +392,8 @@ SendAT("\r\nAT+QSTK=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
     }   
     network=0;
     sendfs = 0; 
-    sms_mc60();    
+    sms_mc60();
+    //send_sms("8287324005", "I am Rudra");
     TCP_Send("\r\nAT+QISEND=0\r\n\r\n\r\n",g_u8SendData,">","ERROR","SEND OK",10);	
     breaker = 0;
     if(sendfs==1){
@@ -400,6 +401,12 @@ SendAT("\r\nAT+QSTK=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
     }
    
     if(network == 1){
+      if(alertid == 10){
+        memset(temp, 0, 100);
+        sprintf(temp, "%s,%s,%s,%s,%s,%d,%s,%s,%s,%s,%s",imei, latitude, latdir, longitude, longdir,  fix, kmph, cellid , lac, gpsdate, gpstime);
+        send_sms(emernum1, temp);
+        send_sms(emernum2, temp);
+      }
       notsentcounter++;
       sendalert();
       if(breaker == 1)SendAT_GPS("\r\n\r\nAT+QGNSSRD=\"NMEA/RMC\"\r\n\r\n\r\n", "MGPSSTATUS", "OK" , "ERROR",5);	
@@ -416,7 +423,10 @@ SendAT("\r\nAT+QSTK=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
       SendAT("\r\nAT+QICLOSE=1\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
       SendAT("\r\nAT+CFUN=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
       SendAT("\r\nAT+CFUN=1\r\n\r\n", "SMS Ready", "NOT INSERTED" , "ERROR",10);	
-      //osDelay(2000);
+      wait = 0;
+      do{
+        sms_mc60(); 
+      }while(wait < 2);
       Save_FS();
       SendAT("\r\nAT+QIDEACT\r\n\r\n", "OK", "DEACT OK" , "ERROR",10);
       SendAT("\r\nAT+QIMODE=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
@@ -425,26 +435,61 @@ SendAT("\r\nAT+QSTK=1\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
       //manualdelay(200);
     }
     else{
+      
+        //if(fix == 0){
+           SendAT("\r\nAT+QGEPOF=0,255\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
+           //SendAT("\r\nAT+QGEPOF=1,255\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",5);
+               
+        //}
       // Keep looping...
-      //        if(interval_count > 10000)interval_count = 0;     
-//        if(interval_count_health > 10000)interval_count_health = 0;     
-//        if(tc > 10000)tc = 0;     
-//        if(tmr0sec > 10000)tmr0sec = 0;     
-//        if(tcpsendchtimer > 10000)tcpsendchtimer = 0;     
-//        if(i2ctimeout > 10000)i2ctimeout = 0;
+        if(interval_count > 10000)interval_count = 0;     
+        if(interval_count_health > 10000)interval_count_health = 0;     
+        if(tc > 10000)tc = 0;     
+        if(tmr0sec > 10000)tmr0sec = 0;     
+        if(tcpsendchtimer > 10000)tcpsendchtimer = 0;     
+        if(i2ctimeout > 10000)i2ctimeout = 0;
+        if(wetmr > 10000)wetmr = 0;
+        if(ignition == 1){
+          sleepinterval = sleepinterval_i1;
+        }else{
+          sleepinterval = sleepinterval_i0;      
+        }
+        // Live Data packet
+        one = 1;
+        while((interval_count_health < sleepinterval_health) && (interval_count < sleepinterval)){
+//          if(sleepinterval > 30){
+//            if(one == 1)
+//              SendAT("\r\nAT+CFUN=0\r\n\r\n", "OK", "NOT INSERTED" , "ERROR",10);
+//            
+//            one = 0;
+//          }
+          dtr = 0;
+          if(PB6 == 0){
+            sms_mc60();
+          }
+        }
+        one = 0;
+
     }
   }
 }
 
 __inline void networkswitch(){
- 
+ int timout = 0;
   _NETSWITCH:
+  timout++;
+  if(timout > 0){
+    SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
+    goto __RETURN;
+  }
+  SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
+  
   PB15 = 0;
   manualdelay(1);
   PB15 = 1;
-  manualdelay(100);      
+  manualdelay(50);      
   SendAT("\r\nAT\r\n", "+STKPCI", "NAK" , "NAK",40);
-  manualdelay(100);
+  manualdelay(50);
   SendAT("\r\nAT+COPS?\r\n", "OK", "NAK" , "NAK",40);
   // Set Menu 2500 is for Set Menu .
   SendAT("\r\nAT+STKTR=\"810301250082028281830100\"\r\n", "+STKPCI:", "NAK" , "NAK",40);
@@ -489,12 +534,15 @@ __inline void networkswitch(){
     goto _NETSWITCH;
   }    
   // Here you need to reset the module you can use power reset
+  SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
+
   PB15 = 0;
   manualdelay(1);
   PB15 = 1;
   manualdelay(100);      
   SendAT("\r\nAT\r\n", "+STKPCI: 0", "NAK" , "NAK",40);
   manualdelay(100);   
+  __RETURN:
 }
 
 __inline void accgyroconfig(void){
@@ -509,7 +557,7 @@ __inline void accgyroconfig(void){
   
 }
 
-__inline int binTwosComplementToSignedDecimal(int data,int significantBits) 
+__inline float binTwosComplementToSignedDecimal(int data,int significantBits) 
 {
     int power = pow(2,significantBits-1);
     int sum = 0;
@@ -551,30 +599,44 @@ __inline int binTwosComplementToSignedDecimal(int data,int significantBits)
     } 
     return sum;
 }
-void readaccgyrodata(void){
- 
-  I2C_Write(0x10,0x60);
-  I2C_Write(0x11,0x60);  
-  I2C_Write(0x20, 0x67);  
+ void readaccgyrodata(void){
+ while(1){
+//  I2C_Write(0x10,0x60);
+//  I2C_Write(0x11,0x60);  
+//  I2C_Write(0x20, 0x67);  
 /*
     Let’s use FS ±2 g as an example sensitivity level.  As the range is -2 to +2, this would be a total of 4g.  Or 4,000 Milli-Gs.
     The output is 16 bits. 16 bits equals 65,535.   This means we can get 65,535 different readings for the range  between -2 and +2. (or -2,000 MilliGs and +2,000 MilliGs)
     4,000 MilliGs / 65,535 = 0.061
     Each time the LSB changes by one, the value changes by 0.061, which is the value highlighted in blue in the table above.
 */
-  STATUS_REG_A = I2C_Read(0x1E);
-  if(1){
-    ax = ((I2C_Read(0x29) << 8) | I2C_Read(0x28))*0.061;
-    //OUT_X_L_A = I2C_Read(0x28); 
-    ay = ((I2C_Read(0x2B) << 8) | I2C_Read(0x2A))*0.061;
-    //OUT_Y_L_A = I2C_Read(0x2A); 
-    az = ((I2C_Read(0x2D) << 8) | I2C_Read(0x2C))*0.061;
-    //OUT_Z_L_A = I2C_Read(0x2C);   
-    ax = binTwosComplementToSignedDecimal(ax, 16);
-    ay = binTwosComplementToSignedDecimal(ay, 16);
-    az = binTwosComplementToSignedDecimal(az, 16);
-  }
-  
+//  STATUS_REG_A = I2C_Read(0x1E);
+//  if(1)
+   
+    osSignalWait (0x0001, osWaitForever);  
+   {
+    ax = ((I2C_Read(0x29) << 8) | I2C_Read(0x28));
+    ay = ((I2C_Read(0x2B) << 8) | I2C_Read(0x2A));
+    az = ((I2C_Read(0x2D) << 8) | I2C_Read(0x2C));
+
+    aax = binTwosComplementToSignedDecimal(ax, 16)*0.00061;
+    aay = binTwosComplementToSignedDecimal(ay, 16)*0.00061;
+    aaz = binTwosComplementToSignedDecimal(az, 16)*0.00061;
+
+    
+    gx = ((I2C_Read(0x23) << 8) | I2C_Read(0x22));
+    gy = ((I2C_Read(0x25) << 8) | I2C_Read(0x24));
+    gz = ((I2C_Read(0x27) << 8) | I2C_Read(0x26));
+   
+    ggx = binTwosComplementToSignedDecimal(gx, 16)*0.00763;
+    ggy = binTwosComplementToSignedDecimal(gy, 16)*0.00763;
+    ggz = binTwosComplementToSignedDecimal(gz, 16)*0.00763;
+    
+    
+  }osSignalClear (tid_Thread_accgyro_READ, 0x0001);
+  //osDelay(100);
+ }
+ 
 }
 
 __inline uint8_t I2C_Write(uint16_t u16Address, uint8_t u8Data)
@@ -667,6 +729,7 @@ __inline uint8_t I2C_Read(uint16_t u16Address){
 
 
 __inline void sms_mc60(void){
+  char epolatlong[30] = {0};
   int smsreq=0;
   int del = 0;
   if(ring = 1){
@@ -699,6 +762,15 @@ __inline void sms_mc60(void){
       send_sms(sender_num, messagedata); 
     }
     else if(strstr(g_u8RecData,"RESET")){
+      
+      SendAT("\r\nAT+CMGD=1,4\r\n\r\n", "OK", "ERROR", "7103", 10);
+      SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
+
+      PB15 = 0;
+      manualdelay(1);
+      PB15 = 1;
+      manualdelay(50);       
+      
       SYS_UnlockReg();                          // Unlock Registers
       SYS->IPRSTC1 = 0x1; /* Reset MCU */      
     }
@@ -801,24 +873,80 @@ __inline void sms_mc60(void){
       memset(ph_num,0,15);
       parse_g(g_u8RecData,3,4,'"','"',ph_num);  
     }       
-    else if(strstr(g_u8RecData,"SETBATTHRESHOLD")){
+    else if(strstr(g_u8RecData,"SETBATTHRESH")){
       parameterupgrade = 1;
       memset(temp,0,100);
       parse_g(g_u8RecData,9,10,'"','"',temp);  
-      batteryvoltagethreshold = atoi(temp); 
+      batteryvoltagethreshold = atof(temp); 
+      saveipconfigurations();  
+      sprintf(messagedata,"Battery Alert below \"%.1f\" volts configured and saved",batteryvoltagethreshold);
+      send_sms(sender_num, messagedata);          
     }
-    else if(strstr(g_u8RecData,"SETNETSELECT")){
+    else if(strstr(g_u8RecData,"SETSIMSWITCH")){
       parameterupgrade = 1;
       memset(temp,0,100);
-      parse_g(g_u8RecData,9,10,'"','"',temp);  
-      netselect = atoi(temp); 
+      //parse_g(g_u8RecData,9,10,'"','"',temp);  
+      //netselect = atoi(temp);
+      networkswitch();
+      send_sms(sender_num, imei);  
+      manualdelay(500);
     }     
     else if(strstr(g_u8RecData,"GETIMEI")){
       send_sms(sender_num, imei);
-    }         
-    else if(strstr(g_u8RecData,"GETNMEA")){
-      SendAT("\r\nAT+QGNSSRD?\r\n\r\n", "Ready", "OK" , "ERROR",10);	
-    }         
+    }
+    else if(strstr(g_u8RecData,"EPO")){
+      memset(epolatlong,0,30);
+      parse_g(g_u8RecData,9,10,'"','"',epolatlong);        
+      SendAT("\r\nAT+CREG?;+CGREG?\r\n\r\n", "OK", "ERROR", "7103", 10);
+      memset(cregresp,0,10);
+      parse_g(g_u8RecData, 1, 1, ',', 'O' , cregresp);
+      remove_all_chars(cregresp,'\r','\n');      
+      if(strstr(g_u8RecData,"1") || strstr(g_u8RecData, "5"))
+        {
+          memset(temp,0,100);
+          sprintf(temp,"\r\nAT+QGREFLOC=%s\r\n\r\n",epolatlong);
+          SendAT(temp, "OK", "ERROR", "7103", 10);
+          SendAT("\r\nAT+QGNSSEPO=1\r\n\r\n", "OK", "ERROR", "7103", 10);
+          SendAT("\r\nAT+QGEPOAID=1\r\n\r\n", "OK", "ERROR", "7103", 10);
+      }
+    }        
+     else if(strstr(g_u8RecData,"ANTENNA")){
+      memset(epolatlong,0,30);
+      parse_g(g_u8RecData,9,10,'"','"',epolatlong);        
+      if(strstr(epolatlong,"EXT")){
+        antennaselect = 0;
+      }else if(strstr(epolatlong,"INT")){
+        antennaselect = 1;
+      }        
+      saveipconfigurations(); 
+    }       
+     else if(strstr(g_u8RecData,"DEFAULT")){
+        memset(IP1,0,50);
+        strcat(IP1,"104.236.203.4");
+        memset(PORT1,0,10);
+        strcat(PORT1,"5557");
+        memset(PORT2,0,10);
+        memset(IP2,0,50);
+        strcat(IP1,"104.236.203.4");
+        strcat(PORT1,"5557");    
+        memset(vehicleregnum,0,15);
+        strcat(vehicleregnum,"BR15AN1526");
+
+        memset(apn1,0,20);
+        memset(apn2,0,20);
+        strcat(apn1,"airtelgprs.com");
+        strcat(apn2,"internet");
+        sleepinterval_i1 = 30;
+        sleepinterval_i0 = 30;
+
+        saveipconfigurations(); 
+    } 
+     else if(strstr(g_u8RecData,"SETVENDORID")){
+      memset(temp,0,100);
+      parse_g(g_u8RecData,9,10,'"','"',temp);        
+      
+      saveipconfigurations(); 
+    }      
   ring=0;  
   if(del == 0){
     manualdelay(100);
@@ -884,10 +1012,33 @@ int saveipconfigurations(void){
   int retry = 1;
   int len;
   while(retry == 1){
+    if((strlen(IP1) < 4) || (strlen(IP2) < 4)|| (strlen(PORT1) < 1) || (strlen(PORT2) < 1) || (strlen(vehicleregnum) < 4)){
+
+      //reboot
+      SYS_UnlockReg();                          // Unlock Registers
+      SYS->IPRSTC1 = 0x1; /* Reset MCU */
+    
+      memset(IP1,0,50);
+      memset(IP2,0,50);
+      memset(PORT1,0,7);
+      memset(PORT2,0,7);
+      memset(vehicleregnum,0,15);
+      strcat(IP1, "203.129.207.124");
+      strcat(IP2, "104.236.203.4");
+      strcat(PORT1, "1025");
+      strcat(PORT2, "5557");
+      strcat(vehicleregnum, "DL1PC5498");
+      send_sms("8287324005", "bhasad hai");
+      sleepinterval_i1 = 30;
+      sleepinterval_i0 = 30;
+      sleepinterval_health = 900;
+  }    
+    
+    
     memset(fileinstance,0,20);
     SendAT("\r\nAT+QFDEL=\"IPCONFIG.TXT\"\r\n", "ERROR", "OK" , "4010",10);
     while(strstr(g_u8RecData,"ERROR")){
-      //SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
+      SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
       PB15 = 0;
         manualdelay(1);
       PB15 = 1;
@@ -909,7 +1060,7 @@ int saveipconfigurations(void){
     
     SendAT("\r\nAT+QFOPEN=\"IPCONFIG.TXT\",0\r\n", "ERROR", "OK" , "ERROR",10);
     if(strstr(g_u8RecData,"ERROR")){
-      //SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
+      SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
       PB15 = 0;
         manualdelay(1);
       PB15 = 1;
@@ -931,8 +1082,8 @@ int saveipconfigurations(void){
     SendAT(temp, "CONNECT", "OK" , "ERROR",10);	  
 
     memset(configdata,0,300);
-    sprintf(configdata,"|IP1|%s|P1|%s|IP2|%s|P2|%s|F_R_P|%.0f|F_W_P|%.0f|I1_NR|%d|L_PLT|%s|APN1|%s|OS|%.1f|HA|%.1f|HB|%.1f|RT|%.1f|I_HLT|%d|I0_NR|%d|I_EM|%d|B_V_T|%.1f|net|%d|APN2|%s|\n",\
-                         IP1,PORT1,IP2,PORT2,readpt,pt,sleepinterval_i1,vehicleregnum,apn1,overspeed,harshacc,harshbrake,rashturn,sleepinterval_health,sleepinterval_i0,wakeinterval_emer,batteryvoltagethreshold,netselect,apn2);
+    sprintf(configdata,"|IP1|%s|P1|%s|IP2|%s|P2|%s|F_R_P|%.0f|F_W_P|%.0f|I1_NR|%d|L_PLT|%s|APN1|%s|OS|%.1f|HA|%.1f|HB|%.1f|RT|%.1f|I_HLT|%d|I0_NR|%d|I_EM|%d|B_V_T|%.1f|net|%d|APN2|%s|ant|%d|\n",\
+                         IP1,PORT1,IP2,PORT2,readpt,pt,sleepinterval_i1,vehicleregnum,apn1,overspeed,harshacc,harshbrake,rashturn,sleepinterval_health,sleepinterval_i0,wakeinterval_emer,batteryvoltagethreshold,netselect,apn2,antennaselect);
     retry = 0;    
     len = strlen(configdata);
     
@@ -948,6 +1099,9 @@ int saveipconfigurations(void){
     SendAT(temp, "+CME ERROR", "OK" , "ERROR",10);
     manualdelay(10);
   }
+SendAT("\r\nAT+QICLOSE=0\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
+SendAT("\r\nAT+QICLOSE=1\r\n\r\n","CLOSE OK\r\n","ERROR","FAIL",10);	
+
 return 0;
 }
 __inline void readipconfigurations(void){
@@ -956,12 +1110,13 @@ __inline void readipconfigurations(void){
   char pt_c[10] = 0;
   char readpt_c[10] = 0;
   char interval_c[10] = 0;
+  __READCONFIG:
   do{    
     manualdelay(10);
     memset(fileinstance,0,20);
     SendAT("\r\nAT+QFOPEN=\"IPCONFIG.TXT\",0\r\n", "ERROR", "OK\r\n" , "ERROR",10);	
     if(!strstr(g_u8RecData, "OK")){
-      //SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
+      SendAT("\r\nAT+CFUN=1,1\r\n\r\n", "ERROR", "OK" , "ERROR",1);
       PB15 = 0;
         manualdelay(1);
       PB15 = 1;
@@ -975,6 +1130,7 @@ __inline void readipconfigurations(void){
     parse_g(g_u8RecData, 1, 1, ' ', 'K' , fileinstance);
     remove_all_chars(fileinstance, '\r', '\n'); 
     remove_all_chars(fileinstance, 'O', 'K'); 
+    remove_all_alpha(fileinstance, 'O', 'K'); 
     if(strlen(fileinstance)<1)retry = 1;
     else{
       //seek to the origin 
@@ -986,6 +1142,9 @@ __inline void readipconfigurations(void){
       manualdelay(10);
       sprintf(temp, "AT+QFREAD=%s\r\n\r\n", fileinstance);
       SendAT(temp, "OK", "OK" , "ERROR",10);	    
+      if(!strstr(g_u8RecData, "CONNECT")){
+        goto __READCONFIG;
+      }
       memset(IP1,0,50);
       memset(IP2,0,50);
       memset(PORT1,0,7);
@@ -1035,8 +1194,11 @@ __inline void readipconfigurations(void){
       parse_g(g_u8RecData, 36,37,'|','|', temp);
       netselect=atoi(temp);   
       parse_g(g_u8RecData, 38,39,'|','|', apn2);   
+      memset(temp,0,100);
+      parse_g(g_u8RecData, 40,41,'|','|', temp);      
+      antennaselect = atoi(temp);
       
-   
+      PB8 = antennaselect;
       pt = atof(pt_c);
       readpt = atof(readpt_c);
       sleepinterval_i1 = atoi(interval_c); 
@@ -1182,34 +1344,36 @@ __inline void SYS_Init(void)
     SYS->GPA_MFP |= SYS_GPA_MFP_PA0_ADC0 | SYS_GPA_MFP_PA1_ADC1 | SYS_GPA_MFP_PA2_ADC2 | SYS_GPA_MFP_PA3_ADC3 | SYS_GPA_MFP_PA4_ADC4 | SYS_GPA_MFP_PA5_ADC5 | SYS_GPA_MFP_PA6_ADC6 ;
     SYS->ALT_MFP1 = 0;
     
-    
+    GPIO_SET_DEBOUNCE_TIME(GPIO_DBCLKSRC_HCLK, GPIO_DBCLKSEL_32768);
+    GPIO_ENABLE_DEBOUNCE(PB, BIT6 | BIT9 | BIT10 | BIT13 | BIT8 | BIT15);
+    GPIO_ENABLE_DEBOUNCE(PA, BIT14 | BIT15 | BIT12 | BIT13 );   
     //digital input
-    GPIO_SetMode(PA, BIT6, GPIO_PMD_INPUT);      //input 1
+    //GPIO_SetMode(PA, BIT6, GPIO_PMD_INPUT);      //input 1
     GPIO_SetMode(PA, BIT14, GPIO_PMD_INPUT);      //input 1
-    GPIO_EnableInt(PA, 14, GPIO_INT_LOW);
+    GPIO_EnableInt(PA, 14, GPIO_INT_FALLING);
     NVIC_EnableIRQ(GPAB_IRQn);
     GPIO_SetMode(PA, BIT15, GPIO_PMD_INPUT);      //input 2
-    GPIO_EnableInt(PA, 15, GPIO_INT_LOW);
+    GPIO_EnableInt(PA, 15, GPIO_INT_FALLING);
     NVIC_EnableIRQ(GPAB_IRQn);
     GPIO_SetMode(PA, BIT12, GPIO_PMD_INPUT);      //input3
-    GPIO_EnableInt(PA, 12, GPIO_INT_LOW);
+    GPIO_EnableInt(PA, 12, GPIO_INT_FALLING);
     NVIC_EnableIRQ(GPAB_IRQn);
     GPIO_SetMode(PA, BIT13, GPIO_PMD_INPUT);      //input 4
-    GPIO_EnableInt(PA, 13, GPIO_INT_LOW);
+    GPIO_EnableInt(PA, 13, GPIO_INT_FALLING);
     NVIC_EnableIRQ(GPAB_IRQn);
     
     //digital input //ring, emergency, ignition, 
-//    GPIO_SetMode(PB, BIT6, GPIO_PMD_INPUT);       //ring
+    GPIO_SetMode(PB, BIT6, GPIO_PMD_INPUT);       //ring
 //    GPIO_EnableInt(PB, 6, GPIO_INT_LOW);
 //    NVIC_EnableIRQ(GPAB_IRQn);
     GPIO_SetMode(PB, BIT9, GPIO_PMD_INPUT);       //emerge5ncy
-    GPIO_EnableInt(PB, 9, GPIO_INT_LOW);
+    GPIO_EnableInt(PB, 9, GPIO_INT_BOTH_EDGE);
     NVIC_EnableIRQ(GPAB_IRQn);
     GPIO_SetMode(PB, BIT10, GPIO_PMD_INPUT);      //ignition
-    GPIO_EnableInt(PB, 10, GPIO_INT_LOW);
+    GPIO_EnableInt(PB, 10, GPIO_INT_BOTH_EDGE);
     NVIC_EnableIRQ(GPAB_IRQn);
     GPIO_SetMode(PB, BIT13, GPIO_PMD_INPUT);      //tamper
-    GPIO_EnableInt(PB, 13, GPIO_INT_LOW);
+    GPIO_EnableInt(PB, 13, GPIO_INT_FALLING);
     NVIC_EnableIRQ(GPAB_IRQn);    
     
     GPIO_SetMode(PB, BIT8, GPIO_PMD_OUTPUT);       
@@ -1218,11 +1382,9 @@ __inline void SYS_Init(void)
     
     GPIO_SetMode(PC, BIT2, GPIO_PMD_OUTPUT);       
     GPIO_SetMode(PC, BIT3, GPIO_PMD_OUTPUT);       
-    GPIO_SET_DEBOUNCE_TIME(GPIO_DBCLKSRC_LIRC, GPIO_DBCLKSEL_32768);
-    GPIO_ENABLE_DEBOUNCE(PB, BIT6 | BIT9 | BIT10 | BIT13 | BIT8 | BIT15);
-    GPIO_ENABLE_DEBOUNCE(PA, BIT14 | BIT15 | BIT12 | BIT13 );
+
 //    
-    PB8 = 0;
+    PB8 = 1;
 }
 
 
@@ -1267,7 +1429,7 @@ __inline void sendalert(){
           send_sms(emernum2, "Alert – Emergency state OFF*");          
           break;        
         case 12:
-          send_sms(emernum1, "Alert – over the air parameter change*");
+          send_sms(emernum1, "Alert – over the air parameter change");
           send_sms(emernum2, "Alert – over the air parameter change");          
           break;    
         case 13:
@@ -1461,19 +1623,19 @@ void GPAB_IRQHandler(void){
 //    if(GPIO_GET_INT_FLAG(PB, BIT15)){
 //        GPIO_CLR_INT_FLAG(PB, BIT15);
 //    }
-    if(GPIO_GET_INT_FLAG(PA, BIT14)){
-        GPIO_CLR_INT_FLAG(PA, BIT14);
-        input1 = 1;trueint = 1;
-    }if(GPIO_GET_INT_FLAG(PA, BIT15)){
-        GPIO_CLR_INT_FLAG(PA, BIT15);
-        input2 = 1;trueint = 1;
-    }if(GPIO_GET_INT_FLAG(PA, BIT12)){
-        GPIO_CLR_INT_FLAG(PA, BIT12);
-        input3 = 1;trueint = 1;
-    }if(GPIO_GET_INT_FLAG(PA, BIT13)){
-        GPIO_CLR_INT_FLAG(PA, BIT13);
-        input4 = 1;trueint = 1;
-    }  
+//    if(GPIO_GET_INT_FLAG(PA, BIT14)){
+//        GPIO_CLR_INT_FLAG(PA, BIT14);
+//        input1 = 1;trueint = 1;
+//    }if(GPIO_GET_INT_FLAG(PA, BIT15)){
+//        GPIO_CLR_INT_FLAG(PA, BIT15);
+//        input2 = 1;trueint = 1;
+//    }if(GPIO_GET_INT_FLAG(PA, BIT12)){
+//        GPIO_CLR_INT_FLAG(PA, BIT12);
+//        input3 = 1;trueint = 1;
+//    }if(GPIO_GET_INT_FLAG(PA, BIT13)){
+//        GPIO_CLR_INT_FLAG(PA, BIT13);
+//        input4 = 1;trueint = 1;
+//    }  
 //    if(GPIO_GET_INT_FLAG(PB, BIT6)){
 //        GPIO_CLR_INT_FLAG(PB, BIT6);
 //        ring = 1;trueint = 1;
@@ -1483,11 +1645,23 @@ void GPAB_IRQHandler(void){
     if(GPIO_GET_INT_FLAG(PB, BIT9)){
         GPIO_CLR_INT_FLAG(PB, BIT9);
         emergencystatus = 1;
-        wetmr = 0;trueint = 1;
-    }if(GPIO_GET_INT_FLAG(PB, BIT10)){
-        GPIO_CLR_INT_FLAG(PB, BIT10);
+        if(PB9 == 0){
+        emergencyhighlow = 1;
+        }else{
+          emergencyhighlow = 0;
+        }
+        trueint = 1;    
+    }if(GPIO_GET_INT_FLAG(PB, BIT10)){   
         ignition = 1;trueint = 1;
-    }if(GPIO_GET_INT_FLAG(PB, BIT13)){
+      if(PB10 == 0){
+        ignitionhighlow = 1;
+      }else{
+        ignitionhighlow = 0;
+      }
+      GPIO_CLR_INT_FLAG(PB, BIT10);
+      trueint = 1;
+    }
+    if(GPIO_GET_INT_FLAG(PB, BIT13)){
         GPIO_CLR_INT_FLAG(PB, BIT13);
         tamperalert = 'O';trueint = 1;
     }
@@ -1495,13 +1669,22 @@ void GPAB_IRQHandler(void){
     
     
     
-    //if (trueint == 0)
+    if (trueint == 0)
     {
         /* Un-expected interrupt. Just clear all PC, PD, PE and PF interrupts */
         PB->ISRC = PB->ISRC;
         PA->ISRC = PA->ISRC;
     }
-   printf("\r\nAT+interrupt\r\n");
+   //printf("\r\nAT+interrupt\r\n");
+}
+
+__inline void remove_all_alpha(char* str, char c, char d) {
+    char *pr = str, *pw = str;
+    while (*pr) {
+        *pw = *pr++;
+			pw += (*pw > 47 && *pw < 58);
+    }
+    *pw = '\0';
 }
 void WDT_IRQHandler(void)
 {
@@ -1525,10 +1708,11 @@ void TMR0_IRQHandler(void)
         tcpsendchtimer++;
         tc++;
         i2ctimeout++;
-        if(emergencystatus == 1)
-        wetmr++;
-        //PC2^=1;
-        //PC3^=1;
+        //if(emergencystatus == 1)
+        wetmr+=1;
+        wait++;
+        PC2^=1;
+        PC3^=1;
 
     }
 }

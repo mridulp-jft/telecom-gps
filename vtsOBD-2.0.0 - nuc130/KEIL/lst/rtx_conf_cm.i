@@ -1145,8 +1145,9 @@ __declspec(noreturn) void os_error (uint32_t error_code);
  
  
 
- 
 
+extern int32_t HardFault_Handler();
+extern volatile int32_t tmr0sec;
 
 
  
@@ -1155,13 +1156,18 @@ __declspec(noreturn) void os_error (uint32_t error_code);
 
 
 void os_idle_demon (void) {
- 
+int idletime = 0; 
+  idletime = tmr0sec;
   for (;;) {
+    if(tmr0sec > (idletime+10)){
+      HardFault_Handler();
+    }
+    
      
   }
 }
  
-#line 268 "RTE\\CMSIS\\RTX_Conf_CM.c"
+#line 274 "RTE\\CMSIS\\RTX_Conf_CM.c"
  
  
  
@@ -1196,7 +1202,7 @@ void os_error (uint32_t error_code) {
       break;
   }
   HardFault_Handler();
-  for (;;);
+  
 }
  
 
@@ -1300,9 +1306,9 @@ extern uint32_t const os_rrobin;
 extern uint32_t const os_trv;
 extern uint8_t  const os_flags;
 
-uint16_t const os_maxtaskrun = 1;
-uint32_t const os_stackinfo  = (0<<28) | (1<<24) | ((0 + 1)<<16) | (100*4);
-uint32_t const os_rrobin     = (1 << 16) | 2;
+uint16_t const os_maxtaskrun = 2;
+uint32_t const os_stackinfo  = (0<<28) | (1<<24) | ((1 + 1)<<16) | (100*4);
+uint32_t const os_rrobin     = (1 << 16) | 10;
 uint32_t const os_tickfreq   = 12000000;
 uint16_t const os_tickus_i   = 12000000/1000000;
 uint16_t const os_tickus_f   = (((uint64_t)(12000000-1000000*(12000000/1000000)))<<16)/1000000;
@@ -1322,7 +1328,7 @@ __attribute__((used)) uint32_t const os_timernum  = 0U;
  
 extern
 uint32_t       mp_tcb[];
-uint32_t mp_tcb[(((52)+3)/4)*(1) + 3];
+uint32_t mp_tcb[(((52)+3)/4)*(2) + 3];
 extern
 uint16_t const mp_tcb_size;
 uint16_t const mp_tcb_size = sizeof(mp_tcb);
@@ -1330,7 +1336,7 @@ uint16_t const mp_tcb_size = sizeof(mp_tcb);
  
 extern
 uint64_t       mp_stk[];
-uint64_t mp_stk[(((100*4)+7)/8)*(1-(0 + 1)+1) + 2];
+uint64_t mp_stk[(((100*4)+7)/8)*(2-(1 + 1)+1) + 2];
 extern
 uint32_t const mp_stk_size;
 uint32_t const mp_stk_size = sizeof(mp_stk);
@@ -1338,7 +1344,7 @@ uint32_t const mp_stk_size = sizeof(mp_stk);
  
 extern
 uint64_t       os_stack_mem[];
-uint64_t       os_stack_mem[2+(0 + 1)+((4*(124+898))/8)];
+uint64_t       os_stack_mem[2+(1 + 1)+((4*(274+898))/8)];
 extern
 uint32_t const os_stack_sz;
 uint32_t const os_stack_sz = sizeof(os_stack_mem);
@@ -1358,7 +1364,7 @@ uint8_t  const os_fifo_size = 16;
  
 extern
 void *os_active_TCB[];
-void *os_active_TCB[1];
+void *os_active_TCB[2];
 
  
 #line 220 "C:\\Keil_v5\\ARM\\PACK\\ARM\\CMSIS\\5.2.0\\CMSIS\\RTOS\\RTX\\INC\\RTX_CM_lib.h"
@@ -1391,7 +1397,7 @@ uint16_t const mp_tmr_size = 0U;
 
 
  
-static uint32_t std_libspace[1][96/4];
+static uint32_t std_libspace[2][96/4];
 static OS_MUT   std_libmutex[8];
 static uint32_t nr_mutex;
 extern void  *__libspace_start;
@@ -1523,7 +1529,7 @@ __asm void _platform_post_lib_init (void) {
 
 
  
-#line 311 "RTE\\CMSIS\\RTX_Conf_CM.c"
+#line 317 "RTE\\CMSIS\\RTX_Conf_CM.c"
  
 
 

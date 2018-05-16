@@ -16,6 +16,7 @@
 ".\obj\retarget.o"
 ".\obj\spi.o"
 ".\obj\sys.o"
+".\obj\timer_1.o"
 ".\obj\uart.o"
 ".\obj\wdt.o"
 ".\obj\wwdt.o"

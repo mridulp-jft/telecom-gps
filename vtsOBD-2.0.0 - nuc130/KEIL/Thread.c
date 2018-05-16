@@ -36,7 +36,7 @@ extern int32_t life;
 __inline void manualdelay(int delayms);
 __inline void remove_all_chars(char* str, char c, char d);
 __inline void obd_get_data();
-
+void accgyro_READ (void const *argument);
 extern void SendAT(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void SendAT_FS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void TCP_Send_ch(char * tcpcommand,char * tcpdataq, char * tcpresponse1, char * tcpresponse2, char * tcpresponse3, int32_t tcptimeout);
@@ -46,33 +46,40 @@ extern void TCP_Send(char * tcpcommand,char * tcpdata, char * tcpresponse1, char
 extern void SendAT_GPS(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void send_OBD(char * command, char * response1, char * response2, char * response3, int32_t timeout);
 extern void parse_g(char* str, int first, int sec, char f, char s , char *string);
+extern void readaccgyrodata(void);
 //void GSM (void const *argument);                                // thread function
 void OBD_READ (void const *argument); 
+void accgyro_READ (void const *argument) ;
 //osThreadId tid_Thread_GSM;                                      // thread id
 //osThreadDef (GSM, osPriorityNormal, 1, 2050);                   // thread object
 extern osThreadId mainThreadID;
 osThreadId tid_Thread_OBD_READ;                                     // thread id
-osThreadDef (OBD_READ, osPriorityNormal, 1, 4048);                  // thread object
+osThreadDef (OBD_READ, osPriorityNormal, 1, 1000);                  // thread object
+osThreadId tid_Thread_accgyro_READ;
+osThreadDef (readaccgyrodata, osPriorityNormal, 1, 1000);                  // thread object
 
 void OBD_READ (void const *argument) 
 {
   while (1) 
 	{
-    motion = 1;
-    osSignalWait (0x0002, osWaitForever); // wait forever for the signal 0x0002
-    osSignalClear (tid_Thread_OBD_READ, 0x0002);
-    #ifdef OBD    
-      obd_get_data();
-    #endif    
-    signal = osSignalSet (mainThreadID, 0x0001);
-    osDelay(4900);
+//    motion = 1;
+//    osSignalWait (0x0002, osWaitForever); // wait forever for the signal 0x0002
+//    osSignalClear (tid_Thread_OBD_READ, 0x0002);
+//    #ifdef OBD    
+//      obd_get_data();
+//    #endif    
+//    signal = osSignalSet (mainThreadID, 0x0001);
+//    osDelay(4900);
+    readaccgyrodata();
+    osDelay(100);
+    
    }
  }
 
 int Init_Thread (void) {
 //  #ifdef OBD
-      tid_Thread_OBD_READ = osThreadCreate (osThread(OBD_READ), NULL);
-      if (!tid_Thread_OBD_READ) return(-1);  
+      tid_Thread_accgyro_READ = osThreadCreate (osThread(readaccgyrodata), NULL);
+      if (!tid_Thread_accgyro_READ) return(-1);  
       return(0);
 //  #endif
 }
